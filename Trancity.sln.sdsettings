@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Properties>
+  <Properties key="CSharpFormatting">
+    <Property key="IndentationSize">4</Property>
+    <Property key="ConvertTabsToSpaces">True</Property>
+  </Properties>
+</Properties>
