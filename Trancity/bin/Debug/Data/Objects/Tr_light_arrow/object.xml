@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Trancity>
+  <Object>
+    <dir>..\Tr_light\</dir>
+    <name>Tr. light (arrow)</name>
+    <filename>tr_light_arrow.x</filename>
+    <bounding_sphere>
+      <r>1.0</r>
+      <x>0.0</x>
+      <y>2.05</y>
+      <z>0.0</z>
+    </bounding_sphere>
+    <type>2</type> <!-- 0 - objects, 1 - stops, 2- traffic lights, 3 - signals -->
+    <args>
+      <green_mtrl>1</green_mtrl>
+	<custom_tex_count>8</custom_tex_count>
+	<tex0>стрелка_вправо.png</tex0>
+	<tex1>стрелка_прямо.png</tex1>
+	<tex2>стрелка_влево.png</tex2>
+	<tex3>стрелка_белая_вправо.png</tex3>
+	<tex4>стрелка_белая_прямо.png</tex4>
+	<tex5>стрелка_белая_влево.png</tex5>
+	<tex6>стрелка_белая_прямо_вправо.png</tex6>
+	<tex7>стрелка_белая_прямо_влево.png</tex7>
+    </args>
+  </Object>
+</Trancity>

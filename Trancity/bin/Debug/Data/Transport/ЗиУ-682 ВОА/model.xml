@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Trancity>
+  <Doors>
+    	<door0>
+		<type>0</type>
+		<dir></dir>
+		<filename>дверь.x</filename>
+		<length>0.387</length>
+		<height>2.286</height>
+		<width>0.031</width>
+	</door0>
+	<door1>
+		<type>0</type>
+		<dir></dir>
+		<filename>передняя_дверь.x</filename>
+		<length>0.387</length>
+		<height>2.286</height>
+		<width>0.031</width>
+	</door1>
+  </Doors>
+  <Model>
+    <Trolleybus>
+			<name>ЗиУ-682 В0А</name>
+			<dir></dir>
+			<filename>троллейбус.x</filename>
+			<tail_count>0</tail_count>
+			<tail_filename />
+			<tail_dist_1 />
+			<tail_dist_2 />
+			<middle_filename />
+			<additions>
+<addition0>
+<part>0</part>
+<filename>фары.x</filename>
+<type>0</type>
+</addition0>
+
+<addition1>
+<part>0</part>
+<filename>влево.x</filename>
+<type>1</type>
+</addition1>
+
+<addition2>
+<part>0</part>
+<filename>вправо.x</filename>
+<type>2</type>
+</addition2>
+
+<addition3>
+<part>0</part>
+<filename>тормоз.x</filename>
+<type>3</type>
+</addition3>
+
+			</additions>
+			<door_count>3</door_count>
+			<doors>
+				<door0>
+					<model>1</model>
+					<part>0</part>
+					<x0>8.01</x0>
+					<x1>7.23</x1>
+					<y0>0.42</y0>
+					<y1>2.67</y1>
+					<z0>-1.31</z0>
+					<z1>-1.31</z1>
+					<right>1</right>
+					<index>0</index>
+					<driver>1</driver>
+				</door0>
+				<door1>
+					<model>0</model>
+					<part>0</part>
+					<x0>2.48</x0>
+					<x1>3.23</x1>
+					<y0>0.42</y0>
+					<y1>2.67</y1>
+					<z0>-1.31</z0>
+					<z1>-1.31</z1>
+					<right>0</right>
+					<index>1</index>
+					<driver>0</driver>
+				</door1>
+				<door2>
+					<model>0</model>
+					<part>0</part>
+					<x0>4.025</x0>
+					<x1>3.23</x1>
+					<y0>0.42</y0>
+					<y1>2.67</y1>
+					<z0>-1.31</z0>
+					<z1>-1.31</z1>
+					<right>1</right>
+					<index>1</index>
+					<driver>0</driver>
+				</door2>
+				<door3>
+					<model>0</model>
+					<part>0</part>
+					<x0>-2.65</x0>
+					<x1>-1.88</x1>
+					<y0>0.42</y0>
+					<y1>2.67</y1>
+					<z0>-1.31</z0>
+					<z1>-1.31</z1>
+					<right>0</right>
+					<index>2</index>
+					<driver>0</driver>
+				</door3>
+				<door4>
+					<model>0</model>
+					<part>0</part>
+					<x0>-1.11</x0>
+					<x1>-1.88</x1>
+					<y0>0.42</y0>
+					<y1>2.67</y1>
+					<z0>-1.31</z0>
+					<z1>-1.31</z1>
+					<right>1</right>
+					<index>2</index>
+					<driver>0</driver>
+				</door4>
+			</doors>
+			<wheel_radius>0.6</wheel_radius>
+			<wheels>
+				<wheel0>
+					<dir></dir>
+				<filename>колесо_переднее.x</filename>
+					<part>0</part>
+					<x>6.275</x>
+					<y>1.15</y>
+				</wheel0>
+				<wheel1>
+					<dir></dir>
+				<filename>колесо_заднее.x</filename>
+					<part>0</part>
+					<x>0.036</x>
+					<y>1.1</y>
+				</wheel1>
+			</wheels>
+                         <shtangi_dir/>
+                         <shtangi_filename>штанга.x</shtangi_filename>
+                         <shtangi_full_length>7.02</shtangi_full_length>
+                         <shtangi_angle_min>-0.322</shtangi_angle_min>
+                         <standalone_motion>
+                         <battery_power>120.0</battery_power>
+                         <acceleration>0.45</acceleration>
+						 <charge_consumption>0.10</charge_consumption> 
+                         </standalone_motion>
+                        <shtangi>
+				<shtanga0>
+					<x>2.9</x>
+					<y>3.25</y>
+					<z>0.358</z>
+				</shtanga0>
+				<shtanga1>
+					<x>2.9</x>
+					<y>3.25</y>
+					<z>0.292</z>
+				</shtanga1>
+			</shtangi>
+			<narad_pos>
+				<x>8.5</x>
+				<y>1.65</y>
+				<z>1.25</z>
+			</narad_pos>
+			<occupied_locations>
+				<location><x>9.5</x><y>1.5</y></location>
+				<location><x>9.5</x><y>-1.5</y></location>
+				<location><x>6.8</x><y>1.5</y></location>
+				<location><x>6.8</x><y>-1.5</y></location>
+				<location><x>4.1</x><y>1.5</y></location>
+				<location><x>4.1</x><y>-1.5</y></location>
+				<location><x>1.4</x><y>1.5</y></location>
+				<location><x>1.4</x><y>-1.5</y></location>
+				<location><x>-1.3</x><y>1.5</y></location>
+				<location><x>-1.3</x><y>-1.5</y></location>
+				<location><x>-4.0</x><y>1.5</y></location>
+				<location><x>-4.0</x><y>-1.5</y></location>
+			</occupied_locations>
+			<steering>
+                                        <dir />
+                                        <filename>steering.x</filename>
+                                        <x>8.09</x>
+                                        <y>1.67</y>
+                                        <z>0.83</z>
+                                        <angle>0.26179938779914943653855361527329</angle>
+                        </steering>
+			<tails_occupied_locations />
+			<control_system>РКСУ_Троллейбус</control_system>
+    </Trolleybus>
+  </Model>
+</Trancity>

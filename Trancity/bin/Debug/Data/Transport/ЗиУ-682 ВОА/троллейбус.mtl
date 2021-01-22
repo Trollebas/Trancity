@@ -1,0 +1,1325 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  Deep Exploration 5.7 5.7.3.4950 Release
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl Material_59
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.294118 0.294118 0.294118
+illum 2
+Ns 2048
+map_Kd money.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material1111111
+Ka 0 0 0
+Kd 0.631373 0.631373 0.631373
+Ks 0 0 0
+illum 2
+Ns 19.6983
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Default_Materia
+Ka 0 0 0
+Kd 0.929412 0.929412 0.929412
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material611
+Ka 0 0 0
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 2
+map_Kd derevo.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material6111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 17.1484
+map_Kd Стена.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material30
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd main.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material511
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd Стена.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Explorer_Default
+Ka 0.117647 0.117647 0.117647
+Kd 0.752941 0.752941 0.752941
+Ks 0.752941 0.752941 0.752941
+illum 2
+Ns 8
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material261
+Ka 0 0 0
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 2
+map_Kd mar_big.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material5
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd derevo.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material61
+Ka 0 0 0
+Kd 0.631373 0.631373 0.631373
+Ks 0 0 0
+illum 2
+Ns 17.1484
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material7
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 17.1484
+map_Kd pol.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material18
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material29
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd umz_fara.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material4111
+Ka 0 0 0
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 64
+map_Kd main.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material711
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 19.6983
+map_Kd Стена.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material12111
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 19.6983
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl plafon
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material81
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 17.1484
+map_Kd vodsid1.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __________37
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material31
+Ka 0 0 0
+Kd 0 0 0
+Ks 1 1 1
+illum 2
+Ns 20
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material211111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 20
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material3512
+Ka 0 0 0
+Kd 0 0.454902 0.760784
+Ks 0 0 0
+illum 2
+Ns 2.14355
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material1111111111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 20
+map_Kd rik2.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material1
+Ka 0 0 0
+Kd 0 0 0
+Ks 0.360784 0.360784 0.360784
+illum 2
+Ns 64
+d 0.43
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material2
+Ka 0 0 0
+Kd 0.360784 0.360784 0.360784
+Ks 0 0 0
+illum 2
+Ns 17.1484
+d 0.5
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material211
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 17.1484
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material121
+Ka 0 0 0
+Kd 0.45098 0.45098 0.45098
+Ks 0 0 0
+illum 2
+Ns 17.1484
+d 0.5
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material21
+Ka 0 0 0
+Kd 0.039216 0.039216 0.039216
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl pribors_1
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd kabina11.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl black
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 2048
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl kryshka_paneli_
+Ka 0 0 0
+Kd 0.290196 0.290196 0.290196
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl pribors_
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd kabina1.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl black_blesk
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material25
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd kab12.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl sedl3
+Ka 0 0 0
+Kd 0.258824 0.258824 0.258824
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material21111111111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd roga.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material211112
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd поручни.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material311111
+Ka 0 0 0
+Kd 0.729412 0.729412 0.729412
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material11111
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 64
+d 0.42
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material21111
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 19.6983
+d 0.5
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material4
+Ka 0 0 0
+Kd 0.258824 0.258824 0.258824
+Ks 0 0 0
+illum 2
+Ns 17.1484
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material191
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.270588 0.270588 0.270588
+illum 2
+Ns 2
+map_Kd Стена.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material26
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd laz_far.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material41
+Ka 0 0 0
+Kd 0.101961 0.101961 0.101961
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl pol
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd pol.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl leather
+Ka 0 0 0
+Kd 0.301961 0.301961 0.301961
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl seruy_metal
+Ka 0 0 0
+Kd 0.45098 0.45098 0.45098
+Ks 0 0 0
+illum 2
+Ns 64
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material11111111
+Ka 0 0 0
+Kd 0.670588 0.670588 0.670588
+Ks 1 1 1
+illum 2
+Ns 19.6983
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material35121
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 2.14355
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material38
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 19.6983
+d 0.2
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material311
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.498039 0.498039 0.498039
+illum 2
+Ns 20
+map_Kd 128.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material11111111111
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 20
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material51
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd OBIV.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material5111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material61111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 17.1484
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material1711
+Ka 0 0 0
+Kd 0 0.501961 0
+Ks 1 1 1
+illum 2
+Ns 2
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material17111
+Ka 0 0 0
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 2
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material411
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd 128.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl zerkala1
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd ZERKL.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl detali1
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd DET.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material211111111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 20
+map_Kd shtora.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material111111111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd shtora.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material_70
+Ka 0 0 0
+Kd 0.6 0.6 0.647059
+Ks 0.713726 0.713726 0.74902
+illum 2
+Ns 2048
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material_48
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.294118 0.294118 0.294118
+illum 2
+Ns 2048
+map_Kd other.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __________301
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd REKL1.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl trafareti
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd rik2.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl trafareti2
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd тел.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl trafareti3
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd 352637.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Matte__FF000000
+Ka 0 0 0
+Kd 0 0 0
+Ks 0.085294 0.085294 0.085294
+illum 2
+Ns 3.24901
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Matte__FFCCCC01
+Ka 0 0 0
+Kd 0.8 0.8 0.8
+Ks 0.726667 0.726667 0.726667
+illum 2
+Ns 3.24901
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl sid__spec_1
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.085294 0.085294 0.085294
+illum 2
+Ns 3.24901
+map_Kd sid1.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl __________25
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2048
+map_Kd SID2.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl sid__spec_11
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.085294 0.085294 0.085294
+illum 2
+Ns 3.24901
+map_Kd sid11.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl sid__spec_111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.085294 0.085294 0.085294
+illum 2
+Ns 3.24901
+map_Kd sid12.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl sid__spec_112
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.085294 0.085294 0.085294
+illum 2
+Ns 3.24901
+map_Kd sid111.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material51111
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd Стена1.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material291
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd umz_fara1.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material28
+Ka 0 0 0
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 2
+map_Kd 1281.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Material2111111
+Ka 0 0 0
+Kd 0.360784 0.360784 0.360784
+Ks 0 0 0
+illum 2
+Ns 20
+d 0.5
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl trafareti11
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 4
+map_Kd ЖТТУ.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl driver__dif_spec
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 2048
+map_Kd chuvak_0.png
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 

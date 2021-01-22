@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F21623D-9AA5-4FD0-9297-12105A3D1AEF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Trancity</RootNamespace>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>8192</FileAlignment>
+    <StartupObject>Trancity.MainForm</StartupObject>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\Andrey\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationIcon>Icons\favicon_backup2.ico</ApplicationIcon>
+    <NoWin32Manifest>True</NoWin32Manifest>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <AssemblyName>Trancity</AssemblyName>
+    <ReferencePath>D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\</ReferencePath>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>PdbOnly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <StartAction>Project</StartAction>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DebugType>PdbOnly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x64' ">
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>x64</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualC" />
+    <Reference Include="SlimDX" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\DeviceOptionsDialog.Designer.cs">
+      <DependentUpon>DeviceOptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ITest.cs" />
+    <Compile Include="Common\MyRawInput.cs" />
+    <Compile Include="Common\MyXAudio2.cs" />
+    <Compile Include="Common\RestrictedStack.cs" />
+    <Compile Include="Common\StreamWork.cs" />
+    <Compile Include="Common\UI\Controls.cs" />
+    <Compile Include="Common\UI\MyGUI.cs" />
+    <Compile Include="Common\UI\TestTexture.cs" />
+    <Compile Include="Common\NumericBox.cs" />
+    <Compile Include="Common\Xml.cs" />
+    <Compile Include="GroundPart.cs" />
+    <Compile Include="MyCamera.cs" />
+    <Compile Include="ObjectLoader.cs" />
+    <Compile Include="ObjectModel.cs" />
+    <Compile Include="SkyBox.cs" />
+    <Compile Include="SoundLoader.cs" />
+    <Compile Include="SimpleTimer.cs" />
+    <Compile Include="Common\DeviceOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\FilteredJoystickState.cs" />
+    <Compile Include="Common\FilteredKeyboardState.cs" />
+    <Compile Include="Common\IMatrixObject.cs" />
+    <Compile Include="Common\Ini.cs" />
+    <Compile Include="Common\Mesh_Object.cs" />
+    <Compile Include="Common\MyDirect3D.cs" />
+    <Compile Include="Common\MyDirectInput.cs" />
+    <Compile Include="Localization.cs" />
+    <Compile Include="MyList.cs" />
+    <Compile Include="ConvertTime.cs" />
+    <Compile Include="Period_Point.cs" />
+    <Compile Include="SplineLoader.cs" />
+    <Compile Include="SplineModel.cs" />
+    <Compile Include="StopListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StopListForm.Designer.cs">
+      <DependentUpon>StopListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stuff.cs" />
+    <Compile Include="Spline.cs" />
+    <Compile Include="ThreadPoolTest.cs" />
+    <Compile Include="Trancity\BaseSignal.cs" />
+    <Compile Include="Trancity\Cheats.cs" />
+    <Compile Include="Trancity\Editor.Action.cs">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Trancity\Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trancity\Editor.Designer.cs">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Common\DeviceOptionsDialog.resx">
+      <DependentUpon>DeviceOptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StopListForm.resx">
+      <DependentUpon>StopListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trancity\ComputeTime_Dialog.resx">
+      <DependentUpon>ComputeTime_Dialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trancity\Editor.resx">
+      <DependentUpon>Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trancity\Main_Form.resx">
+      <DependentUpon>Main_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trancity\Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Options.Designer1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlForm.resx">
+      <DependentUpon>UserControlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Icons\favicon_backup2.ico" />
+    <Compile Include="Trancity\ComputeTime_Dialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IObjectContainer.cs" />
+    <Compile Include="Trancity\Main_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trancity\Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trancity\Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Trancity\TimeBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Trancity\IVector.cs" />
+    <Compile Include="Trancity\Автобус.cs" />
+    <Compile Include="Trancity\Безрельсовый_Транспорт.cs" />
+    <Compile Include="Trancity\Игрок.cs" />
+    <Compile Include="Trancity\Конечная_станция.cs" />
+    <Compile Include="Trancity\Контактный_провод.cs" />
+    <Compile Include="Trancity\Рельсовый_Транспорт.cs" />
+    <Compile Include="Trancity\Сигнал.cs" />
+    <Compile Include="Trancity\Табличка_Впарк.cs" />
+    <Compile Include="TripStop.cs" />
+    <Compile Include="TypeOfTransport.cs" />
+    <Compile Include="Trancity\Объект_привязки_3D.cs" />
+    <Compile Include="Trancity\Парк.cs" />
+    <Compile Include="Trancity\Пересечка.cs" />
+    <Compile Include="Trancity\Рельс.cs" />
+    <Compile Include="Trancity\Светофор.cs" />
+    <Compile Include="Trancity\Светофорная_система.cs" />
+    <Compile Include="Trancity\Светофорный_сигнал.cs" />
+    <Compile Include="Trancity\Сигналы.cs" />
+    <Compile Include="Trancity\Сигнальная_система.cs" />
+    <Compile Include="Trancity\Указатель_наряда.cs" />
+    <Compile Include="Controlling.cs" />
+    <Compile Include="IControlledObject.cs" />
+    <Compile Include="BaseStop.cs" />
+    <Compile Include="UserControlForm.cs" />
+    <Compile Include="UserControlForm.Designer.cs">
+      <DependentUpon>UserControlForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Двери.cs" />
+    <Compile Include="Road.cs" />
+    <Compile Include="Ground.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Route.cs" />
+    <Compile Include="World.cs" />
+    <Compile Include="Модели.cs" />
+    <Compile Include="Модель_дверей.cs" />
+    <Compile Include="Модель_транспорта.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="Object.cs" />
+    <Compile Include="Stop.cs" />
+    <Compile Include="Положение.cs" />
+    <Compile Include="Trip.cs" />
+    <Compile Include="Система_управления.cs" />
+    <Compile Include="Трамвай.cs" />
+    <Compile Include="Транспорт.cs" />
+    <Compile Include="Троллейбус.cs" />
+    <Compile Include="Управление.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProfilingSessions\Session20201125_120755.sdps" />
+    <Content Include="Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme_Editor.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\UI" />
+    <Folder Include="Icons" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotR\DotR.csproj">
+      <Project>{0ce375cb-b3b4-4e29-aeb9-e51a23757f02}</Project>
+      <Name>DotR</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

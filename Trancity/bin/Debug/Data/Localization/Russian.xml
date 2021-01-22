@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Trancity>
+  <Localization>
+    <Reserve>
+	<Windowed>в окне</Windowed>
+	<Empty>Нет</Empty>
+	<Random>Случайный</Random>
+	<Shtangi_loosed>автономный ход</Shtangi_loosed>
+	<Of>of</Of>
+	<Edit>Настроить..</Edit>
+	<NameTopEditor>Редактор Trancity</NameTopEditor>
+	<TrancityName>Trancity 0.6.3.3.1</TrancityName>
+	<Continuous>Продолжить</Continuous>
+	<Exit>Выход</Exit>
+	<InitializeWOpt>Не удалось инициализировать Direct3D.</InitializeWOpt>
+	<Load_city>Загрузка города...</Load_city>
+	<Load_models>Загрузка моделей...</Load_models>
+	<Load_shaders>Загрузка шейдеров...</Load_shaders>
+	<Load_objects>Загрузка объектов...</Load_objects>
+	<Load_stops>Загрузка остановок...</Load_stops>
+	<Load_sounds>Загрузка звуков...</Load_sounds>
+	<Save_city>Сохранение города...</Save_city>
+    </Reserve>
+    <Forms>
+	<Editor>Редактор Trancity</Editor>
+	<MainForm>Trancity</MainForm>
+	<Launch_Buttton>Запустить!</Launch_Buttton>
+	<Editor_Button>Редактор</Editor_Button>
+	<Exit_Button>Выход</Exit_Button>
+	<Options_Page>Общие настройки</Options_Page>
+	<Players_Page>Настройки игроков</Players_Page>
+	<DirectX_Page>Настройки DirectX</DirectX_Page>
+	<AutoControl_Box>Начать с автоматическим управлением</AutoControl_Box>
+	<Time_label>Начальное время:</Time_label>
+	<TransportCount_label>Количество ПС:</TransportCount_label>
+	<RotateCamera_Box>Поворачивать камеру вместе с ПС</RotateCamera_Box>
+	<InParkCount_label>в парке:</InParkCount_label>
+	<OnRouteCount_label>на линии:</OnRouteCount_label>
+	<LoadCity_Button>Загрузить...</LoadCity_Button>
+	<InvArrows_Box>Переключение стрелок под током налево</InvArrows_Box>
+	<City_label>Город:</City_label>
+	<Langugage_label>Язык:</Langugage_label>
+	<Control_label>Управление:</Control_label>
+	<Order_label>Наряд:</Order_label>
+	<Route_label>Маршрут:</Route_label>
+	<Transport_label>Подвижной состав:</Transport_label>
+	<Remove_Button>Удалить</Remove_Button>
+	<Add_Button>Добавить</Add_Button>
+	<EnableShaders_Box>Рисовать скайбокс</EnableShaders_Box>
+	<Screen_Size_label>Разрешение экрана:</Screen_Size_label>
+	<NonExclusiveMouse_Box>Не захватывать мышь</NonExclusiveMouse_Box>
+	<Splines_Cond_label>Качество кривых рельсов:</Splines_Cond_label>
+	<NonExclusiveKeyboard_Box>Не захватывать клавиатуру</NonExclusiveKeyboard_Box>
+	<Vertex_label>Vertex processing:</Vertex_label>
+	<NoStops_Box>Не рисовать текст на значках остановок</NoStops_Box>
+	<NoSound_Box>Беззвучный режим</NoSound_Box>
+	<DeviceOptionsDialog>Настройки экрана</DeviceOptionsDialog>
+	<ChooseDevice_Label>Выберите режим:</ChooseDevice_Label>
+	<Windowed_Radio>Оконный</Windowed_Radio>
+	<Fullscreen_Radio>Полноэкранный</Fullscreen_Radio>
+	<OK_Button>OK</OK_Button>
+	<Cancel_Button>Отмена</Cancel_Button>
+	<ComputeTimeDialog>Вычисление времени рейса</ComputeTimeDialog>
+	<Objects_Instance_label>Экземпляры:</Objects_Instance_label>
+	<Objects_EditLocation_Button>Изменить</Objects_EditLocation_Button>
+	<Objects_ShowLocation_Button>Показать</Objects_ShowLocation_Button>
+	<Objects_Location_label>Местоположение:</Objects_Location_label>
+	<Objects_Remove_Button>Удалить объект</Objects_Remove_Button>
+	<Objects_Add_Button>Добавить объект</Objects_Add_Button>
+	<Objects_label>Объекты:</Objects_label>
+	<StopsButton>Остановки...</StopsButton>
+	<Route_TransportType_label>Вид транспорта:</Route_TransportType_label>
+	<Route_ShowNarads_Box>Показать наряды</Route_ShowNarads_Box>
+	<Route_Runs_ComputeTime_Button>Посчитать время...</Route_Runs_ComputeTime_Button>
+	<Route_Runs_ToPark_Box>В парк</Route_Runs_ToPark_Box>
+	<Route_Runs_Park_Box>Парковый рейс</Route_Runs_Park_Box>
+	<Route_Runs_Time_label>Время в пути:</Route_Runs_Time_label>
+	<Route_Runs_ToParkIndex_label>Номер пути, начиная
+с которого в парк:</Route_Runs_ToParkIndex_label>
+	<Route_Runs_label>Трассы маршрута:</Route_Runs_label>
+	<Route_Name_label>Название маршрута:</Route_Name_label>
+	<Route_Runs_Remove_Button>Удалить трассу</Route_Runs_Remove_Button>
+	<Route_Remove_Button>Удалить маршрут</Route_Remove_Button>
+	<Route_Runs_Add_Button>Добавить трассу</Route_Runs_Add_Button>
+	<Route_Add_Button>Добавить маршрут</Route_Add_Button>
+	<Route_ChangeName_Button>Изменить название</Route_ChangeName_Button>
+	<Route_label>Маршруты:</Route_label>
+	<Svetofor_Svetofor_Arrow_Box>Только зелёная
+секция (стрелка)</Svetofor_Svetofor_Arrow_Box>
+	<Svetofor_Element_Location_label>Местоположение:</Svetofor_Element_Location_label>
+	<Svetofor_Cycle_label>Светофорный цикл:</Svetofor_Cycle_label>
+	<Svetofor_Green_label>Время и длительность
+зелёного сигнала:</Svetofor_Green_label>
+	<Svetofor_Work_label>Время работы:</Svetofor_Work_label>
+	<Svetofor_Remove_Button>Удалить систему</Svetofor_Remove_Button>
+	<Svetofor_Svetofor_ArrowRed_label>Красная стрелка:</Svetofor_Svetofor_ArrowRed_label>
+	<Svetofor_Svetofor_ArrowYellow_label>Жёлтая стрелка:</Svetofor_Svetofor_ArrowYellow_label>
+	<Svetofor_Svetofor_ArrowGreen_label>Зелёная стрелка:</Svetofor_Svetofor_ArrowGreen_label>
+	<Svetofor_Element_label>Элементы:</Svetofor_Element_label>
+	<Svetofor_Add_Button>Добавить систему</Svetofor_Add_Button>
+	<Svetofor_Element_EditLocation_Button>Изменить</Svetofor_Element_EditLocation_Button>
+	<Svetofor_Element_ShowLocation_Button>Показать</Svetofor_Element_ShowLocation_Button>
+	<Svetofor_label>Светофорные системы:</Svetofor_label>
+	<Svetofor_Element_Remove_Button>Удалить элемент</Svetofor_Element_Remove_Button>
+	<Svetofor_Signal_Add_Button>Добавить сигнал</Svetofor_Signal_Add_Button>
+	<Svetofor_Svetofor_Add_Button>Добавить светофор</Svetofor_Svetofor_Add_Button>
+	<Signals_Element_Minus_Box>Минусовой контакт</Signals_Element_Minus_Box>
+	<Signals_Element_Location_label>Местоположение:</Signals_Element_Location_label>
+	<Signals_Bound_label>Красный при значении:</Signals_Bound_label>
+	<Signals_Remove_Button>Удалить систему</Signals_Remove_Button>
+	<Signals_Element_label>Элементы:</Signals_Element_label>
+	<Signals_Add_Button>Добавить систему</Signals_Add_Button>
+	<Signals_Element_EditLocation_Button>Изменить</Signals_Element_EditLocation_Button>
+	<Signals_Element_ShowLocation_Button>Показать</Signals_Element_ShowLocation_Button>
+	<Signals_label>Сигнальные системы:</Signals_label>
+	<Signals_Element_Remove_Button>Удалить элемент</Signals_Element_Remove_Button>
+	<Signals_Element_AddSignal_Button>Добавить сигнал</Signals_Element_AddSignal_Button>
+	<Signals_Element_AddContact_Button>Добавить контакт</Signals_Element_AddContact_Button>
+	<TypeOfTransportBox>Вид транспорта</TypeOfTransportBox>
+	<BusBox>Автобус</BusBox>
+	<TrolleybusBox>Троллейбус</TrolleybusBox>
+	<TramwayBox>Трамвай</TramwayBox>
+	<Stops_Location_label>Местоположение:</Stops_Location_label>
+	<Stops_Name_label>Название остановки:</Stops_Name_label>
+	<Stops_Remove_Button>Удалить остановку</Stops_Remove_Button>
+	<Stops_Add_Button>Добавить остановку</Stops_Add_Button>
+	<Stops_EditLocation_Button>Изменить</Stops_EditLocation_Button>
+	<Stops_ShowLocation_Button>Показать</Stops_ShowLocation_Button>
+	<Stops_ChangeName_Button>Изменить название</Stops_ChangeName_Button>
+	<Stops_label>Остановки:</Stops_label>
+	<Park_Name_label>Название парка:</Park_Name_label>
+	<Park_Remove_Button>Удалить парк</Park_Remove_Button>
+	<Park_ChangeName_Button>Изменить название</Park_ChangeName_Button>
+	<Park_Add_Button>Добавить парк</Park_Add_Button>
+	<Park_label>Выбранный парк:</Park_label>
+	<Narad_Runs_Time2_label>Время прибытия:</Narad_Runs_Time2_label>
+	<Narad_Runs_Time1_label>Время отправления:</Narad_Runs_Time1_label>
+	<Narad_Runs_label>Рейсы:</Narad_Runs_label>
+	<Narad_Park_label>Парк:</Narad_Park_label>
+	<Narad_Runs_Run_label>Трасса рейса:</Narad_Runs_Run_label>
+	<Narad_Name_label>Название наряда:</Narad_Name_label>
+	<Narad_Runs_Remove_Button>Удалить рейс</Narad_Runs_Remove_Button>
+	<Narad_Remove_Button>Удалить наряд</Narad_Remove_Button>
+	<Narad_Runs_Add_Button>Добавить рейс</Narad_Runs_Add_Button>
+	<Narad_Add_Button>Добавить наряд</Narad_Add_Button>
+	<Narad_ChangeName_Button>Изменить название</Narad_ChangeName_Button>
+	<Narad_label>Наряды:</Narad_label>
+	<StopListForm>Остановки</StopListForm>
+	<Update_Button>Обновить</Update_Button>
+	<Clear_Button>Очистить</Clear_Button>
+	<Stops_Model_label>Модель:</Stops_Model_label>
+	<Svetofor_Model_label>Модель:</Svetofor_Model_label>
+	<Signals_Model_label>Модель:</Signals_Model_label>
+	<Splines_label>Рельсы и дороги:</Splines_label>
+	<Spline_Select_mode_Box>Режим выбора</Spline_Select_mode_Box>
+	<Splines_Remove_Button>Удалить</Splines_Remove_Button>
+	<Splines_ChangeModel_Button>Сменить модель</Splines_ChangeModel_Button>
+	<Splines_Location_label>Местоположение:</Splines_Location_label>
+	<Splines_ShowLocation_Button>Показать</Splines_ShowLocation_Button>
+	<Splines_Instance_label>Экземпляры:</Splines_Instance_label>
+	<Rail_Box_dist_Label>Расстояние коробки:</Rail_Box_dist_Label>
+	<Info>Рельсы и дороги:</Info>
+	<FunctionNoWork>Данная функция ещё пока недоступна.</FunctionNoWork>
+    </Forms>
+    <Messages>
+	<Joints_no_begin_no_end>Найдено {0} путей без начала и {1} путей без продолжения.</Joints_no_begin_no_end>
+	<Joints_no_begin>Найдено {0} путей без начала.</Joints_no_begin>
+	<Joints_no_end>Найдено {0} путей без продолжения.</Joints_no_end>
+	<Joints_checked>Все стыки проверены!</Joints_checked>
+	<Routes_already_computed>Не найдено ни одного не посчитанного рейса!</Routes_already_computed>
+	<Route_failed>Один из рейсов не может быть посчитан!</Route_failed>
+	<Save_city_quit>Сохранить город перед выходом?</Save_city_quit>
+	<Save_city_run>Сохранить город перед запуском?</Save_city_run>
+	<Save_city>Сохранить этот город?</Save_city>
+	<Save_city_failed>Ошибка во время сохранения</Save_city_failed>
+	<Min_curve_radius>Минимальный радиус кривой: {0} м.</Min_curve_radius>
+	<Curve_not_found>Не найдено ни одной кривой!</Curve_not_found>
+	<Map_not_found>Нынешняя карта не был найдена!\nнажмите кнопку ОК и выберите другую карту.</Map_not_found>
+    </Messages>
+    <Menu_Editor>
+	<City_Item>Карта</City_Item>
+	<New_Item>Новая</New_Item>
+	<Open_Item>Открыть...</Open_Item>
+	<Save_Item>Сохранить</Save_Item>
+	<SaveAs_Item>Сохранить как...</SaveAs_Item>
+	<Refresh_All_TripStop_Lists_Item>Обновить все остановки рейсов...</Refresh_All_TripStop_Lists_Item>
+	<Check_Joints_Item>Проверить стыки...</Check_Joints_Item>
+	<Find_MinRadius_Item>Найти минимальный радиус...</Find_MinRadius_Item>
+	<ComputeAllTime_Item>Посчитать все маршруты...</ComputeAllTime_Item>
+	<Run_Item>Запустить карту</Run_Item>
+	<Exit_Item>Выход</Exit_Item>
+    </Menu_Editor>
+    <Tips>
+	<New_Button>Новый</New_Button>
+	<Open_Button>Открыть</Open_Button>
+	<Save_Button>Сохранить</Save_Button>
+	<Run_Button>Запустить текущую карту</Run_Button>
+	<Rail_Button>Рельсы и дороги</Rail_Button>
+	<Troll_lines_Button>Контактная сеть</Troll_lines_Button>
+	<Stops_Button>Остановки</Stops_Button>
+	<Park_Button>Парки</Park_Button>
+	<Route_Button>Маршруты</Route_Button>
+	<Signals_Button>Сигналы</Signals_Button>
+	<Svetofor_Button>Светофоры</Svetofor_Button>
+	<Object_Button>Объекты</Object_Button>
+	<Rail_Edit_Button>Редактировать</Rail_Edit_Button>
+	<Rail_Build_Direct_Button>Строить прямые дороги</Rail_Build_Direct_Button>
+	<Rail_Build_Curve_Button>Строить кривые дороги</Rail_Build_Curve_Button>
+	<Road_Button>Дорога</Road_Button>
+	<Park_In_Button>Въезд</Park_In_Button>
+	<Park_Out_Button>Выезд</Park_Out_Button>
+	<Park_Rails_Button>Пути стоянки</Park_Rails_Button>
+	<Troll_lines_Flag_Button>Трамвайная КС</Troll_lines_Flag_Button>
+    </Tips>
+    <General>
+	<Control_auto>автоматическое</Control_auto>
+	<Control_semiauto>полуавтоматическое</Control_semiauto>
+	<Control_manual>ручное</Control_manual>
+	<Controller_position>Позиция контроллера</Controller_position>
+	<Reverse>Реверс</Reverse>
+	<Parking_brake>Стояночный тормоз</Parking_brake>
+	<Speed>Скорость</Speed>
+	<Speed_kmh>км/ч</Speed_kmh>
+	<Route>Маршрут</Route>
+	<Order>Наряд</Order>
+	<To_park>в парк</To_park>
+	<Next_road>Далее по маршруту</Next_road>
+	<Nr_forward>прямо</Nr_forward>
+	<Nr_right>направо</Nr_right>
+	<Nr_left>налево</Nr_left>
+	<Departure_time>Время отправления</Departure_time>
+	<Arrival_time>Время прибытия</Arrival_time>
+	<Steering>Руль</Steering>
+	<Steering_left>влево</Steering_left>
+	<Steering_right>вправо</Steering_right>
+	<Forward>вперёд</Forward>
+	<Back>назад</Back>
+	<Enabled>включен</Enabled>
+	<Disabled>выключен</Disabled>
+	<Brake1>Т1</Brake1>
+	<Brake2>Т2</Brake2>
+	<Brake3>Т3</Brake3>
+	<Brake4>Т4</Brake4>
+	<BrakePnev>ТР</BrakePnev>
+	<Shunting>М</Shunting>
+	<Move1>Х1</Move1>
+	<Move2>Х2</Move2>
+	<Move3>Х3</Move3>
+    </General>
+    <Tramway>
+	<Tramway>Трамвай</Tramway>
+	<Control>Управление трамваем</Control>
+	<Pantograph_raised>Токоприёмник поднят</Pantograph_raised>
+	<Pantograph_omitted>Токоприёмник опущен</Pantograph_omitted>
+    </Tramway>
+    <Trolleybus>
+	<Trolleybus>Троллейбус</Trolleybus>
+	<Control>Управление троллейбусом</Control>
+	<Shtangi_raised>Токоприёмники подняты</Shtangi_raised>
+	<Shtangi_omitted>Токоприёмники опущены</Shtangi_omitted>
+	<Air_brake>Пневматический тормоз</Air_brake>
+	<Standalone_motion>Автономный ход</Standalone_motion>
+	<Battery_power>Заряд аккумуляторов</Battery_power>
+    </Trolleybus>
+    <Bus>
+	<Engine>Двигатель</Engine>
+	<Control>Управление автобусом</Control>
+	<AutoControl>Управление автотранспортом</AutoControl>
+	<Gearbox_mode>Режим КПП</Gearbox_mode>
+	<Current_gear>Текущая передача</Current_gear>
+	<Pedals_position>Положение педалей</Pedals_position>
+	<Gas>Газ</Gas>
+	<Brake>Тормоз</Brake>
+    </Bus>
+  </Localization>
+</Trancity>

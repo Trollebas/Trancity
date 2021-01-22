@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Trancity>
+  <Localization>
+    <Reserve>
+	<Windowed>wind.</Windowed>
+	<Empty>Empty</Empty>
+	<Random>Random</Random>
+	<Shtangi_loosed>boogies loosed!</Shtangi_loosed>
+	<Of>of</Of>
+	<Edit>Edit...</Edit>
+	<NameTopEditor>Transedit</NameTopEditor>
+	<TrancityName>Trancity 0.6.3.3</TrancityName>
+	<Continuous>Continue</Continuous>
+	<Exit>Exit</Exit>
+	<Load_city>Load city...</Load_city>
+	<Load_models>Load models...</Load_models>
+	<Load_shaders>Load shaders...</Load_shaders>
+	<Load_objects>Load objects...</Load_objects>
+	<Load_stops>Load stops...</Load_stops>
+	<Load_sounds>Load sounds...</Load_sounds>
+	<Save_city>Save city...</Save_city>
+    </Reserve>
+    <Forms>
+	<Launch_Buttton>Start!</Launch_Buttton>
+	<Editor_Button>Editor</Editor_Button>
+	<Exit_Button>Exit</Exit_Button>
+	<Options_Page>General options</Options_Page>
+	<DirectX_Page>DirectX options</DirectX_Page>
+	<Players_Page>Players options</Players_Page>
+	<AutoControl_Box>Start with automatic control</AutoControl_Box>
+	<Time_label>Start time:</Time_label>
+	<TransportCount_label>Transport count:</TransportCount_label>
+	<RotateCamera_Box>Bind camera rotation to transport</RotateCamera_Box>
+	<InParkCount_label>in parks:</InParkCount_label>
+	<OnRouteCount_label>on routes:</OnRouteCount_label>
+	<LoadCity_Button>Load...</LoadCity_Button>
+	<InvArrows_Box>Left-handed rail arrows</InvArrows_Box>
+	<City_label>City:</City_label>
+	<Langugage_label>Langugage:</Langugage_label>
+	<Control_label>Controlling device:</Control_label>
+	<Order_label>Order:</Order_label>
+	<Route_label>Route:</Route_label>
+	<Transport_label>Transport:</Transport_label>
+	<Remove_Button>Remove</Remove_Button>
+	<Add_Button>Add</Add_Button>
+	<EnableShaders_Box>Draw skybox</EnableShaders_Box>
+	<Screen_Size_label>Screen size:</Screen_Size_label>
+	<NonExclusiveMouse_Box>Dont exclusive mouse</NonExclusiveMouse_Box>
+	<Splines_Cond_label>Splines quality:</Splines_Cond_label>
+	<NonExclusiveKeyboard_Box>Dont exclusive keyboard</NonExclusiveKeyboard_Box>
+	<Vertex_label>Vertex processing:</Vertex_label>
+	<NoStops_Box>Dont draw timetable on stops</NoStops_Box>
+	<NoSound_Box>Disable sounds</NoSound_Box>
+	<DeviceOptionsDialog>Device options</DeviceOptionsDialog>
+	<ChooseDevice_Label>Choose device:</ChooseDevice_Label>
+	<Windowed_Radio>Windowed</Windowed_Radio>
+	<Fullscreen_Radio>Fullscreen</Fullscreen_Radio>
+	<OK_Button>OK</OK_Button>
+	<Cancel_Button>Cancel</Cancel_Button>
+	<ComputeTimeDialog>Computing route time</ComputeTimeDialog>
+	<Objects_Instance_label>Instances:</Objects_Instance_label>
+	<Objects_EditLocation_Button>Edit</Objects_EditLocation_Button>
+	<Objects_ShowLocation_Button>Show</Objects_ShowLocation_Button>
+	<Objects_Location_label>Location:</Objects_Location_label>
+	<Objects_Remove_Button>Remove object</Objects_Remove_Button>
+	<Objects_Add_Button>Add object</Objects_Add_Button>
+	<Objects_label>Objects:</Objects_label>
+	<StopsButton>Stops...</StopsButton>
+	<Route_TransportType_label>Type of transport:</Route_TransportType_label>
+	<Route_ShowNarads_Box>Show orders</Route_ShowNarads_Box>
+	<Route_Runs_ComputeTime_Button>Compute time...</Route_Runs_ComputeTime_Button>
+	<Route_Runs_ToPark_Box>To Park</Route_Runs_ToPark_Box>
+	<Route_Runs_Park_Box>Park runs</Route_Runs_Park_Box>
+	<Route_Runs_Time_label>Time:</Route_Runs_Time_label>
+	<Route_Runs_ToParkIndex_label>Path index, indicate that
+route is going to park:</Route_Runs_ToParkIndex_label>
+	<Route_Runs_label>Route runs:</Route_Runs_label>
+	<Route_Name_label>Route name:</Route_Name_label>
+	<Route_Runs_Remove_Button>Remove run</Route_Runs_Remove_Button>
+	<Route_Remove_Button>Remove route</Route_Remove_Button>
+	<Route_Runs_Add_Button>Add run</Route_Runs_Add_Button>
+	<Route_Add_Button>Add route</Route_Add_Button>
+	<Route_ChangeName_Button>Change name</Route_ChangeName_Button>
+	<Route_label>Routes:</Route_label>
+	<Svetofor_Svetofor_Arrow_Box>Only green arrow</Svetofor_Svetofor_Arrow_Box>
+	<Svetofor_Element_Location_label>Location:</Svetofor_Element_Location_label>
+	<Svetofor_Cycle_label>Cycle:</Svetofor_Cycle_label>
+	<Svetofor_Green_label>Green arrow start time
+and length:</Svetofor_Green_label>
+	<Svetofor_Work_label>Work time:</Svetofor_Work_label>
+	<Svetofor_Remove_Button>Remove system</Svetofor_Remove_Button>
+	<Svetofor_Svetofor_ArrowRed_label>Red arrow:</Svetofor_Svetofor_ArrowRed_label>
+	<Svetofor_Svetofor_ArrowYellow_label>Yellow arrow:</Svetofor_Svetofor_ArrowYellow_label>
+	<Svetofor_Svetofor_ArrowGreen_label>Green allow:</Svetofor_Svetofor_ArrowGreen_label>
+	<Svetofor_Element_label>Instances:</Svetofor_Element_label>
+	<Svetofor_Add_Button>Add system</Svetofor_Add_Button>
+	<Svetofor_Element_EditLocation_Button>Edit</Svetofor_Element_EditLocation_Button>
+	<Svetofor_Element_ShowLocation_Button>Show</Svetofor_Element_ShowLocation_Button>
+	<Svetofor_label>Traffic lights systems:</Svetofor_label>
+	<Svetofor_Element_Remove_Button>Remove element</Svetofor_Element_Remove_Button>
+	<Svetofor_Signal_Add_Button>Add signal</Svetofor_Signal_Add_Button>
+	<Svetofor_Svetofor_Add_Button>Add light</Svetofor_Svetofor_Add_Button>
+	<Signals_Element_Minus_Box>Minus contact</Signals_Element_Minus_Box>
+	<Signals_Element_Location_label>Location:</Signals_Element_Location_label>
+	<Signals_Bound_label>Red light starts on:</Signals_Bound_label>
+	<Signals_Remove_Button>Remove system</Signals_Remove_Button>
+	<Signals_Element_label>Instances:</Signals_Element_label>
+	<Signals_Add_Button>Add system</Signals_Add_Button>
+	<Signals_Element_EditLocation_Button>Edit</Signals_Element_EditLocation_Button>
+	<Signals_Element_ShowLocation_Button>Show</Signals_Element_ShowLocation_Button>
+	<Signals_label>Signals systems:</Signals_label>
+	<Signals_Element_Remove_Button>Remove element</Signals_Element_Remove_Button>
+	<Signals_Element_AddSignal_Button>Add signal</Signals_Element_AddSignal_Button>
+	<Signals_Element_AddContact_Button>Add contact</Signals_Element_AddContact_Button>
+	<TypeOfTransportBox>Type of transport</TypeOfTransportBox>
+	<BusBox>Bus</BusBox>
+	<TrolleybusBox>Trolleybus</TrolleybusBox>
+	<TramwayBox>Tramway</TramwayBox>
+	<Stops_Location_label>Location:</Stops_Location_label>
+	<Stops_Name_label>Stop name:</Stops_Name_label>
+	<Stops_Remove_Button>Remove stop</Stops_Remove_Button>
+	<Stops_Add_Button>Add stop</Stops_Add_Button>
+	<Stops_EditLocation_Button>Edit</Stops_EditLocation_Button>
+	<Stops_ShowLocation_Button>Show</Stops_ShowLocation_Button>
+	<Stops_ChangeName_Button>Change name</Stops_ChangeName_Button>
+	<Stops_label>Stops:</Stops_label>
+	<Park_Name_label>Park name:</Park_Name_label>
+	<Park_Remove_Button>Remove park</Park_Remove_Button>
+	<Park_ChangeName_Button>Change name</Park_ChangeName_Button>
+	<Park_Add_Button>Add park</Park_Add_Button>
+	<Park_label>Selected park:</Park_label>
+	<Narad_Runs_Time2_label>Arrival time:</Narad_Runs_Time2_label>
+	<Narad_Runs_Time1_label>Departure time:</Narad_Runs_Time1_label>
+	<Narad_Runs_label>Runs:</Narad_Runs_label>
+	<Narad_Park_label>Park:</Narad_Park_label>
+	<Narad_Runs_Run_label>Run roads:</Narad_Runs_Run_label>
+	<Narad_Name_label>Order name:</Narad_Name_label>
+	<Narad_Runs_Remove_Button>Remove run</Narad_Runs_Remove_Button>
+	<Narad_Remove_Button>Remoe order</Narad_Remove_Button>
+	<Narad_Runs_Add_Button>Add run</Narad_Runs_Add_Button>
+	<Narad_Add_Button>Add order</Narad_Add_Button>
+	<Narad_ChangeName_Button>Change name</Narad_ChangeName_Button>
+	<Narad_label>Orders:</Narad_label>
+	<StopListForm>Stop list</StopListForm>
+	<Update_Button>Update</Update_Button>
+	<Clear_Button>Clear</Clear_Button>
+	<Stops_Model_label>Model of stop:</Stops_Model_label>
+	<Svetofor_Model_label>Model of tr. light:</Svetofor_Model_label>
+	<Signals_Model_label>Model of signal:</Signals_Model_label>
+	<Splines_label>Rails and roads:</Splines_label>
+	<Spline_Select_mode_Box>Selection mode</Spline_Select_mode_Box>
+	<Splines_Remove_Button>Remove</Splines_Remove_Button>
+	<Splines_ChangeModel_Button>Change model</Splines_ChangeModel_Button>
+	<Splines_Location_label>Location:</Splines_Location_label>
+	<Splines_ShowLocation_Button>Show</Splines_ShowLocation_Button>
+	<Splines_Instance_label>Instances:</Splines_Instance_label>
+	<Rail_Box_dist_Label>Box distance:</Rail_Box_dist_Label>
+    </Forms>
+    <Messages>
+	<Joints_no_begin_no_end>Found {0} ways whithout beginning and {1} ways whithout continuing.</Joints_no_begin_no_end>
+	<Joints_no_begin>Found {0} ways whithout beginning.</Joints_no_begin>
+	<Joints_no_end>Found {0} ways whithout continuing.</Joints_no_end>
+	<Joints_checked>All joints checked!</Joints_checked>
+	<Routes_already_computed>All routes already computed!</Routes_already_computed>
+	<Route_failed>Some route cannot be computed!</Route_failed>
+	<Save_city_quit>Save this city before closing?</Save_city_quit>
+	<Save_city_run>Save this city before run?</Save_city_run>
+	<Save_city>Do you want to save this city?</Save_city>
+	<Save_city_failed>Save failed</Save_city_failed>
+	<Min_curve_radius>Minimal radius: {0} m.</Min_curve_radius>
+	<Curve_not_found>Curves not found!</Curve_not_found>
+    </Messages>
+    <Menu_Editor>
+	<City_Item>City</City_Item>
+	<New_Item>New</New_Item>
+	<Open_Item>Open...</Open_Item>
+	<Save_Item>Save</Save_Item>
+	<SaveAs_Item>Save as...</SaveAs_Item>
+	<Refresh_All_TripStop_Lists_Item>Refresh all TripStop lists...</Refresh_All_TripStop_Lists_Item>
+	<Check_Joints_Item>Check joints...</Check_Joints_Item>
+	<Find_MinRadius_Item>Find minimal radius...</Find_MinRadius_Item>
+	<ComputeAllTime_Item>Compute all routes...</ComputeAllTime_Item>
+	<Run_Item>Run city</Run_Item>
+	<Exit_Item>Exit</Exit_Item>
+    </Menu_Editor>
+    <Tips>
+	<New_Button>New city</New_Button>
+	<Open_Button>Open city</Open_Button>
+	<Save_Button>Save city</Save_Button>
+	<Run_Button>Run current city</Run_Button>
+	<Rail_Button>Rails and roads</Rail_Button>
+	<Troll_lines_Button>Wires</Troll_lines_Button>
+	<Stops_Button>Stops</Stops_Button>
+	<Park_Button>Parks</Park_Button>
+	<Route_Button>Routes</Route_Button>
+	<Signals_Button>Signals</Signals_Button>
+	<Svetofor_Button>Traffic lights</Svetofor_Button>
+	<Object_Button>Objects</Object_Button>
+	<Rail_Edit_Button>Edit</Rail_Edit_Button>
+	<Rail_Build_Direct_Button>Straight road</Rail_Build_Direct_Button>
+	<Rail_Build_Curve_Button>Curve road</Rail_Build_Curve_Button>
+	<Road_Button>Road</Road_Button>
+	<Park_In_Button>Park entry</Park_In_Button>
+	<Park_Out_Button>Park exit</Park_Out_Button>
+	<Park_Rails_Button>Park roads</Park_Rails_Button>
+	<Troll_lines_Flag_Button>Tramway wires</Troll_lines_Flag_Button>
+    </Tips>
+    <General>
+	<Control_auto>automatic</Control_auto>
+	<Control_semiauto>semiautomatic</Control_semiauto>
+	<Control_manual>manual</Control_manual>
+	<Controller_position>Controller position</Controller_position>
+	<Reverse>Reverse control</Reverse>
+	<Parking_brake>Parking brake</Parking_brake>
+	<Speed>Speed</Speed>
+	<Speed_kmh>km/h</Speed_kmh>
+	<Route>Route</Route>
+	<Order>Order</Order>
+	<To_park>to park</To_park>
+	<Next_road>Route' next road</Next_road>
+	<Nr_forward>directly</Nr_forward>
+	<Nr_right>right</Nr_right>
+	<Nr_left>left</Nr_left>
+	<Departure_time>Departure time</Departure_time>
+	<Arrival_time>Arrival time</Arrival_time>
+	<Steering>Steering</Steering>
+	<Steering_left>left</Steering_left>
+	<Steering_right>right</Steering_right>
+	<Forward>forward</Forward>
+	<Back>backward</Back>
+	<Enabled>enabled</Enabled>
+	<Disabled>disabled</Disabled>
+	<Brake1>B1</Brake1>
+	<Brake2>B2</Brake2>
+	<Brake3>B3</Brake3>
+	<Brake4>B4</Brake4>
+	<BrakePnev>BР</BrakePnev>
+	<Shunting>Shunting</Shunting>
+	<Move1>M1</Move1>
+	<Move2>M2</Move2>
+	<Move3>M3</Move3>
+    </General>
+    <Tramway>
+	<Tramway>Tramway</Tramway>
+	<Control>Tramway control</Control>
+	<Pantograph_raised>Pantograph raised</Pantograph_raised>
+	<Pantograph_omitted>Pantograph omitted</Pantograph_omitted>
+    </Tramway>
+    <Trolleybus>
+	<Trolleybus>Trolleybus</Trolleybus>
+	<Control>Trolleybus control</Control>
+	<Shtangi_raised>Boogies raised</Shtangi_raised>
+	<Shtangi_omitted>Boogies omitted</Shtangi_omitted>
+	<Air_brake>Air brake</Air_brake>
+	<Standalone_motion>Standalone motion</Standalone_motion>
+	<Battery_power>Standalone motion</Battery_power>
+    </Trolleybus>
+    <Bus>
+	<Engine>Engine</Engine>
+	<Control>Bus control</Control>
+	<Gearbox_mode>Gearbox mode</Gearbox_mode>
+	<Current_gear>Current gear</Current_gear>
+	<Pedals_position>Pedals position</Pedals_position>
+	<Gas>Gas</Gas>
+	<Brake>Brake</Brake>
+    </Bus>
+  </Localization>
+</Trancity>

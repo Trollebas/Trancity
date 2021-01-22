@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Trancity>
+  <Object>
+    <dir>..\Stop1\</dir>
+    <name>Stop (12 routes)</name>
+    <filename>stop3.x</filename>
+    <bounding_sphere>
+      <r>21.0</r>
+      <x>2.0125</x>
+      <y>1.5</y>
+      <z>-6.9875</z>
+    </bounding_sphere>
+    <type>1</type> <!-- 0 - objects, 1 - stops, 2- traffic lights, 3 - signals -->
+    <args>
+	<tram_tex>Plate.PNG</tram_tex>
+	<bus_tex>PlateB.png</bus_tex>
+	<trol_tex>PlateTr.png</trol_tex>
+	<trol_bus_tex>PlateTrB.png</trol_bus_tex>
+    </args>
+  </Object>
+</Trancity>

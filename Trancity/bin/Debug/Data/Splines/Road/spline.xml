@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Trancity>
+  <Spline>
+    <dir></dir>
+    <name>Road</name>
+    <type>1</type>
+    <noscale>0</noscale>
+    <length>10</length>
+    <texture_filename>Дорога_test2.png</texture_filename>
+    <points>
+      <p0>
+        <x>1.0</x>
+        <y>0.0</y>
+        <texv>0.0</texv>
+      </p0>
+      <p1>
+        <x>-1.0</x>
+        <y>0.0</y>
+        <texv>1.0</texv>
+      </p1>
+    </points>
+    <mesh_filename>дорога.x</mesh_filename>
+  </Spline>
+</Trancity>

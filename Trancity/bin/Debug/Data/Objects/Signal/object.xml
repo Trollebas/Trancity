@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Trancity>
+  <Object>
+    <dir />
+    <name>Signal</name>
+    <filename>signal.x</filename>
+    <bounding_sphere>
+      <r>2.0</r>
+      <x>0.0</x>
+      <y>1.25</y>
+      <z>0.0</z>
+    </bounding_sphere>
+    <type>3</type> <!-- 0 - objects, 1 - stops, 2- traffic lights, 3 - signals -->
+    <args>
+	<red_mtrl>2</red_mtrl>
+      <green_mtrl>1</green_mtrl>
+    </args>
+  </Object>
+</Trancity>

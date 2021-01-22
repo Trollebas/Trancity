@@ -1,0 +1,4 @@
+D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Debug\ResolveAssemblyReference.cache
+D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Debug\Engine.Controls.RenderForm.resources
+D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Debug\ODE_Test.ExceptionHandlerForm.resources
+D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Debug\DotR.csproj.GenerateResource.Cache

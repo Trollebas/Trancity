@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{0CE375CB-B3B4-4E29-AEB9-E51A23757F02}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DotR</RootNamespace>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+    <AssemblyName>DotR</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+    <AssemblyName>ODE_Test64</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'GLx86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+    <AssemblyName>ODE_Test</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'GLx64' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+    <AssemblyName>ODE_Test64</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|GLx64' ">
+    <DefineConstants>DEBUG;TRACE;OGL;OAL</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|GLx86' ">
+    <DefineConstants>DEBUG;TRACE;OGL;OAL</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DefineConstants>DEBUG;TRACE;DX9;XA2</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DefineConstants>DEBUG;TRACE;DX9;XA2</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|GLx64' ">
+    <DefineConstants>TRACE;OGL</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|GLx86' ">
+    <DefineConstants>TRACE;OGL</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DefineConstants>TRACE;DX9;XA2</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineConstants>TRACE;DX9;XA2</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Condition=" '$(Platform)' == 'GLx86' OR '$(Platform)' == 'GLx64' " Include="OpenTK">
+      <HintPath>D:\soft_new\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x86' OR '$(Platform)' == 'x64' " Include="SlimDX" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\IRenderControl.cs" />
+    <Compile Include="Controls\RenderForm.cs" />
+    <Compile Include="Controls\RenderForm.Designer.cs">
+      <DependentUpon>RenderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RenderPanel.cs" />
+    <Compile Include="Controls\RenderPanel.Designer.cs">
+      <DependentUpon>RenderPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls.cs" />
+    <Compile Include="GUI\MyGUI.cs" />
+    <Compile Include="Input\DInputKeyboard.cs" />
+    <Compile Include="Input\FilteredKeyboardState.cs" />
+    <Compile Include="Input\IInputDevice.cs" />
+    <Compile Include="Input\KeyboardDevice.cs" />
+    <Compile Include="Input\MyDirectInput.cs" />
+    <Compile Include="Input\OpenTKKeyboard.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Renderer\DeviceOptions.cs" />
+    <Compile Include="Renderer\DX9RenderDevice.cs" />
+    <Compile Include="Renderer\IMatrixObject.cs" />
+    <Compile Include="Renderer\IRawDevice.cs" />
+    <Compile Include="Renderer\MeshObject.cs" />
+    <Compile Include="Renderer\MyDirect3D.cs" />
+    <Compile Include="Renderer\OGLRenderDevice.cs" />
+    <Compile Include="Renderer\RenderDevice.cs" />
+    <Compile Include="Renderer\RenderSystem.cs" />
+    <Compile Include="Renderer\SimpleStateManager.cs" />
+    <Compile Include="Sound\IEmiUpdater.cs" />
+    <Compile Include="Sound\ISound2D.cs" />
+    <Compile Include="Sound\ISound3D.cs" />
+    <Compile Include="Sound\OALSoundDevice.cs" />
+    <Compile Include="Sound\SoundDevice.cs" />
+    <Compile Include="Sound\XA2Sound3D.cs" />
+    <Compile Include="Sound\SoundManager.cs" />
+    <Compile Include="Sound\XA2SoundDevice.cs" />
+    <Compile Include="Sound\XA2Sound2D.cs" />
+    <Compile Include="Math\BoundingFigures.cs" />
+    <Compile Include="Math\Double3DPoint.cs" />
+    <Compile Include="Math\DoublePoint.cs" />
+    <Compile Include="Utilities.cs" />
+    <Compile Include="WinFormsExt\WinFormsUt.cs" />
+    <Compile Include="ExceptionHandlerForm.cs" />
+    <Compile Include="ExceptionHandlerForm.Designer.cs">
+      <DependentUpon>ExceptionHandlerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="World\MyCamera.cs" />
+    <Compile Include="Xml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\RenderForm.resx">
+      <DependentUpon>RenderForm.Designer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionHandlerForm.resx">
+      <DependentUpon>ExceptionHandlerForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI" />
+    <Folder Include="Controls" />
+    <Folder Include="Input" />
+    <Folder Include="World" />
+    <Folder Include="Renderer" />
+    <Folder Include="Sound" />
+    <Folder Include="WinFormsExt" />
+    <Folder Include="Math" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>
