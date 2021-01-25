@@ -16,20 +16,19 @@ namespace Trancity
         private int _видТранспорта = TypeOfTransport.Tramway;
         private bool city_ready;
         private Button Add_Button;
-        private MainForm app;
         private CheckBox AutoControl_Box;
         private Label City_label;
         private Label City_Name_label;
         private int current_player = -1;
         private DeviceOptionsDialog dialog;
         private TabPage DirectX_Page;
-        private System.Windows.Forms.Button Editor_Button;
-        private System.Windows.Forms.GroupBox DirectX_Box;
-        private System.Windows.Forms.Button Exit_Button;
-        private System.Windows.Forms.Label Transport_label;
-        private System.Windows.Forms.Label Order_label;
-        private System.Windows.Forms.Label Route_label;
-        private System.Windows.Forms.Label Control_label;
+        private Button Editor_Button;
+        private GroupBox DirectX_Box;
+        private Button Exit_Button;
+        private Label Transport_label;
+        private Label Order_label;
+        private Label Route_label;
+        private Label Control_label;
         private Button Launch_Buttton;
         private Button LoadCity_Button;
         private OpenFileDialog LoadCity_Dialog;
@@ -43,7 +42,7 @@ namespace Trancity
         private CheckedListBox Players_List;
         private TabPage Players_Page;
         private TrackBar Rail_Box;
-        private System.Windows.Forms.Button Remove_Button;
+        private Button Remove_Button;
         private ComboBox Screen_Box;
         private TimeBox StartTime_Box;
         private TabControl Tab_Control;
@@ -55,38 +54,41 @@ namespace Trancity
         private ComboBox Наряд_Box;
         private ComboBox ПодвижнойСостав_Box;
         private ComboBox Управление_Box;
-        private System.Windows.Forms.CheckBox EnableShaders_Box;
-        private System.Windows.Forms.Label Langugage_label;
-        private System.Windows.Forms.ComboBox Lang_Box;
-        private System.Windows.Forms.CheckBox InvArrows_Box;
-        private System.Windows.Forms.CheckBox RotateCamera_Box;
-        private System.Windows.Forms.Label OnRouteCount_label;
-        private System.Windows.Forms.Label TransportCount_label;
-        private System.Windows.Forms.Label InParkCount_label;
-        private System.Windows.Forms.Label Compute_TCount_label;
-        private System.Windows.Forms.Label Screen_Size_label;
-        private System.Windows.Forms.Label Splines_Cond_label;
+        private CheckBox EnableShaders_Box;
+        private Label Langugage_label;
+        private ComboBox Lang_Box;
+        private CheckBox InvArrows_Box;
+        private CheckBox RotateCamera_Box;
+        private Label OnRouteCount_label;
+        private Label TransportCount_label;
+        private Label InParkCount_label;
+        private Label Compute_TCount_label;
+        private Label Screen_Size_label;
+        private Label Splines_Cond_label;
+        private MainForm app = new MainForm { настройки = new MainForm.НастройкиЗапуска() };
 
         private void Add_Button_Click(object sender, EventArgs e)
         {
-            var игрокаArray = app.настройки.игроки;
-            this.app.настройки.игроки = new MainForm.НастройкиЗапускаИгрока[игрокаArray.Length + 1];
-            this.app.настройки.количествоИгроков = игрокаArray.Length + 1;
+            // var avp = MainForm app;
+            // var app = new MainForm { настройки = new MainForm.НастройкиЗапуска() };
+            var игрокаArray =  app.настройки.игроки;
+            app.настройки.игроки = new MainForm.НастройкиЗапускаИгрока[игрокаArray.Length + 1];
+            app.настройки.количествоИгроков = игрокаArray.Length + 1;
             for (int i = 0; i < игрокаArray.Length; i++)
             {
                 this.app.настройки.игроки[i] = игрокаArray[i];
             }
-            this.app.настройки.игроки[игрокаArray.Length].inputGuid = Guid.Empty;//Microsoft.DirectX.DirectInput.SystemGuid.Keyboard;
-            this.app.настройки.игроки[игрокаArray.Length].вИгре = true;
-            this.app.настройки.игроки[игрокаArray.Length].имя = this.Name_Box.Text;
-            this.app.настройки.игроки[игрокаArray.Length].маршрут = 0;
-            this.app.настройки.игроки[игрокаArray.Length].наряд = 0;
-            this.app.настройки.игроки[игрокаArray.Length].подвижнойСостав = "";
+            app.настройки.игроки[игрокаArray.Length].inputGuid = Guid.Empty;//Microsoft.DirectX.DirectInput.SystemGuid.Keyboard;
+            app.настройки.игроки[игрокаArray.Length].вИгре = true;
+            app.настройки.игроки[игрокаArray.Length].имя = this.Name_Box.Text;
+            app.настройки.игроки[игрокаArray.Length].маршрут = 0;
+            app.настройки.игроки[игрокаArray.Length].наряд = 0;
+            app.настройки.игроки[игрокаArray.Length].подвижнойСостав = "";
             this.Name_Box.Clear();
             this.Players_List.Items.Clear();
-            for (int j = 0; j < this.app.настройки.количествоИгроков; j++)
+            for (int j = 0; j < app.настройки.количествоИгроков; j++)
             {
-                this.Players_List.Items.Add(this.app.настройки.игроки[j].имя, this.app.настройки.игроки[j].вИгре);
+                this.Players_List.Items.Add(app.настройки.игроки[j].имя, app.настройки.игроки[j].вИгре);
             }
             this.UpdatePlayers(sender, e);
         }

@@ -7,3 +7,12 @@ D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Debug\DotR.dll
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Debug\DotR.pdb
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Debug\Engine.Controls.RenderForm.resources
+C:\Users\User\Documents\GitHub\Trancity\DotR\bin\Debug\DotR.dll.config
+C:\Users\User\Documents\GitHub\Trancity\DotR\bin\Debug\DotR.dll
+C:\Users\User\Documents\GitHub\Trancity\DotR\bin\Debug\DotR.pdb
+C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\Engine.Controls.RenderForm.resources
+C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\ODE_Test.ExceptionHandlerForm.resources
+C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\DotR.csproj.GenerateResource.Cache
+C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\DotR.dll
+C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\DotR.pdb
+C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\DotR.csprojResolveAssemblyReference.cache

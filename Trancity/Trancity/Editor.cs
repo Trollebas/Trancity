@@ -35,13 +35,11 @@ namespace Trancity
         private StatusBarPanel Angle2_Status;
         private MenuItem Check_Joints_Item;
         private MenuItem City_Item;
-        private MenuItem Edit_Item;
         private MenuItem ComputeAllTime_Item;
         private MenuItem Exit_Item;
         private MenuItem Find_MinRadius_Item;
         private MenuItem Open_Item;
         private MenuItem New_Item;
-        private MenuItem Undo_Item;
         private MenuItem Refresh_All_TripStop_Lists_Item;
         private MenuItem Run_Item;
         private MenuItem Save_Item;
@@ -236,7 +234,7 @@ namespace Trancity
         private ToolBarButton Object_Button;
         private Объект строящийся_объект;
         private bool splines_aviable;
-        private double time_color = 0.0;
+        private double time_color = 10.0;
         private bool[] _lastMouseButtons = new bool[5];
         public bool активна = true;
         private int _транспортPosIndex;
@@ -257,7 +255,9 @@ namespace Trancity
          }
         
         
-         
+        /// <summary>
+        /// Editor Trancity
+        /// </summary>
         public Editor()
         {
             //
@@ -390,7 +390,9 @@ namespace Trancity
                     return;
             }
         }
-        
+        /// <summary>
+        /// Клавиши
+        /// </summary>
         public void Editor_Form_KeyDown(object sender, KeyEventArgs e)
         {
             var MouseState = MyDirectInput.Mouse_State;
@@ -5960,7 +5962,7 @@ namespace Trancity
                 return;
             var selectedIndex = Splines_Instance_Box.SelectedIndex;
             this.DoRegisterAction(new RemoveRoadAction(selectedIndex));
-            if (selectedIndex > 0)
+            if (selectedIndex >= 0)
             {
                 Splines_Instance_Box.SelectedIndex = selectedIndex - 1;
             }

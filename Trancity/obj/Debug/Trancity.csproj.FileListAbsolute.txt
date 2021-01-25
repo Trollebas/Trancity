@@ -17,3 +17,21 @@ D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\obj\Debug\Trancity.exe
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\obj\Debug\Trancity.pdb
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\bin\Debug\Trancity.pdb
+C:\Users\User\Documents\GitHub\Trancity\Trancity\bin\Debug\Readme.txt
+C:\Users\User\Documents\GitHub\Trancity\Trancity\bin\Debug\Readme_Editor.txt
+C:\Users\User\Documents\GitHub\Trancity\Trancity\bin\Debug\Trancity.exe.config
+C:\Users\User\Documents\GitHub\Trancity\Trancity\bin\Debug\Trancity.exe
+C:\Users\User\Documents\GitHub\Trancity\Trancity\bin\Debug\Trancity.pdb
+C:\Users\User\Documents\GitHub\Trancity\Trancity\bin\Debug\DotR.dll
+C:\Users\User\Documents\GitHub\Trancity\Trancity\bin\Debug\DotR.pdb
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Common.DeviceOptionsDialog.resources
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.StopListForm.resources
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.ComputeTimeDialog.resources
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.Editor.resources
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.MainForm.resources
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.Options.resources
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.UserControlForm.resources
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.csproj.GenerateResource.Cache
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.exe
+C:\Users\User\Documents\GitHub\Trancity\Trancity\obj\Debug\Trancity.pdb

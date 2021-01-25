@@ -73,6 +73,7 @@ namespace Trancity
                     localization.initializewdi = Engine.Xml.GetString(reserve["InitializeWDI"], "Не удалось инициализировать DirectInput.");
                     localization.angle = Engine.Xml.GetString(reserve["Angle"], "Угол: ");
                     localization.scale = Engine.Xml.GetString(reserve["Scale"], "масштаб: ");
+                    localization.initializetreadtest = Engine.Xml.GetString(reserve["InitializeWDI"], "Включен дополнительный поток рендеринга!");
                     localization.nulltran = Engine.Xml.GetString(reserve["NullTran"], "Не удалось найти модель ");
                     localization.forplayer = Engine.Xml.GetString(reserve["ForPlayer"], " для игрока ");
                     localization.nullrandom = Engine.Xml.GetString(reserve["NullRandom"], "Случайный маршрут не выбран для игрока ");
@@ -231,6 +232,7 @@ namespace Trancity
     public struct ПсевдоЛокализация
     {
         public string name;
+        public string initializetreadtest;
         public string namegame;
         public string nametopeditor;
         public string сontinuous;

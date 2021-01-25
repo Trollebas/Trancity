@@ -111,24 +111,11 @@ namespace Trancity
                     var light = MyDirect3D.device.GetLight(i);
                     light.Diffuse = Color.FromArgb(color, color, color);
                     MyDirect3D.device.SetLight(i, light);
-//                    MyGUI.default_font.DrawString(null, str111, (int) (420 + MyDirect3D.device.Viewport.X), (int) (15 + MyDirect3D.device.Viewport.Y), Color.Black);
                 }
             }
             if (changed_time)
             {
-                int color = (int)(MyDirect3D.light_color * MyDirect3D.light_intency);
-                for (int i = 0; i < 11; i += 2)
-                {
-                    var light = MyDirect3D.device.GetLight(i);
-                    light.Diffuse = Color.FromArgb(color, color, color);
-                    MyDirect3D.device.SetLight(i, light);
-                }
-                /*var fgf = World.time;
-                if (fgf)
-                {
-                MyDirect3D.light_intency = Math.Max(MyDirect3D.light_intency - 0.1f, 0.0f);
-                MyDirect3D.light_intency = Math.Max(MyDirect3D.light_intency + 0.1f, 0.0f);
-                }*/
+                
             }
             if (KeyState[Key.Escape])
             {
@@ -2378,7 +2365,6 @@ namespace Trancity
 	                    var str111 = "\nCS: " + ((_transport.currentStop != null) ? _transport.currentStop.название : "")
 	                    	+ "\nNS: " + ((_transport.nextStop != null) ? _transport.nextStop.название : "")
 	                    	+ "\nSI: " + _transport.stopIndex
-	                        + "\nNewControl: " + ((NewControl) ? Localization.current_.enable : Localization.current_.disable)
 	                        + "\n\nX: " + _transport.Координаты3D.x.ToString("#0.0")
 	                        + "\nY: " + _transport.Координаты3D.y.ToString("#0.0")
 	                        + "\nZ: " + _transport.Координаты3D.z.ToString("#0.0")
@@ -2638,7 +2624,8 @@ namespace Trancity
 //                	MyGUI.default_font.DrawString(null, "Понедельник".PadLeft(27), MyDirect3D.Window_Width - 398, 15, Color.Black);
                 }
                 if (!MainForm.debug) continue;
-                var _str = "\ndTmax: " + World.dtmax.ToString("#0.000") + "\nFPS: " + MyDirect3D._newDevice.FPS.ToString("  00")
+                var _str = "\ndTmax: " + World.dtmax.ToString("#0.000") + "\nFPS: " + MyDirect3D._newDevice.FPS.ToString("#00")
+                    + "\nNewControl: " + ((NewControl) ? Localization.current_.enable : Localization.current_.disable)
                 	+ "\nX: " + MyDirect3D.Camera_Position.x.ToString("#0.0")
 	                + "\nY: " + MyDirect3D.Camera_Position.y.ToString("#0.0")
 	                + "\nZ: " + MyDirect3D.Camera_Position.z.ToString("#0.0")
@@ -2685,10 +2672,9 @@ namespace Trancity
 	                }
 	                if (MainForm.debug)
 	                {
-	                	Common.MyGUI.stringlist[4 + i] = "\nCS: " + ((_transport.currentStop != null) ? _transport.currentStop.название : "")
+	                	MyGUI.stringlist[4 + i] = "\nCS: " + ((_transport.currentStop != null) ? _transport.currentStop.название : "")
 	                    	+ "\nNS: " + ((_transport.nextStop != null) ? _transport.nextStop.название : "")
 	                    	+ "\nSI: " + _transport.stopIndex
-	                	    + "\nNewControl: " + ((NewControl) ? Localization.current_.enable : Localization.current_.disable)
 	                        + "\n\nX: " + _transport.Координаты3D.x.ToString("#0.0")
 	                        + "\nY: " + _transport.Координаты3D.y.ToString("#0.0")
 	                        + "\nZ: " + _transport.Координаты3D.z.ToString("#0.0")
@@ -2935,7 +2921,8 @@ namespace Trancity
 	                }
                 }
                 Common.MyGUI.stringlist[i] = whole_info;
-                Common.MyGUI.stringlist[i + 8] = "\ndTmax: " + World.dtmax.ToString("#0.000") + "\nFPS: " + MyDirect3D._newDevice.FPS.ToString("  00")
+                Common.MyGUI.stringlist[i + 8] = "\ndTmax: " + World.dtmax.ToString("#0.000") + "\nFPS: " + MyDirect3D._newDevice.FPS.ToString("#00")
+                    + "\nNewControl: " + ((NewControl) ? Localization.current_.enable : Localization.current_.disable)
                 	+ "\nX: " + MyDirect3D.Camera_Position.x.ToString("#0.0")
 	                + "\nY: " + MyDirect3D.Camera_Position.y.ToString("#0.0")
 	                + "\nZ: " + MyDirect3D.Camera_Position.z.ToString("#0.0")

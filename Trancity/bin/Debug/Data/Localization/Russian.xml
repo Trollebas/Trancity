@@ -51,7 +51,7 @@
 	<NonExclusiveMouse_Box>Не захватывать мышь</NonExclusiveMouse_Box>
 	<Splines_Cond_label>Качество кривых рельсов:</Splines_Cond_label>
 	<NonExclusiveKeyboard_Box>Не захватывать клавиатуру</NonExclusiveKeyboard_Box>
-	<Vertex_label>Vertex processing:</Vertex_label>
+	<Vertex_label>Обработка вершин:</Vertex_label>
 	<NoStops_Box>Не рисовать текст на значках остановок</NoStops_Box>
 	<NoSound_Box>Беззвучный режим</NoSound_Box>
 	<DeviceOptionsDialog>Настройки экрана</DeviceOptionsDialog>

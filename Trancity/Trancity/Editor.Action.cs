@@ -108,7 +108,7 @@ namespace Trancity
 
             public override void Undo()
             {
-               for (int i = _roads.Length - 1; i >= 0; i--)
+               for (int i = _roads.Length; i >= 0; i--)
                     _parent.мир.listДороги.Remove(_roads[i]);
                 foreach (var spline in _parent.мир.ВсеДороги)
                     spline.ОбновитьСледующиеДороги(_parent.мир.ВсеДороги);
@@ -175,6 +175,7 @@ namespace Trancity
                 var cityWires = new List<Контактный_провод>(_parent.мир.контактныеПровода);
                 cityWires.AddRange(_wires);
                 // TODO: recalc disabled status for newly added wires
+                
                 _parent.мир.контактныеПровода = cityWires.ToArray();
             }
             
@@ -380,6 +381,7 @@ namespace Trancity
             {
                 _parent.мир.остановки.Insert(_index, _object);
                 _parent.UpdateStopsList();
+                //_parent.UpdateRouteControls(Route );
                 // TODO: insert back to trips?
             }
             

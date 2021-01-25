@@ -1,6 +1,5 @@
 ﻿using Common;
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -15,13 +14,14 @@ namespace Trancity
 {
     public class MainForm : Engine.Controls.RenderForm//Form
     {
-        //private readonly IContainer _components;
+//        private readonly IContainer _components;
         public static int ticklast;
         public Game _игра;
         public НастройкиЗапуска настройки;
         public static bool debug;
         public static bool thread_test = false;
         public static bool in_editor = false;
+       // public static string app;
 
         public MainForm()
         {
@@ -59,17 +59,17 @@ namespace Trancity
         }
 
         [STAThread]
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // now we'll catch every exception. mb...
+            // now we'll catch every exception. mb... теперь мы будем ловить каждое исключение. ..
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-			Application.ThreadException += new ThreadExceptionEventHandler(OnUIThreadException);
-			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(OnCurrentDomainUnhandledException);
-			
+			Application.ThreadException += (OnUIThreadException);
+			AppDomain.CurrentDomain.UnhandledException += (OnCurrentDomainUnhandledException);
             bool sound_flag = false;
             bool nolog = false;
+            bool editor = false;
             MyFeatures.CheckFolders(Application.StartupPath);
             var app = new MainForm { настройки = new НастройкиЗапуска() };
             app.ЗагрузитьНастройки();
@@ -90,7 +90,7 @@ namespace Trancity
                 	case "-thread_test":
                 		{
                 			thread_test = true;
-                			Logger.Log("Additional render thread enabled!");
+                			Logger.Log(Localization.current_.initializetreadtest);
                 			break;
                 		}
                 	case "-nolog":
@@ -98,6 +98,19 @@ namespace Trancity
                 			nolog = true;
                 			break;
                 		}
+                    case "-editor":
+                        {
+                            /*Logger.Initialize(Assembly.GetExecutingAssembly());
+                            MyDirectInput.EnumerateDevices();
+                            var editor = new Editor();
+                            
+                            editor.Load += (editor.Editor_Form_Load);
+                            
+                            editor.InitializeComponent();
+                            var mainform = new Form();*/
+                            editor = true;
+                            break;
+                        }
                 	default:
                 		{
                 			app.настройки.cityFilename = str;
@@ -115,8 +128,16 @@ namespace Trancity
                     if (result == DialogResult.Ignore)
                     {
                         Application.Run(new Editor());
+                        Logger.Log("Запущен редактор!");
                     }
                     return;
+            }
+            if (editor)
+            {
+               // app.Close();
+                Application.Run(new Editor());
+                Logger.Log("Запущен редактор!");
+                return;
             }
             app.СохранитьНастройки();
             if (app.настройки.игроки.Length > 1)
