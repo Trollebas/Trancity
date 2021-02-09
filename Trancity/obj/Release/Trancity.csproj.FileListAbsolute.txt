@@ -15,3 +15,23 @@ D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\obj\Release\Trancity.csproj.GenerateResource.Cache
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\obj\Release\Trancity.exe
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\obj\Release\Trancity.pdb
+F:\Projects\Trancity\Trancity\bin\Debug\Readme.txt
+F:\Projects\Trancity\Trancity\bin\Debug\Readme_Editor.txt
+F:\Projects\Trancity\Trancity\bin\Debug\Trancity.exe.config
+F:\Projects\Trancity\Trancity\bin\Debug\Trancity.exe
+F:\Projects\Trancity\Trancity\bin\Debug\Trancity.pdb
+F:\Projects\Trancity\Trancity\bin\Debug\ODE_Test64.dll
+F:\Projects\Trancity\Trancity\bin\Debug\ODE_Test64.dll.config
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.csprojAssemblyReference.cache
+F:\Projects\Trancity\Trancity\obj\Release\Common.DeviceOptionsDialog.resources
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.StopListForm.resources
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.ComputeTimeDialog.resources
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.Editor.resources
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.MainForm.resources
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.Options.resources
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.UserControlForm.resources
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.csproj.GenerateResource.cache
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.csproj.CoreCompileInputs.cache
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.csproj.CopyComplete
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.exe
+F:\Projects\Trancity\Trancity\obj\Release\Trancity.pdb

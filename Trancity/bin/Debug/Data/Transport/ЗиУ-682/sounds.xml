@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Trancity>
+	<newsound varname="run_0_5" loop="true">
+		<filename>run_5.wav</filename>
+		<distance>60.0</distance>
+		<conditions>
+			<condition varname="enabled" ifvalue="1" compareType="1"/>
+		</conditions>
+	</newsound>
+	<newsound varname="run_10_40" loop="true">
+		<filename>run_40.wav</filename>
+		<distance>60.0</distance>
+		<conditions>
+			<condition varname="enabled" ifvalue="1" compareType="1"/>
+		</conditions>
+	</newsound>
+	
+	
+	<newcurve xvar="speed" targetvar="run_0_5" soundparam="volume">
+		<pnt x="0" y="0"></pnt>
+		<pnt x="3" y="1"></pnt>
+		<pnt x="6" y="1"></pnt>
+		<pnt x="20" y="0"></pnt>
+	</newcurve>
+	<newcurve xvar="speed" targetvar="run_0_5" soundparam="pitch">
+		<pnt x="0" y="0"></pnt>
+		<pnt x="5" y="1"></pnt>
+		<pnt x="15" y="1.5"></pnt>
+	</newcurve>
+	
+	<newcurve xvar="speed" targetvar="run_10_40" soundparam="volume">
+		<pnt x="6" y="0"></pnt>
+		<pnt x="30" y="1"></pnt>
+	</newcurve>
+	<newcurve xvar="speed" targetvar="run_10_40" soundparam="pitch">
+		<pnt x="6" y="0.2"></pnt>
+		<pnt x="40" y="1"></pnt>
+		<pnt x="60" y="1.3"></pnt>
+	</newcurve>
+</Trancity>

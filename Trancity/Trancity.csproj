@@ -19,6 +19,19 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <ApplicationIcon>Icons\favicon_backup2.ico</ApplicationIcon>
+    <NoWin32Manifest>True</NoWin32Manifest>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <AssemblyName>Trancity</AssemblyName>
+    <ReferencePath>D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\</ReferencePath>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -33,29 +46,17 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ApplicationIcon>Icons\favicon_backup2.ico</ApplicationIcon>
-    <NoWin32Manifest>True</NoWin32Manifest>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <NoStdLib>False</NoStdLib>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <SignAssembly>False</SignAssembly>
-    <DelaySign>False</DelaySign>
-    <RunCodeAnalysis>False</RunCodeAnalysis>
-    <AssemblyName>Trancity</AssemblyName>
-    <ReferencePath>D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\</ReferencePath>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>Full</DebugType>
-    <Optimize>True</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>PdbOnly</DebugType>
@@ -98,6 +99,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'x64' ">
     <BaseAddress>4194304</BaseAddress>
@@ -127,13 +129,18 @@
     <Compile Include="Common\UI\Controls.cs" />
     <Compile Include="Common\UI\MyGUI.cs" />
     <Compile Include="Common\UI\TestTexture.cs" />
-    <Compile Include="Common\NumericBox.cs" />
+    <Compile Include="Common\NumericBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Common\Xml.cs" />
+    <Compile Include="ControlledSound.cs" />
+    <Compile Include="Func.cs" />
     <Compile Include="GroundPart.cs" />
     <Compile Include="MyCamera.cs" />
     <Compile Include="ObjectLoader.cs" />
     <Compile Include="ObjectModel.cs" />
     <Compile Include="SkyBox.cs" />
+    <Compile Include="SoundCurve.cs" />
     <Compile Include="SoundLoader.cs" />
     <Compile Include="SimpleTimer.cs" />
     <Compile Include="Common\DeviceOptionsDialog.cs">
@@ -165,6 +172,7 @@
     <Compile Include="Trancity\Cheats.cs" />
     <Compile Include="Trancity\Editor.Action.cs">
       <DependentUpon>Editor.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Trancity\Editor.cs">
       <SubType>Form</SubType>
@@ -238,7 +246,9 @@
     <Compile Include="Controlling.cs" />
     <Compile Include="IControlledObject.cs" />
     <Compile Include="BaseStop.cs" />
-    <Compile Include="UserControlForm.cs" />
+    <Compile Include="UserControlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserControlForm.Designer.cs">
       <DependentUpon>UserControlForm.cs</DependentUpon>
     </Compile>
@@ -300,10 +310,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\UI" />
-    <Folder Include="Icons" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DotR\DotR.csproj">
       <Project>{0ce375cb-b3b4-4e29-aeb9-e51a23757f02}</Project>

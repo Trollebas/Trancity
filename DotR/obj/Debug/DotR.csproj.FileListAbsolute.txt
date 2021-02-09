@@ -16,3 +16,13 @@ C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\DotR.csproj.GenerateResou
 C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\DotR.dll
 C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\DotR.pdb
 C:\Users\User\Documents\GitHub\Trancity\DotR\obj\Debug\DotR.csprojResolveAssemblyReference.cache
+F:\Projects\Trancity\DotR\obj\Debug\DotR.csprojAssemblyReference.cache
+F:\Projects\Trancity\DotR\obj\Debug\Engine.Controls.RenderForm.resources
+F:\Projects\Trancity\DotR\obj\Debug\ODE_Test.ExceptionHandlerForm.resources
+F:\Projects\Trancity\DotR\obj\Debug\DotR.csproj.GenerateResource.cache
+F:\Projects\Trancity\DotR\obj\Debug\DotR.csproj.CoreCompileInputs.cache
+F:\Projects\Trancity\DotR\bin\Debug\DotR.dll.config
+F:\Projects\Trancity\DotR\bin\Debug\DotR.dll
+F:\Projects\Trancity\DotR\bin\Debug\DotR.pdb
+F:\Projects\Trancity\DotR\obj\Debug\DotR.dll
+F:\Projects\Trancity\DotR\obj\Debug\DotR.pdb

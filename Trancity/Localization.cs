@@ -65,7 +65,7 @@ namespace Trancity
                     localization.edit = Engine.Xml.GetString(reserve["Edit"], "Настроить...");
                     localization.city = Engine.Xml.GetString(reserve["City"], "Карты Trancity");
                     localization.allfiles = Engine.Xml.GetString(reserve["AllFiles"], "Все файлы");
-                    localization.namegame = Engine.Xml.GetString(reserve["TrancityName"], "Trancity 0.6.3.3.1");
+                    localization.namegame = Engine.Xml.GetString(reserve["TrancityName"], "Trancity");
                     localization.nametopeditor = Engine.Xml.GetString(reserve["NameTopEditor"], "Редактор Trancity");
                     localization.сontinuous = Engine.Xml.GetString(reserve["Continuous"], "Продолжить");
                     localization.exit = Engine.Xml.GetString(reserve["Exit"], "Выйти");

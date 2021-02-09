@@ -40,7 +40,7 @@ namespace Engine.Sound
 			}
 			audioBuffer.LoopCount = XAudio2.LoopInfinite;
 			// СорсВойс, видимо, туда же
-			SourceVoice svoice = new SourceVoice(device.RawDevice, format);
+			SourceVoice svoice = new SourceVoice(device.RawDevice, format, 0, 2f);
 			svoice.SubmitSourceBuffer(audioBuffer);
 			var sound2d = new XA2Sound2D(svoice, format, audioBuffer);
 			return sound2d;
