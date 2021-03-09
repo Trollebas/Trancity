@@ -94,9 +94,6 @@
     <DefineConstants>TRACE;DX9;XA2</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Condition=" '$(Platform)' == 'GLx86' OR '$(Platform)' == 'GLx64' " Include="OpenTK">
-      <HintPath>D:\soft_new\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
-    </Reference>
     <Reference Condition=" '$(Platform)' == 'x86' OR '$(Platform)' == 'x64' " Include="SlimDX" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -166,15 +163,6 @@
       <DependentUpon>ExceptionHandlerForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GUI" />
-    <Folder Include="Controls" />
-    <Folder Include="Input" />
-    <Folder Include="World" />
-    <Folder Include="Renderer" />
-    <Folder Include="Sound" />
-    <Folder Include="WinFormsExt" />
-    <Folder Include="Math" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

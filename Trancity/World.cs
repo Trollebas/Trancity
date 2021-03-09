@@ -1,11 +1,9 @@
+using Common;
+using Engine;
 using System;
 using System.Collections.Generic;
-using System.Xml;
-using System.Windows.Forms;
 using System.Diagnostics;
-using Common;
-using SlimDX;
-using Engine;
+using System.Xml;
 
 namespace Trancity
 {
@@ -27,13 +25,13 @@ namespace Trancity
         public MyList транспорты = new MyList(new Type[0]);
         public List<Объект> объекты = new List<Объект>();
         public double time_speed = 1000.0;
-//        public SimpleTimer simple_timer = new SimpleTimer(0.175);
+        //        public SimpleTimer simple_timer = new SimpleTimer(0.175);
         public SkyBox skybox = new SkyBox();
         public static double dtmax = 0.0;
 
         public void Create_Meshes()
         {
-			Common.MyGUI.status_string = Localization.current_.load_models;//"Загрузка моделей...";
+            Common.MyGUI.status_string = Localization.current_.load_models;//"Загрузка моделей...";
             Common.MyGUI.Splash();
             for (var i = 0; i < ВсеДороги.Length; i++)
             {
@@ -47,10 +45,10 @@ namespace Trancity
                     }
                 }
                 ВсеДороги[i].CreateMesh();
-//                ВсеДороги[i].Test();
+                //                ВсеДороги[i].Test();
                 if (ВсеДороги[i] is Рельс)
                 {
-                	if ((!MainForm.in_editor) && (((Рельс)ВсеДороги[i]).следующие_рельсы.Length <= 1)) continue;
+                    if ((!MainForm.in_editor) && (((Рельс)ВсеДороги[i]).следующие_рельсы.Length <= 1)) continue;
                     ((Рельс)ВсеДороги[i]).добавочные_провода.CreateMesh();
                 }
             }
@@ -103,9 +101,9 @@ namespace Trancity
             this.земля.CreateMesh();
             if ((SkyBox.draw) && (!MainForm.in_editor))
             {
-            	Common.MyGUI.status_string = Localization.current_.load_shaders;//"Загрузка шейдеров...";
-            	Common.MyGUI.Splash();
-            	this.skybox.CreateMesh();
+                Common.MyGUI.status_string = Localization.current_.load_shaders;//"Загрузка шейдеров...";
+                Common.MyGUI.Splash();
+                this.skybox.CreateMesh();
             }
             Common.MyGUI.load_status = 0;
             Common.MyGUI.status_string = Localization.current_.load_objects;//"Загрузка объектов...";
@@ -113,7 +111,7 @@ namespace Trancity
             int obj_count = объекты.Count > 1 ? объекты.Count - 1 : объекты.Count;
             for (var z = 0; z < объекты.Count; z++)
             {
-            	if ((Environment.TickCount - MainForm.ticklast) > 50)
+                if ((Environment.TickCount - MainForm.ticklast) > 50)
                 {
                     int num21 = (Common.MyGUI.load_max * z) / (obj_count);
                     if (num21 > Common.MyGUI.load_status)
@@ -148,7 +146,7 @@ namespace Trancity
             Common.MyGUI.load_status = Common.MyGUI.load_max;
             Common.MyGUI.Splash();
         }
-        
+
         public void CreateSound()
         {
             Common.MyGUI.load_status = 0;
@@ -176,8 +174,8 @@ namespace Trancity
         {
             foreach (var дорога in Рельсы)
             {
-//            	дорога.Render();
-            	if (дорога.следующие_рельсы.Length <= 1) continue;
+                //            	дорога.Render();
+                if (дорога.следующие_рельсы.Length <= 1) continue;
                 дорога.добавочные_провода.Render();
             }
             foreach (var провод in контактныеПровода)
@@ -202,40 +200,40 @@ namespace Trancity
             }
             foreach (var остановка in остановки)
             {
-            	остановка.CheckCondition();
-            	остановка.Render();
+                остановка.CheckCondition();
+                остановка.Render();
             }
             foreach (var объект in объекты)
             {
-            	объект.CheckCondition();
-            	объект.Render();
+                объект.CheckCondition();
+                объект.Render();
             }
-//            земля.IsNear = true;
-//            земля.Render();
+            //            земля.IsNear = true;
+            //            земля.Render();
         }
-        
+
         public void RenderMeshes2()
         {
-        	skybox.Render();
-        	земля.Render();
+            skybox.Render();
+            земля.Render();
         }
-        
+
         public void RenderMeshesA()
         {
             foreach (var дорога in ВсеДороги)
             {
-            	дорога.Render();
-            	/*if ((!(дорога is Рельс)) || (((Рельс)дорога).следующие_рельсы.Length <= 1)) continue;
+                дорога.Render();
+                /*if ((!(дорога is Рельс)) || (((Рельс)дорога).следующие_рельсы.Length <= 1)) continue;
                 ((Рельс)дорога).добавочные_провода.Render();*/
             }
         }
 
         public void UpdateSound(Игрок[] игроки, bool игра_активна)
         {
-//        	var pnt = DoublePoint.Zero;
-//        	var pnt2 = Double3DPoint.Zero;
-        	MyXAudio2.Device.UpdateListner(ref /*pnt2/**/игроки[0].cameraPosition/**/,
-        	                               ref /*pnt/**/игроки[0].cameraRotation/**/);
+            //        	var pnt = DoublePoint.Zero;
+            //        	var pnt2 = Double3DPoint.Zero;
+            MyXAudio2.Device.UpdateListner(ref /*pnt2/**/игроки[0].cameraPosition/**/,
+                                           ref /*pnt/**/игроки[0].cameraRotation/**/);
             foreach (Transport транспорт in this.транспорты)
             {
                 транспорт.UpdateSound(игроки, игра_активна);
@@ -259,7 +257,7 @@ namespace Trancity
             var tr_by_parks = new List<Transport>[парки.Length];
             for (int i = 0; i < парки.Length; i++)
             {
-            	tr_by_parks[i] = new List<Transport>();
+                tr_by_parks[i] = new List<Transport>();
             }
             игра.игроки = new Игрок[настройки.количествоИгроков];
             for (var j = 0; j < настройки.количествоИгроков; j++)
@@ -272,15 +270,15 @@ namespace Trancity
                 игра.игроки[j].cameraRotationChange = DoublePoint.Zero;
                 игра.игроки[j].inputGuid = игрока.inputGuid;
                 игра.игроки[j].поворачиватьКамеру = настройки.поворачиватьКамеру;
-//                var транспорта = TypeOfTransport.Tramway;
-//                var троллейбуса = new МодельТранспорта();
+                //                var транспорта = TypeOfTransport.Tramway;
+                //                var троллейбуса = new МодельТранспорта();
                 МодельТранспорта троллейбуса = null;
                 int транспорта = -1;
                 foreach (var трамвай2 in Модели.Трамваи)
                 {
-                	if (игрока.подвижнойСостав != трамвай2.name) continue;
-                	транспорта = TypeOfTransport.Tramway;
-                	троллейбуса = трамвай2;
+                    if (игрока.подвижнойСостав != трамвай2.name) continue;
+                    транспорта = TypeOfTransport.Tramway;
+                    троллейбуса = трамвай2;
                 }
                 foreach (var троллейбуса2 in Модели.Троллейбусы)
                 {
@@ -296,8 +294,8 @@ namespace Trancity
                 }
                 if ((троллейбуса == null) || (транспорта == -1))
                 {
-					Logger.Log("World", Localization.current_.nulltran + игрока.подвижнойСостав + Localization.current_.forplayer + игрока.имя);
-                	continue;
+                    Logger.Log("World", Localization.current_.nulltran + игрока.подвижнойСостав + Localization.current_.forplayer + игрока.имя);
+                    continue;
                 }
                 var управление = настройки.автоматическоеУправление ? Управление.Автоматическое : Управление.Ручное;
                 var маршрут = new Route(транспорта, "-");
@@ -305,24 +303,24 @@ namespace Trancity
                 {
                     if ((игрока.маршрут > 1) && ((игрока.маршрут - 2) < маршруты.Length))
                     {
-                    	маршрут = маршруты[(игрока.маршрут - 2)];
+                        маршрут = маршруты[(игрока.маршрут - 2)];
                     }
                     else
                     {
-                    	try
-                    	{
-                    		List<Route> current_routes = new List<Route>();
-	                    	foreach (var route in маршруты)
-	                    	{
-	                    		if (route.typeOfTransport != транспорта) continue;
-	                    		current_routes.Add(route);
-	                    	}
-	                    	маршрут = current_routes[Cheats._random.Next(current_routes.Count)];
-                    	}
-                    	catch
-                    	{
-                    		Logger.Log("World", Localization.current_.nullrandom + игрока.имя);
-                    	}
+                        try
+                        {
+                            List<Route> current_routes = new List<Route>();
+                            foreach (var route in маршруты)
+                            {
+                                if (route.typeOfTransport != транспорта) continue;
+                                current_routes.Add(route);
+                            }
+                            маршрут = current_routes[Cheats._random.Next(current_routes.Count)];
+                        }
+                        catch
+                        {
+                            Logger.Log("World", Localization.current_.nullrandom + игрока.имя);
+                        }
                     }
                 }
                 var парк = парки[Cheats._random.Next(парки.Length)];
@@ -333,42 +331,42 @@ namespace Trancity
                 }
                 else if (игрока.наряд == 1)
                 {
-                	try
-                	{
-                		item = маршрут.orders[Cheats._random.Next(маршрут.orders.Length)];
-                	}
-                	catch
-                	{
-                		Logger.Log("World", Localization.current_.nullorder + игрока.имя);
-                	}
+                    try
+                    {
+                        item = маршрут.orders[Cheats._random.Next(маршрут.orders.Length)];
+                    }
+                    catch
+                    {
+                        Logger.Log("World", Localization.current_.nullorder + игрока.имя);
+                    }
                 }
                 if (транспорта != TypeOfTransport.Tramway)
                 {
-                	try
-                	{
-                		дорога = Дороги[Cheats._random.Next(Дороги.Length)];
-                	}
-                	catch
-                	{
-                		дорога = new Road(0.0, 0.0, 20.0, 0.0, 0.0, true, 1.0, 1.0);
-                		дорога.следующиеДороги = new[] { дорога };
-                    	дорога.предыдущиеДороги = new[] { дорога };
-                    	дорога.соседниеДороги = new[] { дорога };
-                	}
+                    try
+                    {
+                        дорога = Дороги[Cheats._random.Next(Дороги.Length)];
+                    }
+                    catch
+                    {
+                        дорога = new Road(0.0, 0.0, 20.0, 0.0, 0.0, true, 1.0, 1.0);
+                        дорога.следующиеДороги = new[] { дорога };
+                        дорога.предыдущиеДороги = new[] { дорога };
+                        дорога.соседниеДороги = new[] { дорога };
+                    }
                 }
                 else
                 {
-                	try
-                	{
-                		дорога = Рельсы[Cheats._random.Next(Рельсы.Length)];
-                	}
-                	catch
-                	{
-                		дорога = new Рельс(0.0, 0.0, 20.0, 0.0, 0.0, true);
-                    	дорога.следующиеДороги = new[] { дорога };
-                    	дорога.предыдущиеДороги = new[] { дорога };
-                    	дорога.соседниеДороги = new[] { дорога };
-                	}
+                    try
+                    {
+                        дорога = Рельсы[Cheats._random.Next(Рельсы.Length)];
+                    }
+                    catch
+                    {
+                        дорога = new Рельс(0.0, 0.0, 20.0, 0.0, 0.0, true);
+                        дорога.следующиеДороги = new[] { дорога };
+                        дорога.предыдущиеДороги = new[] { дорога };
+                        дорога.соседниеДороги = new[] { дорога };
+                    }
                 }
                 var num4 = Cheats._random.NextDouble() * дорога.Длина;
                 Trip рейс = null;
@@ -387,35 +385,7 @@ namespace Trancity
                 игра.игроки[j].cameraRotation = new DoublePoint(0.0, -0.1);
                 switch (транспорта)
                 {
-                	case TypeOfTransport.Tramway:
-	                	{
-	                		if (!(дорога is Рельс))
-	                        {
-	                        	Logger.Log("World", Localization.current_.tramofrali + игрока.имя);
-	                        	break;
-	                        }
-	                        транспорт = new Трамвай.ОбычныйТрамвай(троллейбуса, (Рельс)дорога, num4, управление, парк, маршрут, item);//, true);
-	                    }
-                		break;
-                    case TypeOfTransport.Trolleybus:
-                    case TypeOfTransport.Bus:
-	                    {
-	                        var point = new Double3DPoint
-	                            {
-	                                XZPoint = дорога.НайтиКоординаты(num4, 0.0),
-	                                y = дорога.НайтиВысоту(num4)
-	                            };
-	                        var point2 = new DoublePoint(дорога.НайтиНаправление(num4), дорога.НайтиНаправлениеY(num4));
-	                        транспорт = new Троллейбус.ОбычныйТроллейбус(троллейбуса, point, point2, управление, парк, маршрут, item);
-	                        транспорт.SetPosition(дорога, num4, 0.0, Double3DPoint.Zero, DoublePoint.Zero, this);
-	                    }
-                		break;
-                }
-                игра.игроки[j].управляемыйОбъект = транспорт;
-                игра.игроки[j].объектПривязки = транспорт;
-                switch (транспорта)
-                {
-           case TypeOfTransport.Tramway:
+                    case TypeOfTransport.Tramway:
                         {
                             if (!(дорога is Рельс))
                             {
@@ -425,7 +395,35 @@ namespace Trancity
                             транспорт = new Трамвай.ОбычныйТрамвай(троллейбуса, (Рельс)дорога, num4, управление, парк, маршрут, item);//, true);
                         }
                         break;
+                    case TypeOfTransport.Trolleybus:
+                    case TypeOfTransport.Bus:
+                        {
+                            var point = new Double3DPoint
+                            {
+                                XZPoint = дорога.НайтиКоординаты(num4, 0.0),
+                                y = дорога.НайтиВысоту(num4)
+                            };
+                            var point2 = new DoublePoint(дорога.НайтиНаправление(num4), дорога.НайтиНаправлениеY(num4));
+                            транспорт = new Троллейбус.ОбычныйТроллейбус(троллейбуса, point, point2, управление, парк, маршрут, item);
+                            транспорт.SetPosition(дорога, num4, 0.0, Double3DPoint.Zero, DoublePoint.Zero, this);
                         }
+                        break;
+                }
+                игра.игроки[j].управляемыйОбъект = транспорт;
+                игра.игроки[j].объектПривязки = транспорт;
+                switch (транспорта)
+                {
+                    case TypeOfTransport.Tramway:
+                        {
+                            if (!(дорога is Рельс))
+                            {
+                                Logger.Log("World", Localization.current_.tramofrali + игрока.имя);
+                                break;
+                            }
+                            транспорт = new Трамвай.ОбычныйТрамвай(троллейбуса, (Рельс)дорога, num4, управление, парк, маршрут, item);//, true);
+                        }
+                        break;
+                }
                 транспорт.рейс = рейс;
                 if (транспорт is Троллейбус)
                 {
@@ -434,38 +432,38 @@ namespace Trancity
                         штанга.НайтиПровод(контактныеПровода);
                         if (штанга.Провод != null)
                         {
-                        	штанга.поднимается = true;
-                        	штанга.Обновить(false);//, 0.0f);
+                            штанга.поднимается = true;
+                            штанга.Обновить(false);//, 0.0f);
                             штанга.угол = штанга.уголNormal;
                         }
                     }
                 }
                 else
                 {
-                	var pant = ((Трамвай)транспорт).токоприёмник;
-                	((Трамвай)транспорт).Обновить(this, new Игрок[0]);//особенность текущей механики
-                	pant.НайтиПровод(контактныеПровода2);
-                	if (pant.Провод != null)
-                	{
-	                	pant.поднимается = true;
-	                	pant.высота = pant.обычная_высота_max;
-                	}
+                    var pant = ((Трамвай)транспорт).токоприёмник;
+                    ((Трамвай)транспорт).Обновить(this, new Игрок[0]);//особенность текущей механики
+                    pant.НайтиПровод(контактныеПровода2);
+                    if (pant.Провод != null)
+                    {
+                        pant.поднимается = true;
+                        pant.высота = pant.обычная_высота_max;
+                    }
                 }
-//                var point4 = транспорт.position + new DoublePoint(транспорт.direction) * 9.5;//9.5
-//                игра.игроки[j].cameraPosition = new Double3DPoint(point4.x, 2.5, point4.y);
-				if (!транспорт.SetCamera(0, игра.игроки[j]))
-				{
-                	игра.игроки[j].cameraRotation = new DoublePoint(транспорт.direction, транспорт.НаправлениеY - 0.1);
-                	игра.игроки[j].cameraPosition = Double3DPoint.Multiply(new Double3DPoint(8.0, 2.5, 0.0), транспорт.Координаты3D, игра.игроки[j].cameraRotation);
+                //                var point4 = транспорт.position + new DoublePoint(транспорт.direction) * 9.5;//9.5
+                //                игра.игроки[j].cameraPosition = new Double3DPoint(point4.x, 2.5, point4.y);
+                if (!транспорт.SetCamera(0, игра.игроки[j]))
+                {
+                    игра.игроки[j].cameraRotation = new DoublePoint(транспорт.direction, транспорт.НаправлениеY - 0.1);
+                    игра.игроки[j].cameraPosition = Double3DPoint.Multiply(new Double3DPoint(8.0, 2.5, 0.0), транспорт.Координаты3D, игра.игроки[j].cameraRotation);
                 }
                 транспорты.Add(транспорт);
                 if (from_park)
                 {
-                	for (int i = 0; i < парки.Length; i++)
-		            {
-                		if (парк != парки[i]) continue;
-		            	tr_by_parks[i].Add(транспорт);
-		            }
+                    for (int i = 0; i < парки.Length; i++)
+                    {
+                        if (парк != парки[i]) continue;
+                        tr_by_parks[i].Add(транспорт);
+                    }
                 }
             }
             for (var k = 0; k < list.Count; k++)
@@ -480,15 +478,15 @@ namespace Trancity
                 switch (list[k].маршрут.typeOfTransport)
                 {
                     case TypeOfTransport.Tramway:
-                		{
-                			if (Модели.Трамваи.Count == 0) continue;
-                			МодельТранспорта трам4 = null;
-                			if (list[k].transport == "" || list[k].transport == Localization.current_.random)
+                        {
+                            if (Модели.Трамваи.Count == 0) continue;
+                            МодельТранспорта трам4 = null;
+                            if (list[k].transport == "" || list[k].transport == Localization.current_.random)
                             {
                                 трам4 = Модели.Трамваи[Cheats._random.Next(0, Модели.Трамваи.Count)];
                             }
-                			else
-                			{
+                            else
+                            {
                                 трам4 = null;
                                 foreach (var трамвай in Модели.Трамваи)
                                 {
@@ -502,23 +500,23 @@ namespace Trancity
                                 {
                                     трам4 = Модели.Трамваи[Cheats._random.Next(0, Модели.Трамваи.Count)];
                                 }
-                			}
-                			if (!(дорога2 is Рельс))
-                			{
-								Logger.Log("World", Localization.current_.tramofraliroute + list[k].номер + Localization.current_.tramofralirouteend);
-                				break;
-                			}
-                			транспорт2 = new Трамвай.ОбычныйТрамвай(трам4, (Рельс)дорога2, distance, Управление.Автоматическое, list[k].парк, list[k].маршрут, list[k]);
-                		}
-                		break;
+                            }
+                            if (!(дорога2 is Рельс))
+                            {
+                                Logger.Log("World", Localization.current_.tramofraliroute + list[k].номер + Localization.current_.tramofralirouteend);
+                                break;
+                            }
+                            транспорт2 = new Трамвай.ОбычныйТрамвай(трам4, (Рельс)дорога2, distance, Управление.Автоматическое, list[k].парк, list[k].маршрут, list[k]);
+                        }
+                        break;
                     case TypeOfTransport.Trolleybus:
                         {
-                			if (Модели.Троллейбусы.Count == 0) continue;
+                            if (Модели.Троллейбусы.Count == 0) continue;
                             var point5 = new Double3DPoint
-                                             {
-                                                 XZPoint = дорога2.НайтиКоординаты(distance, 0.0),
-                                                 y = дорога2.НайтиВысоту(distance)
-                                             };
+                            {
+                                XZPoint = дорога2.НайтиКоординаты(distance, 0.0),
+                                y = дорога2.НайтиВысоту(distance)
+                            };
                             var point6 = new DoublePoint(дорога2.НайтиНаправление(distance), дорога2.НайтиНаправлениеY(distance));
                             МодельТранспорта троллейбуса4 = null;
                             if (list[k].transport == "" || list[k].transport == Localization.current_.random)
@@ -543,7 +541,7 @@ namespace Trancity
                             }
                             транспорт2 = new Троллейбус.ОбычныйТроллейбус(троллейбуса4, point5, point6, Управление.Автоматическое, list[k].парк, list[k].маршрут, list[k]);
                             транспорт2.SetPosition(дорога2, distance, 0.0, Double3DPoint.Zero, DoublePoint.Zero, this);
-//                            ((Троллейбус.ОбычныйТроллейбус)транспорт2).ОбновитьПоложение(this);
+                            //                            ((Троллейбус.ОбычныйТроллейбус)транспорт2).ОбновитьПоложение(this);
                         }
                         break;
                     default:
@@ -554,10 +552,10 @@ namespace Trancity
                             }
                             if (Модели.Автобусы.Count == 0) continue;
                             var point7 = new Double3DPoint
-                                             {
-                                                 XZPoint = дорога2.НайтиКоординаты(distance, 0.0),
-                                                 y = дорога2.НайтиВысоту(distance)
-                                             };
+                            {
+                                XZPoint = дорога2.НайтиКоординаты(distance, 0.0),
+                                y = дорога2.НайтиВысоту(distance)
+                            };
                             var point8 = new DoublePoint(дорога2.НайтиНаправление(distance), дорога2.НайтиНаправлениеY(distance));
                             МодельТранспорта автобус = null;
                             if (list[k].transport == "" || list[k].transport == Localization.current_.random)
@@ -582,7 +580,7 @@ namespace Trancity
                             }
                             транспорт2 = new Троллейбус.ОбычныйТроллейбус(автобус, point7, point8, Управление.Автоматическое, list[k].парк, list[k].маршрут, list[k]);
                             транспорт2.SetPosition(дорога2, distance, 0.0, Double3DPoint.Zero, DoublePoint.Zero, this);
-//                            ((Троллейбус.ОбычныйТроллейбус)транспорт2).ОбновитьПоложение(this);
+                            //                            ((Троллейбус.ОбычныйТроллейбус)транспорт2).ОбновитьПоложение(this);
                         }
                         break;
                 }
@@ -596,124 +594,124 @@ namespace Trancity
                         штанга.НайтиПровод(контактныеПровода);
                         if (штанга.Провод != null)
                         {
-                        	штанга.поднимается = true;
-                        	штанга.Обновить(false);//, 0.0f);
+                            штанга.поднимается = true;
+                            штанга.Обновить(false);//, 0.0f);
                             штанга.угол = штанга.уголNormal;
                         }
                     }
                 }
                 else
                 {
-                	var pant = ((Трамвай)транспорт2).токоприёмник;
-                	((Трамвай)транспорт2).Обновить(this, new Игрок[0]);
-                	pant.НайтиПровод(контактныеПровода2);
-                	if (pant.Провод != null)
-                	{
-	                	pant.поднимается = true;
-	                	pant.высота = pant.обычная_высота_max;
-                	}
+                    var pant = ((Трамвай)транспорт2).токоприёмник;
+                    ((Трамвай)транспорт2).Обновить(this, new Игрок[0]);
+                    pant.НайтиПровод(контактныеПровода2);
+                    if (pant.Провод != null)
+                    {
+                        pant.поднимается = true;
+                        pant.высота = pant.обычная_высота_max;
+                    }
                 }
                 транспорты.Add(транспорт2);
                 if (from_park)
                 {
-                	for (int i = 0; i < парки.Length; i++)
-		            {
-                		if (транспорт2.парк != парки[i]) continue;
-		            	tr_by_parks[i].Add(транспорт2);
-		            }
+                    for (int i = 0; i < парки.Length; i++)
+                    {
+                        if (транспорт2.парк != парки[i]) continue;
+                        tr_by_parks[i].Add(транспорт2);
+                    }
                 }
             }
-//            игра.транспортArray = (Transport[]) транспорты.ToArray(typeof(Transport));
-			//Спауним по паркам с сортировкой по времени выхода:
-			for (int i = 0; i < парки.Length; i++)
-			{
-				if (парки[i].пути_стоянки.Length == 0) continue;
-				int pathpos = 0;
-				double dist = парки[i].пути_стоянки[0].Длина;
-				while (tr_by_parks[i].Count > 0)
-				{
-					Transport transport = tr_by_parks[i][0];
-					foreach (var trs in tr_by_parks[i])
-					{
-						if (transport.рейс.время_отправления > trs.рейс.время_отправления) transport = trs;
-					}
-					while (((dist - transport.length0) < -1.0) && (pathpos < парки[i].пути_стоянки.Length - 1))
-					{
-						pathpos++;
-						dist = парки[i].пути_стоянки[pathpos].Длина;
-					}
-					transport.SetPosition(парки[i].пути_стоянки[pathpos], dist - transport.length0 + 1.0, 0.0, Double3DPoint.Zero, DoublePoint.Zero, this);
-					dist -= transport.length0 + transport.length1;
-					//TODO: пообъединять лишнее:
-					for (int j = 0; j < игра.игроки.Length; j++)
-					{
-						if (игра.игроки[j].управляемыйОбъект != transport) continue;
-						if (!transport.SetCamera(0, игра.игроки[j]))
-						{
-	                		игра.игроки[j].cameraRotation = new DoublePoint(transport.direction, transport.НаправлениеY - 0.1);
-	                		игра.игроки[j].cameraPosition = Double3DPoint.Multiply(new Double3DPoint(8.0, 2.5, 0.0), transport.Координаты3D, игра.игроки[j].cameraRotation);
-						}
-					}
-					if (transport is Троллейбус)
-	                {
-	                    foreach (var штанга in ((Троллейбус)transport).штанги)
-	                    {
-	                        штанга.НайтиПровод(контактныеПровода);
-	                        if (штанга.Провод != null)
-	                        {
-	                        	штанга.поднимается = true;
-	                        	штанга.Обновить(false);//, 0.0f);
-	                            штанга.угол = штанга.уголNormal;
-	                        }
-	                    }
-	                }
-	                else
-	                {
-	                	var pant = ((Трамвай)transport).токоприёмник;
-	                	((Трамвай)transport).Обновить(this, new Игрок[0]);
-	                	pant.НайтиПровод(контактныеПровода2);
-	                	if (pant.Провод != null)
-	                	{
-		                	pant.поднимается = true;
-		                	pant.высота = pant.обычная_высота_max;
-	                	}
-	                }
-					tr_by_parks[i].Remove(transport);
-				}
-			}
+            //            игра.транспортArray = (Transport[]) транспорты.ToArray(typeof(Transport));
+            //Спауним по паркам с сортировкой по времени выхода:
+            for (int i = 0; i < парки.Length; i++)
+            {
+                if (парки[i].пути_стоянки.Length == 0) continue;
+                int pathpos = 0;
+                double dist = парки[i].пути_стоянки[0].Длина;
+                while (tr_by_parks[i].Count > 0)
+                {
+                    Transport transport = tr_by_parks[i][0];
+                    foreach (var trs in tr_by_parks[i])
+                    {
+                        if (transport.рейс.время_отправления > trs.рейс.время_отправления) transport = trs;
+                    }
+                    while (((dist - transport.length0) < -1.0) && (pathpos < парки[i].пути_стоянки.Length - 1))
+                    {
+                        pathpos++;
+                        dist = парки[i].пути_стоянки[pathpos].Длина;
+                    }
+                    transport.SetPosition(парки[i].пути_стоянки[pathpos], dist - transport.length0 + 1.0, 0.0, Double3DPoint.Zero, DoublePoint.Zero, this);
+                    dist -= transport.length0 + transport.length1;
+                    //TODO: пообъединять лишнее:
+                    for (int j = 0; j < игра.игроки.Length; j++)
+                    {
+                        if (игра.игроки[j].управляемыйОбъект != transport) continue;
+                        if (!transport.SetCamera(0, игра.игроки[j]))
+                        {
+                            игра.игроки[j].cameraRotation = new DoublePoint(transport.direction, transport.НаправлениеY - 0.1);
+                            игра.игроки[j].cameraPosition = Double3DPoint.Multiply(new Double3DPoint(8.0, 2.5, 0.0), transport.Координаты3D, игра.игроки[j].cameraRotation);
+                        }
+                    }
+                    if (transport is Троллейбус)
+                    {
+                        foreach (var штанга in ((Троллейбус)transport).штанги)
+                        {
+                            штанга.НайтиПровод(контактныеПровода);
+                            if (штанга.Провод != null)
+                            {
+                                штанга.поднимается = true;
+                                штанга.Обновить(false);//, 0.0f);
+                                штанга.угол = штанга.уголNormal;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var pant = ((Трамвай)transport).токоприёмник;
+                        ((Трамвай)transport).Обновить(this, new Игрок[0]);
+                        pant.НайтиПровод(контактныеПровода2);
+                        if (pant.Провод != null)
+                        {
+                            pant.поднимается = true;
+                            pant.высота = pant.обычная_высота_max;
+                        }
+                    }
+                    tr_by_parks[i].Remove(transport);
+                }
+            }
         }
 
         public void ЗагрузитьГород(string filename)
         {
-        	if (string.IsNullOrEmpty(filename)) return;
-        	Logger.Log("LoadCity", string.Format("Loading {0}", filename));
-        	XmlDocument document = Engine.Xml.TryOpenDocument(filename);
+            if (string.IsNullOrEmpty(filename)) return;
+            Logger.Log("LoadCity", string.Format("Loading {0}", filename));
+            XmlDocument document = Engine.Xml.TryOpenDocument(filename);
             var element = document["City"];
             listДороги.Clear();
             if (element == null) return;
             var element2 = element["Rails"];
             if (element2 != null)
             {
-            	for (var i = 0; i < element2.ChildNodes.Count; i++)
-            	{
-            		XmlElement element3 = element2["rail" + i];
-            		listДороги.Add(new Рельс(Engine.Xml.GetDouble(element3["x0"]), Engine.Xml.GetDouble(element3["y0"]), Engine.Xml.GetDouble(element3["x1"]), Engine.Xml.GetDouble(element3["y1"]), Engine.Xml.GetDouble(element3["angle0"]), Engine.Xml.GetDouble(element3["angle1"])));
-            		if ((element3["height0"] != null) && (element3["height1"] != null))
-            		{
-            			Рельсы[i].высота[0] = Engine.Xml.GetDouble(element3["height0"]);
-            			Рельсы[i].высота[1] = Engine.Xml.GetDouble(element3["height1"]);
-            		}
-            		this.Рельсы[i].расстояние_добавочных_проводов = Engine.Xml.GetDouble(element3["d_strel"]);
-            		this.Рельсы[i].кривая = Engine.Xml.GetDouble(element3["iskriv"]) != 0.0;
-            		this.Рельсы[i].name = Engine.Xml.GetString(element3["name"], "Rails");
-            	}
+                for (var i = 0; i < element2.ChildNodes.Count; i++)
+                {
+                    XmlElement element3 = element2["rail" + i];
+                    listДороги.Add(new Рельс(Engine.Xml.GetDouble(element3["x0"]), Engine.Xml.GetDouble(element3["y0"]), Engine.Xml.GetDouble(element3["x1"]), Engine.Xml.GetDouble(element3["y1"]), Engine.Xml.GetDouble(element3["angle0"]), Engine.Xml.GetDouble(element3["angle1"])));
+                    if ((element3["height0"] != null) && (element3["height1"] != null))
+                    {
+                        Рельсы[i].высота[0] = Engine.Xml.GetDouble(element3["height0"]);
+                        Рельсы[i].высота[1] = Engine.Xml.GetDouble(element3["height1"]);
+                    }
+                    this.Рельсы[i].расстояние_добавочных_проводов = Engine.Xml.GetDouble(element3["d_strel"]);
+                    this.Рельсы[i].кривая = Engine.Xml.GetDouble(element3["iskriv"]) != 0.0;
+                    this.Рельсы[i].name = Engine.Xml.GetString(element3["name"], "Rails");
+                }
             }
             XmlElement element4 = element["Roads"];
             if (element4 != null)
             {
                 for (int j = 0; j < element4.ChildNodes.Count; j++)
                 {
-                	XmlElement element5 = element4["road" + j.ToString()];
+                    XmlElement element5 = element4["road" + j.ToString()];
                     this.listДороги.Add(new Road(Engine.Xml.GetDouble(element5["x0"]), Engine.Xml.GetDouble(element5["y0"]), Engine.Xml.GetDouble(element5["x1"]), Engine.Xml.GetDouble(element5["y1"]), Engine.Xml.GetDouble(element5["angle0"]), Engine.Xml.GetDouble(element5["angle1"]), Engine.Xml.GetDouble(element5["wide0"]), Engine.Xml.GetDouble(element5["wide1"])));
                     if ((element5["height0"] != null) && (element5["height1"] != null))
                     {
@@ -731,7 +729,7 @@ namespace Trancity
             //TODO: проблема с расчётом MatricesCount рельсов
             foreach (Road дорога in this.ВсеДороги)
             {
-//                дорога.ComputeMatrix();
+                //                дорога.ComputeMatrix();
                 дорога.CreateBoundingSphere();
             }
             XmlElement element6 = element["Trolleybus_lines"];
@@ -740,7 +738,7 @@ namespace Trancity
                 this.контактныеПровода = new Контактный_провод[element6.ChildNodes.Count];
                 for (int k = 0; k < element6.ChildNodes.Count; k++)
                 {
-                	XmlElement element7 = element6["line" + k.ToString()];
+                    XmlElement element7 = element6["line" + k.ToString()];
                     this.контактныеПровода[k] = new Контактный_провод(Engine.Xml.GetDouble(element7["x0"]), Engine.Xml.GetDouble(element7["y0"]), Engine.Xml.GetDouble(element7["x1"]), Engine.Xml.GetDouble(element7["y1"]), Engine.Xml.GetDouble(element7["right"]) != 0.0);
                     if ((element7["height0"] != null) && (element7["height1"] != null))
                     {
@@ -761,7 +759,7 @@ namespace Trancity
                 this.контактныеПровода2 = new Трамвайный_контактный_провод[element6_1.ChildNodes.Count];
                 for (int k = 0; k < element6_1.ChildNodes.Count; k++)
                 {
-                	XmlElement element7 = element6_1["line" + k.ToString()];
+                    XmlElement element7 = element6_1["line" + k.ToString()];
                     this.контактныеПровода2[k] = new Трамвайный_контактный_провод(Engine.Xml.GetDouble(element7["x0"]), Engine.Xml.GetDouble(element7["y0"]), Engine.Xml.GetDouble(element7["x1"]), Engine.Xml.GetDouble(element7["y1"]));
                     if ((element7["height0"] != null) && (element7["height1"] != null))
                     {
@@ -797,9 +795,9 @@ namespace Trancity
                     XmlElement element10 = element9["park_rails"];
                     this.парки[m].пути_стоянки = new Road[element10.ChildNodes.Count];
                     for (int n = 0; n < element10.ChildNodes.Count; n++)
-	                {
-	                    this.парки[m].пути_стоянки[n] = this.ВсеДороги[(int)Engine.Xml.GetDouble(element10["park_rail" + n.ToString()])];
-	                }
+                    {
+                        this.парки[m].пути_стоянки[n] = this.ВсеДороги[(int)Engine.Xml.GetDouble(element10["park_rail" + n.ToString()])];
+                    }
                 }
             }
             var element23 = element["Stops"];
@@ -813,22 +811,22 @@ namespace Trancity
                     var name = element24["name"].InnerText;
                     try
                     {
-                    	this.остановки.Add(new Stop(Engine.Xml.GetString(element24["model"], "Stop (4 routes)"), new TypeOfTransport(TypeOfTransport.Tramway), this.ВсеДороги[(int)Engine.Xml.GetDouble(element24["rail"])], Engine.Xml.GetDouble(element24["distance"])));
+                        this.остановки.Add(new Stop(Engine.Xml.GetString(element24["model"], "Stop (4 routes)"), new TypeOfTransport(TypeOfTransport.Tramway), this.ВсеДороги[(int)Engine.Xml.GetDouble(element24["rail"])], Engine.Xml.GetDouble(element24["distance"])));
                     }
                     catch
                     {
-                    	throw new IndexOutOfRangeException("Не удалось загрузить остановку[" + num17 + "] " + name);
+                        throw new IndexOutOfRangeException("Не удалось загрузить остановку[" + num17 + "] " + name);
                     }
                     XmlElement type = element24["type"];
                     if (type != null)
                     {
                         if (type.InnerText == "0" || type.InnerText == "1" || type.InnerText == "2")
                         {
-                        	if (!flag)
-                        	{
-                        		Logger.Log("LoadCity", "Слишком старая карта (старше 0.6.2)");
-                        		flag = true;
-                        	}
+                            if (!flag)
+                            {
+                                Logger.Log("LoadCity", "Слишком старая карта (старше 0.6.2)");
+                                flag = true;
+                            }
                             остановки[num17].typeOfTransport[(int)Engine.Xml.GetDouble(element24["type"])] = true;
                         }
                         else
@@ -843,10 +841,10 @@ namespace Trancity
                     XmlElement element25 = element24["stop_path"];
                     this.остановки[num17].частьПути = new Road[element25.ChildNodes.Count];
                     for (int num18 = 0; num18 < element25.ChildNodes.Count; num18++)
-	                {
-	                    this.остановки[num17].частьПути[num18] = this.ВсеДороги[(int)Engine.Xml.GetDouble(element25["stop_rail" + num18.ToString()])];
-	                }
-//                    this.остановки[num17].ОбновитьМаршруты(this.маршруты);
+                    {
+                        this.остановки[num17].частьПути[num18] = this.ВсеДороги[(int)Engine.Xml.GetDouble(element25["stop_rail" + num18.ToString()])];
+                    }
+                    //                    this.остановки[num17].ОбновитьМаршруты(this.маршруты);
                     this.остановки[num17].UpdatePosition(this);
                 }
             }
@@ -873,9 +871,9 @@ namespace Trancity
                             var element14 = element13[string.Format("run{0}", num9)];
                             if (element14 == null) continue;
                             var item = new Trip
-                                           {
-                                               время_прибытия = Engine.Xml.GetDouble(element14["time"])
-                                           };
+                            {
+                                время_прибытия = Engine.Xml.GetDouble(element14["time"])
+                            };
                             var element15 = element14["run_rails"];
                             if (element15 != null)
                             {
@@ -914,11 +912,11 @@ namespace Trancity
                                 var element17 = element16["run" + num11];
                                 if (element17 == null) continue;
                                 var рейс2 = new Trip
-                                                {
-                                                    inPark = Engine.Xml.GetDouble(element17["to_park"]) != 0.0,
-                                                    inParkIndex = (int)Engine.Xml.GetDouble(element17["to_park_index"]),
-                                                    время_прибытия = Engine.Xml.GetDouble(element17["time"])
-                                                };
+                                {
+                                    inPark = Engine.Xml.GetDouble(element17["to_park"]) != 0.0,
+                                    inParkIndex = (int)Engine.Xml.GetDouble(element17["to_park_index"]),
+                                    время_прибытия = Engine.Xml.GetDouble(element17["time"])
+                                };
                                 var element18 = element17["run_rails"];
                                 if (element18 != null)
                                 {
@@ -937,7 +935,7 @@ namespace Trancity
                                     {
                                         XmlNode node = tripStopsElement.ChildNodes[i];
                                         parse = int.Parse(node.Name.Substring(4));
-                                    	if (parse < 0) continue;
+                                        if (parse < 0) continue;
                                         Stop stop = остановки[parse];
                                         рейс2.tripStopList.Add(new TripStop(stop, (node.InnerText == "Да") || (node.InnerText == "1")));
                                     }
@@ -984,17 +982,17 @@ namespace Trancity
                 }
                 if (element23 != null)
                 {
-	                for (var num171 = 0; num171 < element23.ChildNodes.Count; num171++)
-	                {
-	                	this.остановки[num171].ОбновитьМаршруты(this.маршруты);
-	                }
+                    for (var num171 = 0; num171 < element23.ChildNodes.Count; num171++)
+                    {
+                        this.остановки[num171].ОбновитьМаршруты(this.маршруты);
+                    }
                 }
             }
 
             XmlElement element26 = element["Signals"];
             if (element26 != null)
             {
-            	Logger.Log("LoadCity", "Old signals construction found!");
+                Logger.Log("LoadCity", "Old signals construction found!");
                 this.сигнальныеСистемы = new Сигнальная_система[element26.ChildNodes.Count];
                 for (int num19 = 0; num19 < element26.ChildNodes.Count; num19++)
                 {
@@ -1009,34 +1007,34 @@ namespace Trancity
                         string innerText = element29["type"].InnerText;
                         if (innerText != null)
                         {
-                        	switch (innerText)
-                        	{
-                        		case "Контакт":
-                        			new Сигнальная_система.Контакт(this.сигнальныеСистемы[num19], дорога2, num21, Engine.Xml.GetDouble(element29["minus"]) != 0.0);
-                        			break;
-                        		
-                        		case "Сигнал":
-                        			{
-//                        				new Сигнальная_система.Сигнал(this.сигнальныеСистемы[num19], дорога2, num21, "Signal");
-                        				var signal = new Visual_Signal(this.сигнальныеСистемы[num19], Engine.Xml.GetString(element29["model"], "Signal"));
-                        				signal.положение = new Положение();
-                        				signal.road = дорога2;
-                        				signal.положение.расстояние = num21;
-                        				signal.положение.отклонение = Engine.Xml.GetDouble(element29["place"], -1.4 - (дорога2.НайтиШирину(num21) / 2.0));
-                        				signal.положение.высота = Engine.Xml.GetDouble(element29["height"]);
-                        				signal.CreateBoundingSphere();
-                        				break;
-                        			}
-                        	}
+                            switch (innerText)
+                            {
+                                case "Контакт":
+                                    new Сигнальная_система.Контакт(this.сигнальныеСистемы[num19], дорога2, num21, Engine.Xml.GetDouble(element29["minus"]) != 0.0);
+                                    break;
+
+                                case "Сигнал":
+                                    {
+                                        //                        				new Сигнальная_система.Сигнал(this.сигнальныеСистемы[num19], дорога2, num21, "Signal");
+                                        var signal = new Visual_Signal(this.сигнальныеСистемы[num19], Engine.Xml.GetString(element29["model"], "Signal"));
+                                        signal.положение = new Положение();
+                                        signal.road = дорога2;
+                                        signal.положение.расстояние = num21;
+                                        signal.положение.отклонение = Engine.Xml.GetDouble(element29["place"], -1.4 - (дорога2.НайтиШирину(num21) / 2.0));
+                                        signal.положение.высота = Engine.Xml.GetDouble(element29["height"]);
+                                        signal.CreateBoundingSphere();
+                                        break;
+                                    }
+                            }
                         }
                     }
                 }
             }
             else
             {
-            	// TODO: новая загрузка сигналов
-            	var sinals_element = element["Signal_systems"];
-            	this.сигнальныеСистемы = new Сигнальная_система[sinals_element.ChildNodes.Count];
+                // TODO: новая загрузка сигналов
+                var sinals_element = element["Signal_systems"];
+                this.сигнальныеСистемы = new Сигнальная_система[sinals_element.ChildNodes.Count];
                 for (int num19 = 0; num19 < sinals_element.ChildNodes.Count; num19++)
                 {
                     XmlElement element27 = sinals_element["signal_system" + num19.ToString()];
@@ -1044,18 +1042,18 @@ namespace Trancity
                     var items_element = element27["signals"];
                     for (int i = 0; i < items_element.ChildNodes.Count; i++)
                     {
-                    	var temp_signal = items_element["signal" + i.ToString()];
-                    	string name = Engine.Xml.GetString(temp_signal["model"]);
-                    	var road = this.ВсеДороги[(int)Engine.Xml.GetDouble(temp_signal["path"])];
-                    	var dist = Engine.Xml.GetDouble(temp_signal["distance"]);
-                    	var shift = Engine.Xml.GetDouble(temp_signal["place"]);
-                    	var signal = new Visual_Signal(this.сигнальныеСистемы[num19], name);
-                    	signal.положение = new Положение();
-                    	signal.road = road;
-                    	signal.положение.расстояние = dist;
-                    	signal.положение.отклонение = shift;
-                    	signal.положение.высота = Engine.Xml.GetDouble(temp_signal["height"]);
-                    	signal.CreateBoundingSphere();
+                        var temp_signal = items_element["signal" + i.ToString()];
+                        string name = Engine.Xml.GetString(temp_signal["model"]);
+                        var road = this.ВсеДороги[(int)Engine.Xml.GetDouble(temp_signal["path"])];
+                        var dist = Engine.Xml.GetDouble(temp_signal["distance"]);
+                        var shift = Engine.Xml.GetDouble(temp_signal["place"]);
+                        var signal = new Visual_Signal(this.сигнальныеСистемы[num19], name);
+                        signal.положение = new Положение();
+                        signal.road = road;
+                        signal.положение.расстояние = dist;
+                        signal.положение.отклонение = shift;
+                        signal.положение.высота = Engine.Xml.GetDouble(temp_signal["height"]);
+                        signal.CreateBoundingSphere();
                     }
                     XmlElement element28 = element27["contacts"];
                     for (int num20 = 0; num20 < element28.ChildNodes.Count; num20++)
@@ -1088,7 +1086,7 @@ namespace Trancity
                         this.светофорныеСистемы[num22].светофоры[num23].положение.расстояние = Engine.Xml.GetDouble(element33["distance"]);
                         this.светофорныеСистемы[num22].светофоры[num23].положение.отклонение = Engine.Xml.GetDouble(element33["place"]);
                         this.светофорныеСистемы[num22].светофоры[num23].положение.высота = Engine.Xml.GetDouble(element33["height"]);
-//                        this.светофорныеСистемы[num22].светофоры[num23].стрелка = flag;
+                        //                        this.светофорныеСистемы[num22].светофоры[num23].стрелка = flag;
                         this.светофорныеСистемы[num22].светофоры[num23].зелёная_стрелка = /*(Светофор.Стрелки)*/((int)Engine.Xml.GetDouble(element33["arrow_green"]));
                         this.светофорныеСистемы[num22].светофоры[num23].жёлтая_стрелка = /*(Светофор.Стрелки)*/((int)Engine.Xml.GetDouble(element33["arrow_yellow"]));
                         this.светофорныеСистемы[num22].светофоры[num23].красная_стрелка = /*(Светофор.Стрелки)*/((int)Engine.Xml.GetDouble(element33["arrow_red"]));
@@ -1116,11 +1114,11 @@ namespace Trancity
             Logger.Log("LoadCity", "Success!");
             this.filename = filename;
         }
-        
+
         public void LoadCitySimple(string filename)
         {
-        	if (filename == string.Empty) return;
-        	Logger.Log("LoadCitySimple", string.Format("Loading {0}", filename));
+            if (filename == string.Empty) return;
+            Logger.Log("LoadCitySimple", string.Format("Loading {0}", filename));
             XmlDocument document = Engine.Xml.TryOpenDocument(filename);
             var element = document["City"];
             listДороги.Clear();
@@ -1128,10 +1126,10 @@ namespace Trancity
             var element2 = element["Rails"];
             if (element2 != null)
             {
-            	for (var i = 0; i < element2.ChildNodes.Count; i++)
-            	{
-            		listДороги.Add(new Рельс(0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
-            	}
+                for (var i = 0; i < element2.ChildNodes.Count; i++)
+                {
+                    listДороги.Add(new Рельс(0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+                }
             }
             XmlElement element4 = element["Roads"];
             if (element4 != null)
@@ -1177,9 +1175,9 @@ namespace Trancity
                             var element14 = element13[string.Format("run{0}", num9)];
                             if (element14 == null) continue;
                             var item = new Trip
-                                           {
-                                               время_прибытия = Engine.Xml.GetDouble(element14["time"])
-                                           };
+                            {
+                                время_прибытия = Engine.Xml.GetDouble(element14["time"])
+                            };
                             var element15 = element14["run_rails"];
                             if (element15 != null)
                             {
@@ -1191,7 +1189,7 @@ namespace Trancity
                             }
                             маршруты[num8].trips.Add(item);
                         }
-                	}
+                    }
                     if (element12 != null)
                     {
                         var element16 = element12["park_runs"];
@@ -1201,11 +1199,11 @@ namespace Trancity
                                 var element17 = element16["run" + num11];
                                 if (element17 == null) continue;
                                 var рейс2 = new Trip
-                                                {
-                                                    inPark = Engine.Xml.GetDouble(element17["to_park"]) != 0.0,
-                                                    inParkIndex = (int)Engine.Xml.GetDouble(element17["to_park_index"]),
-                                                    время_прибытия = Engine.Xml.GetDouble(element17["time"])
-                                                };
+                                {
+                                    inPark = Engine.Xml.GetDouble(element17["to_park"]) != 0.0,
+                                    inParkIndex = (int)Engine.Xml.GetDouble(element17["to_park_index"]),
+                                    время_прибытия = Engine.Xml.GetDouble(element17["time"])
+                                };
                                 var element18 = element17["run_rails"];
                                 if (element18 != null)
                                 {
@@ -1271,10 +1269,10 @@ namespace Trancity
             {
                 if (дорога.кривая)
                 {
-//                    point = pos - дорога.структура.центр0;
+                    //                    point = pos - дорога.структура.центр0;
                     pos.CopyTo(ref point);
                     point.Subtract(ref дорога.структура.центр0);
-//                    point2 = дорога.концы[0] - дорога.структура.центр0;
+                    //                    point2 = дорога.концы[0] - дорога.структура.центр0;
                     дорога.концы[0].CopyTo(ref point2);
                     point2.Subtract(ref дорога.структура.центр0);
                     double num = ((Math.Sign(дорога.структура.угол0) * (point.Angle - point2.Angle)) + 12.566370614359173) % 6.2831853071795862;
@@ -1283,10 +1281,10 @@ namespace Trancity
                         list.Add(new Положение(дорога, (дорога.структура.длина0 * num) / Math.Abs(дорога.структура.угол0), -Math.Sign(дорога.структура.угол0) * (point.Modulus - дорога.АбсолютныйРадиус)));
                         list2.Add(Math.Abs((double)(point.Modulus - дорога.АбсолютныйРадиус)));
                     }
-//                    point = pos - дорога.структура.центр1;
+                    //                    point = pos - дорога.структура.центр1;
                     pos.CopyTo(ref point);
                     point.Subtract(ref дорога.структура.центр1);
-//                    point2 = дорога.структура.серединка - дорога.структура.центр1;
+                    //                    point2 = дорога.структура.серединка - дорога.структура.центр1;
                     дорога.структура.серединка.CopyTo(ref point2);
                     point2.Subtract(ref дорога.структура.центр1);
                     num = ((Math.Sign(дорога.структура.угол1) * (point.Angle - point2.Angle)) + 12.566370614359173) % 6.2831853071795862;
@@ -1298,11 +1296,11 @@ namespace Trancity
                 }
                 else
                 {
-//                    point = pos - дорога.концы[0];
+                    //                    point = pos - дорога.концы[0];
                     pos.CopyTo(ref point);
                     point.Subtract(ref дорога.концы[0]);
                     point.Angle -= дорога.направления[0];
-//                    point2 = дорога.концы[1] - дорога.концы[0];
+                    //                    point2 = дорога.концы[1] - дорога.концы[0];
                     дорога.концы[1].CopyTo(ref point2);
                     point2.Subtract(ref дорога.концы[0]);
                     point2.Angle -= дорога.направления[0];
@@ -1330,16 +1328,16 @@ namespace Trancity
 
         public Положение[] Найти_все_положения(params Double3DPoint[] pos)
         {
-        	Double3DPoint point = new Double3DPoint();
-        	DoublePoint point2 = new DoublePoint();
+            Double3DPoint point = new Double3DPoint();
+            DoublePoint point2 = new DoublePoint();
             List<Положение> list = new List<Положение>();
             double num = 0.0;
             for (int i = 0; i < pos.Length; i++)
             {
                 for (int j = i + 1; j < pos.Length; j++)
                 {
-                	pos[i].CopyTo(ref point);
-                	pos[i].Subtract(ref pos[j]);
+                    pos[i].CopyTo(ref point);
+                    pos[i].Subtract(ref pos[j]);
                     num = Math.Max(num, point.Modulus);
                 }
             }
@@ -1351,7 +1349,7 @@ namespace Trancity
                 if (point2.Modulus <= (num4 + num))
                 {
                     pos[0].XZPoint.CopyTo(ref point2);
-                	point2.Subtract(ref дорога.концы[1]);
+                    point2.Subtract(ref дорога.концы[1]);
                     if (point2.Modulus <= (num4 + num))
                     {
                         for (int k = 0; k < pos.Length; k++)
@@ -1415,30 +1413,30 @@ namespace Trancity
 
         public Положение Найти_положение(Double3DPoint pos, Road дорога)
         {
-        	DoublePoint point = new DoublePoint();
-        	DoublePoint point2 = new DoublePoint();
-        	DoublePoint posXZ = pos.XZPoint;
+            DoublePoint point = new DoublePoint();
+            DoublePoint point2 = new DoublePoint();
+            DoublePoint posXZ = pos.XZPoint;
             double num = дорога.Длина + (Math.Max(дорога.ширина[0], дорога.ширина[1]) / 2.0);
-//            DoublePoint point5 = pos.xz_point - дорога.концы[0];
-//            if (point5.модуль <= num)
-//            posXZ.CopyTo(ref point);
-//            point.Subtract(ref дорога.концы[0]);
+            //            DoublePoint point5 = pos.xz_point - дорога.концы[0];
+            //            if (point5.модуль <= num)
+            //            posXZ.CopyTo(ref point);
+            //            point.Subtract(ref дорога.концы[0]);
             if (/*point.Modulus*/DoublePoint.Distance(ref posXZ, ref дорога.концы[0]) <= num)
             {
-//                DoublePoint point6 = pos.xz_point - дорога.концы[1];
-//                if (point6.модуль <= num)
-//                posXZ.CopyTo(ref point);
-//            	point.Subtract(ref дорога.концы[1]);
+                //                DoublePoint point6 = pos.xz_point - дорога.концы[1];
+                //                if (point6.модуль <= num)
+                //                posXZ.CopyTo(ref point);
+                //            	point.Subtract(ref дорога.концы[1]);
                 if (/*point.Modulus*/DoublePoint.Distance(ref posXZ, ref дорога.концы[1]) <= num)
                 {
                     if (дорога.кривая)
                     {
-//                        DoublePoint point = pos.xz_point - дорога.структура.центр0;
-//                        DoublePoint point2 = дорога.концы[0] - дорога.структура.центр0;
+                        //                        DoublePoint point = pos.xz_point - дорога.структура.центр0;
+                        //                        DoublePoint point2 = дорога.концы[0] - дорога.структура.центр0;
                         posXZ.CopyTo(ref point);
-			            point.Subtract(ref дорога.структура.центр0);
-			            дорога.концы[0].CopyTo(ref point2);
-			            point2.Subtract(ref дорога.структура.центр0);
+                        point.Subtract(ref дорога.структура.центр0);
+                        дорога.концы[0].CopyTo(ref point2);
+                        point2.Subtract(ref дорога.структура.центр0);
                         double num2 = ((Math.Sign(дорога.структура.угол0) * (point.Angle - point2.Angle)) + 12.566370614359173) % 6.2831853071795862;
                         if (num2 < Math.Abs(дорога.структура.угол0))
                         {
@@ -1449,12 +1447,12 @@ namespace Trancity
                                 return new Положение(дорога, num3, -Math.Sign(дорога.структура.угол0) * (point.Modulus - дорога.АбсолютныйРадиус), num4);
                             }
                         }
-//                        point = pos.xz_point - дорога.структура.центр1;
-//                        point2 = дорога.структура.серединка - дорога.структура.центр1;
+                        //                        point = pos.xz_point - дорога.структура.центр1;
+                        //                        point2 = дорога.структура.серединка - дорога.структура.центр1;
                         posXZ.CopyTo(ref point);
-			            point.Subtract(ref дорога.структура.центр1);
-			            дорога.структура.серединка.CopyTo(ref point2);
-			            point2.Subtract(ref дорога.структура.центр1);
+                        point.Subtract(ref дорога.структура.центр1);
+                        дорога.структура.серединка.CopyTo(ref point2);
+                        point2.Subtract(ref дорога.структура.центр1);
                         num2 = ((Math.Sign(дорога.структура.угол1) * (point.Angle - point2.Angle)) + 12.566370614359173) % 6.2831853071795862;
                         if (num2 < Math.Abs(дорога.структура.угол1))
                         {
@@ -1483,12 +1481,12 @@ namespace Trancity
                             }
                         }*/
                         posXZ.CopyTo(ref point);
-            			point.Subtract(ref дорога.концы[0]);
-            			point.Angle -= дорога.направления[0];
-            			дорога.концы[1].CopyTo(ref point2);
-            			point2.Subtract(ref дорога.концы[0]);
-            			point2.Angle -= дорога.направления[0];
-            			if ((point.x >= 0.0) && (point.x < point2.x))
+                        point.Subtract(ref дорога.концы[0]);
+                        point.Angle -= дорога.направления[0];
+                        дорога.концы[1].CopyTo(ref point2);
+                        point2.Subtract(ref дорога.концы[0]);
+                        point2.Angle -= дорога.направления[0];
+                        if ((point.x >= 0.0) && (point.x < point2.x))
                         {
                             point.y -= (point2.y * point.x) / point2.x;
                             point.x *= дорога.Длина / point2.x;
@@ -1540,7 +1538,7 @@ namespace Trancity
                             расстояние_по_дороге = num4;
                             if (((дорога2 is Рельс) && (((Рельс)дорога2).следующие_рельсы.Length > 1)) && (расстояние_по_дороге > (дорога2.Длина - ((Рельс)дорога2).расстояние_добавочных_проводов)))
                             {
-                            	расстояние_по_дороге -= ((Рельс)дорога2).расстояние_добавочных_проводов + (Cheats._random.NextDouble() * 5.0);
+                                расстояние_по_дороге -= ((Рельс)дорога2).расстояние_добавочных_проводов + (Cheats._random.NextDouble() * 5.0);
                                 return;
                             }
                             return;
@@ -1578,7 +1576,7 @@ namespace Trancity
 
         public void Обновить_время()
         {
-        	var ftime = ((double)Environment.TickCount) / time_speed;
+            var ftime = ((double)Environment.TickCount) / time_speed;
             if (this.системноеВремя == 0.0)
             {
                 this.системноеВремя = ftime;//((double)Environment.TickCount) / time_speed;//0x3e8;
@@ -1587,14 +1585,14 @@ namespace Trancity
             dtmax = Math.Max(dtmax, прошлоВремени);
             if (MainForm.in_editor) прошлоВремени = Math.Min(прошлоВремени, 0.25);
             this.системноеВремя = ftime;//((double)Environment.TickCount) / time_speed;//1000
-//            MeshObject.timer.Refresh();
+                                        //            MeshObject.timer.Refresh();
         }
 
         public void Сохранить_город(string filename)
         {
-        	Logger.Log("SaveCity", "Trying to save current city...");
-        	Stopwatch stopwatch = new Stopwatch();
-        	stopwatch.Start();
+            Logger.Log("SaveCity", "Trying to save current city...");
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             XmlDocument parent = new XmlDocument();
             XmlElement element = Engine.Xml.AddElement(parent, "City");
             XmlElement element2 = Engine.Xml.AddElement(parent, element, "Rails");
@@ -1709,7 +1707,7 @@ namespace Trancity
                             int stops_ind = остановки.IndexOf(tripStop.stop);
                             if (stops_ind < 0)
                             {
-                            	continue;//throw new IndexOutOfRangeException("Один из элементов списока остановок маршрута " + this.маршруты[n].number + " (рейса " + num9.ToString() + ") не существует!");
+                                continue;//throw new IndexOutOfRangeException("Один из элементов списока остановок маршрута " + this.маршруты[n].number + " (рейса " + num9.ToString() + ") не существует!");
                             }
                             Engine.Xml.AddElement(parent, stops, "Stop" + stops_ind, tripStop.flag ? ((double)1) : ((double)0));//"Да" : "Нет");
                         }
@@ -1742,7 +1740,7 @@ namespace Trancity
                             int stops_ind = остановки.IndexOf(tripStop.stop);
                             if (stops_ind < 0)
                             {
-                            	continue;//throw new IndexOutOfRangeException("Один из элементов списока остановок маршрута " + this.маршруты[n].number + " (паркового рейса " + num12.ToString() + ") не существует!");
+                                continue;//throw new IndexOutOfRangeException("Один из элементов списока остановок маршрута " + this.маршруты[n].number + " (паркового рейса " + num12.ToString() + ") не существует!");
                             }
                             Engine.Xml.AddElement(parent, stops, "Stop" + stops_ind, tripStop.flag ? ((double)1) : ((double)0));//"Да" : "Нет");
                         }
@@ -1817,7 +1815,7 @@ namespace Trancity
                 XmlElement element28 = Engine.Xml.AddElement(parent, element27, "elements");
                 for (int i = 0; i < this.сигнальныеСистемы[num23].vsignals.Count; i++)
                 {
-                	XmlElement element29 = Engine.Xml.AddElement(parent, element28, "element" + i.ToString());
+                    XmlElement element29 = Engine.Xml.AddElement(parent, element28, "element" + i.ToString());
                     Engine.Xml.AddElement(parent, element29, "type", "Сигнал");
                     Engine.Xml.AddElement(parent, element29, "model", this.сигнальныеСистемы[num23].vsignals[i].name);
                     int num25 = this.Найти_индекс_для_сохранения(this.сигнальныеСистемы[num23].vsignals[i].положение.Дорога);
@@ -1832,7 +1830,7 @@ namespace Trancity
                 }
                 for (int num24 = 0; num24 < this.сигнальныеСистемы[num23].элементы.Count; num24++)
                 {
-                	XmlElement element29 = Engine.Xml.AddElement(parent, element28, "element" + (num24 + this.сигнальныеСистемы[num23].vsignals.Count).ToString());
+                    XmlElement element29 = Engine.Xml.AddElement(parent, element28, "element" + (num24 + this.сигнальныеСистемы[num23].vsignals.Count).ToString());
                     Engine.Xml.AddElement(parent, element29, "type", this.сигнальныеСистемы[num23].элементы[num24].GetType().Name);
                     int num25 = this.Найти_индекс_для_сохранения(this.сигнальныеСистемы[num23].элементы[num24].дорога);
                     if (num25 < 0)
@@ -1841,11 +1839,11 @@ namespace Trancity
                     }
                     Engine.Xml.AddElement(parent, element29, "rail", (double)num25);
                     Engine.Xml.AddElement(parent, element29, "distance", this.сигнальныеСистемы[num23].элементы[num24].расстояние);
-//                    if (this.сигнальныеСистемы[num23].элементы[num24] is Сигнальная_система.Контакт)
-//                    {
-//                        Сигнальная_система.Контакт контакт = (Сигнальная_система.Контакт)this.сигнальныеСистемы[num23].элементы[num24];
-                        Engine.Xml.AddElement(parent, element29, "minus", /*контакт*/this.сигнальныеСистемы[num23].элементы[num24].минус ? ((double)1) : ((double)0));
-//                    }
+                    //                    if (this.сигнальныеСистемы[num23].элементы[num24] is Сигнальная_система.Контакт)
+                    //                    {
+                    //                        Сигнальная_система.Контакт контакт = (Сигнальная_система.Контакт)this.сигнальныеСистемы[num23].элементы[num24];
+                    Engine.Xml.AddElement(parent, element29, "minus", /*контакт*/this.сигнальныеСистемы[num23].элементы[num24].минус ? ((double)1) : ((double)0));
+                    //                    }
                 }
             }
             XmlElement element30 = Engine.Xml.AddElement(parent, element, "Svetofor_systems");
@@ -1871,7 +1869,7 @@ namespace Trancity
                     Engine.Xml.AddElement(parent, element33, "distance", this.светофорныеСистемы[num26].светофоры[num27].положение.расстояние);
                     Engine.Xml.AddElement(parent, element33, "place", this.светофорныеСистемы[num26].светофоры[num27].положение.отклонение);
                     Engine.Xml.AddElement(parent, element33, "height", this.светофорныеСистемы[num26].светофоры[num27].положение.высота);
-//                    Engine.Xml.AddElement(element33, "arrow", this.светофорныеСистемы[num26].светофоры[num27].стрелка ? ((double)1) : ((double)0));
+                    //                    Engine.Xml.AddElement(element33, "arrow", this.светофорныеСистемы[num26].светофоры[num27].стрелка ? ((double)1) : ((double)0));
                     Engine.Xml.AddElement(parent, element33, "arrow_green", (double)this.светофорныеСистемы[num26].светофоры[num27].зелёная_стрелка);
                     Engine.Xml.AddElement(parent, element33, "arrow_yellow", (double)this.светофорныеСистемы[num26].светофоры[num27].жёлтая_стрелка);
                     Engine.Xml.AddElement(parent, element33, "arrow_red", (double)this.светофорныеСистемы[num26].светофоры[num27].красная_стрелка);
@@ -1904,10 +1902,10 @@ namespace Trancity
             Logger.Log("SaveCity", "City saved to file " + filename);
             Logger.Log("SaveCity", "Elapsed time : " + stopwatch.Elapsed.ToString());
         }
-        
+
         public double GetHeight(DoublePoint pos)
         {
-        	return земля.GetHeight(pos);
+            return земля.GetHeight(pos);
         }
 
         public Road[] ВсеДороги

@@ -10,34 +10,34 @@ using System;
 
 namespace Engine.Controls
 {
-	/// <summary>
-	/// IRenderControl - интерфейс для используемых контролов.
-	/// Будет сильно торчать наружу, надо подумать как обрубить концы
-	/// </summary>
-	public interface IRenderControl
-	{
-		
-		
-		RenderDevice Renderer { get; }
-	}
-	
-	/// <summary>
-	/// накрутим немного колхоза
-	/// </summary>
-	internal interface IInternalRenderControl
-	{
-		IntPtr ControlHandle { get; }
-		
-		System.Drawing.Size ControlSize { set; }
-		
-		RenderDevice Renderer { set; }
-	}
-	
-	/// <summary>
-	/// и ещё немного колхоза
-	/// </summary>
-	internal interface IInternalRenderForm
-	{
-		void ShowForm();
-	}
+    /// <summary>
+    /// IRenderControl - интерфейс для используемых контролов.
+    /// Будет сильно торчать наружу, надо подумать как обрубить концы
+    /// </summary>
+    public interface IRenderControl
+    {
+
+
+        RenderDevice Renderer { get; }
+    }
+
+    /// <summary>
+    /// накрутим немного колхоза
+    /// </summary>
+    internal interface IInternalRenderControl
+    {
+        IntPtr ControlHandle { get; }
+
+        System.Drawing.Size ControlSize { set; }
+
+        RenderDevice Renderer { set; }
+    }
+
+    /// <summary>
+    /// и ещё немного колхоза
+    /// </summary>
+    internal interface IInternalRenderForm
+    {
+        void ShowForm();
+    }
 }

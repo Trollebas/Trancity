@@ -1,6 +1,6 @@
 ﻿namespace Common
 {
-	using SlimDX.DirectInput;
+    using SlimDX.DirectInput;
     using System;
 
     public class FilteredJoystickState
@@ -51,7 +51,7 @@
             this.lasttick = Environment.TickCount;
             for (int i = 0; i < 0x10; i++)
             {
-            	if ((this.InputState.GetButtons().Length > i) && (this.InputState.GetButtons()[i]))
+                if ((this.InputState.GetButtons().Length > i) && (this.InputState.GetButtons()[i]))
                 {
                     this.key_pressed_unfiltered[i] = true;
                     if (!this.key_pressed[i] && (this.keyticks[i] == 0))

@@ -1,10 +1,9 @@
 ﻿namespace Trancity
 {
     using Common;
-//    using Microsoft.DirectX;
-//    using Microsoft.DirectX.Direct3D;
+    //    using Microsoft.DirectX;
+    //    using Microsoft.DirectX.Direct3D;
     using SlimDX;
-    using SlimDX.Direct3D9;
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.IO;
@@ -25,8 +24,8 @@
             Brush brush = new SolidBrush(Color.Black);
             for (var i = 0; i < _meshTextures.Length; i++)
             {
-            	if ((string.IsNullOrEmpty(_meshTextureFilenames[i])) || (_meshTextureFilenames[i].ToLower() != texture.ToLower()))
-            		continue;
+                if ((string.IsNullOrEmpty(_meshTextureFilenames[i])) || (_meshTextureFilenames[i].ToLower() != texture.ToLower()))
+                    continue;
                 Image image = new Bitmap(texture);
                 var graphics = Graphics.FromImage(image);
                 var s = наряд.маршрут.number;
@@ -36,8 +35,8 @@
                 Stream stream = new MemoryStream();
                 image.Save(stream, ImageFormat.Bmp);
                 stream.Seek(0L, SeekOrigin.Begin);
-//                _meshTextures[i] = Texture.FromStream(MyDirect3D.device, stream);
-				base.LoadTextureFromStream(i, stream);
+                //                _meshTextures[i] = Texture.FromStream(MyDirect3D.device, stream);
+                base.LoadTextureFromStream(i, stream);
             }
         }
 

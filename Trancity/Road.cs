@@ -1,11 +1,11 @@
+using Common;
+using Engine;
+using SlimDX;
+using SlimDX.Direct3D9;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Common;
-using SlimDX;
-using SlimDX.Direct3D9;
-using Engine;
 
 namespace Trancity
 {
@@ -66,9 +66,9 @@ namespace Trancity
             кривая = !прямая;
             ширина[0] = ширина0;
             ширина[1] = ширина1;
-            
+
             ОбновитьСтруктуру();
-            
+
             while (направления[0] > Math.PI)
             {
                 направления[0] -= Math.PI * 2.0;
@@ -150,7 +150,7 @@ namespace Trancity
             points[0] = new Double3DPoint(1.0, 0.0, 0.0);
             points[1] = new Double3DPoint(-1.0, 0.0, 1.0);*/
             matrices_count = MatricesCount;
-//            double default_length = 10.0;
+            //            double default_length = 10.0;
             double dist;
             double width;
             double height;
@@ -189,35 +189,35 @@ namespace Trancity
             Vector3 normal;
             for (int i = 0; i < matrices_count; i++)
             {
-            	dist = Длина * i / (matrices_count - 1);
-            	width = НайтиШирину(dist) / 2.0;
-            	НайтиПозициюПоВысоте(dist, out height, out additional_angel);
-            	direction = НайтиНаправление(dist);
-            	normal = MyFeatures.ToVector3(new Double3DPoint(direction, additional_angel + (Math.PI / 2.0)));
-            	normal.Normalize();
-            	for (int j = 0; j < model.points.Length; j++)
-            	{
-            		pos = НайтиКоординаты(dist, model.noscale ? model.points[j].x : model.points[j].x * width).Subtract(ref структура.серединка);
-            		vertexes[i * model.points.Length + j].Position = new Vector3((float)pos.x, (float)(height + Math.Cos(additional_angel) * model.points[j].y), (float)pos.y);
-            		//TODO: custom normal vector
-            		vertexes[i * model.points.Length + j].Normal = normal;
-            		vertexes[i * model.points.Length + j].texcoord = new Vector2((float)(dist / width), (float)model.points[j].z);
-            	}
+                dist = Длина * i / (matrices_count - 1);
+                width = НайтиШирину(dist) / 2.0;
+                НайтиПозициюПоВысоте(dist, out height, out additional_angel);
+                direction = НайтиНаправление(dist);
+                normal = MyFeatures.ToVector3(new Double3DPoint(direction, additional_angel + (Math.PI / 2.0)));
+                normal.Normalize();
+                for (int j = 0; j < model.points.Length; j++)
+                {
+                    pos = НайтиКоординаты(dist, model.noscale ? model.points[j].x : model.points[j].x * width).Subtract(ref структура.серединка);
+                    vertexes[i * model.points.Length + j].Position = new Vector3((float)pos.x, (float)(height + Math.Cos(additional_angel) * model.points[j].y), (float)pos.y);
+                    //TODO: custom normal vector
+                    vertexes[i * model.points.Length + j].Normal = normal;
+                    vertexes[i * model.points.Length + j].texcoord = new Vector2((float)(dist / width), (float)model.points[j].z);
+                }
             }
             poly_count = (model.points.Length - 1) * (matrices_count - 1) * 2;
             indexes = new int[base.poly_count * 3];
             for (int i = 0; i < matrices_count - 1; i++)
             {
-            	for (int j = 0; j < model.points.Length - 1; j++)
-            	{
-            		arpos = ((model.points.Length - 1) * i + j) * 6;
-            		indexes[arpos] = i * model.points.Length + j;
-            		indexes[arpos + 2] = indexes[arpos] + 1;
-            		indexes[arpos + 1] = indexes[arpos] + model.points.Length;
-            		indexes[arpos + 3] = indexes[arpos + 2];
-            		indexes[arpos + 5] = indexes[arpos + 1] + 1;
-            		indexes[arpos + 4] = indexes[arpos + 1];
-            	}
+                for (int j = 0; j < model.points.Length - 1; j++)
+                {
+                    arpos = ((model.points.Length - 1) * i + j) * 6;
+                    indexes[arpos] = i * model.points.Length + j;
+                    indexes[arpos + 2] = indexes[arpos] + 1;
+                    indexes[arpos + 1] = indexes[arpos] + model.points.Length;
+                    indexes[arpos + 3] = indexes[arpos + 2];
+                    indexes[arpos + 5] = indexes[arpos + 1] + 1;
+                    indexes[arpos + 4] = indexes[arpos + 1];
+                }
             }
             /**/
             base._meshMaterials = new Material[1];
@@ -233,10 +233,10 @@ namespace Trancity
             matrixes = new Matrix[1];
             matrixes[0] = Matrix.Translation((float)структура.серединка.x, 0.0f, (float)структура.серединка.y);
         }
-        
+
         public override Matrix GetMatrix(int index)
         {
-        	if ((!MainForm.in_editor) && (matrixes[index] != MyMatrix.Zero)) return matrixes[index];
+            if ((!MainForm.in_editor) && (matrixes[index] != MyMatrix.Zero)) return matrixes[index];
             double num5;
             double num6;
             DoublePoint point;
@@ -282,10 +282,10 @@ namespace Trancity
                 num7 = НайтиНаправление(num);
                 var point3 = point2 - point;
                 point3.Angle -= num7;
-                matrix.M11 = (float) point3.x;
-                matrix.M12 = (float) num6;
-                matrix.M13 = (float) point3.y;
-                matrix.M33 = (float) num3;
+                matrix.M11 = (float)point3.x;
+                matrix.M12 = (float)num6;
+                matrix.M13 = (float)point3.y;
+                matrix.M33 = (float)num3;
             }
             else
             {
@@ -296,14 +296,14 @@ namespace Trancity
                 num7 = НайтиНаправление(num2) + Math.PI;
                 var point4 = point2 - point;
                 point4.Angle -= num7;
-                matrix.M11 = (float) point4.x;
-                matrix.M12 = (float) num6;
-                matrix.M13 = (float) point4.y;
-                matrix.M33 = (float) num4;
+                matrix.M11 = (float)point4.x;
+                matrix.M12 = (float)num6;
+                matrix.M13 = (float)point4.y;
+                matrix.M33 = (float)num4;
             }
             matrix.M22 = 1f;
             matrix.M44 = 1f;
-            return ((matrix * Matrix.RotationY(-((float) num7))) * Matrix.Translation((float) point.x, (float) num5, (float) point.y));
+            return ((matrix * Matrix.RotationY(-((float)num7))) * Matrix.Translation((float)point.x, (float)num5, (float)point.y));
         }
 
         public double НайтиВысоту(double расстояние)
@@ -319,9 +319,9 @@ namespace Trancity
             DoublePoint point, point1;
             double num;
             НайтиПозицию(расстояние, out point, out num);
-//            return (point + new DoublePoint(num += MyFeatures.halfPI) * отклонение);//1.5707963267948966
+            //            return (point + new DoublePoint(num += MyFeatures.halfPI) * отклонение);//1.5707963267948966
             point1 = new DoublePoint(num += (Math.PI / 2.0)).Multyply(отклонение);
-			return point.Add(ref point1);
+            return point.Add(ref point1);
         }
 
         public double НайтиНаправление(double расстояние)
@@ -393,7 +393,7 @@ namespace Trancity
             }
             else
             {
-            	var length = Длина;
+                var length = Длина;
                 var num = length / 10.0;
                 var point = new DoublePoint(length - (2.0 * num), высота[1] - высота[0]);
                 var d = (length - (2.0 * num)) / point.Modulus;
@@ -499,8 +499,8 @@ namespace Trancity
             var endpoint = концы[1];
             var startangle = направления[0] + (Math.PI / 2.0);
             var endangel = направления[1] + (Math.PI / 2.0);
-//            var angel_center = (new DoublePoint(startangle) - new DoublePoint(endangel)) / 2.0;
-			var dendangel = new DoublePoint(endangel);
+            //            var angel_center = (new DoublePoint(startangle) - new DoublePoint(endangel)) / 2.0;
+            var dendangel = new DoublePoint(endangel);
             var angel_center = new DoublePoint(startangle).Subtract(ref dendangel).Divide(2.0);
             DoublePoint point_center = (startpoint - endpoint).Divide(2.0);
             dendangel.CopyFromAngle(point_center.Angle);
@@ -524,8 +524,8 @@ namespace Trancity
                 angel_center.Multyply(ref dendangel);
                 point5 = point_center.Divide(ref point5);
                 определитьСтруктуру.радиус = point5.x;
-//                определитьСтруктуру.центр0 = startpoint + (new DoublePoint(startangle) * point5);
-//                определитьСтруктуру.центр1 = endpoint + (new DoublePoint(endangel) * point5);
+                //                определитьСтруктуру.центр0 = startpoint + (new DoublePoint(startangle) * point5);
+                //                определитьСтруктуру.центр1 = endpoint + (new DoublePoint(endangel) * point5);
                 определитьСтруктуру.центр0 = startpoint + new DoublePoint(startangle).Multyply(ref point5);
                 определитьСтруктуру.центр1 = endpoint + new DoublePoint(endangel).Multyply(ref point5);
                 определитьСтруктуру.серединка = (определитьСтруктуру.центр0 + определитьСтруктуру.центр1).Divide(2.0);// / 2.0;
@@ -592,13 +592,13 @@ namespace Trancity
         {
             get
             {
-            	if ((matrices_count != -1) && (((Math.Abs(col - Game.col) > 1) || (Math.Abs(row - Game.row) > 1)))) return 0;
-            	if (base.bounding_sphere != null)
-            	{
-            		if (!MyDirect3D.SphereInFrustum(bounding_sphere)) return 0;
-            	}
-            	if (matrices_count != -1) return matrices_count;
-            	if (кривая)
+                if ((matrices_count != -1) && (((Math.Abs(col - Game.col) > 1) || (Math.Abs(row - Game.row) > 1)))) return 0;
+                if (base.bounding_sphere != null)
+                {
+                    if (!MyDirect3D.SphereInFrustum(bounding_sphere)) return 0;
+                }
+                if (matrices_count != -1) return matrices_count;
+                if (кривая)
                 {
                     _meshNumParts = (int)Math.Floor(((Длина / АбсолютныйРадиус) * 22.0) / качествоДороги);
                     if (_meshNumParts > 200)
@@ -612,7 +612,7 @@ namespace Trancity
                 }
                 else if (высота[0] != высота[1])
                 {
-                    _meshNumParts = (((int) (((Длина * 2.0) / 10.0) / качествоДороги)) * 2) + 1;
+                    _meshNumParts = (((int)(((Длина * 2.0) / 10.0) / качествоДороги)) * 2) + 1;
                 }
                 else
                 {
@@ -630,8 +630,8 @@ namespace Trancity
                 {
                     return (структура.длина0 + структура.длина1);
                 }
-//                var point = концы[1] - концы[0];
-//                return point.Modulus;
+                //                var point = концы[1] - концы[0];
+                //                return point.Modulus;
                 return DoublePoint.Distance(ref концы[1], ref концы[0]);
             }
         }
@@ -666,7 +666,7 @@ namespace Trancity
         {
             get
             {
-            	var point = НайтиКоординаты(5.0, 0.0).Subtract(ref концы[0]);// - концы[0];
+                var point = НайтиКоординаты(5.0, 0.0).Subtract(ref концы[0]);// - концы[0];
                 point.Angle -= направления[0];
                 return -point.y;
             }
@@ -676,26 +676,26 @@ namespace Trancity
         {
             get
             {
-            	var point = НайтиКоординаты(Длина - 5.0, 0.0).Subtract(ref концы[1]);// - концы[1];
+                var point = НайтиКоординаты(Длина - 5.0, 0.0).Subtract(ref концы[1]);// - концы[1];
                 point.Angle -= направления[1];
                 return -point.y;
             }
         }
-        
+
         public void CreateBoundingSphere()
         {
-        	try
-        	{
-        		var length = Длина / 2.0;
-				var v0 = НайтиВысоту(length);
-				var p0 = НайтиКоординаты(length, 0.0);
-        		var p2 = new Double3DPoint(p0.x, v0, p0.y);
-        		base.bounding_sphere = new Sphere(Double3DPoint.Zero, length + 5.0);
-        		base.bounding_sphere.Update(p2, DoublePoint.Zero);
-        		col = (int)Math.Floor(p0.x / Ground.grid_size);
-        		row = (int)Math.Floor(p0.y / Ground.grid_size);
-        	}
-        	catch {};
+            try
+            {
+                var length = Длина / 2.0;
+                var v0 = НайтиВысоту(length);
+                var p0 = НайтиКоординаты(length, 0.0);
+                var p2 = new Double3DPoint(p0.x, v0, p0.y);
+                base.bounding_sphere = new Sphere(Double3DPoint.Zero, length + 5.0);
+                base.bounding_sphere.Update(p2, DoublePoint.Zero);
+                col = (int)Math.Floor(p0.x / Ground.grid_size);
+                row = (int)Math.Floor(p0.y / Ground.grid_size);
+            }
+            catch { };
         }
 
         [StructLayout(LayoutKind.Sequential)]

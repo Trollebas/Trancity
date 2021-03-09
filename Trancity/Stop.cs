@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using Common;
-using SlimDX.Direct3D9;
 
 namespace Trancity
 {
@@ -44,7 +42,7 @@ namespace Trancity
 
         public void ОбновитьКартинку()
         {
-        	var str = model.FindStringArg("tram_tex", string.Empty);//"Plate.PNG";
+            var str = model.FindStringArg("tram_tex", string.Empty);//"Plate.PNG";
             var str2 = "";//str;            
             if (typeOfTransport[TypeOfTransport.Trolleybus])
             {
@@ -66,8 +64,8 @@ namespace Trancity
                 {
                     for (var i = 0; i < _meshTextures.Length; i++)
                     {
-                    	if ((string.IsNullOrEmpty(_meshTextureFilenames[i])) || (_meshTextureFilenames[i].ToLower() != str.ToLower()))
-                    		continue;
+                        if ((string.IsNullOrEmpty(_meshTextureFilenames[i])) || (_meshTextureFilenames[i].ToLower() != str.ToLower()))
+                            continue;
                         LoadTexture(i, base.meshDir + str2);
                     }
                 }
@@ -159,7 +157,7 @@ namespace Trancity
                 var index = 0;
                 for (var n = 0; index < _meshTextures.Length; n++)
                 {
-                	if (string.IsNullOrEmpty(_meshTextureFilenames[index]) || (_meshTextureFilenames[index].ToLower() != (meshDir + str).ToLower()))
+                    if (string.IsNullOrEmpty(_meshTextureFilenames[index]) || (_meshTextureFilenames[index].ToLower() != (meshDir + str).ToLower()))
                     {
                         n--;
                     }
@@ -186,10 +184,10 @@ namespace Trancity
                             }
                             var расписание = _расписания[num17];
                             var num19 = 0;
-                            num19 += (int) Math.Ceiling(расписание.поРабочим.Length / 10.0);
+                            num19 += (int)Math.Ceiling(расписание.поРабочим.Length / 10.0);
                             if (!расписание.Ежедневное)
                             {
-                                num19 += (int) Math.Ceiling(расписание.поВыходным.Length / 10.0);
+                                num19 += (int)Math.Ceiling(расписание.поВыходным.Length / 10.0);
                             }
                             if (num19 <= 5)
                             {
@@ -232,7 +230,7 @@ namespace Trancity
                                         }
                                         else
                                         {
-                                            var num23 = (int) Math.Ceiling(расписание.поРабочим.Length / 10.0);
+                                            var num23 = (int)Math.Ceiling(расписание.поРабочим.Length / 10.0);
                                             if ((num23 == 1) && (расписание.поВыходным.Length <= 30))
                                             {
                                                 num23 = 2;
@@ -303,7 +301,7 @@ namespace Trancity
                         Stream stream = new MemoryStream();
                         image.Save(stream, ImageFormat.Bmp);
                         stream.Seek(0L, SeekOrigin.Begin);
-//                        _meshTextures[index] = Texture.FromStream(MyDirect3D.device, stream);
+                        //                        _meshTextures[index] = Texture.FromStream(MyDirect3D.device, stream);
                         base.LoadTextureFromStream(index, stream);
                     }
                     index++;
@@ -325,7 +323,7 @@ namespace Trancity
                         break;
                     }
                 }
-           }
+            }
             _маршруты = list.ToArray();
             _расписания = new Расписание[_маршруты.Length];
             for (var i = 0; i < _маршруты.Length; i++)
@@ -358,7 +356,7 @@ namespace Trancity
                             {
                                 if (дорогаArray[k] == road)
                                 {
-                                    var item = (int) (рейс2.время_отправления + (((рейс2.время_прибытия - рейс2.время_отправления) * (num4 + distance)) / num3));
+                                    var item = (int)(рейс2.время_отправления + (((рейс2.время_прибытия - рейс2.время_отправления) * (num4 + distance)) / num3));
                                     if (наряд.поРабочим)
                                     {
                                         list2.Add(item);
@@ -500,7 +498,7 @@ namespace Trancity
                         numArray2[index]--;
                     }
                 }
-                var num5 = (int) Math.Ceiling(((поВыходным[num4] - поВыходным[numArray[index]]) / 60.0) / numArray2[index]);
+                var num5 = (int)Math.Ceiling(((поВыходным[num4] - поВыходным[numArray[index]]) / 60.0) / numArray2[index]);
                 return (num5 + " мин.");
             }
 
@@ -546,7 +544,7 @@ namespace Trancity
                         numArray2[index]--;
                     }
                 }
-                var num5 = (int) Math.Ceiling(((поРабочим[num4] - поРабочим[numArray[index]]) / 60.0) / numArray2[index]);
+                var num5 = (int)Math.Ceiling(((поРабочим[num4] - поРабочим[numArray[index]]) / 60.0) / numArray2[index]);
                 return (num5 + " мин.");
             }
 
@@ -569,13 +567,13 @@ namespace Trancity
                 }
             }
         }
-        
+
         public int CompareTo(Stop stop)
         {
-        	if (stop.road != this.road)
-        		return 0;
-        	return Math.Sign(this.distance - stop.distance);
+            if (stop.road != this.road)
+                return 0;
+            return Math.Sign(this.distance - stop.distance);
         }
-        
+
     }
 }

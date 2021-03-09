@@ -20,7 +20,7 @@ namespace Trancity
             this.высота = высота;
             this.ширина = ширина;
         }
-        
+
         public enum Тип
         {
             Двустворчатые,

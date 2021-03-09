@@ -1,26 +1,25 @@
-using System;
 using Common;
-using SlimDX;
-using SlimDX.Direct3D9;
 using Engine;
+using SlimDX;
+using System;
 
 namespace Trancity
 {
     public class Ground : MeshObject, MeshObject/*.ICustomCreation/*/.IFromFile/**/, IMatrixObject
     {
-    	public static int grid_step = 21;
-    	public static int grid_size = 300;
-    	
-    	/*private MeshVertex[] vertexes = null;
+        public static int grid_step = 21;
+        public static int grid_size = 300;
+
+        /*private MeshVertex[] vertexes = null;
     	private int[] indexes = null;
     	private int poly_count;
     	private GroundPart[] parts;/**/
-    	
+
         public Matrix GetMatrix(int index)
         {
             var point = MyDirect3D.Camera_Position.XZPoint;
             var point2 = new DoublePoint((Math.Floor(point.x / 500.0) * 500.0) + ((index % 2) * 500.0), (Math.Floor(point.y / 500.0) * 500.0) + ((index / 2) * 500.0));
-            return (Matrix.Scaling(0.5f, 1f, 0.5f) * Matrix.Translation((float) point2.x, -0.1f, (float) point2.y));
+            return (Matrix.Scaling(0.5f, 1f, 0.5f) * Matrix.Translation((float)point2.x, -0.1f, (float)point2.y));
         }
 
         public string Filename
@@ -38,11 +37,11 @@ namespace Trancity
                 return !MyDirect3D.карта ? 4 : 0;
             }
         }/**/
-        
+
         public double GetHeight(DoublePoint pos)
         {
-        	//TODO: нахождение высоты
-        	/*var points = MyFeatures.GetPos(ref pos);
+            //TODO: нахождение высоты
+            /*var points = MyFeatures.GetPos(ref pos);
         	if (points[0] == 0)
         	{
         		if (points[1] == 0)
@@ -91,9 +90,9 @@ namespace Trancity
 	        	}
 	        	return -0.1;
         	}/**/
-        	return -0.1;
+            return -0.1;
         }
-        
+
         /*public void CreateMesh()
         {
         	parts = new GroundPart[9];

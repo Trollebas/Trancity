@@ -6,45 +6,32 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+using SlimDX.DirectInput;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using SlimDX.DirectInput;
-using Trancity;
-
-
-using System.Collections.Generic;
-using Common;
-using Engine;
-using System.IO;
-using SlimDX.Direct3D9;
-using System.Diagnostics;
-using System.ComponentModel;
-
-using SlimDX;
 
 namespace Trancity
 {
-	/// <summary>
-	/// UserControlForm - форма для настройки управления
-	/// </summary>
-	public partial class UserControlForm : Form
-	{
-		public UserControlForm()
-		{
-			InitializeComponent();
-			Localization.ApplyLocalization(this);
-		}
-		
-		private void UpdateListBox()
-		{
-            
-		}
-		
-		private void Save_ButtonClick(object sender, EventArgs e)
-		{ 
-		    XmlDocument document = new XmlDocument();
+    /// <summary>
+    /// UserControlForm - форма для настройки управления
+    /// </summary>
+    public partial class UserControlForm : Form
+    {
+        public UserControlForm()
+        {
+            InitializeComponent();
+            Localization.ApplyLocalization(this);
+        }
+
+        private void UpdateListBox()
+        {
+
+        }
+
+        private void Save_ButtonClick(object sender, EventArgs e)
+        {
+            XmlDocument document = new XmlDocument();
             Common.Xml.document = document;
             XmlElement parent = Common.Xml.AddElement(document, "Control");
             XmlElement parent2 = Common.Xml.AddElement(parent, "Keys");
@@ -91,16 +78,17 @@ namespace Trancity
             Common.Xml.AddElement(parent2, "prt_sc", Key.F10.ToString());
             Common.Xml.AddElement(parent2, "debug_info", Key.F1.ToString());
             document.Save(@"Data\Control.xml");
-			
-		}
-		
-		private void Close_ButtonClick(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-		
-		private void Reset_ButtonClick(object sender, EventArgs e)
-		{   XmlDocument document = new XmlDocument();
+
+        }
+
+        private void Close_ButtonClick(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Reset_ButtonClick(object sender, EventArgs e)
+        {
+            XmlDocument document = new XmlDocument();
             Common.Xml.document = document;
             XmlElement parent = Common.Xml.AddElement(document, "Control");
             XmlElement parent2 = Common.Xml.AddElement(parent, "Keys");
@@ -147,6 +135,6 @@ namespace Trancity
             Common.Xml.AddElement(parent2, "prt_sc", Key.F10.ToString());
             Common.Xml.AddElement(parent2, "debug_info", Key.F1.ToString());
             document.Save(@"Data\Control.xml");
-		}
-	}
+        }
+    }
 }

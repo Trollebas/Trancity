@@ -6,15 +6,13 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
-using SlimDX;
-using Trancity;
-using System.IO;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using SlimDX.Direct3D9;
-using System.Drawing;
 using Engine;
+using SlimDX;
+using SlimDX.Direct3D9;
+using System;
+using System.IO;
+using System.Windows.Forms;
+using Trancity;
 
 namespace SlimDX
 {
@@ -33,7 +31,7 @@ namespace Common
             //return a - (a * t) + (b * t);
             return a + t * (b - a);
         }
-        
+
         public static int[] GetPos(ref DoublePoint pos)
         {
             var _pos = new int[2];
@@ -43,7 +41,7 @@ namespace Common
             pos.y -= _pos[1] * Ground.grid_size;
             return _pos;
         }
-        
+
         public static void CheckFolders(string startup_path)
         {
             TryToCreateFolder(startup_path + @"\Cities\");
@@ -54,23 +52,26 @@ namespace Common
             TryToCreateFolder(startup_path + @"\Data\Objects\");
             TryToCreateFolder(startup_path + @"\Screenshots\");
         }
-        
+
         private static void TryToCreateFolder(string path)
         {
             if (!Directory.Exists(path))
             {
-                try { Directory.CreateDirectory(path);
+                try
+                {
+                    Directory.CreateDirectory(path);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Engine.Logger.LogException(e);
                     return;
                 }
             }
         }
-        
+
         //screenshots...
         private static bool screenshot_requested = false;
-        
+
         public static void MakeScreenshot(bool request)
         {
             if (!screenshot_requested)
@@ -82,21 +83,21 @@ namespace Common
             var now = DateTime.Now;
             var path = Application.StartupPath + @"\Screenshots\";
             var screenshot = string.Format(@"{0}\Trancity {1:00}-{2:00}-{3} {4:00}-{5:00}-{6:00}-{7:000}.png", path, now.Day, now.Month, now.Year, now.Hour, now.Minute, now.Second, now.Millisecond);
-//            var surface = MyDirect3D.device.GetRenderTarget(0);
-//            var surface = MyDirect3D.device.GetBackBuffer(0, 0);
+            //            var surface = MyDirect3D.device.GetRenderTarget(0);
+            //            var surface = MyDirect3D.device.GetBackBuffer(0, 0);
             Surface surface = null;
             MyDirect3D.device.GetFrontBufferData(0, surface);
             Surface.ToFile(surface, screenshot, ImageFileFormat.Png);
             surface.Dispose();
         }
-        
+
         //
-        
+
         public static Vector3 ToVector3(Double3DPoint a)
         {
             return new Vector3((float)a.x, (float)a.y, (float)a.z);
         }
-        
+
         public static Double3DPoint ToDouble3DPoint(Vector3 a)
         {
             return new Double3DPoint(a.X, a.Y, a.Z);

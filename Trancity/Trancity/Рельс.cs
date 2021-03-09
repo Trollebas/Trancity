@@ -3,7 +3,6 @@ using Engine;
 using SlimDX;
 using System;
 using System.Collections;
-using System.Drawing;
 
 namespace Trancity
 {
@@ -37,28 +36,28 @@ namespace Trancity
 
         public override Matrix GetMatrix(int index)
         {
-//        	if ((!MainForm.in_editor) && (matrixes[index] != Matrix.Identity)) return matrixes[index];
-        	if ((!MainForm.in_editor) && (matrixes[index] != MyMatrix.Zero)) return matrixes[index];
-//			if (!MainForm.in_editor) return Matrix.Identity;
+            //        	if ((!MainForm.in_editor) && (matrixes[index] != Matrix.Identity)) return matrixes[index];
+            if ((!MainForm.in_editor) && (matrixes[index] != MyMatrix.Zero)) return matrixes[index];
+            //			if (!MainForm.in_editor) return Matrix.Identity;
             bool flag = false;
-//            bool flag2 = false;
+            //            bool flag2 = false;
             if (index >= this.mesh_num_parts)
             {
                 index -= this.mesh_num_parts;
                 flag = true;
             }
-//            if (index >= this.mesh_num_parts)
-//            {
-//                index -= this.mesh_num_parts;
-//                flag2 = true;
-//            }
+            //            if (index >= this.mesh_num_parts)
+            //            {
+            //                index -= this.mesh_num_parts;
+            //                flag2 = true;
+            //            }
             double num = flag ? -0.762 : 0.762;
             double num2 = flag ? -0.762 : 0.762;
-//            if (flag2)
-//            {
-//                num = 0.0;
-//                num2 = 0.0;
-//            }
+            //            if (flag2)
+            //            {
+            //                num = 0.0;
+            //                num2 = 0.0;
+            //            }
             double num3 = 0.05;//flag2 ? высота_контактной_сети : 0.05;
             double num4 = num3;
             double num5 = 1.5;//flag2 ? 0.3 : 1.5;
@@ -66,78 +65,78 @@ namespace Trancity
             {
                 num5 *= 10.0;
             }
-            double num6 = (base.Длина * index) / ((double) this.mesh_num_parts);
-            double num7 = (base.Длина * (index + 1)) / ((double) this.mesh_num_parts);
+            double num6 = (base.Длина * index) / ((double)this.mesh_num_parts);
+            double num7 = (base.Длина * (index + 1)) / ((double)this.mesh_num_parts);
             if ((base.высота[0] != base.высота[1]) && !base.кривая)
             {
                 if (index <= (this.mesh_num_parts / 2))
                 {
-                    num6 = (((base.Длина * 2.0) / 10.0) * index) / ((double) (this.mesh_num_parts / 2));
+                    num6 = (((base.Длина * 2.0) / 10.0) * index) / ((double)(this.mesh_num_parts / 2));
                 }
                 else
                 {
-                    num6 = ((base.Длина * 8.0) / 10.0) + ((((base.Длина * 2.0) / 10.0) * ((index - (this.mesh_num_parts / 2)) - 1)) / ((double) (this.mesh_num_parts / 2)));
+                    num6 = ((base.Длина * 8.0) / 10.0) + ((((base.Длина * 2.0) / 10.0) * ((index - (this.mesh_num_parts / 2)) - 1)) / ((double)(this.mesh_num_parts / 2)));
                 }
                 if ((index + 1) <= (this.mesh_num_parts / 2))
                 {
-                    num7 = (((base.Длина * 2.0) / 10.0) * (index + 1)) / ((double) (this.mesh_num_parts / 2));
+                    num7 = (((base.Длина * 2.0) / 10.0) * (index + 1)) / ((double)(this.mesh_num_parts / 2));
                 }
                 else
                 {
-                    num7 = ((base.Длина * 8.0) / 10.0) + ((((base.Длина * 2.0) / 10.0) * (index - (this.mesh_num_parts / 2))) / ((double) (this.mesh_num_parts / 2)));
+                    num7 = ((base.Длина * 8.0) / 10.0) + ((((base.Длина * 2.0) / 10.0) * (index - (this.mesh_num_parts / 2))) / ((double)(this.mesh_num_parts / 2)));
                 }
             }
             num3 += base.НайтиВысоту(num6);
             num4 += base.НайтиВысоту(num7);
-//            if (!flag2)
-//            {
-                if (this.стрелка_пошёрстная && (index == 0))
+            //            if (!flag2)
+            //            {
+            if (this.стрелка_пошёрстная && (index == 0))
+            {
+                num7 = длина_стрелки;
+                if ((flag && (this == this.предыдущие_рельсы[this.предыдущий_рельс].следующие_рельсы[0])) && ((this.предыдущие_рельсы[this.предыдущий_рельс].следующий_рельс != 0) && this.предыдущие_рельсы[this.предыдущий_рельс].следующие_рельсы[1].кривая))
                 {
-                    num7 = длина_стрелки;
-                    if ((flag && (this == this.предыдущие_рельсы[this.предыдущий_рельс].следующие_рельсы[0])) && ((this.предыдущие_рельсы[this.предыдущий_рельс].следующий_рельс != 0) && this.предыдущие_рельсы[this.предыдущий_рельс].следующие_рельсы[1].кривая))
-                    {
-                        num += смещение_стрелки;
-                    }
-                    if ((!flag && (this == this.предыдущие_рельсы[this.предыдущий_рельс].следующие_рельсы[1])) && ((this.предыдущие_рельсы[this.предыдущий_рельс].следующий_рельс != 1) && this.предыдущие_рельсы[this.предыдущий_рельс].следующие_рельсы[0].кривая))
-                    {
-                        num -= смещение_стрелки;
-                    }
+                    num += смещение_стрелки;
                 }
-                else if (this.стрелка_противошёрстная && (index == (this.mesh_num_parts - 1)))
+                if ((!flag && (this == this.предыдущие_рельсы[this.предыдущий_рельс].следующие_рельсы[1])) && ((this.предыдущие_рельсы[this.предыдущий_рельс].следующий_рельс != 1) && this.предыдущие_рельсы[this.предыдущий_рельс].следующие_рельсы[0].кривая))
                 {
-                    num6 = num7 - длина_стрелки;
+                    num -= смещение_стрелки;
                 }
-                else
+            }
+            else if (this.стрелка_противошёрстная && (index == (this.mesh_num_parts - 1)))
+            {
+                num6 = num7 - длина_стрелки;
+            }
+            else
+            {
+                if (this.стрелка_пошёрстная && !this.стрелка_противошёрстная)
                 {
-                    if (this.стрелка_пошёрстная && !this.стрелка_противошёрстная)
-                    {
-                        num6 = длина_стрелки + (((base.Длина - длина_стрелки) * (index - 1)) / ((double) (this.mesh_num_parts - 1)));
-                        num7 = длина_стрелки + (((base.Длина - длина_стрелки) * index) / ((double) (this.mesh_num_parts - 1)));
-                    }
-                    if (!this.стрелка_пошёрстная && this.стрелка_противошёрстная)
-                    {
-                        num6 = ((base.Длина - длина_стрелки) * index) / ((double) (this.mesh_num_parts - 1));
-                        num7 = ((base.Длина - длина_стрелки) * (index + 1)) / ((double) (this.mesh_num_parts - 1));
-                    }
-                    if (this.стрелка_пошёрстная && this.стрелка_противошёрстная)
-                    {
-                        num6 = длина_стрелки + (((base.Длина - (2.0 * длина_стрелки)) * (index - 1)) / ((double) (this.mesh_num_parts - 2)));
-                        num7 = длина_стрелки + (((base.Длина - (2.0 * длина_стрелки)) * index) / ((double) (this.mesh_num_parts - 2)));
-                    }
+                    num6 = длина_стрелки + (((base.Длина - длина_стрелки) * (index - 1)) / ((double)(this.mesh_num_parts - 1)));
+                    num7 = длина_стрелки + (((base.Длина - длина_стрелки) * index) / ((double)(this.mesh_num_parts - 1)));
                 }
-//            }
+                if (!this.стрелка_пошёрстная && this.стрелка_противошёрстная)
+                {
+                    num6 = ((base.Длина - длина_стрелки) * index) / ((double)(this.mesh_num_parts - 1));
+                    num7 = ((base.Длина - длина_стрелки) * (index + 1)) / ((double)(this.mesh_num_parts - 1));
+                }
+                if (this.стрелка_пошёрстная && this.стрелка_противошёрстная)
+                {
+                    num6 = длина_стрелки + (((base.Длина - (2.0 * длина_стрелки)) * (index - 1)) / ((double)(this.mesh_num_parts - 2)));
+                    num7 = длина_стрелки + (((base.Длина - (2.0 * длина_стрелки)) * index) / ((double)(this.mesh_num_parts - 2)));
+                }
+            }
+            //            }
             DoublePoint point = base.НайтиКоординаты(num6, num);
             DoublePoint point3 = base.НайтиКоординаты(num7, num2) - point;
             double num8 = point3.Modulus;
             double num9 = point3.Angle;
-            float y = ((float) num5) / 2f;
+            float y = ((float)num5) / 2f;
             Matrix matrix = new Matrix();
             matrix.M11 = 1f;
-            matrix.M12 = ((float) (num4 - num3)) / y;
+            matrix.M12 = ((float)(num4 - num3)) / y;
             matrix.M22 = 1f;
             matrix.M33 = 1f;
             matrix.M44 = 1f;
-            return (((matrix * Matrix.Scaling((float) num8, y, (float) num5)) * Matrix.RotationY(-((float) num9))) * Matrix.Translation((float) point.x, (float) num3, (float) point.y));
+            return (((matrix * Matrix.Scaling((float)num8, y, (float)num5)) * Matrix.RotationY(-((float)num9))) * Matrix.Translation((float)point.x, (float)num3, (float)point.y));
         }
 
         public override void ОбновитьСледующиеДороги(Road[] дороги)
@@ -150,40 +149,40 @@ namespace Trancity
                 //if ((дорога != this) && (дорога is Рельс))
                 if ((дорога == this) || (!(дорога is Рельс))) continue;
                 //{
-                    DoublePoint point = дорога.концы[0] - base.концы[1];
-                    if ((point.Modulus < 0.01) && ((Math.Abs((double) ((дорога.направления[0] - base.направления[1]) + Math.PI)) < 0.0001) || (Math.Abs((double) ((дорога.направления[0] - base.направления[1]) - Math.PI)) < 0.0001)))
+                DoublePoint point = дорога.концы[0] - base.концы[1];
+                if ((point.Modulus < 0.01) && ((Math.Abs((double)((дорога.направления[0] - base.направления[1]) + Math.PI)) < 0.0001) || (Math.Abs((double)((дорога.направления[0] - base.направления[1]) - Math.PI)) < 0.0001)))
+                {
+                    if ((list.Count > 0) && (дорога.СтепеньПоворота0 < ((Рельс)list[0]).СтепеньПоворота0))
                     {
-                        if ((list.Count > 0) && (дорога.СтепеньПоворота0 < ((Рельс) list[0]).СтепеньПоворота0))
-                        {
-                            list.Insert(0, дорога);
-                        }
-                        else
-                        {
-                            list.Add(дорога);
-                        }
+                        list.Insert(0, дорога);
                     }
-                    DoublePoint point2 = дорога.концы[1] - base.концы[0];
-                    if ((point2.Modulus < 0.01) && ((Math.Abs((double) ((дорога.направления[1] - base.направления[0]) + Math.PI)) < 0.0001) || (Math.Abs((double) ((дорога.направления[1] - base.направления[0]) - Math.PI)) < 0.0001)))
+                    else
                     {
-                        if ((list2.Count > 0) && (дорога.СтепеньПоворота1 > ((Рельс) list2[0]).СтепеньПоворота1))
-                        {
-                            list2.Insert(0, дорога);
-                        }
-                        else
-                        {
-                            list2.Add(дорога);
-                        }
+                        list.Add(дорога);
                     }
-                    DoublePoint point3 = дорога.концы[1] - base.концы[1];
-                    if ((point3.Modulus < 0.01) && (((Math.Abs((double) (дорога.направления[1] - base.направления[1])) < 0.0001) || (Math.Abs((double) ((дорога.направления[1] - base.направления[1]) + (Math.PI * 2.0))) < 0.0001)) || (Math.Abs((double) ((дорога.направления[1] - base.направления[1]) - (Math.PI * 2.0))) < 0.0001)))
+                }
+                DoublePoint point2 = дорога.концы[1] - base.концы[0];
+                if ((point2.Modulus < 0.01) && ((Math.Abs((double)((дорога.направления[1] - base.направления[0]) + Math.PI)) < 0.0001) || (Math.Abs((double)((дорога.направления[1] - base.направления[0]) - Math.PI)) < 0.0001)))
+                {
+                    if ((list2.Count > 0) && (дорога.СтепеньПоворота1 > ((Рельс)list2[0]).СтепеньПоворота1))
                     {
-                        list3.Add(дорога);
+                        list2.Insert(0, дорога);
                     }
+                    else
+                    {
+                        list2.Add(дорога);
+                    }
+                }
+                DoublePoint point3 = дорога.концы[1] - base.концы[1];
+                if ((point3.Modulus < 0.01) && (((Math.Abs((double)(дорога.направления[1] - base.направления[1])) < 0.0001) || (Math.Abs((double)((дорога.направления[1] - base.направления[1]) + (Math.PI * 2.0))) < 0.0001)) || (Math.Abs((double)((дорога.направления[1] - base.направления[1]) - (Math.PI * 2.0))) < 0.0001)))
+                {
+                    list3.Add(дорога);
+                }
                 //}
             }
-            base.следующиеДороги = (Рельс[]) list.ToArray(typeof(Рельс));
-            base.предыдущиеДороги = (Рельс[]) list2.ToArray(typeof(Рельс));
-            base.соседниеДороги = (Рельс[]) list3.ToArray(typeof(Рельс));
+            base.следующиеДороги = (Рельс[])list.ToArray(typeof(Рельс));
+            base.предыдущиеДороги = (Рельс[])list2.ToArray(typeof(Рельс));
+            base.соседниеДороги = (Рельс[])list3.ToArray(typeof(Рельс));
         }
 
         /*public override string Filename
@@ -198,7 +197,7 @@ namespace Trancity
         {
             get
             {
-            	if ((matrices_count != -1) && (((Math.Abs(col - Game.col) > 1) || (Math.Abs(row - Game.row) > 1)))) return 0;
+                if ((matrices_count != -1) && (((Math.Abs(col - Game.col) > 1) || (Math.Abs(row - Game.row) > 1)))) return 0;
                 /*if (!MyDirect3D.карта)
                 {
                     DoublePoint point = base.НайтиКоординаты(0.0, 0.0);
@@ -214,13 +213,13 @@ namespace Trancity
                     }
                 }*/
                 if (base.bounding_sphere != null)
-            	{
-            		if (!MyDirect3D.SphereInFrustum(bounding_sphere)) return 0;
-            	}
+                {
+                    if (!MyDirect3D.SphereInFrustum(bounding_sphere)) return 0;
+                }
                 if (matrices_count != -1) return matrices_count;
                 if (base.кривая)
                 {
-                    this.mesh_num_parts = (int) (((base.Длина / base.АбсолютныйРадиус) * 22.0) / качество_рельсов);
+                    this.mesh_num_parts = (int)(((base.Длина / base.АбсолютныйРадиус) * 22.0) / качество_рельсов);
                     if (this.mesh_num_parts > 200)
                     {
                         this.mesh_num_parts = 200;
@@ -232,7 +231,7 @@ namespace Trancity
                 }
                 else if (base.высота[0] != base.высота[1])
                 {
-                    this.mesh_num_parts = (((int) (((base.Длина * 2.0) / 10.0) / качество_рельсов)) * 2) + 1;
+                    this.mesh_num_parts = (((int)(((base.Длина * 2.0) / 10.0) / качество_рельсов)) * 2) + 1;
                 }
                 else
                 {
@@ -246,10 +245,10 @@ namespace Trancity
                         this.mesh_num_parts++;
                     }
                 }
-//                if (!MyDirect3D.вид_сверху)
-//                {
-//                    return (this.mesh_num_parts * 3);
-//                }
+                //                if (!MyDirect3D.вид_сверху)
+                //                {
+                //                    return (this.mesh_num_parts * 3);
+                //                }
                 return (this.mesh_num_parts * 2);
             }
         }
@@ -258,7 +257,7 @@ namespace Trancity
         {
             get
             {
-            	return (Рельс[]) base.предыдущиеДороги;
+                return (Рельс[])base.предыдущиеДороги;
             }
         }
 
@@ -266,7 +265,7 @@ namespace Trancity
         {
             get
             {
-            	return (Рельс[]) base.следующиеДороги;
+                return (Рельс[])base.следующиеДороги;
             }
         }
 
@@ -274,7 +273,7 @@ namespace Trancity
         {
             get
             {
-            	return (Рельс[]) base.соседниеДороги;
+                return (Рельс[])base.соседниеДороги;
             }
         }
 
@@ -305,8 +304,8 @@ namespace Trancity
 
             public Matrix GetMatrix(int index)
             {
-                Matrix matrix = Matrix.Scaling(0.5f, 0.5f, 0.5f) * Matrix.RotationY(-((float) this.направление));
-                return (matrix * Matrix.Translation((float) координаты.x, ((float) Рельс.высота_контактной_сети) + 0.05f, (float) координаты.y));
+                Matrix matrix = Matrix.Scaling(0.5f, 0.5f, 0.5f) * Matrix.RotationY(-((float)this.направление));
+                return (matrix * Matrix.Translation((float)координаты.x, ((float)Рельс.высота_контактной_сети) + 0.05f, (float)координаты.y));
             }
 
             public string Filename

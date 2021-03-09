@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 
 namespace Trancity
 {
@@ -57,7 +56,7 @@ namespace Trancity
                         type[Tramway] = value ? false : !type[Trolleybus] ? false : !type[Bus];
                         type[Electrobus] = value;
                         break;
-                   case Traffic:
+                    case Traffic:
                         type[Tramway] = value ? false : !type[Trolleybus] ? false : !type[Bus] ? false : !type[Electrobus];
                         type[Traffic] = value;
                         break;

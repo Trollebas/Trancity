@@ -10,9 +10,9 @@ namespace Engine
     {
         public double x;
         public double y;
-        
+
         public static readonly DoublePoint Zero = new DoublePoint(0.0, 0.0);
-        
+
         public DoublePoint(double x, double y)
         {
             if (double.IsInfinity(x) || double.IsNaN(x))
@@ -32,7 +32,7 @@ namespace Engine
             this.x = Math.Cos(angle);
             this.y = Math.Sin(angle);
         }
-        
+
         public DoublePoint FloorPoint
         {
             get
@@ -40,7 +40,7 @@ namespace Engine
                 return new DoublePoint(Math.Floor(this.x), Math.Floor(this.y));
             }
         }
-        
+
         public DoublePoint CeilingPoint
         {
             get
@@ -48,7 +48,7 @@ namespace Engine
                 return new DoublePoint(Math.Ceiling(this.x), Math.Ceiling(this.y));
             }
         }
-        
+
         public DoublePoint RoundPoint
         {
             get
@@ -56,7 +56,7 @@ namespace Engine
                 return new DoublePoint(Math.Round(this.x), Math.Round(this.y));
             }
         }
-        
+
         public DoublePoint Abs
         {
             get
@@ -64,7 +64,7 @@ namespace Engine
                 return new DoublePoint(Math.Abs(this.x), Math.Abs(this.y));
             }
         }
-        
+
         public double Modulus
         {
             get
@@ -77,7 +77,7 @@ namespace Engine
                 this.Multyply(num);
             }
         }
-        
+
         public double Angle
         {
             get
@@ -92,47 +92,47 @@ namespace Engine
                 this = new DoublePoint(value).Multyply(this.Modulus);
             }
         }
-        
+
         public void CopyTo(ref DoublePoint point)
         {
             point.x = this.x;
             point.y = this.y;
         }
-        
+
         public void CopyFromAngle(double angle)
         {
             this.x = Math.Cos(angle);
             this.y = Math.Sin(angle);
         }
-        
+
         public DoublePoint Add(ref DoublePoint point)
         {
             this.x += point.x;
             this.y += point.y;
             return this;
         }
-        
+
         public DoublePoint Add(DoublePoint point)
         {
             this.x += point.x;
             this.y += point.y;
             return this;
         }
-        
+
         public DoublePoint Subtract(ref DoublePoint point)
         {
             this.x -= point.x;
             this.y -= point.y;
             return this;
         }
-        
+
         public DoublePoint Subtract(DoublePoint point)
         {
             this.x -= point.x;
             this.y -= point.y;
             return this;
         }
-        
+
         public DoublePoint Multyply(ref DoublePoint point)
         {
             double x1 = this.x;
@@ -141,7 +141,7 @@ namespace Engine
             this.y = (x1 * point.y) + (y1 * point.x);
             return this;
         }
-        
+
         public DoublePoint Multyply(DoublePoint point)
         {
             double x1 = this.x;
@@ -150,7 +150,7 @@ namespace Engine
             this.y = (x1 * point.y) + (y1 * point.x);
             return this;
         }
-        
+
         public DoublePoint Divide(ref DoublePoint point)
         {
             double x1 = this.x;
@@ -159,7 +159,7 @@ namespace Engine
             this.y = ((y1 * point.x) - (x1 * point.y)) / ((point.x * point.x) + (point.y * point.y));
             return this;
         }
-        
+
         public DoublePoint Divide(DoublePoint point)
         {
             double x1 = this.x;
@@ -213,32 +213,32 @@ namespace Engine
             this.y %= value;
             return this;
         }
-        
+
         public static implicit operator DoublePoint(Point a)
         {
-            return new DoublePoint((double) a.X, (double) a.Y);
+            return new DoublePoint((double)a.X, (double)a.Y);
         }
-        
+
         public static explicit operator Point(DoublePoint p)
         {
-            return new Point((int) p.RoundPoint.x, (int) p.RoundPoint.y);
+            return new Point((int)p.RoundPoint.x, (int)p.RoundPoint.y);
         }
 
         public static Point operator +(Point p1, DoublePoint p2)
         {
-            return new Point(p1.X + ((int) p2.RoundPoint.x), p1.Y + ((int) p2.RoundPoint.y));
+            return new Point(p1.X + ((int)p2.RoundPoint.x), p1.Y + ((int)p2.RoundPoint.y));
         }
 
         public static Point operator -(Point p1, DoublePoint p2)
         {
-            return new Point(p1.X - ((int) p2.RoundPoint.x), p1.Y - ((int) p2.RoundPoint.y));
+            return new Point(p1.X - ((int)p2.RoundPoint.x), p1.Y - ((int)p2.RoundPoint.y));
         }
-        
+
         public static double Distance(DoublePoint left, DoublePoint right)
         {
             return Distance(ref left, ref right);
         }
-        
+
         public static double Distance(ref DoublePoint left, ref DoublePoint right)
         {
             return Math.Sqrt((left.x - right.x) * (left.x - right.x) + (left.y - right.y) * (left.y - right.y));
@@ -321,32 +321,33 @@ namespace Engine
         {
             return string.Format("{0}; {1};", this.x.ToString(), this.y.ToString());
         }
-        
+
         public override bool Equals(object obj)
         {
             return (obj is DoublePoint) && Equals((DoublePoint)obj);
         }
-        
+
         public bool Equals(DoublePoint other)
         {
             return object.Equals(this.x, other.x) && object.Equals(this.y, other.y);
         }
-        
+
         public override int GetHashCode()
         {
             int hashCode = 0;
-            unchecked {
+            unchecked
+            {
                 hashCode += 1000000007 * x.GetHashCode();
                 hashCode += 1000000009 * y.GetHashCode();
             }
             return hashCode;
         }
-        
+
         public static bool operator ==(DoublePoint lhs, DoublePoint rhs)
         {
             return lhs.Equals(rhs);
         }
-        
+
         public static bool operator !=(DoublePoint lhs, DoublePoint rhs)
         {
             return !(lhs == rhs);

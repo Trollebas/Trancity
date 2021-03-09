@@ -1,27 +1,27 @@
 ﻿using Common;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.Threading;
-using System.Collections.Generic;
-using System.Reflection;
 using Engine;
 using ODE_Test;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace Trancity
 {
     public class MainForm : Engine.Controls.RenderForm//Form
     {
-//        private readonly IContainer _components;
+        //        private readonly IContainer _components;
         public static int ticklast;
         public Game _игра;
         public НастройкиЗапуска настройки;
         public static bool debug;
         public static bool thread_test = false;
         public static bool in_editor = false;
-       // public static string app;
+        // public static string app;
 
         public MainForm()
         {
@@ -30,13 +30,13 @@ namespace Trancity
         public void ApplyLocalization()
         {
             Localization.ApplyLocalization(this);
-           
+
         }
 
-        
+
         protected override void Dispose(bool disposing)
         {
-        	/*
+            /*
             if (disposing && (_components != null))
             {
                 _components.Dispose();
@@ -47,14 +47,14 @@ namespace Trancity
 
         public void InitializeComponent()
         {
-        	this.SuspendLayout();
-        	// 
-        	// MainForm
-        	// 
-        	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-        	this.ClientSize = new System.Drawing.Size(284, 261);
-        	this.Name = "MainForm";
-        	this.ResumeLayout(false);
+            this.SuspendLayout();
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "MainForm";
+            this.ResumeLayout(false);
 
         }
 
@@ -65,8 +65,8 @@ namespace Trancity
             Application.SetCompatibleTextRenderingDefault(false);
             // now we'll catch every exception. mb... теперь мы будем ловить каждое исключение. ..
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-			Application.ThreadException += (OnUIThreadException);
-			AppDomain.CurrentDomain.UnhandledException += (OnCurrentDomainUnhandledException);
+            Application.ThreadException += (OnUIThreadException);
+            AppDomain.CurrentDomain.UnhandledException += (OnCurrentDomainUnhandledException);
             bool sound_flag = false;
             bool nolog = false;
             bool editor = false;
@@ -77,27 +77,27 @@ namespace Trancity
             {
                 switch (str)
                 {
-                	case "-limited":
-	                	{
-	                		Cheats.limited = true;
-	                		break;
-	                	}
-                	case "-debug_strings":
-                		{
-                			debug = true;
-                			break;
-                		}
-                	case "-thread_test":
-                		{
-                			thread_test = true;
-                			Logger.Log(Localization.current_.initializetreadtest);
-                			break;
-                		}
-                	case "-nolog":
-                		{
-                			nolog = true;
-                			break;
-                		}
+                    case "-limited":
+                        {
+                            Cheats.limited = true;
+                            break;
+                        }
+                    case "-debug_strings":
+                        {
+                            debug = true;
+                            break;
+                        }
+                    case "-thread_test":
+                        {
+                            thread_test = true;
+                            Logger.Log(Localization.current_.initializetreadtest);
+                            break;
+                        }
+                    case "-nolog":
+                        {
+                            nolog = true;
+                            break;
+                        }
                     case "-editor":
                         {
                             /*Logger.Initialize(Assembly.GetExecutingAssembly());
@@ -111,11 +111,11 @@ namespace Trancity
                             editor = true;
                             break;
                         }
-                	default:
-                		{
-                			app.настройки.cityFilename = str;
-                			break;
-                		}
+                    default:
+                        {
+                            app.настройки.cityFilename = str;
+                            break;
+                        }
                 }
             }
             if (!nolog)
@@ -125,16 +125,16 @@ namespace Trancity
             if (result != DialogResult.OK)
             {
                 app.Close();
-                    if (result == DialogResult.Ignore)
-                    {
-                        Application.Run(new Editor());
-                        Logger.Log("Запущен редактор!");
-                    }
-                    return;
+                if (result == DialogResult.Ignore)
+                {
+                    Application.Run(new Editor());
+                    Logger.Log("Запущен редактор!");
+                }
+                return;
             }
             if (editor)
             {
-               // app.Close();
+                // app.Close();
                 Application.Run(new Editor());
                 Logger.Log("Запущен редактор!");
                 return;
@@ -142,13 +142,13 @@ namespace Trancity
             app.СохранитьНастройки();
             if (app.настройки.игроки.Length > 1)
             {
-               	var enabledPlayers = new List<НастройкиЗапускаИгрока>();
-               	foreach (var игрока in app.настройки.игроки)
+                var enabledPlayers = new List<НастройкиЗапускаИгрока>();
+                foreach (var игрока in app.настройки.игроки)
                 {
-                   	if (игрока.вИгре)
-                   		enabledPlayers.Add(игрока);
+                    if (игрока.вИгре)
+                        enabledPlayers.Add(игрока);
                 }
-               	app.настройки.игроки = enabledPlayers.ToArray();
+                app.настройки.игроки = enabledPlayers.ToArray();
                 app.настройки.количествоИгроков = app.настройки.игроки.Length;
             }
             sound_flag = !app.настройки.noSound;
@@ -157,21 +157,21 @@ namespace Trancity
             Рельс.стрелки_наоборот = app.настройки.стрелкиНаоборот;
             Stop.неЗагружаемКартинки = app.настройки.noStops;
             SkyBox.draw = app.настройки.enableShaders;
-            
+
             // TODO: убрать размеры экрана из глобальных переменных и из ini-файла.
             MyDirect3D.Window_Width = app.настройки.размерЭкрана.Width;
             MyDirect3D.Window_Height = app.настройки.размерЭкрана.Height;
             Directory.SetCurrentDirectory(Application.StartupPath + @"\Data");
             if (!MyDirect3D.Initialize2(app))
             {
-            	throw new Exception(Localization.current_.initializewopt);
+                throw new Exception(Localization.current_.initializewopt);
             }
             app.Show();
             Common.MyGUI.Splash();
             if (sound_flag)
             {
-              	MyXAudio2.Initialize(Engine.Sound.SoundDeviceType.XAudio2);
-               	MyXAudio2.Device.MasterVolume = app.настройки.soundVolume / 100.0f;
+                MyXAudio2.Initialize(Engine.Sound.SoundDeviceType.XAudio2);
+                MyXAudio2.Device.MasterVolume = app.настройки.soundVolume / 100.0f;
             }
             if (!MyDirectInput.Initialize(app, !app.настройки.nonExclusiveKeyboard, !app.настройки.nonExclusiveMouse))
             {
@@ -196,7 +196,7 @@ namespace Trancity
             if (sound_flag)
             {
                 app._игра.мир.CreateSound();
-//              Logger.Log("Sounds", string.Format("Total: {0} with size {1}", SoundManager.BuffersCount, SoundManager.MemoryUsage));
+                //              Logger.Log("Sounds", string.Format("Total: {0} with size {1}", SoundManager.BuffersCount, SoundManager.MemoryUsage));
             }
             else //Localization.current_.souen Localization.current_.soudis Localization.current_.souplay
             {
@@ -204,12 +204,12 @@ namespace Trancity
             }
             Logger.Log(sound_flag ? Localization.current_.souen : Localization.current_.soudis);
             Logger.Log(Localization.current_.souplay);
-			if (thread_test)
-			{
-				ThreadPoolTest.RunGameProcess(app._игра, sound_flag);
-				app.Close();
-				return;
-			}
+            if (thread_test)
+            {
+                ThreadPoolTest.RunGameProcess(app._игра, sound_flag);
+                app.Close();
+                return;
+            }
             while (app.Created)
             {
                 if (!MyDirectInput.Process() && MyDirectInput.alt_f4)
@@ -236,79 +236,79 @@ namespace Trancity
             }
 
         }
-        
+
         protected override void OnDeactivate(EventArgs e)
         {
-        	if (this.WindowState == FormWindowState.Minimized)
-		    {
-		    	this.ShowInTaskbar = false;
-		    	this.Visible = false;
-		    }
-        	base.OnDeactivate(e);
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+                this.Visible = false;
+            }
+            base.OnDeactivate(e);
         }
-        
-		protected override void OnActivated(EventArgs e)
-		{
-			if (this.WindowState == FormWindowState.Minimized)
-		    {
-		    	this.ShowInTaskbar = true;
-		    	this.Visible = true;
-		    	this.WindowState = FormWindowState.Normal;
-		    }
-			base.OnActivated(e);
-		}
-        
+
+        protected override void OnActivated(EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = true;
+                this.Visible = true;
+                this.WindowState = FormWindowState.Normal;
+            }
+            base.OnActivated(e);
+        }
+
         private static void OnUIThreadException(object sender, ThreadExceptionEventArgs t)
-		{
-        	var exception = t.Exception;
-        	Logger.LogException(exception, "UI thread");
-			var result = ExceptionHandlerForm.ShowHandlerDialog(exception, "UI thread", false);
-			if (result != DialogResult.Abort) return;
-			Environment.Exit(0);
-		}
-		
-		private static void OnCurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
-		{
-			var exception = (Exception)e.ExceptionObject;
-			Logger.LogException(exception, "CurrentDomain.UnhandledException");
-			var result = ExceptionHandlerForm.ShowHandlerDialog(exception, "CurrentDomain.UnhandledException event", e.IsTerminating);
-			if (result == DialogResult.Retry) return;
-			Environment.Exit(0);
-		}
+        {
+            var exception = t.Exception;
+            Logger.LogException(exception, "UI thread");
+            var result = ExceptionHandlerForm.ShowHandlerDialog(exception, "UI thread", false);
+            if (result != DialogResult.Abort) return;
+            Environment.Exit(0);
+        }
+
+        private static void OnCurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var exception = (Exception)e.ExceptionObject;
+            Logger.LogException(exception, "CurrentDomain.UnhandledException");
+            var result = ExceptionHandlerForm.ShowHandlerDialog(exception, "CurrentDomain.UnhandledException event", e.IsTerminating);
+            if (result == DialogResult.Retry) return;
+            Environment.Exit(0);
+        }
 
         private void ЗагрузитьНастройки()
         {
             Directory.SetCurrentDirectory(Application.StartupPath);
             using (var ini = new Ini(@".\options.ini", StreamWorkMode.Read))
             {
-	            настройки.размерЭкрана = new Size(ini.ReadInt("Common", "displayWidth", 0x500), ini.ReadInt("Common", "displayHeight", 960));
-	            настройки.начальноеВремя = ini.ReadInt("Common", "startupTime", 0x6270);
-				настройки.автоматическоеУправление = ini.ReadBool("Common", "autoControl", false);
-	            настройки.поворачиватьКамеру = ini.ReadBool("Common", "rotateCam", true);
-	            настройки.deviceType = (SlimDX.Direct3D9.DeviceType)ini.ReadInt("Common", "deviceType", 1);
-	            настройки.createFlags = (SlimDX.Direct3D9.CreateFlags)ini.ReadInt("Common", "createFlags", 0x40);
-	            настройки.качествоРельсов = ini.ReadDouble("Common", "splinesQuality", 4.0);
-	            настройки.cityFilename = ini.Read("Common", "cityFilename", string.Empty);
-	            настройки.стрелкиНаоборот = ini.ReadBool("Common", "invRailArrows", false);
-	            настройки.noSound = ini.ReadBool("Common", "noSound", false);
-	            настройки.soundVolume = ini.ReadInt("Common", "soundVolume", 80);
-	            настройки.noStops = ini.ReadBool("Common", "noStops", false);
-	            настройки.nonExclusiveKeyboard = ini.ReadBool("Common", "nonExclusiveKeyboard", false);
-	            настройки.nonExclusiveMouse = ini.ReadBool("Common", "nonExclusiveMouse", false);
-	            настройки.enableShaders = ini.ReadBool("Common", "enableShaders", false);
-	            настройки.language = ini.Read("Common", "language", "Russian");
-	            настройки.количествоИгроков = ini.ReadInt("Common", "playersCount", 0);
-	            настройки.игроки = new НастройкиЗапускаИгрока[настройки.количествоИгроков];
-	            for (var i = 0; i < настройки.количествоИгроков; i++)
-	            {
-	                var section = string.Format("Player {0}", i);
-	                настройки.игроки[i].имя = ini.Read(section, "name", "Игрок " + i);
-	                настройки.игроки[i].inputGuid = new Guid(ini.Read(section, "inputGuid", string.Empty));
-	                настройки.игроки[i].подвижнойСостав = ini.Read(section, "transport", "");
-	                настройки.игроки[i].маршрут = ini.ReadInt(section, "route", 0);
-	                настройки.игроки[i].наряд = ini.ReadInt(section, "order", 0);
-	                настройки.игроки[i].вИгре = ini.ReadBool(section, "inGame", false);
-	            }
+                настройки.размерЭкрана = new Size(ini.ReadInt("Common", "displayWidth", 0x500), ini.ReadInt("Common", "displayHeight", 960));
+                настройки.начальноеВремя = ini.ReadInt("Common", "startupTime", 0x6270);
+                настройки.автоматическоеУправление = ini.ReadBool("Common", "autoControl", false);
+                настройки.поворачиватьКамеру = ini.ReadBool("Common", "rotateCam", true);
+                настройки.deviceType = (SlimDX.Direct3D9.DeviceType)ini.ReadInt("Common", "deviceType", 1);
+                настройки.createFlags = (SlimDX.Direct3D9.CreateFlags)ini.ReadInt("Common", "createFlags", 0x40);
+                настройки.качествоРельсов = ini.ReadDouble("Common", "splinesQuality", 4.0);
+                настройки.cityFilename = ini.Read("Common", "cityFilename", string.Empty);
+                настройки.стрелкиНаоборот = ini.ReadBool("Common", "invRailArrows", false);
+                настройки.noSound = ini.ReadBool("Common", "noSound", false);
+                настройки.soundVolume = ini.ReadInt("Common", "soundVolume", 80);
+                настройки.noStops = ini.ReadBool("Common", "noStops", false);
+                настройки.nonExclusiveKeyboard = ini.ReadBool("Common", "nonExclusiveKeyboard", false);
+                настройки.nonExclusiveMouse = ini.ReadBool("Common", "nonExclusiveMouse", false);
+                настройки.enableShaders = ini.ReadBool("Common", "enableShaders", false);
+                настройки.language = ini.Read("Common", "language", "Russian");
+                настройки.количествоИгроков = ini.ReadInt("Common", "playersCount", 0);
+                настройки.игроки = new НастройкиЗапускаИгрока[настройки.количествоИгроков];
+                for (var i = 0; i < настройки.количествоИгроков; i++)
+                {
+                    var section = string.Format("Player {0}", i);
+                    настройки.игроки[i].имя = ini.Read(section, "name", "Игрок " + i);
+                    настройки.игроки[i].inputGuid = new Guid(ini.Read(section, "inputGuid", string.Empty));
+                    настройки.игроки[i].подвижнойСостав = ini.Read(section, "transport", "");
+                    настройки.игроки[i].маршрут = ini.ReadInt(section, "route", 0);
+                    настройки.игроки[i].наряд = ini.ReadInt(section, "order", 0);
+                    настройки.игроки[i].вИгре = ini.ReadBool(section, "inGame", false);
+                }
             }
         }
 
@@ -317,37 +317,37 @@ namespace Trancity
             Directory.SetCurrentDirectory(Application.StartupPath);
             using (var ini = new Ini(@".\options.ini", StreamWorkMode.Write))
             {
-	            ini.Write("Common", "displayWidth", настройки.размерЭкрана.Width.ToString());
-	            ini.Write("Common", "displayHeight", настройки.размерЭкрана.Height.ToString());
-	            ini.Write("Common", "startupTime", настройки.начальноеВремя.ToString());
-	            ini.Write("Common", "autoControl", настройки.автоматическоеУправление.ToString());
-	            ini.Write("Common", "rotateCam", настройки.поворачиватьКамеру.ToString());
-	            ini.Write("Common", "deviceType", ((int)настройки.deviceType).ToString());
-	            ini.Write("Common", "createFlags", ((int)настройки.createFlags).ToString());
-	            ini.Write("Common", "splinesQuality", настройки.качествоРельсов.ToString());
-	            ini.Write("Common", "cityFilename", (настройки.cityFilename != null) ? настройки.cityFilename : "");
-	            ini.Write("Common", "invRailArrows", настройки.стрелкиНаоборот.ToString());
-	            ini.Write("Common", "noSound", настройки.noSound.ToString());
-	            ini.Write("Common", "soundVolume", настройки.soundVolume.ToString());
-	            ini.Write("Common", "noStops", настройки.noStops.ToString());
-	            ini.Write("Common", "nonExclusiveKeyboard", настройки.nonExclusiveKeyboard.ToString());
-	            ini.Write("Common", "nonExclusiveMouse", настройки.nonExclusiveMouse.ToString());
-	            ini.Write("Common", "enableShaders", настройки.enableShaders.ToString());
-	            ini.Write("Common", "language", настройки.language.ToString());
-	            ini.Write("Common", "playersCount", настройки.количествоИгроков.ToString());
-	            for (var i = 0; i < настройки.количествоИгроков; i++)
-	            {
-	                var section = string.Format("Player {0}", i);
-	                ini.Write(section, "name", настройки.игроки[i].имя);//"имя"
-	                ini.Write(section, "inputGuid", настройки.игроки[i].inputGuid.ToString());
-	                ini.Write(section, "transport", настройки.игроки[i].подвижнойСостав);
-	                ini.Write(section, "route", настройки.игроки[i].маршрут.ToString());
-	                ini.Write(section, "order", настройки.игроки[i].наряд.ToString());
-	                ini.Write(section, "inGame", настройки.игроки[i].вИгре.ToString());
-	            }
+                ini.Write("Common", "displayWidth", настройки.размерЭкрана.Width.ToString());
+                ini.Write("Common", "displayHeight", настройки.размерЭкрана.Height.ToString());
+                ini.Write("Common", "startupTime", настройки.начальноеВремя.ToString());
+                ini.Write("Common", "autoControl", настройки.автоматическоеУправление.ToString());
+                ini.Write("Common", "rotateCam", настройки.поворачиватьКамеру.ToString());
+                ini.Write("Common", "deviceType", ((int)настройки.deviceType).ToString());
+                ini.Write("Common", "createFlags", ((int)настройки.createFlags).ToString());
+                ini.Write("Common", "splinesQuality", настройки.качествоРельсов.ToString());
+                ini.Write("Common", "cityFilename", (настройки.cityFilename != null) ? настройки.cityFilename : "");
+                ini.Write("Common", "invRailArrows", настройки.стрелкиНаоборот.ToString());
+                ini.Write("Common", "noSound", настройки.noSound.ToString());
+                ini.Write("Common", "soundVolume", настройки.soundVolume.ToString());
+                ini.Write("Common", "noStops", настройки.noStops.ToString());
+                ini.Write("Common", "nonExclusiveKeyboard", настройки.nonExclusiveKeyboard.ToString());
+                ini.Write("Common", "nonExclusiveMouse", настройки.nonExclusiveMouse.ToString());
+                ini.Write("Common", "enableShaders", настройки.enableShaders.ToString());
+                ini.Write("Common", "language", настройки.language.ToString());
+                ini.Write("Common", "playersCount", настройки.количествоИгроков.ToString());
+                for (var i = 0; i < настройки.количествоИгроков; i++)
+                {
+                    var section = string.Format("Player {0}", i);
+                    ini.Write(section, "name", настройки.игроки[i].имя);//"имя"
+                    ini.Write(section, "inputGuid", настройки.игроки[i].inputGuid.ToString());
+                    ini.Write(section, "transport", настройки.игроки[i].подвижнойСостав);
+                    ini.Write(section, "route", настройки.игроки[i].маршрут.ToString());
+                    ini.Write(section, "order", настройки.игроки[i].наряд.ToString());
+                    ini.Write(section, "inGame", настройки.игроки[i].вИгре.ToString());
+                }
             }
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public struct НастройкиЗапуска
         {

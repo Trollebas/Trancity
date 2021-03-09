@@ -1,11 +1,7 @@
 ﻿namespace Trancity
 {
-    using Common;
-    using SlimDX;
-    using SlimDX.Direct3D9;
     using System;
     using System.Collections.Generic;
-    using System.Drawing;
 
     public class Сигнальная_система
     {
@@ -23,39 +19,39 @@
         public void CreateMesh()
         {
             foreach (Visual_Signal vs in vsignals)
-        	{
-        		vs.CreateMesh();
-        	}
-//            this.Обновить_материалы();
+            {
+                vs.CreateMesh();
+            }
+            //            this.Обновить_материалы();
         }
-        
+
         public void Render()
         {
-        	foreach (Visual_Signal vs in vsignals)
-        	{
-        		vs.Render();
-        	}
+            foreach (Visual_Signal vs in vsignals)
+            {
+                vs.Render();
+            }
         }
 
         public void Добавить_элемент(Контакт элемент)
         {
             this.элементы.Add(элемент);
         }
-        
+
         public void Добавить_сигнал(Visual_Signal элемент)
         {
             this.vsignals.Add(элемент);
         }
-        
+
         public void Убрать_сигнал(Visual_Signal элемент)
         {
-        	элемент.road = null;
+            элемент.road = null;
             this.vsignals.Remove(элемент);
         }
-        
+
         public void Убрать_элемент(Контакт элемент)
         {
-        	элемент.дорога = null;
+            элемент.дорога = null;
             this.элементы.Remove(элемент);
         }
 
@@ -89,8 +85,8 @@
             set
             {
                 value = Math.Max(0, value);
-//                bool flag = this.fсостояние < this.граница_переключения;
-//                bool flag2 = value < this.граница_переключения;
+                //                bool flag = this.fсостояние < this.граница_переключения;
+                //                bool flag2 = value < this.граница_переключения;
                 this.fсостояние = value;
                 /*if (flag != flag2)
                 {
@@ -101,7 +97,7 @@
 
         public class Контакт
         {
-        	private Road _дорога;
+            private Road _дорога;
             public double расстояние;
             public Сигнальная_система система;
             public bool минус;
@@ -114,26 +110,26 @@
                 this.расстояние = расстояние;
                 this.минус = минус;
             }
-            
+
             public Road дорога
-	        {
-	        	get
-	        	{
-	        		return this._дорога;
-	        	}
-	        	set
-	        	{
-	        		if (this._дорога != null)
-	        		{
-	        			this._дорога.objects.Remove(this);
-	        		}
-	        		this._дорога = value;
-	        		if (value != null)
-	        		{
-	        			this._дорога.objects.Add(this);
-	        		}
-	        	}
-	        }
+            {
+                get
+                {
+                    return this._дорога;
+                }
+                set
+                {
+                    if (this._дорога != null)
+                    {
+                        this._дорога.objects.Remove(this);
+                    }
+                    this._дорога = value;
+                    if (value != null)
+                    {
+                        this._дорога.objects.Add(this);
+                    }
+                }
+            }
         }
     }
 }

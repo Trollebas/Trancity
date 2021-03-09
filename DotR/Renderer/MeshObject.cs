@@ -67,7 +67,7 @@ namespace Engine
                             _meshTextureFilenames[i] = meshDir + materialArray[i].TextureFileName;
                             LoadTexture(i, _meshTextureFilenames[i]);
                         }
-                        #region trash
+#region trash
                         /*var buffer = _mesh.LockVertexBuffer(LockFlags.ReadOnly);
                         var x = buffer.Read<float>();
                         var y = buffer.Read<float>();
@@ -91,7 +91,7 @@ namespace Engine
                         var mat2 = buffer.Read<int>();
                         var mat3 = buffer.Read<int>();
                         var mat4 = buffer.Read<int>();*/
-                        #endregion
+#endregion
                         _mesh.OptimizeInPlace(MeshOptimizeFlags.AttributeSort | MeshOptimizeFlags.VertexCache | MeshOptimizeFlags.Compact);
                         var struct3 = new MeshFileStruct
                         {
@@ -204,7 +204,7 @@ namespace Engine
             _renderListA.Clear();
         }
                 
-        #region Trash
+#region Trash
         /*public void TestToOde(Double3DPoint pos, double ang)
         {
         	int indexcount = _mesh.NumberFaces*3;
@@ -256,7 +256,7 @@ namespace Engine
 				mesh.UnlockVertexBuffer();
 			}
         }*/
-		#endregion
+#endregion
 		
         public interface ICustomCreation : IMatrixObject//private
         {

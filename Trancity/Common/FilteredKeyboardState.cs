@@ -29,12 +29,12 @@
             {
                 numArray[i] = OtherTicks;
             }
-			numArray[(int)Key.LeftAlt] = 0;
-			numArray[(int)Key.LeftControl] = 0;
-			numArray[(int)Key.LeftShift] = 0;
-			numArray[(int)Key.RightAlt] = 0;
-			numArray[(int)Key.RightControl] = 0;
-			numArray[(int)Key.RightShift] = 0;
+            numArray[(int)Key.LeftAlt] = 0;
+            numArray[(int)Key.LeftControl] = 0;
+            numArray[(int)Key.LeftShift] = 0;
+            numArray[(int)Key.RightAlt] = 0;
+            numArray[(int)Key.RightControl] = 0;
+            numArray[(int)Key.RightShift] = 0;
             numArray[(int)Key.UpArrow] = ArrowTicks;
             numArray[(int)Key.DownArrow] = ArrowTicks;
             numArray[(int)Key.LeftArrow] = ArrowTicks;
@@ -44,12 +44,12 @@
 
         public void Refresh()
         {
-        	this.InputState = this.device.GetCurrentState();//.GetCurrentKeyboardState();
+            this.InputState = this.device.GetCurrentState();//.GetCurrentKeyboardState();
             int num = Environment.TickCount - this.lasttick;
             this.lasttick = Environment.TickCount;
             for (int i = 0; i < Max_Available_Keys; i++)
             {
-            	if (this.InputState.IsPressed((Key) i))//[(Key) i])
+                if (this.InputState.IsPressed((Key)i))//[(Key) i])
                 {
                     if (!this.key_pressed[i] && (this.keyticks[i] == 0))
                     {
@@ -82,19 +82,19 @@
         {
             get
             {
-                return this.key_pressed[(int) key];
+                return this.key_pressed[(int)key];
             }
             set
             {
-                this.key_pressed[(int) key] = value;
+                this.key_pressed[(int)key] = value;
             }
         }
-        
+
         ///
-        
+
         public bool IsDirtyPressed(Key key)
         {
-        	return this.InputState.IsPressed(key);
+            return this.InputState.IsPressed(key);
         }
     }
 }

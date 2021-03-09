@@ -1,8 +1,6 @@
+using Engine;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using Common;
-using Engine;
 
 namespace Trancity
 {
@@ -51,7 +49,7 @@ namespace Trancity
         public double length1 = 0.0;
         public double width = 0.0;
         public MyCamera[] cameras = new MyCamera[0];
-        
+
         public abstract void CreateMesh(World мир);
         public abstract void Render();
         public abstract void UpdateBoundigBoxes(World world);
@@ -127,7 +125,7 @@ namespace Trancity
                 return (((this.рейс != null) && this.рейс.inPark) && (this.рейс_index >= this.рейс.inParkIndex));
             }
         }
-        
+
         public enum Тип_дополнения
         {
             фары,
@@ -138,7 +136,7 @@ namespace Trancity
         }
 
         public abstract DoublePoint position { get; }
-        
+
         public abstract Double3DPoint Координаты3D { get; }
 
         public Route маршрут
@@ -149,15 +147,15 @@ namespace Trancity
             }
             protected set
             {
-                if (route == value) 
-                   return;
+                if (route == value)
+                    return;
                 route = value;
                 ОбновитьМаршрутныеУказатели();
             }
         }
 
         public abstract double direction { get; }
-        
+
         public abstract double НаправлениеY { get; }
 
         public double скорость_abs
@@ -179,11 +177,11 @@ namespace Trancity
                 else
                 {
                     // HACK: зачем здесь try-catch?
-                    try 
+                    try
                     {
                         this.скорость = Math.Sign(this.скорость) * value;
                     }
-                    catch {};
+                    catch { };
                 }
             }
         }
@@ -215,7 +213,7 @@ namespace Trancity
         }
 
         public abstract double ускорение { get; }
-        
+
         public bool ДверьЗакрыта(int номер)
         {
             foreach (var двери in _двери)
@@ -329,7 +327,7 @@ namespace Trancity
                 return true;
             }
         }
-        
+
         protected void UpdateTripStops()
         {
             if ((рейс == null) || (рейс.tripStopList == null) || (рейс.tripStopList.Count == 0))
@@ -354,7 +352,7 @@ namespace Trancity
                 nextStop = null;
             }
         }
-        
+
         protected void SearchForCurrentStop(Stop stop)
         {
             if ((рейс == null) || (рейс.tripStopList == null)
@@ -370,18 +368,18 @@ namespace Trancity
                 return;
             }
         }
-        
+
         public void CreateSoundBuffers()
         {
             система_управления.CreateSoundBuffers();
         }
-        
+
         public void UpdateSound(Игрок[] игроки, bool игра_активна)
         {
             if (!nosound)
                 система_управления.UpdateSound(игроки, игра_активна);
         }
-        
+
         public void LoadCameras()
         {
             if (модель.cameras == null)
@@ -394,7 +392,7 @@ namespace Trancity
                 cameras[i].rotation = модель.cameras[i].rot;
             }
         }
-        
+
         public bool SetCamera(int index, Игрок player)
         {
             if (index >= cameras.Length)
@@ -407,7 +405,7 @@ namespace Trancity
             player.cameraRotation.y = НаправлениеY + cameras[index].rotation.y;
             return true;
         }
-        
+
         public bool condition
         {
             get
@@ -415,7 +413,7 @@ namespace Trancity
                 return ((Math.Abs(Math.Floor(this.position.x / (double)Ground.grid_size) - Game.col) > 1.0) || (Math.Abs(Math.Floor(this.position.y / (double)Ground.grid_size) - Game.row) > 1.0));
             }
         }
-        
+
         protected abstract void CheckCondition();
     }
 }

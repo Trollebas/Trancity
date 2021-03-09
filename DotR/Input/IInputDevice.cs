@@ -6,19 +6,18 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
 
 namespace Engine.Input
 {
-	/// <summary>
-	/// IInputDevice
-	/// </summary>
-	public interface IInputDevice
-	{
-		void RefreshState();
-		
-		bool IsKeyPressed(int keyCode);
-		
-		bool IsKeyReleased(int keyCode);
-	}
+    /// <summary>
+    /// IInputDevice
+    /// </summary>
+    public interface IInputDevice
+    {
+        void RefreshState();
+
+        bool IsKeyPressed(int keyCode);
+
+        bool IsKeyReleased(int keyCode);
+    }
 }

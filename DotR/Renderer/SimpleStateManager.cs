@@ -6,17 +6,16 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
 
 namespace Engine
 {
-	/// <summary>
-	/// There will be state manager
-	/// </summary>
-	public class SimpleStateManager
-	{
-		// TODO: StateManager - см. список:
-		// организация в виде стека
-		//
-	}
+    /// <summary>
+    /// There will be state manager
+    /// </summary>
+    public class SimpleStateManager
+    {
+        // TODO: StateManager - см. список:
+        // организация в виде стека
+        //
+    }
 }

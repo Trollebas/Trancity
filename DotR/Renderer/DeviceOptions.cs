@@ -6,34 +6,33 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
 using System.Runtime.InteropServices;
 
 namespace Engine
 {
-	/// <summary>
-	/// DeviceOptions - so u now wat is it
-	/// </summary>
-	[StructLayout(LayoutKind.Sequential)]
-	public struct DeviceOptions //: IEquatable<DeviceOptions>
-	{
-		public int adapterID;
-		//only for dx?
-    	public int vertexProcessingMode;
-    	//device type
-    	public int deviceType;
-    	public int fullscreenRate;
+    /// <summary>
+    /// DeviceOptions - so u now wat is it
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DeviceOptions //: IEquatable<DeviceOptions>
+    {
+        public int adapterID;
+        //only for dx?
+        public int vertexProcessingMode;
+        //device type
+        public int deviceType;
+        public int fullscreenRate;
         public int fullscreenX;
         public int fullscreenY;
         public bool windowed;
         public int windowedX;
         public int windowedY;
         public bool vSync;
-		
-		#region Equals and GetHashCode implementation
-		// The code in this region is useful if you want to use this structure in collections.
-		// If you don't need it, you can just remove the region and the ": IEquatable<DeviceOptions>" declaration.
-		/*
+
+        #region Equals and GetHashCode implementation
+        // The code in this region is useful if you want to use this structure in collections.
+        // If you don't need it, you can just remove the region and the ": IEquatable<DeviceOptions>" declaration.
+        /*
 		public override bool Equals(object obj)
 		{
 			if (obj is DeviceOptions)
@@ -63,6 +62,6 @@ namespace Engine
 		{
 			return !left.Equals(right);
 		}*/
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -49,11 +49,11 @@ namespace Trancity
 
             if (value > _Points[_Points.Length - 1].x) return _Points[_Points.Length - 1].y;
 
-            for (int i = 0; i < _Points.Length-1; i++)
+            for (int i = 0; i < _Points.Length - 1; i++)
             {
                 //If we in our point
                 if (value >= _Points[i].x && value < _Points[i + 1].x)
-                { 
+                {
                     outValue = Lerp(_Points[i].y, _Points[i + 1].y, Normalize(value, _Points[i].x, _Points[i + 1].x));
 
                     if (value > 3)

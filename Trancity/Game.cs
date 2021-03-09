@@ -1,17 +1,16 @@
-using System;
-using System.Drawing;
 using Common;
 using Engine;
 using SlimDX.Direct3D9;
 using SlimDX.DirectInput;
+using System;
+using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace Trancity
 {
     public class Game
     {
-//        private byte[] _lastMouseButtons = new byte[5];
+        //        private byte[] _lastMouseButtons = new byte[5];
         private bool[] _lastMouseButtons = new bool[5];
         public bool активна = true;
         public »грок[] игроки;
@@ -25,7 +24,7 @@ namespace Trancity
         //test:
         public static int col = 0;
         public static int row = 0;
-//        public Transport[] транспортArray;// = мир.транспорты.ToArray(typeof(Transport));
+        //        public Transport[] транспортArray;// = мир.транспорты.ToArray(typeof(Transport));
 
 
 
@@ -68,8 +67,8 @@ namespace Trancity
             var FJStatesArray = MyDirectInput.Joystick_FilteredStates;
             var joystickDevices = MyDirectInput.JoystickDevices;
             var deviceGuids = MyDirectInput.DeviceGuids;
-//            const int num = 0x400;
-//            byte[] mouseButtons = state.GetMouseButtons();
+            //            const int num = 0x400;
+            //            byte[] mouseButtons = state.GetMouseButtons();
             bool[] mouseButtons = MouseState.GetButtons();
             int x = MouseState.X;
             int y = MouseState.Y;
@@ -96,9 +95,9 @@ namespace Trancity
                 changed = true;
             }
             if (KeyState[Key.Tab])
-                {
-                    MyDirect3D.вид_сверху = !MyDirect3D.вид_сверху;
-                }
+            {
+                MyDirect3D.вид_сверху = !MyDirect3D.вид_сверху;
+            }
             /*if (KeyState[Key.F7])
             {
                 changed_time = !changed_time;
@@ -115,7 +114,7 @@ namespace Trancity
             }
             if (changed_time)
             {
-                
+
             }
             if (KeyState[Key.Escape])
             {
@@ -130,1377 +129,467 @@ namespace Trancity
             }
             if (!NewControl)
             {
-            if (активна)
-            {
-                foreach (var игрок in игроки)
-                {
-                    if (игрок.управл€емыйќбъект != null)
-                    {
-                        DoublePoint point5 = игрок.управл€емыйќбъект.position - игрок.cameraPosition.XZPoint;
-                        if (point5.Modulus > 200.0)
-                        {
-                            игрок.управл€емыйќбъект.управление = ”правление.јвтоматическое;
-                            игрок.управл€емыйќбъект = null;
-                            игрок.объектѕрив€зки = null;
-                        }
-                    }
-                    int current_joystick = -1;
-                    for (int k = 0; k < joystickDevices.Length; k++)
-                    {
-                        if (игрок.inputGuid == deviceGuids[k])
-                        {
-                            current_joystick = k;
-                            break;
-                        }
-                    }
-                    if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
-                    {
-//                        byte[] mouseButtons = state.GetMouseButtons();
-//                        int x = state.X;
-//                        int y = state.Y;
-//                        int z = state.Z;
-//                        if ((mouseButtons[1] != 0) && (this._lastMouseButtons[1] == 0))
-                        if ((mouseButtons[1]) && (!this._lastMouseButtons[1]))
-                        {
-                            this.ѕрив€зывать(игрок);
-                        }
-                        if (KeyState[Key.F9])
-                        {
-                            IVector _прив€зки = null;
-                            IControlledObject _объект = null;
-                            игрок.объектѕрив€зки = _прив€зки;
-                        if ((игрок.управл€емыйќбъект != null) && (игрок.управл€емыйќбъект != _объект))
-                            {
-                            игрок.управл€емыйќбъект.управление = ”правление.јвтоматическое;
-                            }
-                            игрок.управл€емыйќбъект = _объект;
-                        }
-                        if (!MyDirect3D.вид_сверху)
-                        {
-//                            if (mouseButtons[0] == 0)
-                            if (!mouseButtons[0])
-                            {
-                                игрок.cameraRotationChange.x -= 0.001 * x;
-                                игрок.cameraRotationChange.y -= 0.001 * y;
-                            }
-                            else
-                            {
-                                DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                                point.x -= 0.1 * y;
-                                point.y -= 0.1 * x;
-                                игрок.cameraPositionChange.x = (point * new DoublePoint(игрок.cameraRotation.x)).x;
-                                игрок.cameraPositionChange.z = (point * new DoublePoint(игрок.cameraRotation.x)).y;
-                            }
-                            игрок.cameraPositionChange.y += 0.001 * z;
-                        }
-                        else
-                        {                            
-                            MyDirect3D.масштаб += 0.001 * z;
-                            if (MyDirect3D.масштаб <= 2.5) MyDirect3D.масштаб = 2.5;
-//                            if (mouseButtons[0] != 0)
-                            if (mouseButtons[0])
-                            {
-                                DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z);
-                                point.x += 0.01 * x;
-                                point.y -= 0.01 * y;
-                                игрок.cameraPositionChange.x = point.x;
-                                игрок.cameraPositionChange.z = point.y;
-                            }
-                        }
-                        this._lastMouseButtons = mouseButtons;
-                    }
-                    else
-                    {
-                        FilteredJoystickState Current_FJState = FJStatesArray[current_joystick];
-                        JoystickState Current_JState = JStatesArray[current_joystick];
-                        if (Current_FJState[8])
-                        {
-                            this.ѕрив€зывать(игрок);
-                        }
-                        double num8 = (0.05 * Current_JState.X) / ((double) num);
-                        double num9 = (0.02 * Current_JState.Y) / ((double) num);
-                        double num10 = (0.05 * Current_JState.Z) / ((double) num);
-                        switch (Current_JState.GetPointOfViewControllers()[0])//.GetPointOfView()[0])
-                        {
-                            case 0:
-                                num10 = 0.04;
-                                break;
-
-                            case 0x4650:
-                                num10 = -0.04;
-                                break;
-
-                            default:
-                                num10 = 0.0;
-                                break;
-                        }
-                        if (((игрок.управл€емыйќбъект != null) && (игрок.управл€емыйќбъект is Ѕезрельсовый_“ранспорт)) && игрок.управл€емыйќбъект.управление.ручное)
-                        {
-                            if (!Current_FJState[4, false])
-                            {
-                                int num12 = 6;
-                                if (((Transport) игрок.управл€емыйќбъект).система_управлени€ is —истема_управлени€.јвтобусна€)
-                                {
-                                    num12 = 10;
-                                }
-                                if (Current_FJState[num12, false])
-                                {
-                                    игрок.cameraRotationChange.x -= num8;
-                                    игрок.cameraRotationChange.y -= num9;
-                                }
-                            }
-                            else
-                            {
-                                DoublePoint point2 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                                point2.x -= 10.0 * num9;
-                                point2.y -= 10.0 * num8;
-                                игрок.cameraPositionChange.x = (point2 * new DoublePoint(игрок.cameraRotation.x)).x;
-                                игрок.cameraPositionChange.z = (point2 * new DoublePoint(игрок.cameraRotation.x)).y;
-                                игрок.cameraPositionChange.y += num10;
-                            }
-                        }
-                        else if (!Current_FJState[4, false])
-                        {
-                            игрок.cameraRotationChange.x -= num8;
-                            игрок.cameraRotationChange.y -= num9;
-                        }
-                        else
-                        {
-                            DoublePoint point3 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                            point3.x -= 10.0 * num9;
-                            point3.y -= 10.0 * num8;
-                            игрок.cameraPositionChange.x = (point3 * new DoublePoint(игрок.cameraRotation.x)).x;
-                            игрок.cameraPositionChange.z = (point3 * new DoublePoint(игрок.cameraRotation.x)).y;
-                            игрок.cameraPositionChange.y += num10;
-                        }
-                    }
-                    /*var _y = мир.GetHeight(игрок.cameraPosition.xz_point);
-                    if (игрок.cameraPosition.y - 0.01 < _y)
-                    {
-                        игрок.cameraPosition.y = _y + 0.01;
-                    	игрок.cameraPositionChange.y = 0;
-                    }*/
-					if (игрок.управл€емыйќбъект == null) continue;
-					var _transport = (Transport) игрок.управл€емыйќбъект;
-					if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
-					{
-						if (KeyState[Key.A])
-		                {// TODO: пофиксить список остановок при смене управлени€
-		                	_transport.управление.автоматическое = !_transport.управление.автоматическое;
-		                	//_transport.currentStop = _transport.nextStop = null;
-		                	//_transport.nextStop = _transport.currentStop = null;
-		                    _transport.stopIndex = 0;
-		                }
-		                if (KeyState[Key.M])
-		                {
-		                	_transport.управление.ручное = !_transport.управление.ручное;
-		                	//_transport.currentStop = _transport.nextStop = null;
-                            //_transport.nextStop = _transport.currentStop = null;
-                            _transport.stopIndex = 0;
-		                }
-		                if (_transport.управление.ручное)
-		                {
-		                	if (KeyState[Key.Y])
-		                    {
-		                    	_transport.включен = !_transport.включен;
-		                    }
-		                	if (KeyState[Key.S])
-		                    {
-		                    	if (!_transport.двери_водител€_закрыты)
-		                        {
-		                        	_transport.ќткрытьƒвери¬одител€(false);
-		                        }
-		                        else if (!_transport.двери_водител€_открыты)
-		                        {
-		                        	_transport.ќткрытьƒвери¬одител€(true);
-		                        }
-		                    }
-		                	if (KeyState[Key.D])
-		                    {
-		                    	if (!_transport.двери_закрыты)
-		                        {
-		                        	_transport.ќткрытьƒвери(false);
-		                        }
-		                        else if (!_transport.двери_открыты)
-		                        {
-		                        	_transport.ќткрытьƒвери(true);
-		                        }
-		                    }
-		                    if (KeyState[Key.D1])
-		                    {
-		                        if (!_transport.ƒверь«акрыта(0))
-		                        {
-		                        	_transport.ќткрытьƒвери(0, false);
-		                        }
-		                        else if (!_transport.ƒверьќткрыта(0))
-		                        {
-		                        	_transport.ќткрытьƒвери(0, true);
-		                    	}
-		                    }
-		                    if (KeyState[Key.D2])
-		                    {
-		                        if (!_transport.ƒверь«акрыта(1))
-		                        {
-		                        	_transport.ќткрытьƒвери(1, false);
-		                        }
-		                        else if (!_transport.ƒверьќткрыта(0))
-		                        {
-		                        	_transport.ќткрытьƒвери(1, true);
-		                    	}
-		                    }
-		                    if (KeyState[Key.D3])
-		                    {
-		                        if (!_transport.ƒверь«акрыта(2))
-		                        {
-		                        	_transport.ќткрытьƒвери(2, false);
-		                        }
-		                        else if (!_transport.ƒверьќткрыта(0))
-		                        {
-		                        	_transport.ќткрытьƒвери(2, true);
-		                    	}
-		                    }
-		                    if (KeyState[Key.D4])
-		                    {
-		                        if (!_transport.ƒверь«акрыта(3))
-		                        {
-		                        	_transport.ќткрытьƒвери(3, false);
-		                        }
-		                        else if (!_transport.ƒверьќткрыта(0))
-		                        {
-		                        	_transport.ќткрытьƒвери(3, true);
-		                    	}
-		                    }
-		                    if (KeyState[Key.D5])
-		                    {
-		                        if (!_transport.ƒверь«акрыта(4))
-		                        {
-		                        	_transport.ќткрытьƒвери(4, false);
-		                        }
-		                        else if (!_transport.ƒверьќткрыта(0))
-		                        {
-		                        	_transport.ќткрытьƒвери(4, true);
-		                    	}
-		                    }
-		                    if (KeyState[Key.B])
-	                        {
-	                        	_transport.stand_brake = !_transport.stand_brake;
-	                        }
-		                    /*if (state2[Key.E])
-	                        {
-	                            if (transport.аварийна€_сигнализаци€)
-	                            {
-	                            	transport.аварийна€_сигнализаци€ = false;
-	                            }
-	                            else
-	                            {
-	                            	transport.аварийна€_сигнализаци€ = true;
-	                            	transport.указатель_поворота = 0;
-	                        	}
-	                        }*/
-	                        if (KeyState[Key.F])
-	                        {
-	                        	_transport.включены_фары = !_transport.включены_фары;
-	                        }
-		                }
-		                if (игрок.объектѕрив€зки != null)
-		                {
-		                	if (KeyState[Key.C])//KeyState.InputState.IsPressed(Key)
-			                {
-			                	_transport.SetCamera(0, игрок);
-			                }
-			                if (KeyState[Key.F2])
-			                {
-			                	_transport.SetCamera(1, игрок);
-			                }
-			                 if (KeyState[Key.F3])
-			                {
-			                	_transport.SetCamera(2, игрок);
-			                }
-			                if (KeyState[Key.F4])
-			                {
-			                	_transport.SetCamera(3, игрок);
-			                }
-		                }
-	                }
-                    if (игрок.управл€емыйќбъект is “рамвай)
-                    {
-	                    “рамвай трамвай = (“рамвай) игрок.управл€емыйќбъект;
-	                    if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
-	                    {
-	                        if (трамвай.управление.ручное)
-	                        {
-	                            if (KeyState[Key.T])
-	                            {
-	                                if (трамвай.токоприЄмник.опущен)
-	                                {
-	                                	трамвай.токоприЄмник.Ќайтиѕровод(мир.контактныеѕровода2);
-	                                	if (трамвай.токоприЄмник.ѕровод != null)
-	                                	{
-	                                    	трамвай.токоприЄмник.поднимаетс€ = true;
-	                                	}
-	                                }
-	                                else if (трамвай.токоприЄмник.подн€т)
-	                                {
-	                                    трамвай.токоприЄмник.поднимаетс€ = false;
-	                                }
-	                            }
-	                            if (KeyState[Key.D6])
-	                            {
-	                                if (!трамвай.ƒверь«акрыта(5))
-	                                {
-	                                    трамвай.ќткрытьƒвери(5, false);
-	                                }
-	                                else if (!трамвай.ƒверьќткрыта(5))
-	                                {
-	                                    трамвай.ќткрытьƒвери(5, true);
-	                                }
-	                            }
-	                            if (KeyState[Key.D7])
-	                            {
-	                                if (!трамвай.ƒверь«акрыта(6))
-	                                {
-	                                    трамвай.ќткрытьƒвери(6, false);
-	                                }
-	                                else if (!трамвай.ƒверьќткрыта(6))
-	                                {
-	                                    трамвай.ќткрытьƒвери(6, true);
-	                                }
-	                            }
-	                            if (KeyState[Key.D8])
-	                            {
-	                                if (!трамвай.ƒверь«акрыта(7))
-	                                {
-	                                    трамвай.ќткрытьƒвери(7, false);
-	                                }
-	                                else if (!трамвай.ƒверьќткрыта(7))
-	                                {
-	                                    трамвай.ќткрытьƒвери(7, true);
-	                                }
-	                            }
-	                            if (KeyState[Key.D9])
-	                            {
-	                                if (!трамвай.ƒверь«акрыта(8))
-	                                {
-	                                    трамвай.ќткрытьƒвери(8, false);
-	                                }
-	                                else if (!трамвай.ƒверьќткрыта(8))
-	                                {
-	                                    трамвай.ќткрытьƒвери(8, true);
-	                                }
-	                            }
-	                            if (KeyState[Key.D0])
-	                            {
-	                                if (!трамвай.ƒверь«акрыта(9))
-	                                {
-	                                    трамвай.ќткрытьƒвери(9, false);
-	                                }
-	                                else if (!трамвай.ƒверьќткрыта(9))
-	                                {
-	                                    трамвай.ќткрытьƒвери(9, true);
-	                                }
-	                            }
-	                            if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
-	                            {
-	                            	—истема_управлени€.– —”_“рамвай трамвай2 = (—истема_управлени€.– —”_“рамвай) трамвай.система_управлени€;
-	                            	if ((KeyState[Key.Backspace] && (трамвай.скорость == 0.0)) && (трамвай2.позици€_контроллера == 0))
-	                            	{
-	                            	    трамвай2.позици€_реверсора = -трамвай2.позици€_реверсора;
-	                            	}
-	                            	 //if (KeyState[Key.LeftAlt] && (трамвай2.позици€_контроллера != 0))
-                                   //{
-                                         //  трамвай2.позици€_контроллера = 0;
-                                         //  трамвай2.пневматический_тормоз += 0.05;
-                                           // }
-	                            	if (KeyState[Key.DownArrow])
-	                            	{
-	                            	    if (трамвай2.позици€_контроллера > трамвай2.позици€_min)
-	                            	    {
-	                            	        трамвай2.позици€_контроллера--;
-	                            	    }
-	                            	}
-	                            	else if (KeyState[Key.UpArrow] && (трамвай2.позици€_контроллера < трамвай2.позици€_max))
-	                            	{
-	                                	трамвай2.позици€_контроллера++;
-	                            	}
-	                            }
-	                            if (!KeyState[Key.RightControl])
-	                            {
-	                            	if (KeyState[Key.LeftArrow])
-	                                {
-	                                	if (трамвай.указатель_поворота >= 0)
-	                                    {
-	                                        трамвай.указатель_поворота = -1;
-	                                        трамвай.аварийна€_сигнализаци€ = false;
-	                                    }
-	                                    else
-	                                    {
-	                                        трамвай.указатель_поворота = 0;
-	                                    }
-	                                }
-	                            	if (KeyState[Key.RightArrow])
-	                                {
-	                            	       if (трамвай.указатель_поворота <= 0)
-	                                    {
-	                                        трамвай.указатель_поворота = 1;
-	                                        трамвай.аварийна€_сигнализаци€ = false;
-	                                    }
-	                                    else
-	                                    {
-	                                        трамвай.указатель_поворота = 0;
-	                                    }
-	                                }
-	                            }
-	                            else if (((трамвай.скорость == 0.0) && трамвай.двери_водител€_открыты) && ((трамвай.передн€€_ось.текущий_рельс.следующие_рельсы.Length > 1) && (трамвай.передн€€_ось.пройденное_рассто€ние_по_рельсу > (трамвай.передн€€_ось.текущий_рельс.ƒлина - 8.0))))
-	                            {
-	                                if (KeyState[Key.LeftArrow])
-	                                {
-	                                    трамвай.передн€€_ось.текущий_рельс.следующий_рельс = 0;
-	                                }
-	                                if (KeyState[Key.RightArrow])
-	                                {
-	                                    трамвай.передн€€_ось.текущий_рельс.следующий_рельс = 1;
-	                                }
-	                            }
-	                            if (KeyState[Key.Q])
-	                            {
-	                                трамвай.аварийна€_сигнализаци€ = !трамвай.аварийна€_сигнализаци€;
-	                            }
-	                        }
-	                    }
-	                    else
-	                    {
-		                    FilteredJoystickState state5 = FJStatesArray[current_joystick];
-		                    JoystickState state6 = JStatesArray[current_joystick];
-		                    int num16 = state6.GetPointOfViewControllers()[0];//.GetPointOfView()[0];
-		                    if (num16 >= 0)
-		                    {
-		                        num16 = (int) Math.Round((double) ((num16 * 1.0) / 4500.0));
-		                    }
-		                    bool flag1 = state5[6];
-		                    if (state5[5])
-		                    {
-		                        трамвай.управление.автоматическое = !трамвай.управление.автоматическое;
-		                        трамвай.управление.ручное = !трамвай.управление.ручное;
-		                    }
-		                    if (!трамвай.управление.ручное)
-		                    {
-		                        goto Label_0E1A;
-		                    }
-		                    if (state5[11])
-		                    {
-		                        трамвай.включен = !трамвай.включен;
-		                    }
-		                    if (state5[2])
-		                    {
-		                        if (трамвай.токоприЄмник.опущен)
-		                        {
-		                            трамвай.токоприЄмник.Ќайтиѕровод(мир.контактныеѕровода2);
-	                                if (трамвай.токоприЄмник.ѕровод != null)
-	                                {
-	                                   	трамвай.токоприЄмник.поднимаетс€ = true;
-	                                }
-		                        }
-		                        else if (трамвай.токоприЄмник.подн€т)
-		                        {
-		                            трамвай.токоприЄмник.поднимаетс€ = false;
-		                        }
-		                    }
-		                    if (state5[0])
-		                    {
-		                        if (!трамвай.двери_водител€_закрыты)
-		                        {
-		                            трамвай.ќткрытьƒвери¬одител€(false);
-		                        }
-		                        else if (!трамвай.двери_водител€_открыты)
-		                        {
-		                            трамвай.ќткрытьƒвери¬одител€(true);
-		                        }
-		                    }
-		                    if (state5[1])
-		                    {
-		                        if (!трамвай.двери_закрыты)
-		                        {
-		                            трамвай.ќткрытьƒвери(false);
-		                        }
-		                        else if (!трамвай.двери_открыты)
-		                        {
-		                            трамвай.ќткрытьƒвери(true);
-		                        }
-		                    }
-		                    if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
-		                    {
-		                    	var трамвай2 = (—истема_управлени€.– —”_“рамвай) трамвай.система_управлени€;
-		                    	switch (((-5 * state6.RotationZ) / num))
-		                    	{
-		                        	case -5:
-		                            	трамвай2.позици€_контроллера = -5;
-		                            	goto Label_0D93;
-		
-		                        	case -4:
-		                            	if (трамвай2.позици€_контроллера > -4)
-		                            	{
-		                            	    трамвай2.позици€_контроллера = -4;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                        	case -3:
-		                            	if (трамвай2.позици€_контроллера > -3)
-		                            	{
-		                            	    трамвай2.позици€_контроллера = -3;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                        	case -2:
-		                            	if (трамвай2.позици€_контроллера > -2)
-		                            	{
-		                            	    трамвай2.позици€_контроллера = -2;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                        	case -1:
-		                            	if (трамвай2.позици€_контроллера > -1)
-		                            	{
-		                            	    трамвай2.позици€_контроллера = -1;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                        	case 0:
-		                            	if (state6.RotationZ <= 0)
-		                            	{
-		                            	    break;
-		                            	}
-		                            	if (трамвай2.позици€_контроллера > 0)
-		                            	{
-		                            	    трамвай2.позици€_контроллера = 0;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                        	case 1:
-		                            	if (трамвай2.позици€_контроллера < 1)
-		                            	{
-		                            	    трамвай2.позици€_контроллера = 1;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                        	case 2:
-		                            	if (трамвай2.позици€_контроллера < 1)
-		                            	{
-		                            	    трамвай2.позици€_контроллера = 1;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                        	case 3:
-		                            	if (трамвай2.позици€_контроллера < 2)
-		                            	{
-		                            	    трамвай2.позици€_контроллера = 2;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                        	case 4:
-		                            	if (трамвай2.позици€_контроллера < 3)
-		                            	{
-		                                	трамвай2.позици€_контроллера = 3;
-		                            	}
-		                            	goto Label_0D93;
-		
-		                   	     	case 5:
-		                   	         	трамвай2.позици€_контроллера = 4;
-		                    	        goto Label_0D93;
-		
-		                    	    default:
-		                    	        goto Label_0D93;
-		                    	}
-		                    	if ((state6.RotationZ < 0) && (трамвай2.позици€_контроллера < 0))
-		                    	{
-		                    	    трамвай2.позици€_контроллера = 0;
-		                    	}
-		                    	Label_0D93:
-		                    	if ((state5[7] && (трамвай.скорость == 0.0)) && (трамвай2.позици€_контроллера == 0))
-		                    	{
-		                    	    трамвай2.позици€_реверсора = -трамвай2.позици€_реверсора;
-		                    	}
-		                    }
-		                    switch (num16)
-		                    {
-		                        case 0:
-		                            трамвай.указатель_поворота = 0;
-		                            трамвай.аварийна€_сигнализаци€ = false;
-		                            break;
-		
-		                        case 2:
-		                            трамвай.указатель_поворота = 1;
-		                            трамвай.аварийна€_сигнализаци€ = false;
-		                            break;
-		
-		                        case 4:
-		                            трамвай.указатель_поворота = 0;
-		                            трамвай.аварийна€_сигнализаци€ = true;
-		                            break;
-		
-		                        case 6:
-		                            трамвай.указатель_поворота = -1;
-		                            трамвай.аварийна€_сигнализаци€ = false;
-		                            goto Label_0E1A;
-		                    }
-	                    }
-                    }
-                    Label_0E1A:;
-                    if (игрок.управл€емыйќбъект is “роллейбус)
-                    {
-                        “роллейбус троллейбус = (“роллейбус) игрок.управл€емыйќбъект;
-                        if (current_joystick == -1)//(игрок.inputGuid == SystemGuid.Keyboard)
-                        {
-                            if (троллейбус.управление.ручное)
-                            {
-                                if (троллейбус.штанги.Length == 2)
-                                {
-	                                if (KeyState[Key.T])
-	                                {
-	                                    if (троллейбус.штанги[0].ќпущена && троллейбус.штанги[1].ќпущена)
-	                                    {
-	                                        троллейбус.штанги[0].Ќайтиѕровод(this.мир.контактныеѕровода);
-	                                        if (троллейбус.штанги[0].ѕровод != null)
-	                                        {
-	                                            троллейбус.штанги[0].поднимаетс€ = true;
-	                                        }
-	                                        троллейбус.штанги[1].Ќайтиѕровод(this.мир.контактныеѕровода);
-	                                        if (троллейбус.штанги[1].ѕровод != null)
-	                                        {
-	                                            троллейбус.штанги[1].поднимаетс€ = true;
-	                                        }
-	                                    }
-	                                    else
-	                                    {
-	                                        троллейбус.штанги[0].поднимаетс€ = false;
-	                                        троллейбус.штанги[1].поднимаетс€ = false;
-	                                    }
-	                                }
-                                }
-                                if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
-                                {
-                                    —истема_управлени€.– —”_“роллейбус троллейбус2 = (—истема_управлени€.– —”_“роллейбус) троллейбус.система_управлени€;
-                                    if ((KeyState[Key.Backspace] && (троллейбус.скорость == 0.0)) && (троллейбус2.позици€_контроллера == 0))
-                                    {
-                                        троллейбус2.позици€_реверсора = -троллейбус2.позици€_реверсора;
-                                    }
-                                    if (KeyState[Key.LeftAlt] && (троллейбус2.позици€_контроллера != 0)&& (троллейбус.скорость >= 0))
-                                    {
-                                           троллейбус2.позици€_контроллера = 0;
-                                           троллейбус2.пневматический_тормоз = 0.0;
-                                            }
-                                   
-                                    if (KeyState.IsDirtyPressed(Key.DownArrow))//[Key.DownArrow])
-                                    {
-                                        if ((троллейбус2.пневматический_тормоз > 0.0) && (троллейбус2.пневматический_тормоз < 1.0))
-                                        {
-                                            троллейбус2.пневматический_тормоз += 0.05;
-                                        }
-                                    }
-                                    else if (KeyState.IsDirtyPressed(Key.UpArrow) && (троллейбус2.пневматический_тормоз > 0.0))
-                                    {
-                                        троллейбус2.пневматический_тормоз -= 0.05;
-                                        if (троллейбус2.пневматический_тормоз < 0.0)
-                                        {
-                                            троллейбус2.пневматический_тормоз = 0.0;
-                                        }
-                                    }
-                                    if (KeyState[Key.DownArrow])//[Key.DownArrow] [Key.UpArrow]
-                                    {
-                                        if (троллейбус2.позици€_контроллера > троллейбус2.позици€_min)
-                                        {
-                                            троллейбус2.позици€_контроллера--;
-                                        }
-                                        else if (троллейбус2.пневматический_тормоз == 0.0)
-                                        {
-                                            троллейбус2.пневматический_тормоз = 0.05;
-                                        }
-                                    }
-                                    else if ((KeyState[Key.UpArrow] && (троллейбус2.позици€_контроллера < троллейбус2.позици€_max)) && (троллейбус2.пневматический_тормоз == 0.0))
-                                    {
-                                        троллейбус2.позици€_контроллера++;
-                                    }
-                                    if ((KeyState[Key.O]) && (троллейбус.ах != null))
-                                    {
-                                    	троллейбус.ах.включЄн = !троллейбус.ах.включЄн;
-                                    }
-                                }
-                                if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
-                                {
-                                    —истема_управлени€. ѕ_јвто авто = (—истема_управлени€. ѕ_јвто) троллейбус.система_управлени€;
-                                    if ((KeyState[Key.Z] && (авто.режим > 0)) && (((авто.текущий_режим != "R") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                    {
-                                        авто.режим--;
-                                    }
-                                    if ((KeyState[Key.X] && (авто.режим < (авто.режимы.Length - 1))) && (((авто.текущий_режим != "P") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                    {
-                                        авто.режим++;
-                                    }
-                                    if (KeyState[Key.DownArrow])
-                                    {
-                                        if (авто.положение_педалей == 0.0)
-                                        {
-                                            авто.положение_педалей = (-World.прошло¬ремени * 5.0) / 3.0;
-                                        }
-                                    }
-                                    else if (KeyState[Key.UpArrow] && (авто.положение_педалей == 0.0))
-                                    {
-                                        авто.положение_педалей = (World.прошло¬ремени * 5.0) / 3.0;
-                                    }
-                                    if (KeyState.IsDirtyPressed(Key.DownArrow))
-                                    {
-                                        if (авто.положение_педалей < 0.0)
-                                        {
-                                            авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей < -1.0)
-                                            {
-                                                авто.положение_педалей = -1.0;
-                                            }
-                                        }
-                                        if (авто.положение_педалей > 0.0)
-                                        {
-                                            авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей < 0.0)
-                                            {
-                                                авто.положение_педалей = 0.0;
-                                                KeyState.keyticks[0xd0] = 1;
-                                            }
-                                        }
-                                    }
-                                    
-                                    else if (KeyState.IsDirtyPressed(Key.UpArrow))
-                                    {
-                                        if (авто.положение_педалей > 0.0)
-                                        {
-                                            авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей > 1.0)
-                                            {
-                                                авто.положение_педалей = 1.0;
-                                            }
-                                        }
-                                        if (авто.положение_педалей < 0.0)
-                                        {
-                                            авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей > 0.0)
-                                            {
-                                                авто.положение_педалей = 0.0;
-                                                KeyState.keyticks[200] = 1;
-                                            }
-                                        }
-                                    }
-                                }
-                                if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
-                                {
-                                    —истема_управлени€. ѕ_јвто1 авто = (—истема_управлени€. ѕ_јвто1) троллейбус.система_управлени€;
-                                    if (KeyState[Key.Z])
-                                    {
-                                        авто.передача--;
-                                    }
-                                    if (KeyState[Key.X])
-                                    {
-                                        авто.передача++;
-                                    }
-                                    if (KeyState[Key.LeftAlt])
-                                    {
-                                        авто.положение_педалей = 0.0;
-                                    }
-                                    /*if ((KeyState[Key.Z] && (авто.режим > 0)) && (((авто.текущий_режим != "R") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                    {
-                                        авто.режим--;
-                                    }
-                                    if ((KeyState[Key.X] && (авто.режим < (авто.режимы.Length - 1))) && (((авто.текущий_режим != "P") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                    {
-                                        авто.режим++;
-                                    }*/
-                                    if (KeyState[Key.DownArrow])
-                                    {
-                                        if (авто.положение_педалей == 0.0)
-                                        {
-                                            авто.положение_педалей = (-World.прошло¬ремени * 5.0) / 3.0;
-                                        }
-                                    }
-                                    else if (KeyState[Key.UpArrow] && (авто.положение_педалей == 0.0))
-                                    {
-                                        авто.положение_педалей = (World.прошло¬ремени * 5.0) / 3.0;
-                                    }
-                                    if (KeyState.IsDirtyPressed(Key.DownArrow))
-                                    {
-                                        if (авто.положение_педалей < 0.0)
-                                        {
-                                            авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей < -1.0)
-                                            {
-                                                авто.положение_педалей = -1.0;
-                                            }
-                                        }
-                                        if (авто.положение_педалей > 0.0)
-                                        {
-                                            авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей < 0.0)
-                                            {
-                                                авто.положение_педалей = 0.0;
-                                                KeyState.keyticks[0xd0] = 1;
-                                            }
-                                        }
-                                    }
-                                    
-                                    else if (KeyState.IsDirtyPressed(Key.UpArrow))
-                                    {
-                                        if (авто.положение_педалей > 0.0)
-                                        {
-                                            авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей > 1.0)
-                                            {
-                                                авто.положение_педалей = 1.0;
-                                            }
-                                        }
-                                        if (авто.положение_педалей < 0.0)
-                                        {
-                                            авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей > 0.0)
-                                            {
-                                                авто.положение_педалей = 0.0;
-                                                KeyState.keyticks[200] = 1;
-                                            }
-                                        }
-                                    }
-                                }
-                                if (!fmouse)
-                                {
-                                    if (KeyState.IsDirtyPressed(Key.LeftArrow))
-	                                {
-	                                    троллейбус.поворот–ул€ -= 0.3 * World.прошло¬ремени;
-	                                }
-                                    if (KeyState.IsDirtyPressed(Key.RightArrow))
-	                                {
-	                                    троллейбус.поворот–ул€ += 0.3 * World.прошло¬ремени;
-	                                }
-                                	if (KeyState.IsDirtyPressed(Key.Space) && space)
-                                    {
-                                	    
-                                	   if (троллейбус.поворот–ул€ < 0)
-                                	    {
-                                	       троллейбус.поворот–ул€ -= 0.3 * World.прошло¬ремени;
-                                	       if (Math.Abs(троллейбус.поворот–ул€) > 0.001)
-                            {
-                                троллейбус.поворот–ул€ = 0.0;
-                            }
-                                	   }
-                                	   if (троллейбус.поворот–ул€ > 0)
-                                	    {
-                                	       троллейбус.поворот–ул€ += 0.3 * World.прошло¬ремени;
-                                	       if (Math.Abs(троллейбус.поворот–ул€) > 0.001)
-                                	           
-                            {
-                                троллейбус.поворот–ул€ = 0.0;
-                            }
-                                	   }
-                                	   /*
-                                	       if (троллейбус.поворот–ул€ != 0.0)
-                                            
-                {   
-                                	          /* var num6 =
-                    if (num6 < -Math.PI)
-                    {
-                        num6 += Math.PI * 2.0;
-                    }
-                    if (num6 > Math.PI)
-                    {
-                        num6 -= Math.PI * 2.0;
-                    }
-                                       int num7 = Math.Sign((double)(троллейбус.поворот–ул€));
-                    if (num7 > 0)
-                    {
-                        if (Game.fmouse)
-                        {
-                            троллейбус.поворот–ул€ += num7 * World.прошло¬ремени;
-                            if (Math.Abs(троллейбус.поворот–ул€) < 0.001)
-                            {
-                                троллейбус.поворот–ул€ = 0.0;
-                            }
-                        }
-                        }*/
-                                	   
-                                	
-                     
-                                    }
-                                }
-                                else if (!mouseButtons[0])
-                                {
-	                                троллейбус.поворот–ул€ += x * 0.001;
-                                }
-                                if (KeyState[Key.Q])
-                                {
-                                    if (троллейбус.указатель_поворота >= 0)
-                                    {
-                                        троллейбус.указатель_поворота = -1;
-                                        троллейбус.аварийна€_сигнализаци€ = false;
-                                    }
-                                    else
-                                    {
-                                        троллейбус.указатель_поворота = 0;
-                                    }
-                                }
-                                if (KeyState[Key.W])
-                                {
-                                    if (троллейбус.указатель_поворота <= 0)
-                                    {
-                                        троллейбус.указатель_поворота = 1;
-                                        троллейбус.аварийна€_сигнализаци€ = false;
-                                    }
-                                    else
-                                    {
-                                        троллейбус.указатель_поворота = 0;
-                                    }
-                                }
-                                if (KeyState[Key.E])
-                                {
-                                    if (троллейбус.аварийна€_сигнализаци€)
-                                    {
-                                        троллейбус.аварийна€_сигнализаци€ = false;
-                                    }
-                                    else
-                                    {
-                                        троллейбус.аварийна€_сигнализаци€ = true;
-                                        троллейбус.указатель_поворота = 0;
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                                FilteredJoystickState state7 = FJStatesArray[current_joystick];
-                                JoystickState state8 = JStatesArray[current_joystick];
-                                int num20 = state8.GetPointOfViewControllers()[0];//.GetPointOfView()[0];
-                                if (num20 >= 0)
-                                {
-                                    num20 = (int) Math.Round((double) ((num20 * 1.0) / 4500.0));
-                                }
-                                if (state7[5])
-                                {
-                                    троллейбус.управление.автоматическое = !троллейбус.управление.автоматическое;
-                                    троллейбус.управление.ручное = !троллейбус.управление.ручное;
-                                }
-                                if (state7[3])
-                                {
-                                    троллейбус.включены_фары = !троллейбус.включены_фары;
-                                }
-                                if (троллейбус.управление.ручное)
-                                {
-                                    if (state7[11])
-                                    {
-                                        троллейбус.включен = !троллейбус.включен;
-                                    }
-                                    if (state7[2] && (троллейбус.штанги.Length > 1))
-                                    {
-                                        if (троллейбус.штанги[0].ќпущена && троллейбус.штанги[1].ќпущена)
-                                        {
-                                            троллейбус.штанги[0].Ќайтиѕровод(this.мир.контактныеѕровода);
-                                            if (троллейбус.штанги[0].ѕровод != null)
-                                            {
-                                                троллейбус.штанги[0].поднимаетс€ = true;
-                                            }
-                                            троллейбус.штанги[1].Ќайтиѕровод(this.мир.контактныеѕровода);
-                                            if (троллейбус.штанги[1].ѕровод != null)
-                                            {
-                                                троллейбус.штанги[1].поднимаетс€ = true;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            троллейбус.штанги[0].поднимаетс€ = false;
-                                            троллейбус.штанги[1].поднимаетс€ = false;
-                                        }
-                                    }
-                                    if (state7[0])
-                                    {
-                                        if (!троллейбус.двери_водител€_закрыты)
-                                        {
-                                            троллейбус.ќткрытьƒвери¬одител€(false);
-                                        }
-                                        else if (!троллейбус.двери_водител€_открыты)
-                                        {
-                                            троллейбус.ќткрытьƒвери¬одител€(true);
-                                        }
-                                    }
-                                    if (state7[1])
-                                    {
-                                        if (!троллейбус.двери_закрыты)
-                                        {
-                                            троллейбус.ќткрытьƒвери(false);
-                                        }
-                                        else if (!троллейбус.двери_открыты)
-                                        {
-                                            троллейбус.ќткрытьƒвери(true);
-                                        }
-                                    }
-                                    if (!state7[4, false] && !state7[6, false])
-                                    {
-                                        троллейбус.поворот–ул€ += ((0.5 * World.прошло¬ремени) * state8.X) / ((double) num);
-                                    }
-                                    double num21 = (-1.0 * state8.RotationZ) / ((double) num);
-                                    if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
-                                    {
-                                        —истема_управлени€.– —”_“роллейбус троллейбус3 = (—истема_управлени€.– —”_“роллейбус) троллейбус.система_управлени€;
-                                        if (num21 >= -0.6)
-                                        {
-                                            троллейбус3.позици€_контроллера = (int) (4.0 * num21);
-                                            троллейбус3.пневматический_тормоз = 0.0;
-                                        }
-                                        else
-                                        {
-                                            троллейбус3.позици€_контроллера = -2;
-                                            троллейбус3.пневматический_тормоз = -(num21 + 0.6) / 0.4;
-                                        }
-                                        if ((state7[7] && (троллейбус.скорость == 0.0)) && (троллейбус3.позици€_контроллера == 0))
-                                        {
-                                            троллейбус3.позици€_реверсора = -троллейбус3.позици€_реверсора;
-                                        }
-                                    }
-                                    if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
-                                    {
-                                        —истема_управлени€. ѕ_јвто авто2 = (—истема_управлени€. ѕ_јвто) троллейбус.система_управлени€;
-                                        авто2.положение_педалей = num21;
-                                        if ((state7[6] && (авто2.режим > 0)) && (((авто2.текущий_режим != "R") && (авто2.текущий_режим != "N")) || ((авто2.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                        {
-                                            авто2.режим--;
-                                        }
-                                        if ((state7[7] && (авто2.режим < (авто2.режимы.Length - 1))) && (((авто2.текущий_режим != "P") && (авто2.текущий_режим != "N")) || ((авто2.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                        {
-                                            авто2.режим++;
-                                        }
-                                    }
-                                    if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
-                                    {
-                                        —истема_управлени€. ѕ_јвто1 авто2 = (—истема_управлени€. ѕ_јвто1) троллейбус.система_управлени€;
-                                        авто2.положение_педалей = num21;
-                                        if ((state7[6] && (авто2.передача_перевод > 0)) && (((авто2.текуща€_передача != "R") && (авто2.текуща€_передача != "N")) || ((авто2.положение_педалей == 0.0) && (троллейбус.скорость == 0.0))))
-                                        {
-                                            авто2.передача_перевод--;
-                                        }
-                                        if ((state7[7]) || ((авто2.положение_педалей == 0.0) && (троллейбус.скорость == 0.0)))
-                                        {
-                                            авто2.передача_перевод++;
-                                        }
-                                    }
-                                    switch (num20)
-                                    {
-                                        case 0:
-                                            троллейбус.указатель_поворота = 0;
-                                            троллейбус.аварийна€_сигнализаци€ = false;
-                                            break;
-
-                                        case 2:
-                                            троллейбус.указатель_поворота = 1;
-                                            троллейбус.аварийна€_сигнализаци€ = false;
-                                            break;
-
-                                        case 4:
-                                            троллейбус.указатель_поворота = 0;
-                                            троллейбус.аварийна€_сигнализаци€ = true;
-                                            break;
-
-                                        case 6:
-                                            троллейбус.указатель_поворота = -1;
-                                            троллейбус.аварийна€_сигнализаци€ = false;
-                                            break;
-                                    }
-                                }
-//                            }
-                        }
-                    }
-                }
-            }
-            }
-            if (NewControl) {
                 if (активна)
-            {
-                foreach (var игрок in игроки)
                 {
-                    if (игрок.управл€емыйќбъект != null)
+                    foreach (var игрок in игроки)
                     {
-                        DoublePoint point5 = игрок.управл€емыйќбъект.position - игрок.cameraPosition.XZPoint;
-                        if (point5.Modulus > 200.0)
+                        if (игрок.управл€емыйќбъект != null)
                         {
-                            игрок.управл€емыйќбъект.управление = ”правление.јвтоматическое;
-                            игрок.управл€емыйќбъект = null;
-                            игрок.объектѕрив€зки = null;
-                        }
-                    }
-                    int current_joystick = -1;
-                    for (int k = 0; k < joystickDevices.Length; k++)
-                    {
-                        if (игрок.inputGuid == deviceGuids[k])
-                        {
-                            current_joystick = k;
-                            break;
-                        }
-                    }
-                    if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
-                    {
-//                        byte[] mouseButtons = state.GetMouseButtons();
-//                        int x = state.X;
-//                        int y = state.Y;
-//                        int z = state.Z;
-//                        if ((mouseButtons[1] != 0) && (this._lastMouseButtons[1] == 0))
-                        if ((mouseButtons[1]) && (!this._lastMouseButtons[1]))
-                        {
-                            this.ѕрив€зывать(игрок);
-                        }
-                        if (!MyDirect3D.вид_сверху)
-                        {
-//                            if (mouseButtons[0] == 0)
-                            if (!mouseButtons[0])
+                            DoublePoint point5 = игрок.управл€емыйќбъект.position - игрок.cameraPosition.XZPoint;
+                            if (point5.Modulus > 200.0)
                             {
-                                игрок.cameraRotationChange.x -= 0.001 * x;
-                                игрок.cameraRotationChange.y -= 0.001 * y;
-                            }
-                            else
-                            {
-                                DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                                point.x -= 0.1 * y;
-                                point.y -= 0.1 * x;
-                                игрок.cameraPositionChange.x = (point * new DoublePoint(игрок.cameraRotation.x)).x;
-                                игрок.cameraPositionChange.z = (point * new DoublePoint(игрок.cameraRotation.x)).y;
-                            }
-                            игрок.cameraPositionChange.y += 0.001 * z;
-                        }
-                        else
-                        {                            
-                            MyDirect3D.масштаб += 0.001 * z;
-                            if (MyDirect3D.масштаб <= 2.5) MyDirect3D.масштаб = 2.5;
-//                            if (mouseButtons[0] != 0)
-                            if (mouseButtons[0])
-                            {
-                                DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z);
-                                point.x += 0.01 * x;
-                                point.y -= 0.01 * y;
-                                игрок.cameraPositionChange.x = point.x;
-                                игрок.cameraPositionChange.z = point.y;
+                                игрок.управл€емыйќбъект.управление = ”правление.јвтоматическое;
+                                игрок.управл€емыйќбъект = null;
+                                игрок.объектѕрив€зки = null;
                             }
                         }
-                        this._lastMouseButtons = mouseButtons;
-                    }
-                    else
-                    {
-                        FilteredJoystickState Current_FJState = FJStatesArray[current_joystick];
-                        JoystickState Current_JState = JStatesArray[current_joystick];
-                        if (Current_FJState[8])
+                        int current_joystick = -1;
+                        for (int k = 0; k < joystickDevices.Length; k++)
                         {
-                            this.ѕрив€зывать(игрок);
-                        }
-                        double num8 = (0.05 * Current_JState.X) / ((double) num);
-                        double num9 = (0.02 * Current_JState.Y) / ((double) num);
-                        double num10 = (0.05 * Current_JState.Z) / ((double) num);
-                        switch (Current_JState.GetPointOfViewControllers()[0])//.GetPointOfView()[0])
-                        {
-                            case 0:
-                                num10 = 0.04;
+                            if (игрок.inputGuid == deviceGuids[k])
+                            {
+                                current_joystick = k;
                                 break;
-
-                            case 0x4650:
-                                num10 = -0.04;
-                                break;
-
-                            default:
-                                num10 = 0.0;
-                                break;
+                            }
                         }
-                        if (((игрок.управл€емыйќбъект != null) && (игрок.управл€емыйќбъект is Ѕезрельсовый_“ранспорт)) && игрок.управл€емыйќбъект.управление.ручное)
+                        if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
                         {
-                            if (!Current_FJState[4, false])
+                            //                        byte[] mouseButtons = state.GetMouseButtons();
+                            //                        int x = state.X;
+                            //                        int y = state.Y;
+                            //                        int z = state.Z;
+                            //                        if ((mouseButtons[1] != 0) && (this._lastMouseButtons[1] == 0))
+                            if ((mouseButtons[1]) && (!this._lastMouseButtons[1]))
                             {
-                                int num12 = 6;
-                                if (((Transport) игрок.управл€емыйќбъект).система_управлени€ is —истема_управлени€.јвтобусна€)
-                                {
-                                    num12 = 10;
-                                }
-                                if (Current_FJState[num12, false])
-                                {
-                                    игрок.cameraRotationChange.x -= num8;
-                                    игрок.cameraRotationChange.y -= num9;
-                                }
+                                this.ѕрив€зывать(игрок);
                             }
-                            else
+                            if (KeyState[Key.F9])
                             {
-                                DoublePoint point2 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                                point2.x -= 10.0 * num9;
-                                point2.y -= 10.0 * num8;
-                                игрок.cameraPositionChange.x = (point2 * new DoublePoint(игрок.cameraRotation.x)).x;
-                                игрок.cameraPositionChange.z = (point2 * new DoublePoint(игрок.cameraRotation.x)).y;
-                                игрок.cameraPositionChange.y += num10;
+                                IVector _прив€зки = null;
+                                IControlledObject _объект = null;
+                                игрок.объектѕрив€зки = _прив€зки;
+                                if ((игрок.управл€емыйќбъект != null) && (игрок.управл€емыйќбъект != _объект))
+                                {
+                                    игрок.управл€емыйќбъект.управление = ”правление.јвтоматическое;
+                                }
+                                игрок.управл€емыйќбъект = _объект;
                             }
-                        }
-                        else if (!Current_FJState[4, false])
-                        {
-                            игрок.cameraRotationChange.x -= num8;
-                            игрок.cameraRotationChange.y -= num9;
-                        }
-                        else
-                        {
-                            DoublePoint point3 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                            point3.x -= 10.0 * num9;
-                            point3.y -= 10.0 * num8;
-                            игрок.cameraPositionChange.x = (point3 * new DoublePoint(игрок.cameraRotation.x)).x;
-                            игрок.cameraPositionChange.z = (point3 * new DoublePoint(игрок.cameraRotation.x)).y;
-                            игрок.cameraPositionChange.y += num10;
-                        }
-                    }
-                    /*var _y = мир.GetHeight(игрок.cameraPosition.xz_point);
-                    if (игрок.cameraPosition.y - 0.01 < _y)
-                    {
-                        игрок.cameraPosition.y = _y + 0.01;
-                        игрок.cameraPositionChange.y = 0;
-                    }*/
-                    if (игрок.управл€емыйќбъект == null) continue;
-                    var _transport = (Transport) игрок.управл€емыйќбъект;
-                    if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
-                    {
-                        if (KeyState[Key.L])
-                        {// TODO: пофиксить список остановок при смене управлени€
-                            _transport.управление.автоматическое = !_transport.управление.автоматическое;
-                            //_transport.currentStop = _transport.nextStop = null;
-                            //_transport.nextStop = _transport.currentStop = null;
-                            _transport.stopIndex = 0;
-                        }
-                        if (KeyState[Key.M])
-                        {
-                            _transport.управление.ручное = !_transport.управление.ручное;
-                            //_transport.currentStop = _transport.nextStop = null;
-                            //_transport.nextStop = _transport.currentStop = null;
-                            _transport.stopIndex = 0;
-                        }
-                        if (_transport.управление.ручное)
-                        {
-                            if (KeyState[Key.Y])
+                            if (!MyDirect3D.вид_сверху)
                             {
-                                _transport.включен = !_transport.включен;
-                            }
-                            if (KeyState[Key.G])
-                            {
-                                if (!_transport.двери_водител€_закрыты)
+                                //                            if (mouseButtons[0] == 0)
+                                if (!mouseButtons[0])
                                 {
-                                    _transport.ќткрытьƒвери¬одител€(false);
-                                }
-                                else if (!_transport.двери_водител€_открыты)
-                                {
-                                    _transport.ќткрытьƒвери¬одител€(true);
-                                }
-                            }
-                            if (KeyState[Key.H])
-                            {
-                                if (!_transport.двери_закрыты)
-                                {
-                                    _transport.ќткрытьƒвери(false);
-                                }
-                                else if (!_transport.двери_открыты)
-                                {
-                                    _transport.ќткрытьƒвери(true);
-                                }
-                            }
-                            if (KeyState[Key.D1])
-                            {
-                                if (!_transport.ƒверь«акрыта(0))
-                                {
-                                    _transport.ќткрытьƒвери(0, false);
-                                }
-                                else if (!_transport.ƒверьќткрыта(0))
-                                {
-                                    _transport.ќткрытьƒвери(0, true);
-                                }
-                            }
-                            if (KeyState[Key.D2])
-                            {
-                                if (!_transport.ƒверь«акрыта(1))
-                                {
-                                    _transport.ќткрытьƒвери(1, false);
-                                }
-                                else if (!_transport.ƒверьќткрыта(0))
-                                {
-                                    _transport.ќткрытьƒвери(1, true);
-                                }
-                            }
-                            if (KeyState[Key.D3])
-                            {
-                                if (!_transport.ƒверь«акрыта(2))
-                                {
-                                    _transport.ќткрытьƒвери(2, false);
-                                }
-                                else if (!_transport.ƒверьќткрыта(0))
-                                {
-                                    _transport.ќткрытьƒвери(2, true);
-                                }
-                            }
-                            if (KeyState[Key.D4])
-                            {
-                                if (!_transport.ƒверь«акрыта(3))
-                                {
-                                    _transport.ќткрытьƒвери(3, false);
-                                }
-                                else if (!_transport.ƒверьќткрыта(0))
-                                {
-                                    _transport.ќткрытьƒвери(3, true);
-                                }
-                            }
-                            if (KeyState[Key.D5])
-                            {
-                                if (!_transport.ƒверь«акрыта(4))
-                                {
-                                    _transport.ќткрытьƒвери(4, false);
-                                }
-                                else if (!_transport.ƒверьќткрыта(0))
-                                {
-                                    _transport.ќткрытьƒвери(4, true);
-                                }
-                            }
-                            if (KeyState[Key.V])
-                            {
-                                _transport.stand_brake = !_transport.stand_brake;
-                            }
-                            /*if (state2[Key.E])
-                            {
-                                if (transport.аварийна€_сигнализаци€)
-                                {
-                                    transport.аварийна€_сигнализаци€ = false;
+                                    игрок.cameraRotationChange.x -= 0.001 * x;
+                                    игрок.cameraRotationChange.y -= 0.001 * y;
                                 }
                                 else
                                 {
-                                    transport.аварийна€_сигнализаци€ = true;
-                                    transport.указатель_поворота = 0;
+                                    DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                                    point.x -= 0.1 * y;
+                                    point.y -= 0.1 * x;
+                                    игрок.cameraPositionChange.x = (point * new DoublePoint(игрок.cameraRotation.x)).x;
+                                    игрок.cameraPositionChange.z = (point * new DoublePoint(игрок.cameraRotation.x)).y;
                                 }
-                            }*/
-                            if (KeyState[Key.F])
-                            {
-                                _transport.включены_фары = !_transport.включены_фары;
+                                игрок.cameraPositionChange.y += 0.001 * z;
                             }
+                            else
+                            {
+                                MyDirect3D.масштаб += 0.001 * z;
+                                if (MyDirect3D.масштаб <= 2.5) MyDirect3D.масштаб = 2.5;
+                                //                            if (mouseButtons[0] != 0)
+                                if (mouseButtons[0])
+                                {
+                                    DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z);
+                                    point.x += 0.01 * x;
+                                    point.y -= 0.01 * y;
+                                    игрок.cameraPositionChange.x = point.x;
+                                    игрок.cameraPositionChange.z = point.y;
+                                }
+                            }
+                            this._lastMouseButtons = mouseButtons;
                         }
-                        if (игрок.объектѕрив€зки != null)
+                        else
                         {
-                            if (KeyState[Key.C])//KeyState.InputState.IsPressed(Key)
+                            FilteredJoystickState Current_FJState = FJStatesArray[current_joystick];
+                            JoystickState Current_JState = JStatesArray[current_joystick];
+                            if (Current_FJState[8])
                             {
-                                _transport.SetCamera(0, игрок);
+                                this.ѕрив€зывать(игрок);
                             }
-                            if (KeyState[Key.F2])
+                            double num8 = (0.05 * Current_JState.X) / ((double)num);
+                            double num9 = (0.02 * Current_JState.Y) / ((double)num);
+                            double num10 = (0.05 * Current_JState.Z) / ((double)num);
+                            switch (Current_JState.GetPointOfViewControllers()[0])//.GetPointOfView()[0])
                             {
-                                _transport.SetCamera(1, игрок);
+                                case 0:
+                                    num10 = 0.04;
+                                    break;
+
+                                case 0x4650:
+                                    num10 = -0.04;
+                                    break;
+
+                                default:
+                                    num10 = 0.0;
+                                    break;
                             }
-                             if (KeyState[Key.F3])
+                            if (((игрок.управл€емыйќбъект != null) && (игрок.управл€емыйќбъект is Ѕезрельсовый_“ранспорт)) && игрок.управл€емыйќбъект.управление.ручное)
                             {
-                                _transport.SetCamera(2, игрок);
+                                if (!Current_FJState[4, false])
+                                {
+                                    int num12 = 6;
+                                    if (((Transport)игрок.управл€емыйќбъект).система_управлени€ is —истема_управлени€.јвтобусна€)
+                                    {
+                                        num12 = 10;
+                                    }
+                                    if (Current_FJState[num12, false])
+                                    {
+                                        игрок.cameraRotationChange.x -= num8;
+                                        игрок.cameraRotationChange.y -= num9;
+                                    }
+                                }
+                                else
+                                {
+                                    DoublePoint point2 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                                    point2.x -= 10.0 * num9;
+                                    point2.y -= 10.0 * num8;
+                                    игрок.cameraPositionChange.x = (point2 * new DoublePoint(игрок.cameraRotation.x)).x;
+                                    игрок.cameraPositionChange.z = (point2 * new DoublePoint(игрок.cameraRotation.x)).y;
+                                    игрок.cameraPositionChange.y += num10;
+                                }
                             }
-                            if (KeyState[Key.F4])
+                            else if (!Current_FJState[4, false])
                             {
-                                _transport.SetCamera(3, игрок);
+                                игрок.cameraRotationChange.x -= num8;
+                                игрок.cameraRotationChange.y -= num9;
+                            }
+                            else
+                            {
+                                DoublePoint point3 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                                point3.x -= 10.0 * num9;
+                                point3.y -= 10.0 * num8;
+                                игрок.cameraPositionChange.x = (point3 * new DoublePoint(игрок.cameraRotation.x)).x;
+                                игрок.cameraPositionChange.z = (point3 * new DoublePoint(игрок.cameraRotation.x)).y;
+                                игрок.cameraPositionChange.y += num10;
                             }
                         }
-                    }
-                    if (игрок.управл€емыйќбъект is “рамвай)
-                    {
-                        “рамвай трамвай = (“рамвай) игрок.управл€емыйќбъект;
+                        /*var _y = мир.GetHeight(игрок.cameraPosition.xz_point);
+                        if (игрок.cameraPosition.y - 0.01 < _y)
+                        {
+                            игрок.cameraPosition.y = _y + 0.01;
+                            игрок.cameraPositionChange.y = 0;
+                        }*/
+                        if (игрок.управл€емыйќбъект == null) continue;
+                        var _transport = (Transport)игрок.управл€емыйќбъект;
                         if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
                         {
-                            if (трамвай.управление.ручное)
+                            if (KeyState[Key.A])
+                            {// TODO: пофиксить список остановок при смене управлени€
+                                _transport.управление.автоматическое = !_transport.управление.автоматическое;
+                                //_transport.currentStop = _transport.nextStop = null;
+                                //_transport.nextStop = _transport.currentStop = null;
+                                _transport.stopIndex = 0;
+                            }
+                            if (KeyState[Key.M])
                             {
-                                if (KeyState[Key.T])
+                                _transport.управление.ручное = !_transport.управление.ручное;
+                                //_transport.currentStop = _transport.nextStop = null;
+                                //_transport.nextStop = _transport.currentStop = null;
+                                _transport.stopIndex = 0;
+                            }
+                            if (_transport.управление.ручное)
+                            {
+                                if (KeyState[Key.Y])
+                                {
+                                    _transport.включен = !_transport.включен;
+                                }
+                                if (KeyState[Key.S])
+                                {
+                                    if (!_transport.двери_водител€_закрыты)
+                                    {
+                                        _transport.ќткрытьƒвери¬одител€(false);
+                                    }
+                                    else if (!_transport.двери_водител€_открыты)
+                                    {
+                                        _transport.ќткрытьƒвери¬одител€(true);
+                                    }
+                                }
+                                if (KeyState[Key.D])
+                                {
+                                    if (!_transport.двери_закрыты)
+                                    {
+                                        _transport.ќткрытьƒвери(false);
+                                    }
+                                    else if (!_transport.двери_открыты)
+                                    {
+                                        _transport.ќткрытьƒвери(true);
+                                    }
+                                }
+                                if (KeyState[Key.D1])
+                                {
+                                    if (!_transport.ƒверь«акрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(0, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(0, true);
+                                    }
+                                }
+                                if (KeyState[Key.D2])
+                                {
+                                    if (!_transport.ƒверь«акрыта(1))
+                                    {
+                                        _transport.ќткрытьƒвери(1, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(1, true);
+                                    }
+                                }
+                                if (KeyState[Key.D3])
+                                {
+                                    if (!_transport.ƒверь«акрыта(2))
+                                    {
+                                        _transport.ќткрытьƒвери(2, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(2, true);
+                                    }
+                                }
+                                if (KeyState[Key.D4])
+                                {
+                                    if (!_transport.ƒверь«акрыта(3))
+                                    {
+                                        _transport.ќткрытьƒвери(3, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(3, true);
+                                    }
+                                }
+                                if (KeyState[Key.D5])
+                                {
+                                    if (!_transport.ƒверь«акрыта(4))
+                                    {
+                                        _transport.ќткрытьƒвери(4, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(4, true);
+                                    }
+                                }
+                                if (KeyState[Key.B])
+                                {
+                                    _transport.stand_brake = !_transport.stand_brake;
+                                }
+                                /*if (state2[Key.E])
+                                {
+                                    if (transport.аварийна€_сигнализаци€)
+                                    {
+                                        transport.аварийна€_сигнализаци€ = false;
+                                    }
+                                    else
+                                    {
+                                        transport.аварийна€_сигнализаци€ = true;
+                                        transport.указатель_поворота = 0;
+                                    }
+                                }*/
+                                if (KeyState[Key.F])
+                                {
+                                    _transport.включены_фары = !_transport.включены_фары;
+                                }
+                            }
+                            if (игрок.объектѕрив€зки != null)
+                            {
+                                if (KeyState[Key.C])//KeyState.InputState.IsPressed(Key)
+                                {
+                                    _transport.SetCamera(0, игрок);
+                                }
+                                if (KeyState[Key.F2])
+                                {
+                                    _transport.SetCamera(1, игрок);
+                                }
+                                if (KeyState[Key.F3])
+                                {
+                                    _transport.SetCamera(2, игрок);
+                                }
+                                if (KeyState[Key.F4])
+                                {
+                                    _transport.SetCamera(3, игрок);
+                                }
+                            }
+                        }
+                        if (игрок.управл€емыйќбъект is “рамвай)
+                        {
+                            “рамвай трамвай = (“рамвай)игрок.управл€емыйќбъект;
+                            if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
+                            {
+                                if (трамвай.управление.ручное)
+                                {
+                                    if (KeyState[Key.T])
+                                    {
+                                        if (трамвай.токоприЄмник.опущен)
+                                        {
+                                            трамвай.токоприЄмник.Ќайтиѕровод(мир.контактныеѕровода2);
+                                            if (трамвай.токоприЄмник.ѕровод != null)
+                                            {
+                                                трамвай.токоприЄмник.поднимаетс€ = true;
+                                            }
+                                        }
+                                        else if (трамвай.токоприЄмник.подн€т)
+                                        {
+                                            трамвай.токоприЄмник.поднимаетс€ = false;
+                                        }
+                                    }
+                                    if (KeyState[Key.D6])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(5))
+                                        {
+                                            трамвай.ќткрытьƒвери(5, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(5))
+                                        {
+                                            трамвай.ќткрытьƒвери(5, true);
+                                        }
+                                    }
+                                    if (KeyState[Key.D7])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(6))
+                                        {
+                                            трамвай.ќткрытьƒвери(6, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(6))
+                                        {
+                                            трамвай.ќткрытьƒвери(6, true);
+                                        }
+                                    }
+                                    if (KeyState[Key.D8])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(7))
+                                        {
+                                            трамвай.ќткрытьƒвери(7, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(7))
+                                        {
+                                            трамвай.ќткрытьƒвери(7, true);
+                                        }
+                                    }
+                                    if (KeyState[Key.D9])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(8))
+                                        {
+                                            трамвай.ќткрытьƒвери(8, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(8))
+                                        {
+                                            трамвай.ќткрытьƒвери(8, true);
+                                        }
+                                    }
+                                    if (KeyState[Key.D0])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(9))
+                                        {
+                                            трамвай.ќткрытьƒвери(9, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(9))
+                                        {
+                                            трамвай.ќткрытьƒвери(9, true);
+                                        }
+                                    }
+                                    if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
+                                    {
+                                        —истема_управлени€.– —”_“рамвай трамвай2 = (—истема_управлени€.– —”_“рамвай)трамвай.система_управлени€;
+                                        if ((KeyState[Key.Backspace] && (трамвай.скорость == 0.0)) && (трамвай2.позици€_контроллера == 0))
+                                        {
+                                            трамвай2.позици€_реверсора = -трамвай2.позици€_реверсора;
+                                        }
+                                        //if (KeyState[Key.LeftAlt] && (трамвай2.позици€_контроллера != 0))
+                                        //{
+                                        //  трамвай2.позици€_контроллера = 0;
+                                        //  трамвай2.пневматический_тормоз += 0.05;
+                                        // }
+                                        if (KeyState[Key.DownArrow])
+                                        {
+                                            if (трамвай2.позици€_контроллера > трамвай2.позици€_min)
+                                            {
+                                                трамвай2.позици€_контроллера--;
+                                            }
+                                        }
+                                        else if (KeyState[Key.UpArrow] && (трамвай2.позици€_контроллера < трамвай2.позици€_max))
+                                        {
+                                            трамвай2.позици€_контроллера++;
+                                        }
+                                    }
+                                    if (!KeyState[Key.RightControl])
+                                    {
+                                        if (KeyState[Key.LeftArrow])
+                                        {
+                                            if (трамвай.указатель_поворота >= 0)
+                                            {
+                                                трамвай.указатель_поворота = -1;
+                                                трамвай.аварийна€_сигнализаци€ = false;
+                                            }
+                                            else
+                                            {
+                                                трамвай.указатель_поворота = 0;
+                                            }
+                                        }
+                                        if (KeyState[Key.RightArrow])
+                                        {
+                                            if (трамвай.указатель_поворота <= 0)
+                                            {
+                                                трамвай.указатель_поворота = 1;
+                                                трамвай.аварийна€_сигнализаци€ = false;
+                                            }
+                                            else
+                                            {
+                                                трамвай.указатель_поворота = 0;
+                                            }
+                                        }
+                                    }
+                                    else if (((трамвай.скорость == 0.0) && трамвай.двери_водител€_открыты) && ((трамвай.передн€€_ось.текущий_рельс.следующие_рельсы.Length > 1) && (трамвай.передн€€_ось.пройденное_рассто€ние_по_рельсу > (трамвай.передн€€_ось.текущий_рельс.ƒлина - 8.0))))
+                                    {
+                                        if (KeyState[Key.LeftArrow])
+                                        {
+                                            трамвай.передн€€_ось.текущий_рельс.следующий_рельс = 0;
+                                        }
+                                        if (KeyState[Key.RightArrow])
+                                        {
+                                            трамвай.передн€€_ось.текущий_рельс.следующий_рельс = 1;
+                                        }
+                                    }
+                                    if (KeyState[Key.Q])
+                                    {
+                                        трамвай.аварийна€_сигнализаци€ = !трамвай.аварийна€_сигнализаци€;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                FilteredJoystickState state5 = FJStatesArray[current_joystick];
+                                JoystickState state6 = JStatesArray[current_joystick];
+                                int num16 = state6.GetPointOfViewControllers()[0];//.GetPointOfView()[0];
+                                if (num16 >= 0)
+                                {
+                                    num16 = (int)Math.Round((double)((num16 * 1.0) / 4500.0));
+                                }
+                                bool flag1 = state5[6];
+                                if (state5[5])
+                                {
+                                    трамвай.управление.автоматическое = !трамвай.управление.автоматическое;
+                                    трамвай.управление.ручное = !трамвай.управление.ручное;
+                                }
+                                if (!трамвай.управление.ручное)
+                                {
+                                    goto Label_0E1A;
+                                }
+                                if (state5[11])
+                                {
+                                    трамвай.включен = !трамвай.включен;
+                                }
+                                if (state5[2])
                                 {
                                     if (трамвай.токоприЄмник.опущен)
                                     {
@@ -1515,636 +604,475 @@ namespace Trancity
                                         трамвай.токоприЄмник.поднимаетс€ = false;
                                     }
                                 }
-                                if (KeyState[Key.D6])
+                                if (state5[0])
                                 {
-                                    if (!трамвай.ƒверь«акрыта(5))
+                                    if (!трамвай.двери_водител€_закрыты)
                                     {
-                                        трамвай.ќткрытьƒвери(5, false);
+                                        трамвай.ќткрытьƒвери¬одител€(false);
                                     }
-                                    else if (!трамвай.ƒверьќткрыта(5))
+                                    else if (!трамвай.двери_водител€_открыты)
                                     {
-                                        трамвай.ќткрытьƒвери(5, true);
+                                        трамвай.ќткрытьƒвери¬одител€(true);
                                     }
                                 }
-                                if (KeyState[Key.D7])
+                                if (state5[1])
                                 {
-                                    if (!трамвай.ƒверь«акрыта(6))
+                                    if (!трамвай.двери_закрыты)
                                     {
-                                        трамвай.ќткрытьƒвери(6, false);
+                                        трамвай.ќткрытьƒвери(false);
                                     }
-                                    else if (!трамвай.ƒверьќткрыта(6))
+                                    else if (!трамвай.двери_открыты)
                                     {
-                                        трамвай.ќткрытьƒвери(6, true);
-                                    }
-                                }
-                                if (KeyState[Key.D8])
-                                {
-                                    if (!трамвай.ƒверь«акрыта(7))
-                                    {
-                                        трамвай.ќткрытьƒвери(7, false);
-                                    }
-                                    else if (!трамвай.ƒверьќткрыта(7))
-                                    {
-                                        трамвай.ќткрытьƒвери(7, true);
-                                    }
-                                }
-                                if (KeyState[Key.D9])
-                                {
-                                    if (!трамвай.ƒверь«акрыта(8))
-                                    {
-                                        трамвай.ќткрытьƒвери(8, false);
-                                    }
-                                    else if (!трамвай.ƒверьќткрыта(8))
-                                    {
-                                        трамвай.ќткрытьƒвери(8, true);
-                                    }
-                                }
-                                if (KeyState[Key.D0])
-                                {
-                                    if (!трамвай.ƒверь«акрыта(9))
-                                    {
-                                        трамвай.ќткрытьƒвери(9, false);
-                                    }
-                                    else if (!трамвай.ƒверьќткрыта(9))
-                                    {
-                                        трамвай.ќткрытьƒвери(9, true);
+                                        трамвай.ќткрытьƒвери(true);
                                     }
                                 }
                                 if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
                                 {
-                                    —истема_управлени€.– —”_“рамвай трамвай2 = (—истема_управлени€.– —”_“рамвай) трамвай.система_управлени€;
-                                    if ((KeyState[Key.Backspace] && (трамвай.скорость == 0.0)) && (трамвай2.позици€_контроллера == 0))
+                                    var трамвай2 = (—истема_управлени€.– —”_“рамвай)трамвай.система_управлени€;
+                                    switch (((-5 * state6.RotationZ) / num))
+                                    {
+                                        case -5:
+                                            трамвай2.позици€_контроллера = -5;
+                                            goto Label_0D93;
+
+                                        case -4:
+                                            if (трамвай2.позици€_контроллера > -4)
+                                            {
+                                                трамвай2.позици€_контроллера = -4;
+                                            }
+                                            goto Label_0D93;
+
+                                        case -3:
+                                            if (трамвай2.позици€_контроллера > -3)
+                                            {
+                                                трамвай2.позици€_контроллера = -3;
+                                            }
+                                            goto Label_0D93;
+
+                                        case -2:
+                                            if (трамвай2.позици€_контроллера > -2)
+                                            {
+                                                трамвай2.позици€_контроллера = -2;
+                                            }
+                                            goto Label_0D93;
+
+                                        case -1:
+                                            if (трамвай2.позици€_контроллера > -1)
+                                            {
+                                                трамвай2.позици€_контроллера = -1;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 0:
+                                            if (state6.RotationZ <= 0)
+                                            {
+                                                break;
+                                            }
+                                            if (трамвай2.позици€_контроллера > 0)
+                                            {
+                                                трамвай2.позици€_контроллера = 0;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 1:
+                                            if (трамвай2.позици€_контроллера < 1)
+                                            {
+                                                трамвай2.позици€_контроллера = 1;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 2:
+                                            if (трамвай2.позици€_контроллера < 1)
+                                            {
+                                                трамвай2.позици€_контроллера = 1;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 3:
+                                            if (трамвай2.позици€_контроллера < 2)
+                                            {
+                                                трамвай2.позици€_контроллера = 2;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 4:
+                                            if (трамвай2.позици€_контроллера < 3)
+                                            {
+                                                трамвай2.позици€_контроллера = 3;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 5:
+                                            трамвай2.позици€_контроллера = 4;
+                                            goto Label_0D93;
+
+                                        default:
+                                            goto Label_0D93;
+                                    }
+                                    if ((state6.RotationZ < 0) && (трамвай2.позици€_контроллера < 0))
+                                    {
+                                        трамвай2.позици€_контроллера = 0;
+                                    }
+                                Label_0D93:
+                                    if ((state5[7] && (трамвай.скорость == 0.0)) && (трамвай2.позици€_контроллера == 0))
                                     {
                                         трамвай2.позици€_реверсора = -трамвай2.позици€_реверсора;
                                     }
-                                     //if (KeyState[Key.LeftAlt] && (трамвай2.позици€_контроллера != 0))
-                                   //{
-                                         //  трамвай2.позици€_контроллера = 0;
-                                         //  трамвай2.пневматический_тормоз += 0.05;
-                                           // }
-                                    if (KeyState[Key.S])
+                                }
+                                switch (num16)
+                                {
+                                    case 0:
+                                        трамвай.указатель_поворота = 0;
+                                        трамвай.аварийна€_сигнализаци€ = false;
+                                        break;
+
+                                    case 2:
+                                        трамвай.указатель_поворота = 1;
+                                        трамвай.аварийна€_сигнализаци€ = false;
+                                        break;
+
+                                    case 4:
+                                        трамвай.указатель_поворота = 0;
+                                        трамвай.аварийна€_сигнализаци€ = true;
+                                        break;
+
+                                    case 6:
+                                        трамвай.указатель_поворота = -1;
+                                        трамвай.аварийна€_сигнализаци€ = false;
+                                        goto Label_0E1A;
+                                }
+                            }
+                        }
+                    Label_0E1A:;
+                        if (игрок.управл€емыйќбъект is “роллейбус)
+                        {
+                            “роллейбус троллейбус = (“роллейбус)игрок.управл€емыйќбъект;
+                            if (current_joystick == -1)//(игрок.inputGuid == SystemGuid.Keyboard)
+                            {
+                                if (троллейбус.управление.ручное)
+                                {
+                                    if (троллейбус.штанги.Length == 2)
                                     {
-                                        if (трамвай2.позици€_контроллера > трамвай2.позици€_min)
+                                        if (KeyState[Key.T])
                                         {
-                                            трамвай2.позици€_контроллера--;
+                                            if (троллейбус.штанги[0].ќпущена && троллейбус.штанги[1].ќпущена)
+                                            {
+                                                троллейбус.штанги[0].Ќайтиѕровод(this.мир.контактныеѕровода);
+                                                if (троллейбус.штанги[0].ѕровод != null)
+                                                {
+                                                    троллейбус.штанги[0].поднимаетс€ = true;
+                                                }
+                                                троллейбус.штанги[1].Ќайтиѕровод(this.мир.контактныеѕровода);
+                                                if (троллейбус.штанги[1].ѕровод != null)
+                                                {
+                                                    троллейбус.штанги[1].поднимаетс€ = true;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                троллейбус.штанги[0].поднимаетс€ = false;
+                                                троллейбус.штанги[1].поднимаетс€ = false;
+                                            }
                                         }
                                     }
-                                    else if (KeyState[Key.W] && (трамвай2.позици€_контроллера < трамвай2.позици€_max))
+                                    if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
                                     {
-                                        трамвай2.позици€_контроллера++;
+                                        —истема_управлени€.– —”_“роллейбус троллейбус2 = (—истема_управлени€.– —”_“роллейбус)троллейбус.система_управлени€;
+                                        if ((KeyState[Key.Backspace] && (троллейбус.скорость == 0.0)) && (троллейбус2.позици€_контроллера == 0))
+                                        {
+                                            троллейбус2.позици€_реверсора = -троллейбус2.позици€_реверсора;
+                                        }
+                                        if (KeyState[Key.LeftAlt] && (троллейбус2.позици€_контроллера != 0) && (троллейбус.скорость >= 0))
+                                        {
+                                            троллейбус2.позици€_контроллера = 0;
+                                            троллейбус2.пневматический_тормоз = 0.0;
+                                        }
+
+                                        if (KeyState.IsDirtyPressed(Key.DownArrow))//[Key.DownArrow])
+                                        {
+                                            if ((троллейбус2.пневматический_тормоз > 0.0) && (троллейбус2.пневматический_тормоз < 1.0))
+                                            {
+                                                троллейбус2.пневматический_тормоз += 0.05;
+                                            }
+                                        }
+                                        else if (KeyState.IsDirtyPressed(Key.UpArrow) && (троллейбус2.пневматический_тормоз > 0.0))
+                                        {
+                                            троллейбус2.пневматический_тормоз -= 0.05;
+                                            if (троллейбус2.пневматический_тормоз < 0.0)
+                                            {
+                                                троллейбус2.пневматический_тормоз = 0.0;
+                                            }
+                                        }
+                                        if (KeyState[Key.DownArrow])//[Key.DownArrow] [Key.UpArrow]
+                                        {
+                                            if (троллейбус2.позици€_контроллера > троллейбус2.позици€_min)
+                                            {
+                                                троллейбус2.позици€_контроллера--;
+                                            }
+                                            else if (троллейбус2.пневматический_тормоз == 0.0)
+                                            {
+                                                троллейбус2.пневматический_тормоз = 0.05;
+                                            }
+                                        }
+                                        else if ((KeyState[Key.UpArrow] && (троллейбус2.позици€_контроллера < троллейбус2.позици€_max)) && (троллейбус2.пневматический_тормоз == 0.0))
+                                        {
+                                            троллейбус2.позици€_контроллера++;
+                                        }
+                                        if ((KeyState[Key.O]) && (троллейбус.ах != null))
+                                        {
+                                            троллейбус.ах.включЄн = !троллейбус.ах.включЄн;
+                                        }
                                     }
-                                }
-                                if (!KeyState[Key.RightControl])
-                                {
+                                    if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
+                                    {
+                                        —истема_управлени€. ѕ_јвто авто = (—истема_управлени€. ѕ_јвто)троллейбус.система_управлени€;
+                                        if ((KeyState[Key.Z] && (авто.режим > 0)) && (((авто.текущий_режим != "R") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто.режим--;
+                                        }
+                                        if ((KeyState[Key.X] && (авто.режим < (авто.режимы.Length - 1))) && (((авто.текущий_режим != "P") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто.режим++;
+                                        }
+                                        if (KeyState[Key.DownArrow])
+                                        {
+                                            if (авто.положение_педалей == 0.0)
+                                            {
+                                                авто.положение_педалей = (-World.прошло¬ремени * 5.0) / 3.0;
+                                            }
+                                        }
+                                        else if (KeyState[Key.UpArrow] && (авто.положение_педалей == 0.0))
+                                        {
+                                            авто.положение_педалей = (World.прошло¬ремени * 5.0) / 3.0;
+                                        }
+                                        if (KeyState.IsDirtyPressed(Key.DownArrow))
+                                        {
+                                            if (авто.положение_педалей < 0.0)
+                                            {
+                                                авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей < -1.0)
+                                                {
+                                                    авто.положение_педалей = -1.0;
+                                                }
+                                            }
+                                            if (авто.положение_педалей > 0.0)
+                                            {
+                                                авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей < 0.0)
+                                                {
+                                                    авто.положение_педалей = 0.0;
+                                                    KeyState.keyticks[0xd0] = 1;
+                                                }
+                                            }
+                                        }
+
+                                        else if (KeyState.IsDirtyPressed(Key.UpArrow))
+                                        {
+                                            if (авто.положение_педалей > 0.0)
+                                            {
+                                                авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей > 1.0)
+                                                {
+                                                    авто.положение_педалей = 1.0;
+                                                }
+                                            }
+                                            if (авто.положение_педалей < 0.0)
+                                            {
+                                                авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей > 0.0)
+                                                {
+                                                    авто.положение_педалей = 0.0;
+                                                    KeyState.keyticks[200] = 1;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
+                                    {
+                                        —истема_управлени€. ѕ_јвто1 авто = (—истема_управлени€. ѕ_јвто1)троллейбус.система_управлени€;
+                                        if (KeyState[Key.Z])
+                                        {
+                                            авто.передача--;
+                                        }
+                                        if (KeyState[Key.X])
+                                        {
+                                            авто.передача++;
+                                        }
+                                        if (KeyState[Key.LeftAlt])
+                                        {
+                                            авто.положение_педалей = 0.0;
+                                        }
+                                        /*if ((KeyState[Key.Z] && (авто.режим > 0)) && (((авто.текущий_режим != "R") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто.режим--;
+                                        }
+                                        if ((KeyState[Key.X] && (авто.режим < (авто.режимы.Length - 1))) && (((авто.текущий_режим != "P") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто.режим++;
+                                        }*/
+                                        if (KeyState[Key.DownArrow])
+                                        {
+                                            if (авто.положение_педалей == 0.0)
+                                            {
+                                                авто.положение_педалей = (-World.прошло¬ремени * 5.0) / 3.0;
+                                            }
+                                        }
+                                        else if (KeyState[Key.UpArrow] && (авто.положение_педалей == 0.0))
+                                        {
+                                            авто.положение_педалей = (World.прошло¬ремени * 5.0) / 3.0;
+                                        }
+                                        if (KeyState.IsDirtyPressed(Key.DownArrow))
+                                        {
+                                            if (авто.положение_педалей < 0.0)
+                                            {
+                                                авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей < -1.0)
+                                                {
+                                                    авто.положение_педалей = -1.0;
+                                                }
+                                            }
+                                            if (авто.положение_педалей > 0.0)
+                                            {
+                                                авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей < 0.0)
+                                                {
+                                                    авто.положение_педалей = 0.0;
+                                                    KeyState.keyticks[0xd0] = 1;
+                                                }
+                                            }
+                                        }
+
+                                        else if (KeyState.IsDirtyPressed(Key.UpArrow))
+                                        {
+                                            if (авто.положение_педалей > 0.0)
+                                            {
+                                                авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей > 1.0)
+                                                {
+                                                    авто.положение_педалей = 1.0;
+                                                }
+                                            }
+                                            if (авто.положение_педалей < 0.0)
+                                            {
+                                                авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей > 0.0)
+                                                {
+                                                    авто.положение_педалей = 0.0;
+                                                    KeyState.keyticks[200] = 1;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!fmouse)
+                                    {
+                                        if (KeyState.IsDirtyPressed(Key.LeftArrow))
+                                        {
+                                            троллейбус.поворот–ул€ -= 0.3 * World.прошло¬ремени;
+                                        }
+                                        if (KeyState.IsDirtyPressed(Key.RightArrow))
+                                        {
+                                            троллейбус.поворот–ул€ += 0.3 * World.прошло¬ремени;
+                                        }
+                                        if (KeyState.IsDirtyPressed(Key.Space) && space)
+                                        {
+
+                                            if (троллейбус.поворот–ул€ < 0)
+                                            {
+                                                троллейбус.поворот–ул€ -= 0.3 * World.прошло¬ремени;
+                                                if (Math.Abs(троллейбус.поворот–ул€) > 0.001)
+                                                {
+                                                    троллейбус.поворот–ул€ = 0.0;
+                                                }
+                                            }
+                                            if (троллейбус.поворот–ул€ > 0)
+                                            {
+                                                троллейбус.поворот–ул€ += 0.3 * World.прошло¬ремени;
+                                                if (Math.Abs(троллейбус.поворот–ул€) > 0.001)
+
+                                                {
+                                                    троллейбус.поворот–ул€ = 0.0;
+                                                }
+                                            }
+                                            /*
+                                                if (троллейбус.поворот–ул€ != 0.0)
+
+                     {   
+                                                   /* var num6 =
+                         if (num6 < -Math.PI)
+                         {
+                             num6 += Math.PI * 2.0;
+                         }
+                         if (num6 > Math.PI)
+                         {
+                             num6 -= Math.PI * 2.0;
+                         }
+                                            int num7 = Math.Sign((double)(троллейбус.поворот–ул€));
+                         if (num7 > 0)
+                         {
+                             if (Game.fmouse)
+                             {
+                                 троллейбус.поворот–ул€ += num7 * World.прошло¬ремени;
+                                 if (Math.Abs(троллейбус.поворот–ул€) < 0.001)
+                                 {
+                                     троллейбус.поворот–ул€ = 0.0;
+                                 }
+                             }
+                             }*/
+
+
+
+                                        }
+                                    }
+                                    else if (!mouseButtons[0])
+                                    {
+                                        троллейбус.поворот–ул€ += x * 0.001;
+                                    }
                                     if (KeyState[Key.Q])
                                     {
-                                        if (трамвай.указатель_поворота >= 0)
+                                        if (троллейбус.указатель_поворота >= 0)
                                         {
-                                            трамвай.указатель_поворота = -1;
-                                            трамвай.аварийна€_сигнализаци€ = false;
+                                            троллейбус.указатель_поворота = -1;
+                                            троллейбус.аварийна€_сигнализаци€ = false;
                                         }
                                         else
                                         {
-                                            трамвай.указатель_поворота = 0;
+                                            троллейбус.указатель_поворота = 0;
+                                        }
+                                    }
+                                    if (KeyState[Key.W])
+                                    {
+                                        if (троллейбус.указатель_поворота <= 0)
+                                        {
+                                            троллейбус.указатель_поворота = 1;
+                                            троллейбус.аварийна€_сигнализаци€ = false;
+                                        }
+                                        else
+                                        {
+                                            троллейбус.указатель_поворота = 0;
                                         }
                                     }
                                     if (KeyState[Key.E])
                                     {
-                                           if (трамвай.указатель_поворота <= 0)
+                                        if (троллейбус.аварийна€_сигнализаци€)
                                         {
-                                            трамвай.указатель_поворота = 1;
-                                            трамвай.аварийна€_сигнализаци€ = false;
+                                            троллейбус.аварийна€_сигнализаци€ = false;
                                         }
                                         else
                                         {
-                                            трамвай.указатель_поворота = 0;
+                                            троллейбус.аварийна€_сигнализаци€ = true;
+                                            троллейбус.указатель_поворота = 0;
                                         }
                                     }
                                 }
-                                else if (((трамвай.скорость == 0.0) && трамвай.двери_водител€_открыты) && ((трамвай.передн€€_ось.текущий_рельс.следующие_рельсы.Length > 1) && (трамвай.передн€€_ось.пройденное_рассто€ние_по_рельсу > (трамвай.передн€€_ось.текущий_рельс.ƒлина - 8.0))))
-                                {
-                                    if (KeyState[Key.A])
-                                    {
-                                        трамвай.передн€€_ось.текущий_рельс.следующий_рельс = 0;
-                                    }
-                                    if (KeyState[Key.D])
-                                    {
-                                        трамвай.передн€€_ось.текущий_рельс.следующий_рельс = 1;
-                                    }
-                                }
-                                if (KeyState[Key.O])
-                                {
-                                    трамвай.аварийна€_сигнализаци€ = !трамвай.аварийна€_сигнализаци€;
-                                }
                             }
-                        }
-                        else
-                        {
-                            FilteredJoystickState state5 = FJStatesArray[current_joystick];
-                            JoystickState state6 = JStatesArray[current_joystick];
-                            int num16 = state6.GetPointOfViewControllers()[0];//.GetPointOfView()[0];
-                            if (num16 >= 0)
+                            else
                             {
-                                num16 = (int) Math.Round((double) ((num16 * 1.0) / 4500.0));
-                            }
-                            bool flag1 = state5[6];
-                            if (state5[5])
-                            {
-                                трамвай.управление.автоматическое = !трамвай.управление.автоматическое;
-                                трамвай.управление.ручное = !трамвай.управление.ручное;
-                            }
-                            if (!трамвай.управление.ручное)
-                            {
-                                goto Label_0E1A;
-                            }
-                            if (state5[11])
-                            {
-                                трамвай.включен = !трамвай.включен;
-                            }
-                            if (state5[2])
-                            {
-                                if (трамвай.токоприЄмник.опущен)
-                                {
-                                    трамвай.токоприЄмник.Ќайтиѕровод(мир.контактныеѕровода2);
-                                    if (трамвай.токоприЄмник.ѕровод != null)
-                                    {
-                                           трамвай.токоприЄмник.поднимаетс€ = true;
-                                    }
-                                }
-                                else if (трамвай.токоприЄмник.подн€т)
-                                {
-                                    трамвай.токоприЄмник.поднимаетс€ = false;
-                                }
-                            }
-                            if (state5[0])
-                            {
-                                if (!трамвай.двери_водител€_закрыты)
-                                {
-                                    трамвай.ќткрытьƒвери¬одител€(false);
-                                }
-                                else if (!трамвай.двери_водител€_открыты)
-                                {
-                                    трамвай.ќткрытьƒвери¬одител€(true);
-                                }
-                            }
-                            if (state5[1])
-                            {
-                                if (!трамвай.двери_закрыты)
-                                {
-                                    трамвай.ќткрытьƒвери(false);
-                                }
-                                else if (!трамвай.двери_открыты)
-                                {
-                                    трамвай.ќткрытьƒвери(true);
-                                }
-                            }
-                            if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
-                            {
-                                var трамвай2 = (—истема_управлени€.– —”_“рамвай) трамвай.система_управлени€;
-                                switch (((-5 * state6.RotationZ) / num))
-                                {
-                                    case -5:
-                                        трамвай2.позици€_контроллера = -5;
-                                        goto Label_0D93;
-        
-                                    case -4:
-                                        if (трамвай2.позици€_контроллера > -4)
-                                        {
-                                            трамвай2.позици€_контроллера = -4;
-                                        }
-                                        goto Label_0D93;
-        
-                                    case -3:
-                                        if (трамвай2.позици€_контроллера > -3)
-                                        {
-                                            трамвай2.позици€_контроллера = -3;
-                                        }
-                                        goto Label_0D93;
-        
-                                    case -2:
-                                        if (трамвай2.позици€_контроллера > -2)
-                                        {
-                                            трамвай2.позици€_контроллера = -2;
-                                        }
-                                        goto Label_0D93;
-        
-                                    case -1:
-                                        if (трамвай2.позици€_контроллера > -1)
-                                        {
-                                            трамвай2.позици€_контроллера = -1;
-                                        }
-                                        goto Label_0D93;
-        
-                                    case 0:
-                                        if (state6.RotationZ <= 0)
-                                        {
-                                            break;
-                                        }
-                                        if (трамвай2.позици€_контроллера > 0)
-                                        {
-                                            трамвай2.позици€_контроллера = 0;
-                                        }
-                                        goto Label_0D93;
-        
-                                    case 1:
-                                        if (трамвай2.позици€_контроллера < 1)
-                                        {
-                                            трамвай2.позици€_контроллера = 1;
-                                        }
-                                        goto Label_0D93;
-        
-                                    case 2:
-                                        if (трамвай2.позици€_контроллера < 1)
-                                        {
-                                            трамвай2.позици€_контроллера = 1;
-                                        }
-                                        goto Label_0D93;
-        
-                                    case 3:
-                                        if (трамвай2.позици€_контроллера < 2)
-                                        {
-                                            трамвай2.позици€_контроллера = 2;
-                                        }
-                                        goto Label_0D93;
-        
-                                    case 4:
-                                        if (трамвай2.позици€_контроллера < 3)
-                                        {
-                                            трамвай2.позици€_контроллера = 3;
-                                        }
-                                        goto Label_0D93;
-        
-                                        case 5:
-                                            трамвай2.позици€_контроллера = 4;
-                                        goto Label_0D93;
-        
-                                    default:
-                                        goto Label_0D93;
-                                }
-                                if ((state6.RotationZ < 0) && (трамвай2.позици€_контроллера < 0))
-                                {
-                                    трамвай2.позици€_контроллера = 0;
-                                }
-                                Label_0D93:
-                                if ((state5[7] && (трамвай.скорость == 0.0)) && (трамвай2.позици€_контроллера == 0))
-                                {
-                                    трамвай2.позици€_реверсора = -трамвай2.позици€_реверсора;
-                                }
-                            }
-                            switch (num16)
-                            {
-                                case 0:
-                                    трамвай.указатель_поворота = 0;
-                                    трамвай.аварийна€_сигнализаци€ = false;
-                                    break;
-        
-                                case 2:
-                                    трамвай.указатель_поворота = 1;
-                                    трамвай.аварийна€_сигнализаци€ = false;
-                                    break;
-        
-                                case 4:
-                                    трамвай.указатель_поворота = 0;
-                                    трамвай.аварийна€_сигнализаци€ = true;
-                                    break;
-        
-                                case 6:
-                                    трамвай.указатель_поворота = -1;
-                                    трамвай.аварийна€_сигнализаци€ = false;
-                                    goto Label_0E1A;
-                            }
-                        }
-                    }
-                    Label_0E1A:;
-                    if (игрок.управл€емыйќбъект is “роллейбус)
-                    {
-                        “роллейбус троллейбус = (“роллейбус) игрок.управл€емыйќбъект;
-                        if (current_joystick == -1)//(игрок.inputGuid == SystemGuid.Keyboard)
-                        {
-                            if (троллейбус.управление.ручное)
-                            {
-                                if (троллейбус.штанги.Length == 2)
-                                {
-                                    if (KeyState[Key.T])
-                                    {
-                                        if (троллейбус.штанги[0].ќпущена && троллейбус.штанги[1].ќпущена)
-                                        {
-                                            троллейбус.штанги[0].Ќайтиѕровод(this.мир.контактныеѕровода);
-                                            if (троллейбус.штанги[0].ѕровод != null)
-                                            {
-                                                троллейбус.штанги[0].поднимаетс€ = true;
-                                            }
-                                            троллейбус.штанги[1].Ќайтиѕровод(this.мир.контактныеѕровода);
-                                            if (троллейбус.штанги[1].ѕровод != null)
-                                            {
-                                                троллейбус.штанги[1].поднимаетс€ = true;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            троллейбус.штанги[0].поднимаетс€ = false;
-                                            троллейбус.штанги[1].поднимаетс€ = false;
-                                        }
-                                    }
-                                }
-                                if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
-                                {
-                                    —истема_управлени€.– —”_“роллейбус троллейбус2 = (—истема_управлени€.– —”_“роллейбус) троллейбус.система_управлени€;
-                                    if ((KeyState[Key.Backspace] && (троллейбус.скорость == 0.0)) && (троллейбус2.позици€_контроллера == 0))
-                                    {
-                                        троллейбус2.позици€_реверсора = -троллейбус2.позици€_реверсора;
-                                    }
-                                    if (KeyState[Key.LeftAlt] && (троллейбус2.позици€_контроллера != 0)&& (троллейбус.скорость >= 0))
-                                    {
-                                           троллейбус2.позици€_контроллера = 0;
-                                           троллейбус2.пневматический_тормоз = 0.0;
-                                            }
-                                   
-                                    if (KeyState.IsDirtyPressed(Key.S))//[Key.DownArrow])
-                                    {
-                                        if ((троллейбус2.пневматический_тормоз > 0.0) && (троллейбус2.пневматический_тормоз < 1.0))
-                                        {
-                                            троллейбус2.пневматический_тормоз += 0.05;
-                                        }
-                                    }
-                                    else if (KeyState.IsDirtyPressed(Key.W) && (троллейбус2.пневматический_тормоз > 0.0))
-                                    {
-                                        троллейбус2.пневматический_тормоз -= 0.05;
-                                        if (троллейбус2.пневматический_тормоз < 0.0)
-                                        {
-                                            троллейбус2.пневматический_тормоз = 0.0;
-                                        }
-                                    }
-                                    if (KeyState[Key.S])//[Key.DownArrow] [Key.UpArrow]
-                                    {
-                                        if (троллейбус2.позици€_контроллера > троллейбус2.позици€_min)
-                                        {
-                                            троллейбус2.позици€_контроллера--;
-                                        }
-                                        else if (троллейбус2.пневматический_тормоз == 0.0)
-                                        {
-                                            троллейбус2.пневматический_тормоз = 0.05;
-                                        }
-                                    }
-                                    else if ((KeyState[Key.W] && (троллейбус2.позици€_контроллера < троллейбус2.позици€_max)) && (троллейбус2.пневматический_тормоз == 0.0))
-                                    {
-                                        троллейбус2.позици€_контроллера++;
-                                    }
-                                    if ((KeyState[Key.P]) && (троллейбус.ах != null))
-                                    {
-                                        троллейбус.ах.включЄн = !троллейбус.ах.включЄн;
-                                    }
-                                }
-                                if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
-                                {
-                                    —истема_управлени€. ѕ_јвто авто = (—истема_управлени€. ѕ_јвто) троллейбус.система_управлени€;
-                                    if ((KeyState[Key.Z] && (авто.режим > 0)) && (((авто.текущий_режим != "R") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                    {
-                                        авто.режим--;
-                                    }
-                                    if ((KeyState[Key.X] && (авто.режим < (авто.режимы.Length - 1))) && (((авто.текущий_режим != "P") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                    {
-                                        авто.режим++;
-                                    }
-                                    if (KeyState[Key.S])
-                                    {
-                                        if (авто.положение_педалей == 0.0)
-                                        {
-                                            авто.положение_педалей = (-World.прошло¬ремени * 5.0) / 3.0;
-                                        }
-                                    }
-                                    else if (KeyState[Key.W] && (авто.положение_педалей == 0.0))
-                                    {
-                                        авто.положение_педалей = (World.прошло¬ремени * 5.0) / 3.0;
-                                    }
-                                    if (KeyState.IsDirtyPressed(Key.S))
-                                    {
-                                        if (авто.положение_педалей < 0.0)
-                                        {
-                                            авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей < -1.0)
-                                            {
-                                                авто.положение_педалей = -1.0;
-                                            }
-                                        }
-                                        if (авто.положение_педалей > 0.0)
-                                        {
-                                            авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей < 0.0)
-                                            {
-                                                авто.положение_педалей = 0.0;
-                                                KeyState.keyticks[0xd0] = 1;
-                                            }
-                                        }
-                                    }
-                                    
-                                    else if (KeyState.IsDirtyPressed(Key.W))
-                                    {
-                                        if (авто.положение_педалей > 0.0)
-                                        {
-                                            авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей > 1.0)
-                                            {
-                                                авто.положение_педалей = 1.0;
-                                            }
-                                        }
-                                        if (авто.положение_педалей < 0.0)
-                                        {
-                                            авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей > 0.0)
-                                            {
-                                                авто.положение_педалей = 0.0;
-                                                KeyState.keyticks[200] = 1;
-                                            }
-                                        }
-                                    }
-                                }
-                                if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
-                                {
-                                    —истема_управлени€. ѕ_јвто1 авто = (—истема_управлени€. ѕ_јвто1) троллейбус.система_управлени€;
-                                    if (KeyState[Key.Z])
-                                    {
-                                        авто.передача--;
-                                    }
-                                    if (KeyState[Key.X])
-                                    {
-                                        авто.передача++;
-                                    }
-                                    if (KeyState[Key.LeftAlt])
-                                    {
-                                        авто.передача = 0;
-                                    }
-                                    /*if ((KeyState[Key.Z] && (авто.режим > 0)) && (((авто.текущий_режим != "R") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                    {
-                                        авто.режим--;
-                                    }
-                                    if ((KeyState[Key.X] && (авто.режим < (авто.режимы.Length - 1))) && (((авто.текущий_режим != "P") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
-                                    {
-                                        авто.режим++;
-                                    }*/
-                                    if (KeyState[Key.S])
-                                    {
-                                        if (авто.положение_педалей == 0.0)
-                                        {
-                                            авто.положение_педалей = (-World.прошло¬ремени * 5.0) / 3.0;
-                                        }
-                                    }
-                                    else if (KeyState[Key.W] && (авто.положение_педалей == 0.0))
-                                    {
-                                        авто.положение_педалей = (World.прошло¬ремени * 5.0) / 3.0;
-                                    }
-                                    if (KeyState.IsDirtyPressed(Key.S))
-                                    {
-                                        if (авто.положение_педалей < 0.0)
-                                        {
-                                            авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей < -1.0)
-                                            {
-                                                авто.положение_педалей = -1.0;
-                                            }
-                                        }
-                                        if (авто.положение_педалей > 0.0)
-                                        {
-                                            авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей < 0.0)
-                                            {
-                                                авто.положение_педалей = 0.0;
-                                                KeyState.keyticks[0xd0] = 1;
-                                            }
-                                        }
-                                    }
-                                    
-                                    else if (KeyState.IsDirtyPressed(Key.W))
-                                    {
-                                        if (авто.положение_педалей > 0.0)
-                                        {
-                                            авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей > 1.0)
-                                            {
-                                                авто.положение_педалей = 1.0;
-                                            }
-                                        }
-                                        if (авто.положение_педалей < 0.0)
-                                        {
-                                            авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
-                                            if (авто.положение_педалей > 0.0)
-                                            {
-                                                авто.положение_педалей = 0.0;
-                                                KeyState.keyticks[200] = 1;
-                                            }
-                                        }
-                                    }
-                                }
-                                if (!fmouse)
-                                {
-                                    if (KeyState.IsDirtyPressed(Key.A))
-                                    {
-                                        троллейбус.поворот–ул€ -= 0.3 * World.прошло¬ремени;
-                                    }
-                                    if (KeyState.IsDirtyPressed(Key.D))
-                                    {
-                                        троллейбус.поворот–ул€ += 0.3 * World.прошло¬ремени;
-                                    }
-                                    if (KeyState.IsDirtyPressed(Key.Space) && space)
-                                    {
-                                        
-                                       if (троллейбус.поворот–ул€ < 0)
-                                        {
-                                           троллейбус.поворот–ул€ -= 0.3 * World.прошло¬ремени;
-                                           if (Math.Abs(троллейбус.поворот–ул€) > 0.001)
-                            {
-                                троллейбус.поворот–ул€ = 0.0;
-                            }
-                                       }
-                                       if (троллейбус.поворот–ул€ > 0)
-                                        {
-                                           троллейбус.поворот–ул€ += 0.3 * World.прошло¬ремени;
-                                           if (Math.Abs(троллейбус.поворот–ул€) > 0.001)
-                                               
-                            {
-                                троллейбус.поворот–ул€ = 0.0;
-                            }
-                                       }
-                                       /*
-                                           if (троллейбус.поворот–ул€ != 0.0)
-                                            
-                {   
-                                              /* var num6 =
-                    if (num6 < -Math.PI)
-                    {
-                        num6 += Math.PI * 2.0;
-                    }
-                    if (num6 > Math.PI)
-                    {
-                        num6 -= Math.PI * 2.0;
-                    }
-                                       int num7 = Math.Sign((double)(троллейбус.поворот–ул€));
-                    if (num7 > 0)
-                    {
-                        if (Game.fmouse)
-                        {
-                            троллейбус.поворот–ул€ += num7 * World.прошло¬ремени;
-                            if (Math.Abs(троллейбус.поворот–ул€) < 0.001)
-                            {
-                                троллейбус.поворот–ул€ = 0.0;
-                            }
-                        }
-                        }*/
-                                       
-                                    
-                     
-                                    }
-                                }
-                                else if (!mouseButtons[0])
-                                {
-                                    троллейбус.поворот–ул€ += x * 0.001;
-                                }
-                                if (KeyState[Key.Q])
-                                {
-                                    if (троллейбус.указатель_поворота >= 0)
-                                    {
-                                        троллейбус.указатель_поворота = -1;
-                                        троллейбус.аварийна€_сигнализаци€ = false;
-                                    }
-                                    else
-                                    {
-                                        троллейбус.указатель_поворота = 0;
-                                    }
-                                }
-                                if (KeyState[Key.E])
-                                {
-                                    if (троллейбус.указатель_поворота <= 0)
-                                    {
-                                        троллейбус.указатель_поворота = 1;
-                                        троллейбус.аварийна€_сигнализаци€ = false;
-                                    }
-                                    else
-                                    {
-                                        троллейбус.указатель_поворота = 0;
-                                    }
-                                }
-                                if (KeyState[Key.O])
-                                {
-                                    if (троллейбус.аварийна€_сигнализаци€)
-                                    {
-                                        троллейбус.аварийна€_сигнализаци€ = false;
-                                    }
-                                    else
-                                    {
-                                        троллейбус.аварийна€_сигнализаци€ = true;
-                                        троллейбус.указатель_поворота = 0;
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
                                 FilteredJoystickState state7 = FJStatesArray[current_joystick];
                                 JoystickState state8 = JStatesArray[current_joystick];
                                 int num20 = state8.GetPointOfViewControllers()[0];//.GetPointOfView()[0];
                                 if (num20 >= 0)
                                 {
-                                    num20 = (int) Math.Round((double) ((num20 * 1.0) / 4500.0));
+                                    num20 = (int)Math.Round((double)((num20 * 1.0) / 4500.0));
                                 }
                                 if (state7[5])
                                 {
@@ -2206,15 +1134,15 @@ namespace Trancity
                                     }
                                     if (!state7[4, false] && !state7[6, false])
                                     {
-                                        троллейбус.поворот–ул€ += ((0.5 * World.прошло¬ремени) * state8.X) / ((double) num);
+                                        троллейбус.поворот–ул€ += ((0.5 * World.прошло¬ремени) * state8.X) / ((double)num);
                                     }
-                                    double num21 = (-1.0 * state8.RotationZ) / ((double) num);
+                                    double num21 = (-1.0 * state8.RotationZ) / ((double)num);
                                     if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
                                     {
-                                        —истема_управлени€.– —”_“роллейбус троллейбус3 = (—истема_управлени€.– —”_“роллейбус) троллейбус.система_управлени€;
+                                        —истема_управлени€.– —”_“роллейбус троллейбус3 = (—истема_управлени€.– —”_“роллейбус)троллейбус.система_управлени€;
                                         if (num21 >= -0.6)
                                         {
-                                            троллейбус3.позици€_контроллера = (int) (4.0 * num21);
+                                            троллейбус3.позици€_контроллера = (int)(4.0 * num21);
                                             троллейбус3.пневматический_тормоз = 0.0;
                                         }
                                         else
@@ -2229,7 +1157,7 @@ namespace Trancity
                                     }
                                     if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
                                     {
-                                        —истема_управлени€. ѕ_јвто авто2 = (—истема_управлени€. ѕ_јвто) троллейбус.система_управлени€;
+                                        —истема_управлени€. ѕ_јвто авто2 = (—истема_управлени€. ѕ_јвто)троллейбус.система_управлени€;
                                         авто2.положение_педалей = num21;
                                         if ((state7[6] && (авто2.режим > 0)) && (((авто2.текущий_режим != "R") && (авто2.текущий_режим != "N")) || ((авто2.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
                                         {
@@ -2242,7 +1170,7 @@ namespace Trancity
                                     }
                                     if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
                                     {
-                                        —истема_управлени€. ѕ_јвто1 авто2 = (—истема_управлени€. ѕ_јвто1) троллейбус.система_управлени€;
+                                        —истема_управлени€. ѕ_јвто1 авто2 = (—истема_управлени€. ѕ_јвто1)троллейбус.система_управлени€;
                                         авто2.положение_педалей = num21;
                                         if ((state7[6] && (авто2.передача_перевод > 0)) && (((авто2.текуща€_передача != "R") && (авто2.текуща€_передача != "N")) || ((авто2.положение_педалей == 0.0) && (троллейбус.скорость == 0.0))))
                                         {
@@ -2276,15 +1204,1087 @@ namespace Trancity
                                             break;
                                     }
                                 }
-//                            }
+                                //                            }
+                            }
                         }
                     }
                 }
             }
+            if (NewControl)
+            {
+                if (активна)
+                {
+                    foreach (var игрок in игроки)
+                    {
+                        if (игрок.управл€емыйќбъект != null)
+                        {
+                            DoublePoint point5 = игрок.управл€емыйќбъект.position - игрок.cameraPosition.XZPoint;
+                            if (point5.Modulus > 200.0)
+                            {
+                                игрок.управл€емыйќбъект.управление = ”правление.јвтоматическое;
+                                игрок.управл€емыйќбъект = null;
+                                игрок.объектѕрив€зки = null;
+                            }
+                        }
+                        int current_joystick = -1;
+                        for (int k = 0; k < joystickDevices.Length; k++)
+                        {
+                            if (игрок.inputGuid == deviceGuids[k])
+                            {
+                                current_joystick = k;
+                                break;
+                            }
+                        }
+                        if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
+                        {
+                            //                        byte[] mouseButtons = state.GetMouseButtons();
+                            //                        int x = state.X;
+                            //                        int y = state.Y;
+                            //                        int z = state.Z;
+                            //                        if ((mouseButtons[1] != 0) && (this._lastMouseButtons[1] == 0))
+                            if ((mouseButtons[1]) && (!this._lastMouseButtons[1]))
+                            {
+                                this.ѕрив€зывать(игрок);
+                            }
+                            if (!MyDirect3D.вид_сверху)
+                            {
+                                //                            if (mouseButtons[0] == 0)
+                                if (!mouseButtons[0])
+                                {
+                                    игрок.cameraRotationChange.x -= 0.001 * x;
+                                    игрок.cameraRotationChange.y -= 0.001 * y;
+                                }
+                                else
+                                {
+                                    DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                                    point.x -= 0.1 * y;
+                                    point.y -= 0.1 * x;
+                                    игрок.cameraPositionChange.x = (point * new DoublePoint(игрок.cameraRotation.x)).x;
+                                    игрок.cameraPositionChange.z = (point * new DoublePoint(игрок.cameraRotation.x)).y;
+                                }
+                                игрок.cameraPositionChange.y += 0.001 * z;
+                            }
+                            else
+                            {
+                                MyDirect3D.масштаб += 0.001 * z;
+                                if (MyDirect3D.масштаб <= 2.5) MyDirect3D.масштаб = 2.5;
+                                //                            if (mouseButtons[0] != 0)
+                                if (mouseButtons[0])
+                                {
+                                    DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z);
+                                    point.x += 0.01 * x;
+                                    point.y -= 0.01 * y;
+                                    игрок.cameraPositionChange.x = point.x;
+                                    игрок.cameraPositionChange.z = point.y;
+                                }
+                            }
+                            this._lastMouseButtons = mouseButtons;
+                        }
+                        else
+                        {
+                            FilteredJoystickState Current_FJState = FJStatesArray[current_joystick];
+                            JoystickState Current_JState = JStatesArray[current_joystick];
+                            if (Current_FJState[8])
+                            {
+                                this.ѕрив€зывать(игрок);
+                            }
+                            double num8 = (0.05 * Current_JState.X) / ((double)num);
+                            double num9 = (0.02 * Current_JState.Y) / ((double)num);
+                            double num10 = (0.05 * Current_JState.Z) / ((double)num);
+                            switch (Current_JState.GetPointOfViewControllers()[0])//.GetPointOfView()[0])
+                            {
+                                case 0:
+                                    num10 = 0.04;
+                                    break;
+
+                                case 0x4650:
+                                    num10 = -0.04;
+                                    break;
+
+                                default:
+                                    num10 = 0.0;
+                                    break;
+                            }
+                            if (((игрок.управл€емыйќбъект != null) && (игрок.управл€емыйќбъект is Ѕезрельсовый_“ранспорт)) && игрок.управл€емыйќбъект.управление.ручное)
+                            {
+                                if (!Current_FJState[4, false])
+                                {
+                                    int num12 = 6;
+                                    if (((Transport)игрок.управл€емыйќбъект).система_управлени€ is —истема_управлени€.јвтобусна€)
+                                    {
+                                        num12 = 10;
+                                    }
+                                    if (Current_FJState[num12, false])
+                                    {
+                                        игрок.cameraRotationChange.x -= num8;
+                                        игрок.cameraRotationChange.y -= num9;
+                                    }
+                                }
+                                else
+                                {
+                                    DoublePoint point2 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                                    point2.x -= 10.0 * num9;
+                                    point2.y -= 10.0 * num8;
+                                    игрок.cameraPositionChange.x = (point2 * new DoublePoint(игрок.cameraRotation.x)).x;
+                                    игрок.cameraPositionChange.z = (point2 * new DoublePoint(игрок.cameraRotation.x)).y;
+                                    игрок.cameraPositionChange.y += num10;
+                                }
+                            }
+                            else if (!Current_FJState[4, false])
+                            {
+                                игрок.cameraRotationChange.x -= num8;
+                                игрок.cameraRotationChange.y -= num9;
+                            }
+                            else
+                            {
+                                DoublePoint point3 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                                point3.x -= 10.0 * num9;
+                                point3.y -= 10.0 * num8;
+                                игрок.cameraPositionChange.x = (point3 * new DoublePoint(игрок.cameraRotation.x)).x;
+                                игрок.cameraPositionChange.z = (point3 * new DoublePoint(игрок.cameraRotation.x)).y;
+                                игрок.cameraPositionChange.y += num10;
+                            }
+                        }
+                        /*var _y = мир.GetHeight(игрок.cameraPosition.xz_point);
+                        if (игрок.cameraPosition.y - 0.01 < _y)
+                        {
+                            игрок.cameraPosition.y = _y + 0.01;
+                            игрок.cameraPositionChange.y = 0;
+                        }*/
+                        if (игрок.управл€емыйќбъект == null) continue;
+                        var _transport = (Transport)игрок.управл€емыйќбъект;
+                        if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
+                        {
+                            if (KeyState[Key.L])
+                            {// TODO: пофиксить список остановок при смене управлени€
+                                _transport.управление.автоматическое = !_transport.управление.автоматическое;
+                                //_transport.currentStop = _transport.nextStop = null;
+                                //_transport.nextStop = _transport.currentStop = null;
+                                _transport.stopIndex = 0;
+                            }
+                            if (KeyState[Key.M])
+                            {
+                                _transport.управление.ручное = !_transport.управление.ручное;
+                                //_transport.currentStop = _transport.nextStop = null;
+                                //_transport.nextStop = _transport.currentStop = null;
+                                _transport.stopIndex = 0;
+                            }
+                            if (_transport.управление.ручное)
+                            {
+                                if (KeyState[Key.Y])
+                                {
+                                    _transport.включен = !_transport.включен;
+                                }
+                                if (KeyState[Key.G])
+                                {
+                                    if (!_transport.двери_водител€_закрыты)
+                                    {
+                                        _transport.ќткрытьƒвери¬одител€(false);
+                                    }
+                                    else if (!_transport.двери_водител€_открыты)
+                                    {
+                                        _transport.ќткрытьƒвери¬одител€(true);
+                                    }
+                                }
+                                if (KeyState[Key.H])
+                                {
+                                    if (!_transport.двери_закрыты)
+                                    {
+                                        _transport.ќткрытьƒвери(false);
+                                    }
+                                    else if (!_transport.двери_открыты)
+                                    {
+                                        _transport.ќткрытьƒвери(true);
+                                    }
+                                }
+                                if (KeyState[Key.D1])
+                                {
+                                    if (!_transport.ƒверь«акрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(0, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(0, true);
+                                    }
+                                }
+                                if (KeyState[Key.D2])
+                                {
+                                    if (!_transport.ƒверь«акрыта(1))
+                                    {
+                                        _transport.ќткрытьƒвери(1, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(1, true);
+                                    }
+                                }
+                                if (KeyState[Key.D3])
+                                {
+                                    if (!_transport.ƒверь«акрыта(2))
+                                    {
+                                        _transport.ќткрытьƒвери(2, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(2, true);
+                                    }
+                                }
+                                if (KeyState[Key.D4])
+                                {
+                                    if (!_transport.ƒверь«акрыта(3))
+                                    {
+                                        _transport.ќткрытьƒвери(3, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(3, true);
+                                    }
+                                }
+                                if (KeyState[Key.D5])
+                                {
+                                    if (!_transport.ƒверь«акрыта(4))
+                                    {
+                                        _transport.ќткрытьƒвери(4, false);
+                                    }
+                                    else if (!_transport.ƒверьќткрыта(0))
+                                    {
+                                        _transport.ќткрытьƒвери(4, true);
+                                    }
+                                }
+                                if (KeyState[Key.V])
+                                {
+                                    _transport.stand_brake = !_transport.stand_brake;
+                                }
+                                /*if (state2[Key.E])
+                                {
+                                    if (transport.аварийна€_сигнализаци€)
+                                    {
+                                        transport.аварийна€_сигнализаци€ = false;
+                                    }
+                                    else
+                                    {
+                                        transport.аварийна€_сигнализаци€ = true;
+                                        transport.указатель_поворота = 0;
+                                    }
+                                }*/
+                                if (KeyState[Key.F])
+                                {
+                                    _transport.включены_фары = !_transport.включены_фары;
+                                }
+                            }
+                            if (игрок.объектѕрив€зки != null)
+                            {
+                                if (KeyState[Key.C])//KeyState.InputState.IsPressed(Key)
+                                {
+                                    _transport.SetCamera(0, игрок);
+                                }
+                                if (KeyState[Key.F2])
+                                {
+                                    _transport.SetCamera(1, игрок);
+                                }
+                                if (KeyState[Key.F3])
+                                {
+                                    _transport.SetCamera(2, игрок);
+                                }
+                                if (KeyState[Key.F4])
+                                {
+                                    _transport.SetCamera(3, игрок);
+                                }
+                            }
+                        }
+                        if (игрок.управл€емыйќбъект is “рамвай)
+                        {
+                            “рамвай трамвай = (“рамвай)игрок.управл€емыйќбъект;
+                            if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
+                            {
+                                if (трамвай.управление.ручное)
+                                {
+                                    if (KeyState[Key.T])
+                                    {
+                                        if (трамвай.токоприЄмник.опущен)
+                                        {
+                                            трамвай.токоприЄмник.Ќайтиѕровод(мир.контактныеѕровода2);
+                                            if (трамвай.токоприЄмник.ѕровод != null)
+                                            {
+                                                трамвай.токоприЄмник.поднимаетс€ = true;
+                                            }
+                                        }
+                                        else if (трамвай.токоприЄмник.подн€т)
+                                        {
+                                            трамвай.токоприЄмник.поднимаетс€ = false;
+                                        }
+                                    }
+                                    if (KeyState[Key.D6])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(5))
+                                        {
+                                            трамвай.ќткрытьƒвери(5, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(5))
+                                        {
+                                            трамвай.ќткрытьƒвери(5, true);
+                                        }
+                                    }
+                                    if (KeyState[Key.D7])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(6))
+                                        {
+                                            трамвай.ќткрытьƒвери(6, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(6))
+                                        {
+                                            трамвай.ќткрытьƒвери(6, true);
+                                        }
+                                    }
+                                    if (KeyState[Key.D8])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(7))
+                                        {
+                                            трамвай.ќткрытьƒвери(7, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(7))
+                                        {
+                                            трамвай.ќткрытьƒвери(7, true);
+                                        }
+                                    }
+                                    if (KeyState[Key.D9])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(8))
+                                        {
+                                            трамвай.ќткрытьƒвери(8, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(8))
+                                        {
+                                            трамвай.ќткрытьƒвери(8, true);
+                                        }
+                                    }
+                                    if (KeyState[Key.D0])
+                                    {
+                                        if (!трамвай.ƒверь«акрыта(9))
+                                        {
+                                            трамвай.ќткрытьƒвери(9, false);
+                                        }
+                                        else if (!трамвай.ƒверьќткрыта(9))
+                                        {
+                                            трамвай.ќткрытьƒвери(9, true);
+                                        }
+                                    }
+                                    if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
+                                    {
+                                        —истема_управлени€.– —”_“рамвай трамвай2 = (—истема_управлени€.– —”_“рамвай)трамвай.система_управлени€;
+                                        if ((KeyState[Key.Backspace] && (трамвай.скорость == 0.0)) && (трамвай2.позици€_контроллера == 0))
+                                        {
+                                            трамвай2.позици€_реверсора = -трамвай2.позици€_реверсора;
+                                        }
+                                        //if (KeyState[Key.LeftAlt] && (трамвай2.позици€_контроллера != 0))
+                                        //{
+                                        //  трамвай2.позици€_контроллера = 0;
+                                        //  трамвай2.пневматический_тормоз += 0.05;
+                                        // }
+                                        if (KeyState[Key.S])
+                                        {
+                                            if (трамвай2.позици€_контроллера > трамвай2.позици€_min)
+                                            {
+                                                трамвай2.позици€_контроллера--;
+                                            }
+                                        }
+                                        else if (KeyState[Key.W] && (трамвай2.позици€_контроллера < трамвай2.позици€_max))
+                                        {
+                                            трамвай2.позици€_контроллера++;
+                                        }
+                                    }
+                                    if (!KeyState[Key.RightControl])
+                                    {
+                                        if (KeyState[Key.Q])
+                                        {
+                                            if (трамвай.указатель_поворота >= 0)
+                                            {
+                                                трамвай.указатель_поворота = -1;
+                                                трамвай.аварийна€_сигнализаци€ = false;
+                                            }
+                                            else
+                                            {
+                                                трамвай.указатель_поворота = 0;
+                                            }
+                                        }
+                                        if (KeyState[Key.E])
+                                        {
+                                            if (трамвай.указатель_поворота <= 0)
+                                            {
+                                                трамвай.указатель_поворота = 1;
+                                                трамвай.аварийна€_сигнализаци€ = false;
+                                            }
+                                            else
+                                            {
+                                                трамвай.указатель_поворота = 0;
+                                            }
+                                        }
+                                    }
+                                    else if (((трамвай.скорость == 0.0) && трамвай.двери_водител€_открыты) && ((трамвай.передн€€_ось.текущий_рельс.следующие_рельсы.Length > 1) && (трамвай.передн€€_ось.пройденное_рассто€ние_по_рельсу > (трамвай.передн€€_ось.текущий_рельс.ƒлина - 8.0))))
+                                    {
+                                        if (KeyState[Key.A])
+                                        {
+                                            трамвай.передн€€_ось.текущий_рельс.следующий_рельс = 0;
+                                        }
+                                        if (KeyState[Key.D])
+                                        {
+                                            трамвай.передн€€_ось.текущий_рельс.следующий_рельс = 1;
+                                        }
+                                    }
+                                    if (KeyState[Key.O])
+                                    {
+                                        трамвай.аварийна€_сигнализаци€ = !трамвай.аварийна€_сигнализаци€;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                FilteredJoystickState state5 = FJStatesArray[current_joystick];
+                                JoystickState state6 = JStatesArray[current_joystick];
+                                int num16 = state6.GetPointOfViewControllers()[0];//.GetPointOfView()[0];
+                                if (num16 >= 0)
+                                {
+                                    num16 = (int)Math.Round((double)((num16 * 1.0) / 4500.0));
+                                }
+                                bool flag1 = state5[6];
+                                if (state5[5])
+                                {
+                                    трамвай.управление.автоматическое = !трамвай.управление.автоматическое;
+                                    трамвай.управление.ручное = !трамвай.управление.ручное;
+                                }
+                                if (!трамвай.управление.ручное)
+                                {
+                                    goto Label_0E1A;
+                                }
+                                if (state5[11])
+                                {
+                                    трамвай.включен = !трамвай.включен;
+                                }
+                                if (state5[2])
+                                {
+                                    if (трамвай.токоприЄмник.опущен)
+                                    {
+                                        трамвай.токоприЄмник.Ќайтиѕровод(мир.контактныеѕровода2);
+                                        if (трамвай.токоприЄмник.ѕровод != null)
+                                        {
+                                            трамвай.токоприЄмник.поднимаетс€ = true;
+                                        }
+                                    }
+                                    else if (трамвай.токоприЄмник.подн€т)
+                                    {
+                                        трамвай.токоприЄмник.поднимаетс€ = false;
+                                    }
+                                }
+                                if (state5[0])
+                                {
+                                    if (!трамвай.двери_водител€_закрыты)
+                                    {
+                                        трамвай.ќткрытьƒвери¬одител€(false);
+                                    }
+                                    else if (!трамвай.двери_водител€_открыты)
+                                    {
+                                        трамвай.ќткрытьƒвери¬одител€(true);
+                                    }
+                                }
+                                if (state5[1])
+                                {
+                                    if (!трамвай.двери_закрыты)
+                                    {
+                                        трамвай.ќткрытьƒвери(false);
+                                    }
+                                    else if (!трамвай.двери_открыты)
+                                    {
+                                        трамвай.ќткрытьƒвери(true);
+                                    }
+                                }
+                                if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
+                                {
+                                    var трамвай2 = (—истема_управлени€.– —”_“рамвай)трамвай.система_управлени€;
+                                    switch (((-5 * state6.RotationZ) / num))
+                                    {
+                                        case -5:
+                                            трамвай2.позици€_контроллера = -5;
+                                            goto Label_0D93;
+
+                                        case -4:
+                                            if (трамвай2.позици€_контроллера > -4)
+                                            {
+                                                трамвай2.позици€_контроллера = -4;
+                                            }
+                                            goto Label_0D93;
+
+                                        case -3:
+                                            if (трамвай2.позици€_контроллера > -3)
+                                            {
+                                                трамвай2.позици€_контроллера = -3;
+                                            }
+                                            goto Label_0D93;
+
+                                        case -2:
+                                            if (трамвай2.позици€_контроллера > -2)
+                                            {
+                                                трамвай2.позици€_контроллера = -2;
+                                            }
+                                            goto Label_0D93;
+
+                                        case -1:
+                                            if (трамвай2.позици€_контроллера > -1)
+                                            {
+                                                трамвай2.позици€_контроллера = -1;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 0:
+                                            if (state6.RotationZ <= 0)
+                                            {
+                                                break;
+                                            }
+                                            if (трамвай2.позици€_контроллера > 0)
+                                            {
+                                                трамвай2.позици€_контроллера = 0;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 1:
+                                            if (трамвай2.позици€_контроллера < 1)
+                                            {
+                                                трамвай2.позици€_контроллера = 1;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 2:
+                                            if (трамвай2.позици€_контроллера < 1)
+                                            {
+                                                трамвай2.позици€_контроллера = 1;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 3:
+                                            if (трамвай2.позици€_контроллера < 2)
+                                            {
+                                                трамвай2.позици€_контроллера = 2;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 4:
+                                            if (трамвай2.позици€_контроллера < 3)
+                                            {
+                                                трамвай2.позици€_контроллера = 3;
+                                            }
+                                            goto Label_0D93;
+
+                                        case 5:
+                                            трамвай2.позици€_контроллера = 4;
+                                            goto Label_0D93;
+
+                                        default:
+                                            goto Label_0D93;
+                                    }
+                                    if ((state6.RotationZ < 0) && (трамвай2.позици€_контроллера < 0))
+                                    {
+                                        трамвай2.позици€_контроллера = 0;
+                                    }
+                                Label_0D93:
+                                    if ((state5[7] && (трамвай.скорость == 0.0)) && (трамвай2.позици€_контроллера == 0))
+                                    {
+                                        трамвай2.позици€_реверсора = -трамвай2.позици€_реверсора;
+                                    }
+                                }
+                                switch (num16)
+                                {
+                                    case 0:
+                                        трамвай.указатель_поворота = 0;
+                                        трамвай.аварийна€_сигнализаци€ = false;
+                                        break;
+
+                                    case 2:
+                                        трамвай.указатель_поворота = 1;
+                                        трамвай.аварийна€_сигнализаци€ = false;
+                                        break;
+
+                                    case 4:
+                                        трамвай.указатель_поворота = 0;
+                                        трамвай.аварийна€_сигнализаци€ = true;
+                                        break;
+
+                                    case 6:
+                                        трамвай.указатель_поворота = -1;
+                                        трамвай.аварийна€_сигнализаци€ = false;
+                                        goto Label_0E1A;
+                                }
+                            }
+                        }
+                    Label_0E1A:;
+                        if (игрок.управл€емыйќбъект is “роллейбус)
+                        {
+                            “роллейбус троллейбус = (“роллейбус)игрок.управл€емыйќбъект;
+                            if (current_joystick == -1)//(игрок.inputGuid == SystemGuid.Keyboard)
+                            {
+                                if (троллейбус.управление.ручное)
+                                {
+                                    if (троллейбус.штанги.Length == 2)
+                                    {
+                                        if (KeyState[Key.T])
+                                        {
+                                            if (троллейбус.штанги[0].ќпущена && троллейбус.штанги[1].ќпущена)
+                                            {
+                                                троллейбус.штанги[0].Ќайтиѕровод(this.мир.контактныеѕровода);
+                                                if (троллейбус.штанги[0].ѕровод != null)
+                                                {
+                                                    троллейбус.штанги[0].поднимаетс€ = true;
+                                                }
+                                                троллейбус.штанги[1].Ќайтиѕровод(this.мир.контактныеѕровода);
+                                                if (троллейбус.штанги[1].ѕровод != null)
+                                                {
+                                                    троллейбус.штанги[1].поднимаетс€ = true;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                троллейбус.штанги[0].поднимаетс€ = false;
+                                                троллейбус.штанги[1].поднимаетс€ = false;
+                                            }
+                                        }
+                                    }
+                                    if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
+                                    {
+                                        —истема_управлени€.– —”_“роллейбус троллейбус2 = (—истема_управлени€.– —”_“роллейбус)троллейбус.система_управлени€;
+                                        if ((KeyState[Key.Backspace] && (троллейбус.скорость == 0.0)) && (троллейбус2.позици€_контроллера == 0))
+                                        {
+                                            троллейбус2.позици€_реверсора = -троллейбус2.позици€_реверсора;
+                                        }
+                                        if (KeyState[Key.LeftAlt] && (троллейбус2.позици€_контроллера != 0) && (троллейбус.скорость >= 0))
+                                        {
+                                            троллейбус2.позици€_контроллера = 0;
+                                            троллейбус2.пневматический_тормоз = 0.0;
+                                        }
+
+                                        if (KeyState.IsDirtyPressed(Key.S))//[Key.DownArrow])
+                                        {
+                                            if ((троллейбус2.пневматический_тормоз > 0.0) && (троллейбус2.пневматический_тормоз < 1.0))
+                                            {
+                                                троллейбус2.пневматический_тормоз += 0.05;
+                                            }
+                                        }
+                                        else if (KeyState.IsDirtyPressed(Key.W) && (троллейбус2.пневматический_тормоз > 0.0))
+                                        {
+                                            троллейбус2.пневматический_тормоз -= 0.05;
+                                            if (троллейбус2.пневматический_тормоз < 0.0)
+                                            {
+                                                троллейбус2.пневматический_тормоз = 0.0;
+                                            }
+                                        }
+                                        if (KeyState[Key.S])//[Key.DownArrow] [Key.UpArrow]
+                                        {
+                                            if (троллейбус2.позици€_контроллера > троллейбус2.позици€_min)
+                                            {
+                                                троллейбус2.позици€_контроллера--;
+                                            }
+                                            else if (троллейбус2.пневматический_тормоз == 0.0)
+                                            {
+                                                троллейбус2.пневматический_тормоз = 0.05;
+                                            }
+                                        }
+                                        else if ((KeyState[Key.W] && (троллейбус2.позици€_контроллера < троллейбус2.позици€_max)) && (троллейбус2.пневматический_тормоз == 0.0))
+                                        {
+                                            троллейбус2.позици€_контроллера++;
+                                        }
+                                        if ((KeyState[Key.P]) && (троллейбус.ах != null))
+                                        {
+                                            троллейбус.ах.включЄн = !троллейбус.ах.включЄн;
+                                        }
+                                    }
+                                    if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
+                                    {
+                                        —истема_управлени€. ѕ_јвто авто = (—истема_управлени€. ѕ_јвто)троллейбус.система_управлени€;
+                                        if ((KeyState[Key.Z] && (авто.режим > 0)) && (((авто.текущий_режим != "R") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто.режим--;
+                                        }
+                                        if ((KeyState[Key.X] && (авто.режим < (авто.режимы.Length - 1))) && (((авто.текущий_режим != "P") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто.режим++;
+                                        }
+                                        if (KeyState[Key.S])
+                                        {
+                                            if (авто.положение_педалей == 0.0)
+                                            {
+                                                авто.положение_педалей = (-World.прошло¬ремени * 5.0) / 3.0;
+                                            }
+                                        }
+                                        else if (KeyState[Key.W] && (авто.положение_педалей == 0.0))
+                                        {
+                                            авто.положение_педалей = (World.прошло¬ремени * 5.0) / 3.0;
+                                        }
+                                        if (KeyState.IsDirtyPressed(Key.S))
+                                        {
+                                            if (авто.положение_педалей < 0.0)
+                                            {
+                                                авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей < -1.0)
+                                                {
+                                                    авто.положение_педалей = -1.0;
+                                                }
+                                            }
+                                            if (авто.положение_педалей > 0.0)
+                                            {
+                                                авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей < 0.0)
+                                                {
+                                                    авто.положение_педалей = 0.0;
+                                                    KeyState.keyticks[0xd0] = 1;
+                                                }
+                                            }
+                                        }
+
+                                        else if (KeyState.IsDirtyPressed(Key.W))
+                                        {
+                                            if (авто.положение_педалей > 0.0)
+                                            {
+                                                авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей > 1.0)
+                                                {
+                                                    авто.положение_педалей = 1.0;
+                                                }
+                                            }
+                                            if (авто.положение_педалей < 0.0)
+                                            {
+                                                авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей > 0.0)
+                                                {
+                                                    авто.положение_педалей = 0.0;
+                                                    KeyState.keyticks[200] = 1;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
+                                    {
+                                        —истема_управлени€. ѕ_јвто1 авто = (—истема_управлени€. ѕ_јвто1)троллейбус.система_управлени€;
+                                        if (KeyState[Key.Z])
+                                        {
+                                            авто.передача--;
+                                        }
+                                        if (KeyState[Key.X])
+                                        {
+                                            авто.передача++;
+                                        }
+                                        if (KeyState[Key.LeftAlt])
+                                        {
+                                            авто.передача = 0;
+                                        }
+                                        /*if ((KeyState[Key.Z] && (авто.режим > 0)) && (((авто.текущий_режим != "R") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто.режим--;
+                                        }
+                                        if ((KeyState[Key.X] && (авто.режим < (авто.режимы.Length - 1))) && (((авто.текущий_режим != "P") && (авто.текущий_режим != "N")) || ((авто.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто.режим++;
+                                        }*/
+                                        if (KeyState[Key.S])
+                                        {
+                                            if (авто.положение_педалей == 0.0)
+                                            {
+                                                авто.положение_педалей = (-World.прошло¬ремени * 5.0) / 3.0;
+                                            }
+                                        }
+                                        else if (KeyState[Key.W] && (авто.положение_педалей == 0.0))
+                                        {
+                                            авто.положение_педалей = (World.прошло¬ремени * 5.0) / 3.0;
+                                        }
+                                        if (KeyState.IsDirtyPressed(Key.S))
+                                        {
+                                            if (авто.положение_педалей < 0.0)
+                                            {
+                                                авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей < -1.0)
+                                                {
+                                                    авто.положение_педалей = -1.0;
+                                                }
+                                            }
+                                            if (авто.положение_педалей > 0.0)
+                                            {
+                                                авто.положение_педалей -= (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей < 0.0)
+                                                {
+                                                    авто.положение_педалей = 0.0;
+                                                    KeyState.keyticks[0xd0] = 1;
+                                                }
+                                            }
+                                        }
+
+                                        else if (KeyState.IsDirtyPressed(Key.W))
+                                        {
+                                            if (авто.положение_педалей > 0.0)
+                                            {
+                                                авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей > 1.0)
+                                                {
+                                                    авто.положение_педалей = 1.0;
+                                                }
+                                            }
+                                            if (авто.положение_педалей < 0.0)
+                                            {
+                                                авто.положение_педалей += (World.прошло¬ремени * 5.0) / 3.0;
+                                                if (авто.положение_педалей > 0.0)
+                                                {
+                                                    авто.положение_педалей = 0.0;
+                                                    KeyState.keyticks[200] = 1;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (!fmouse)
+                                    {
+                                        if (KeyState.IsDirtyPressed(Key.A))
+                                        {
+                                            троллейбус.поворот–ул€ -= 0.3 * World.прошло¬ремени;
+                                        }
+                                        if (KeyState.IsDirtyPressed(Key.D))
+                                        {
+                                            троллейбус.поворот–ул€ += 0.3 * World.прошло¬ремени;
+                                        }
+                                        if (KeyState.IsDirtyPressed(Key.Space) && space)
+                                        {
+
+                                            if (троллейбус.поворот–ул€ < 0)
+                                            {
+                                                троллейбус.поворот–ул€ -= 0.3 * World.прошло¬ремени;
+                                                if (Math.Abs(троллейбус.поворот–ул€) > 0.001)
+                                                {
+                                                    троллейбус.поворот–ул€ = 0.0;
+                                                }
+                                            }
+                                            if (троллейбус.поворот–ул€ > 0)
+                                            {
+                                                троллейбус.поворот–ул€ += 0.3 * World.прошло¬ремени;
+                                                if (Math.Abs(троллейбус.поворот–ул€) > 0.001)
+
+                                                {
+                                                    троллейбус.поворот–ул€ = 0.0;
+                                                }
+                                            }
+                                            /*
+                                                if (троллейбус.поворот–ул€ != 0.0)
+
+                     {   
+                                                   /* var num6 =
+                         if (num6 < -Math.PI)
+                         {
+                             num6 += Math.PI * 2.0;
+                         }
+                         if (num6 > Math.PI)
+                         {
+                             num6 -= Math.PI * 2.0;
+                         }
+                                            int num7 = Math.Sign((double)(троллейбус.поворот–ул€));
+                         if (num7 > 0)
+                         {
+                             if (Game.fmouse)
+                             {
+                                 троллейбус.поворот–ул€ += num7 * World.прошло¬ремени;
+                                 if (Math.Abs(троллейбус.поворот–ул€) < 0.001)
+                                 {
+                                     троллейбус.поворот–ул€ = 0.0;
+                                 }
+                             }
+                             }*/
+
+
+
+                                        }
+                                    }
+                                    else if (!mouseButtons[0])
+                                    {
+                                        троллейбус.поворот–ул€ += x * 0.001;
+                                    }
+                                    if (KeyState[Key.Q])
+                                    {
+                                        if (троллейбус.указатель_поворота >= 0)
+                                        {
+                                            троллейбус.указатель_поворота = -1;
+                                            троллейбус.аварийна€_сигнализаци€ = false;
+                                        }
+                                        else
+                                        {
+                                            троллейбус.указатель_поворота = 0;
+                                        }
+                                    }
+                                    if (KeyState[Key.E])
+                                    {
+                                        if (троллейбус.указатель_поворота <= 0)
+                                        {
+                                            троллейбус.указатель_поворота = 1;
+                                            троллейбус.аварийна€_сигнализаци€ = false;
+                                        }
+                                        else
+                                        {
+                                            троллейбус.указатель_поворота = 0;
+                                        }
+                                    }
+                                    if (KeyState[Key.O])
+                                    {
+                                        if (троллейбус.аварийна€_сигнализаци€)
+                                        {
+                                            троллейбус.аварийна€_сигнализаци€ = false;
+                                        }
+                                        else
+                                        {
+                                            троллейбус.аварийна€_сигнализаци€ = true;
+                                            троллейбус.указатель_поворота = 0;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                FilteredJoystickState state7 = FJStatesArray[current_joystick];
+                                JoystickState state8 = JStatesArray[current_joystick];
+                                int num20 = state8.GetPointOfViewControllers()[0];//.GetPointOfView()[0];
+                                if (num20 >= 0)
+                                {
+                                    num20 = (int)Math.Round((double)((num20 * 1.0) / 4500.0));
+                                }
+                                if (state7[5])
+                                {
+                                    троллейбус.управление.автоматическое = !троллейбус.управление.автоматическое;
+                                    троллейбус.управление.ручное = !троллейбус.управление.ручное;
+                                }
+                                if (state7[3])
+                                {
+                                    троллейбус.включены_фары = !троллейбус.включены_фары;
+                                }
+                                if (троллейбус.управление.ручное)
+                                {
+                                    if (state7[11])
+                                    {
+                                        троллейбус.включен = !троллейбус.включен;
+                                    }
+                                    if (state7[2] && (троллейбус.штанги.Length > 1))
+                                    {
+                                        if (троллейбус.штанги[0].ќпущена && троллейбус.штанги[1].ќпущена)
+                                        {
+                                            троллейбус.штанги[0].Ќайтиѕровод(this.мир.контактныеѕровода);
+                                            if (троллейбус.штанги[0].ѕровод != null)
+                                            {
+                                                троллейбус.штанги[0].поднимаетс€ = true;
+                                            }
+                                            троллейбус.штанги[1].Ќайтиѕровод(this.мир.контактныеѕровода);
+                                            if (троллейбус.штанги[1].ѕровод != null)
+                                            {
+                                                троллейбус.штанги[1].поднимаетс€ = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            троллейбус.штанги[0].поднимаетс€ = false;
+                                            троллейбус.штанги[1].поднимаетс€ = false;
+                                        }
+                                    }
+                                    if (state7[0])
+                                    {
+                                        if (!троллейбус.двери_водител€_закрыты)
+                                        {
+                                            троллейбус.ќткрытьƒвери¬одител€(false);
+                                        }
+                                        else if (!троллейбус.двери_водител€_открыты)
+                                        {
+                                            троллейбус.ќткрытьƒвери¬одител€(true);
+                                        }
+                                    }
+                                    if (state7[1])
+                                    {
+                                        if (!троллейбус.двери_закрыты)
+                                        {
+                                            троллейбус.ќткрытьƒвери(false);
+                                        }
+                                        else if (!троллейбус.двери_открыты)
+                                        {
+                                            троллейбус.ќткрытьƒвери(true);
+                                        }
+                                    }
+                                    if (!state7[4, false] && !state7[6, false])
+                                    {
+                                        троллейбус.поворот–ул€ += ((0.5 * World.прошло¬ремени) * state8.X) / ((double)num);
+                                    }
+                                    double num21 = (-1.0 * state8.RotationZ) / ((double)num);
+                                    if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
+                                    {
+                                        —истема_управлени€.– —”_“роллейбус троллейбус3 = (—истема_управлени€.– —”_“роллейбус)троллейбус.система_управлени€;
+                                        if (num21 >= -0.6)
+                                        {
+                                            троллейбус3.позици€_контроллера = (int)(4.0 * num21);
+                                            троллейбус3.пневматический_тормоз = 0.0;
+                                        }
+                                        else
+                                        {
+                                            троллейбус3.позици€_контроллера = -2;
+                                            троллейбус3.пневматический_тормоз = -(num21 + 0.6) / 0.4;
+                                        }
+                                        if ((state7[7] && (троллейбус.скорость == 0.0)) && (троллейбус3.позици€_контроллера == 0))
+                                        {
+                                            троллейбус3.позици€_реверсора = -троллейбус3.позици€_реверсора;
+                                        }
+                                    }
+                                    if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
+                                    {
+                                        —истема_управлени€. ѕ_јвто авто2 = (—истема_управлени€. ѕ_јвто)троллейбус.система_управлени€;
+                                        авто2.положение_педалей = num21;
+                                        if ((state7[6] && (авто2.режим > 0)) && (((авто2.текущий_режим != "R") && (авто2.текущий_режим != "N")) || ((авто2.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто2.режим--;
+                                        }
+                                        if ((state7[7] && (авто2.режим < (авто2.режимы.Length - 1))) && (((авто2.текущий_режим != "P") && (авто2.текущий_режим != "N")) || ((авто2.положение_педалей == -1.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто2.режим++;
+                                        }
+                                    }
+                                    if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
+                                    {
+                                        —истема_управлени€. ѕ_јвто1 авто2 = (—истема_управлени€. ѕ_јвто1)троллейбус.система_управлени€;
+                                        авто2.положение_педалей = num21;
+                                        if ((state7[6] && (авто2.передача_перевод > 0)) && (((авто2.текуща€_передача != "R") && (авто2.текуща€_передача != "N")) || ((авто2.положение_педалей == 0.0) && (троллейбус.скорость == 0.0))))
+                                        {
+                                            авто2.передача_перевод--;
+                                        }
+                                        if ((state7[7]) || ((авто2.положение_педалей == 0.0) && (троллейбус.скорость == 0.0)))
+                                        {
+                                            авто2.передача_перевод++;
+                                        }
+                                    }
+                                    switch (num20)
+                                    {
+                                        case 0:
+                                            троллейбус.указатель_поворота = 0;
+                                            троллейбус.аварийна€_сигнализаци€ = false;
+                                            break;
+
+                                        case 2:
+                                            троллейбус.указатель_поворота = 1;
+                                            троллейбус.аварийна€_сигнализаци€ = false;
+                                            break;
+
+                                        case 4:
+                                            троллейбус.указатель_поворота = 0;
+                                            троллейбус.аварийна€_сигнализаци€ = true;
+                                            break;
+
+                                        case 6:
+                                            троллейбус.указатель_поворота = -1;
+                                            троллейбус.аварийна€_сигнализаци€ = false;
+                                            break;
+                                    }
+                                }
+                                //                            }
+                            }
+                        }
+                    }
+                }
             }
             if (KeyState[Key.F1])
             {
-            	MainForm.debug = !MainForm.debug;
+                MainForm.debug = !MainForm.debug;
             }
             if (KeyState[Key.F5])
             {
@@ -2292,14 +2292,14 @@ namespace Trancity
                 //MainForm.IsMnemonic = MainForm.IsMnemonic;
             }
             if (KeyState[Key.F10])
-               {
-               var now = DateTime.Now;
+            {
+                var now = DateTime.Now;
                 var path = Application.StartupPath + @"\Screenshots\";
                 var screenshot = string.Format(@"{0}\Trancity {1:00}-{2:00}-{3} {4:00}-{5:00}-{6:00}-{7:000}.jpg", path, now.Day, now.Month, now.Year, now.Hour, now.Minute, now.Second, now.Millisecond);
                 var surface = MyDirect3D.device.GetRenderTarget(0);
                 Surface.ToFile(surface, screenshot, ImageFileFormat.Jpg);
-               // Surface.ToStream(surface, ImageFileFormat.Jpg);
-                surface.Dispose(); 
+                // Surface.ToStream(surface, ImageFileFormat.Jpg);
+                surface.Dispose();
             }
         }
 
@@ -2314,11 +2314,11 @@ namespace Trancity
             MyDirect3D.device.Clear(ClearFlags.ZBuffer | ClearFlags.Target, 0, 1f, 0);
             if (!активна)
             {
-            	menu.Draw();
-            	MyDirect3D._newDevice.EndScene();
-            	return;
+                menu.Draw();
+                MyDirect3D._newDevice.EndScene();
+                return;
             }
-            Label_new:
+        Label_new:
             for (var i = 0; i < игроки.Length; i++)
             {
                 MyDirect3D.SetViewport(i);
@@ -2330,9 +2330,9 @@ namespace Trancity
                 игроки[i].cameraRotationChange.Divide(3.0);
                 //а может вообще переделать? ограничение поворота камеры
                 if (Math.Abs(игроки[i].cameraRotation.x) > Math.PI)
-                	игроки[i].cameraRotation.x -= 2.0 * Math.PI * Math.Sign(игроки[i].cameraRotation.x);
+                    игроки[i].cameraRotation.x -= 2.0 * Math.PI * Math.Sign(игроки[i].cameraRotation.x);
                 if (Math.Abs(игроки[i].cameraRotation.y) > (Math.PI / 2.0))
-                	игроки[i].cameraRotation.y = (Math.PI / 2.0) * Math.Sign(игроки[i].cameraRotation.y);
+                    игроки[i].cameraRotation.y = (Math.PI / 2.0) * Math.Sign(игроки[i].cameraRotation.y);
                 //
                 MyDirect3D.SetCameraPos(игроки[i].cameraPosition, игроки[i].cameraRotation);
                 //
@@ -2341,213 +2341,213 @@ namespace Trancity
                 //
                 MyDirect3D.ComputeFrustum();
                 мир.RenderMeshes2();
-				мир.RenderMeshes();
-				MeshObject.RenderList();
-				MyDirect3D.Alpha = true;
-				мир.RenderMeshesA();
-				MeshObject.RenderListA();
-				MyDirect3D.Alpha = false;
+                мир.RenderMeshes();
+                MeshObject.RenderList();
+                MyDirect3D.Alpha = true;
+                мир.RenderMeshesA();
+                MeshObject.RenderListA();
+                MyDirect3D.Alpha = false;
                 if (игроки[i].управл€емыйќбъект != null)
                 {
-                	var _transport = (Transport) игроки[i].управл€емыйќбъект;
-                	var speed_str = (_transport.скорость * 3.6).ToString("###0.00");
-	                var control_str = "";
-	                if (_transport.управление.автоматическое)
-	                {
-	                    control_str = _transport.управление.ручное ? Localization.current_.ctrl_s : Localization.current_.ctrl_a;
-	                }
-	                else
-	                {
-	                    control_str = _transport.управление.ручное ? Localization.current_.ctrl_m : "-";
-	                }
-	                if (MainForm.debug)
-	                {
-	                    var str111 = "\nCS: " + ((_transport.currentStop != null) ? _transport.currentStop.название : "")
-	                    	+ "\nNS: " + ((_transport.nextStop != null) ? _transport.nextStop.название : "")
-	                    	+ "\nSI: " + _transport.stopIndex
-	                        + "\n\nX: " + _transport. оординаты3D.x.ToString("#0.0")
-	                        + "\nY: " + _transport. оординаты3D.y.ToString("#0.0")
-	                        + "\nZ: " + _transport. оординаты3D.z.ToString("#0.0")
-	                        + "\nrY: " + (_transport.direction * 180.0 / Math.PI).ToString("#0.0")
-	                    	+ "\nrZ: " + (_transport.ЌаправлениеY * 180.0 / Math.PI).ToString("#0.0");
-	                    Common.MyGUI.default_font.DrawString(null, str111, (int) (420 + MyDirect3D.device.Viewport.X), (int) (15 + MyDirect3D.device.Viewport.Y), Color.Black);
-	                }
-	                if (_transport is “рамвай)//(игроки[i].управл€емыйќбъект is “рамвай)
-	                {
-	                    var трамвай = (“рамвай) _transport;//игроки[i].управл€емыйќбъект;
-	                    var str = "-";
-	                    if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
-	                    {
-		                    var трамвай2 = (—истема_управлени€.– —”_“рамвай) трамвай.система_управлени€;
-		                    switch (трамвай2.позици€_контроллера)
-		                    {
-		                        case -5:
-		                            str = Localization.current_.bp;
-		                            break;
-		
-		                        case -4:
-		                            str = Localization.current_.b4;
-		                            break;
-		
-		                        case -3:
-		                            str = Localization.current_.b3;
-		                            break;
-		
-		                        case -2:
-		                            str = Localization.current_.b2;
-		                            break;
-		
-		                        case -1:
-		                            str = Localization.current_.b1;
-		                            break;
-		
-		                        case 0:
-		                            str = "0";
-		                            break;
-		
-		                        case 1:
-		                            str = Localization.current_.m;
-		                            break;
-		
-		                        case 2:
-		                            str = Localization.current_.x1;
-		                            break;
-		
-		                        case 3:
-		                            str = Localization.current_.x2;
-		                            break;
-		
-		                        case 4:
-		                            str = Localization.current_.x3;
-		                            break;
-		                    }
-		                    var str2 = (трамвай2.позици€_реверсора == 1) ? Localization.current_.forward : (трамвай2.позици€_реверсора == -1) ? Localization.current_.back : "0";
-		                    str = str + "\n" + Localization.current_.reverse + ": " + str2;
-	                    }
-	                    str = str + "\n" + ((трамвай.токоприЄмник.подн€т) ? Localization.current_.tk_on : Localization.current_.tk_off)
-	                    	 + "\n" + Localization.current_.parking_brake + " " + (трамвай.stand_brake ? Localization.current_.enable : Localization.current_.disable);
-	                    var str5 = трамвай.маршрут.number;
-	                    
-	                   
-	                    if (трамвай.в_парк)
-	                    {
-	                        str5 = str5 + " (" + Localization.current_.route_in_park + ")";
-	                    }
-	                    if (трамвай.нар€д != null)
-	                    {
-//	                        var str15 = str5;
-	                        str5 = str5 + "\n" + Localization.current_.order + ": " + трамвай.нар€д.маршрут.number + "/" + трамвай.нар€д.номер;
-	                        if (трамвай.рейс != null)
-	                        {
-                                    
-	                            
-	                            if (мир.time < трамвай.рейс.врем€_отправлени€)
-	                            {
-	                                str5 = str5 + "\n" + Localization.current_.departure_time + ": " + трамвай.рейс.str_врем€_отправлени€;
-	                            }
-	                            str5 = str5 + "\n" + Localization.current_.arrival_time + ": " + трамвай.рейс.str_врем€_прибыти€;
-	                            if (((трамвай.рейс_index < (трамвай.рейс.pathes.Length - 1)) && (трамвай.передн€€_ось.текущий_рельс.следующие_рельсы.Length > 1)) && ((трамвай.рейс_index > 0) || (трамвай.передн€€_ось.текущий_рельс == трамвай.рейс.pathes[0])))
-	                            {
-	                                var дорога = трамвай.рейс.pathes[трамвай.рейс_index + 1];
-	                                var str6 = Localization.current_.nr_pryamo;
-	                                if (дорога.крива€)
-	                                {
-	                                    if (дорога.—тепеньѕоворота0 > 0.0)
-	                                    {
-	                                        str6 = Localization.current_.nr_right;
-	                                    }
-	                                    else if (дорога.—тепеньѕоворота0 < 0.0)
-	                                    {
-	                                        str6 = Localization.current_.nr_left;
-	                                    }
-	                                }
-	                                str5 = str5 + "\n" + Localization.current_.nr + ": " + str6;
-	                                
-	                            }
-	                        }
-	                    }
-	                    if (трамвай.nextStop != null)
+                    var _transport = (Transport)игроки[i].управл€емыйќбъект;
+                    var speed_str = (_transport.скорость * 3.6).ToString("###0.00");
+                    var control_str = "";
+                    if (_transport.управление.автоматическое)
+                    {
+                        control_str = _transport.управление.ручное ? Localization.current_.ctrl_s : Localization.current_.ctrl_a;
+                    }
+                    else
+                    {
+                        control_str = _transport.управление.ручное ? Localization.current_.ctrl_m : "-";
+                    }
+                    if (MainForm.debug)
+                    {
+                        var str111 = "\nCS: " + ((_transport.currentStop != null) ? _transport.currentStop.название : "")
+                            + "\nNS: " + ((_transport.nextStop != null) ? _transport.nextStop.название : "")
+                            + "\nSI: " + _transport.stopIndex
+                            + "\n\nX: " + _transport. оординаты3D.x.ToString("#0.0")
+                            + "\nY: " + _transport. оординаты3D.y.ToString("#0.0")
+                            + "\nZ: " + _transport. оординаты3D.z.ToString("#0.0")
+                            + "\nrY: " + (_transport.direction * 180.0 / Math.PI).ToString("#0.0")
+                            + "\nrZ: " + (_transport.ЌаправлениеY * 180.0 / Math.PI).ToString("#0.0");
+                        Common.MyGUI.default_font.DrawString(null, str111, (int)(420 + MyDirect3D.device.Viewport.X), (int)(15 + MyDirect3D.device.Viewport.Y), Color.Black);
+                    }
+                    if (_transport is “рамвай)//(игроки[i].управл€емыйќбъект is “рамвай)
+                    {
+                        var трамвай = (“рамвай)_transport;//игроки[i].управл€емыйќбъект;
+                        var str = "-";
+                        if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
+                        {
+                            var трамвай2 = (—истема_управлени€.– —”_“рамвай)трамвай.система_управлени€;
+                            switch (трамвай2.позици€_контроллера)
+                            {
+                                case -5:
+                                    str = Localization.current_.bp;
+                                    break;
+
+                                case -4:
+                                    str = Localization.current_.b4;
+                                    break;
+
+                                case -3:
+                                    str = Localization.current_.b3;
+                                    break;
+
+                                case -2:
+                                    str = Localization.current_.b2;
+                                    break;
+
+                                case -1:
+                                    str = Localization.current_.b1;
+                                    break;
+
+                                case 0:
+                                    str = "0";
+                                    break;
+
+                                case 1:
+                                    str = Localization.current_.m;
+                                    break;
+
+                                case 2:
+                                    str = Localization.current_.x1;
+                                    break;
+
+                                case 3:
+                                    str = Localization.current_.x2;
+                                    break;
+
+                                case 4:
+                                    str = Localization.current_.x3;
+                                    break;
+                            }
+                            var str2 = (трамвай2.позици€_реверсора == 1) ? Localization.current_.forward : (трамвай2.позици€_реверсора == -1) ? Localization.current_.back : "0";
+                            str = str + "\n" + Localization.current_.reverse + ": " + str2;
+                        }
+                        str = str + "\n" + ((трамвай.токоприЄмник.подн€т) ? Localization.current_.tk_on : Localization.current_.tk_off)
+                             + "\n" + Localization.current_.parking_brake + " " + (трамвай.stand_brake ? Localization.current_.enable : Localization.current_.disable);
+                        var str5 = трамвай.маршрут.number;
+
+
+                        if (трамвай.в_парк)
+                        {
+                            str5 = str5 + " (" + Localization.current_.route_in_park + ")";
+                        }
+                        if (трамвай.нар€д != null)
+                        {
+                            //	                        var str15 = str5;
+                            str5 = str5 + "\n" + Localization.current_.order + ": " + трамвай.нар€д.маршрут.number + "/" + трамвай.нар€д.номер;
+                            if (трамвай.рейс != null)
+                            {
+
+
+                                if (мир.time < трамвай.рейс.врем€_отправлени€)
+                                {
+                                    str5 = str5 + "\n" + Localization.current_.departure_time + ": " + трамвай.рейс.str_врем€_отправлени€;
+                                }
+                                str5 = str5 + "\n" + Localization.current_.arrival_time + ": " + трамвай.рейс.str_врем€_прибыти€;
+                                if (((трамвай.рейс_index < (трамвай.рейс.pathes.Length - 1)) && (трамвай.передн€€_ось.текущий_рельс.следующие_рельсы.Length > 1)) && ((трамвай.рейс_index > 0) || (трамвай.передн€€_ось.текущий_рельс == трамвай.рейс.pathes[0])))
+                                {
+                                    var дорога = трамвай.рейс.pathes[трамвай.рейс_index + 1];
+                                    var str6 = Localization.current_.nr_pryamo;
+                                    if (дорога.крива€)
+                                    {
+                                        if (дорога.—тепеньѕоворота0 > 0.0)
+                                        {
+                                            str6 = Localization.current_.nr_right;
+                                        }
+                                        else if (дорога.—тепеньѕоворота0 < 0.0)
+                                        {
+                                            str6 = Localization.current_.nr_left;
+                                        }
+                                    }
+                                    str5 = str5 + "\n" + Localization.current_.nr + ": " + str6;
+
+                                }
+                            }
+                        }
+                        if (трамвай.nextStop != null)
                         {
                             //str17 = "\n" + Localization.current_.stop  + ((_transport.nextStop != null) ? _transport.nextStop.название : "");
-                           var str17 = "\n" + Localization.current_.stop  + ((_transport.nextStop != null) ? _transport.nextStop.название : "");
+                            var str17 = "\n" + Localization.current_.stop + ((_transport.nextStop != null) ? _transport.nextStop.название : "");
                         }
-	                    Common.MyGUI.default_font.DrawString(null, Localization.current_.tram_control + ": " + control_str + "\n" + Localization.current_.ctrl_pos + ": " + str + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km +  "\n" + Localization.current_.route + ": " + str5, (int) (15 + MyDirect3D.device.Viewport.X), (int) (15 + MyDirect3D.device.Viewport.Y), Color.Black);
-	                }
-	                if (_transport is “роллейбус)// (игроки[i].управл€емыйќбъект is “роллейбус)
-	                {
-	                    var троллейбус = (“роллейбус) _transport;//игроки[i].управл€емыйќбъект;
-	                    var str7 = "-";
-	                    var str8 = "неизвестно чем";
-	                    if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
-	                    {
-	                        str8 = Localization.current_.trol_control;
-	                        str7 = "\n" + Localization.current_.ctrl_pos + ": ";
-	                        var троллейбус2 = (—истема_управлени€.– —”_“роллейбус) троллейбус.система_управлени€;
-	                        switch (троллейбус2.позици€_контроллера)
-	                        {
-	                            case -2:
-	                                str7 = str7 + Localization.current_.b2;
-	                                break;
-	
-	                            case -1:
-	                                str7 = str7 + Localization.current_.b1;
-	                                break;
-	
-	                            case 0:
-	                                str7 = str7 + "0";
-	                                break;
-	
-	                            case 1:
-	                                str7 = str7 + Localization.current_.m;
-	                                break;
-	
-	                            case 2:
-	                                str7 = str7 + Localization.current_.x1;
-	                                break;
-	
-	                            case 3:
-	                                str7 = str7 + Localization.current_.x2;
-	                                break;
-	
-	                            case 4:
-	                                str7 = str7 + Localization.current_.x3;
-	                                break;
-	                        }
-	                        str7 = str7 + "\n" + Localization.current_.air_brake + ": " + ((троллейбус2.пневматический_тормоз * 100.0)).ToString("0") + "%";
-	                        var str9 = (троллейбус2.позици€_реверсора == 1) ? Localization.current_.forward : (троллейбус2.позици€_реверсора == -1) ? Localization.current_.back : "0";
-	                        str7 = str7 + "\n" + Localization.current_.reverse + ": " + str9;
-	                        str7 = str7 + "\n" + ((троллейбус.штанги_подн€ты) ? Localization.current_.st_on : Localization.current_.st_off);
-	                        str7 = str7 + "\n" + Localization.current_.trol + " " + ((троллейбус.включен) ? Localization.current_.enable : Localization.current_.disable);
-	                        if (троллейбус.ах != null)
-	                        {
-	                            //var str99 = (троллейбус2.включение_ах == 1) ? Localization.current_.enable : (троллейбус2.включение_ах == 0) ? Localization.current_.disable : "0";
+                        Common.MyGUI.default_font.DrawString(null, Localization.current_.tram_control + ": " + control_str + "\n" + Localization.current_.ctrl_pos + ": " + str + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km + "\n" + Localization.current_.route + ": " + str5, (int)(15 + MyDirect3D.device.Viewport.X), (int)(15 + MyDirect3D.device.Viewport.Y), Color.Black);
+                    }
+                    if (_transport is “роллейбус)// (игроки[i].управл€емыйќбъект is “роллейбус)
+                    {
+                        var троллейбус = (“роллейбус)_transport;//игроки[i].управл€емыйќбъект;
+                        var str7 = "-";
+                        var str8 = "неизвестно чем";
+                        if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
+                        {
+                            str8 = Localization.current_.trol_control;
+                            str7 = "\n" + Localization.current_.ctrl_pos + ": ";
+                            var троллейбус2 = (—истема_управлени€.– —”_“роллейбус)троллейбус.система_управлени€;
+                            switch (троллейбус2.позици€_контроллера)
+                            {
+                                case -2:
+                                    str7 = str7 + Localization.current_.b2;
+                                    break;
+
+                                case -1:
+                                    str7 = str7 + Localization.current_.b1;
+                                    break;
+
+                                case 0:
+                                    str7 = str7 + "0";
+                                    break;
+
+                                case 1:
+                                    str7 = str7 + Localization.current_.m;
+                                    break;
+
+                                case 2:
+                                    str7 = str7 + Localization.current_.x1;
+                                    break;
+
+                                case 3:
+                                    str7 = str7 + Localization.current_.x2;
+                                    break;
+
+                                case 4:
+                                    str7 = str7 + Localization.current_.x3;
+                                    break;
+                            }
+                            str7 = str7 + "\n" + Localization.current_.air_brake + ": " + ((троллейбус2.пневматический_тормоз * 100.0)).ToString("0") + "%";
+                            var str9 = (троллейбус2.позици€_реверсора == 1) ? Localization.current_.forward : (троллейбус2.позици€_реверсора == -1) ? Localization.current_.back : "0";
+                            str7 = str7 + "\n" + Localization.current_.reverse + ": " + str9;
+                            str7 = str7 + "\n" + ((троллейбус.штанги_подн€ты) ? Localization.current_.st_on : Localization.current_.st_off);
+                            str7 = str7 + "\n" + Localization.current_.trol + " " + ((троллейбус.включен) ? Localization.current_.enable : Localization.current_.disable);
+                            if (троллейбус.ах != null)
+                            {
+                                //var str99 = (троллейбус2.включение_ах == 1) ? Localization.current_.enable : (троллейбус2.включение_ах == 0) ? Localization.current_.disable : "0";
                                 str7 = str7 + "\n" + Localization.current_.ax + " " + ((троллейбус.ах.включЄн) ? Localization.current_.enable : Localization.current_.disable);
-	                           // str7 = str7 + "\n" + ((троллейбус.ах.включЄн) ? Localization.current_.enable : Localization.current_.disable);
-	                            //var str99 = (троллейбус2.включение_ах == 1)  ? Localization.current_.enable : (троллейбус2.включение_ах == 0)  ? Localization.current_.disable : "0";
-	                        	//str7 = str7 + "\n" + Localization.current_.ax + " " + str99;
-	                        	str7 = str7 + "\n" + Localization.current_.ax_power + ": " + (троллейбус.ах.текуща€_Ємкость / троллейбус.ах.полна€_Ємкость).ToString("##0%");
-	                        }
-	                    }
-	                    else if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
-	                    {
-	                        str8 = Localization.current_.bus_control;
-	                        var авто = (—истема_управлени€. ѕ_јвто) троллейбус.система_управлени€;
-	                        str7 = (("\n" + Localization.current_.gmod + ": " + авто.текущий_режим) + "\n" + Localization.current_.cur_pos + ": " + авто.текуща€_передача) + "\n" + Localization.current_.pedal_pos + ": ";
-	                        if (авто.положение_педалей > 0.0)
-	                        {
-	                            str7 = str7 + Localization.current_.gas + " ";
-	                        }
-	                        if (авто.положение_педалей < 0.0)
-	                        {
-	                            str7 = str7 + Localization.current_.brake + " ";
-	                        }
-	                        str7 = str7 + ((Math.Abs(авто.положение_педалей) * 100.0)).ToString("0") + "%"
-	                        	+ "\n" + Localization.current_.engine + " " + (троллейбус.включен ? Localization.current_.enable : Localization.current_.disable);
-	                    }
-	                    else if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
+                                // str7 = str7 + "\n" + ((троллейбус.ах.включЄн) ? Localization.current_.enable : Localization.current_.disable);
+                                //var str99 = (троллейбус2.включение_ах == 1)  ? Localization.current_.enable : (троллейбус2.включение_ах == 0)  ? Localization.current_.disable : "0";
+                                //str7 = str7 + "\n" + Localization.current_.ax + " " + str99;
+                                str7 = str7 + "\n" + Localization.current_.ax_power + ": " + (троллейбус.ах.текуща€_Ємкость / троллейбус.ах.полна€_Ємкость).ToString("##0%");
+                            }
+                        }
+                        else if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
+                        {
+                            str8 = Localization.current_.bus_control;
+                            var авто = (—истема_управлени€. ѕ_јвто)троллейбус.система_управлени€;
+                            str7 = (("\n" + Localization.current_.gmod + ": " + авто.текущий_режим) + "\n" + Localization.current_.cur_pos + ": " + авто.текуща€_передача) + "\n" + Localization.current_.pedal_pos + ": ";
+                            if (авто.положение_педалей > 0.0)
+                            {
+                                str7 = str7 + Localization.current_.gas + " ";
+                            }
+                            if (авто.положение_педалей < 0.0)
+                            {
+                                str7 = str7 + Localization.current_.brake + " ";
+                            }
+                            str7 = str7 + ((Math.Abs(авто.положение_педалей) * 100.0)).ToString("0") + "%"
+                                + "\n" + Localization.current_.engine + " " + (троллейбус.включен ? Localization.current_.enable : Localization.current_.disable);
+                        }
+                        else if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
                         {
                             str8 = Localization.current_.auto_control;
-                            var авто = (—истема_управлени€. ѕ_јвто1) троллейбус.система_управлени€;
+                            var авто = (—истема_управлени€. ѕ_јвто1)троллейбус.система_управлени€;
                             str7 = ("\n" + Localization.current_.cur_pos + ": " + авто.текуща€_передача) + "\n" + Localization.current_.pedal_pos + ": ";
                             if (авто.положение_педалей > 0.0)
                             {
@@ -2560,87 +2560,87 @@ namespace Trancity
                             str7 = str7 + ((Math.Abs(авто.положение_педалей) * 100.0)).ToString("0") + "%"
                                 + "\n" + Localization.current_.engine + " " + (троллейбус.включен ? Localization.current_.enable : Localization.current_.disable);
                         }
-	                    str7 = str7 + "\n" + Localization.current_.parking_brake + " " + (троллейбус.stand_brake ? Localization.current_.enable : Localization.current_.disable);
-	                    if (троллейбус.поворот–ул€ > 0.0)
-	                    {
-	                        str7 = str7 + "\n" + Localization.current_.sterling + ": " + (((троллейбус.поворот–ул€ * 180.0) / 3.1415926535897931)).ToString("0") + "\x00b0 " + Localization.current_.ster_r;
-	                    }
-	                    else if (троллейбус.поворот–ул€ < 0.0)
-	                    {
-	                        str7 = str7 + "\n" + Localization.current_.sterling + ": " + (((-троллейбус.поворот–ул€ * 180.0) / 3.1415926535897931)).ToString("0") + "\x00b0 " + Localization.current_.ster_l;
-	                    }
-	                    else
-	                    {
-	                        str7 = str7 + "\n" + Localization.current_.sterling + ": " + Localization.current_.nr_pryamo;
-	                    }
-	                    var str12 = троллейбус.маршрут.number;
-	                    
-	                    if (троллейбус.в_парк)
-	                    {
-	                        str12 = str12 + " (" + Localization.current_.route_in_park + ")";
-	                    }
-	                    if (троллейбус.нар€д != null)
-	                    {
-	                        var str16 = str12;
-	                        str12 = str16 + "\n" + Localization.current_.order + ": " + троллейбус.нар€д.маршрут.number + "/" + троллейбус.нар€д.номер;
-	                        if (троллейбус.рейс != null)
-	                        {
-	                            if (мир.time < троллейбус.рейс.врем€_отправлени€)
-	                            {
-	                                str12 = str12 + "\n" + Localization.current_.departure_time + ": " + троллейбус.рейс.str_врем€_отправлени€;
-	                            }
-	                            str12 = str12 + "\n" + Localization.current_.arrival_time + ": " + троллейбус.рейс.str_врем€_прибыти€;
-	                            if ((((троллейбус.рейс_index < (троллейбус.рейс.pathes.Length - 1)) && (троллейбус.положение.ƒорога != null)) && (троллейбус.положение.ƒорога.следующиеƒороги.Length > 1)) && ((троллейбус.рейс_index > 0) || (троллейбус.положение.ƒорога == троллейбус.рейс.pathes[0])))
-	                            {
-	                                var дорога2 = троллейбус.рейс.pathes[троллейбус.рейс_index + 1];
-	                                var str13 = Localization.current_.nr_pryamo;
-	                                if (дорога2.крива€)
-	                                {
-	                                    if (дорога2.—тепеньѕоворота0 > 0.0)
-	                                    {
-	                                        str13 = Localization.current_.nr_right;
-	                                    }
-	                                    else if (дорога2.—тепеньѕоворота0 < 0.0)
-	                                    {
-	                                        str13 = Localization.current_.nr_left;
-	                                    }
-	                                }
-	                                str12 = str12 + "\n" + Localization.current_.nr + ": " + str13;
-	                                
-	                            }
-	                        }
-	                    }
-	                    if (троллейбус.nextStop != null)
-	                    {
-	                        var str17 = "\n" + Localization.current_.stop  + ((_transport.nextStop != null) ? _transport.nextStop.название : "");
-	                    }
-	                    Common.MyGUI.default_font.DrawString(null, str8 + ": " + control_str + str7 + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km + "\n" + Localization.current_.route + ": " + str12, 15 + MyDirect3D.device.Viewport.X, 15 + MyDirect3D.device.Viewport.Y, Color.Black);
-	                }
+                        str7 = str7 + "\n" + Localization.current_.parking_brake + " " + (троллейбус.stand_brake ? Localization.current_.enable : Localization.current_.disable);
+                        if (троллейбус.поворот–ул€ > 0.0)
+                        {
+                            str7 = str7 + "\n" + Localization.current_.sterling + ": " + (((троллейбус.поворот–ул€ * 180.0) / 3.1415926535897931)).ToString("0") + "\x00b0 " + Localization.current_.ster_r;
+                        }
+                        else if (троллейбус.поворот–ул€ < 0.0)
+                        {
+                            str7 = str7 + "\n" + Localization.current_.sterling + ": " + (((-троллейбус.поворот–ул€ * 180.0) / 3.1415926535897931)).ToString("0") + "\x00b0 " + Localization.current_.ster_l;
+                        }
+                        else
+                        {
+                            str7 = str7 + "\n" + Localization.current_.sterling + ": " + Localization.current_.nr_pryamo;
+                        }
+                        var str12 = троллейбус.маршрут.number;
+
+                        if (троллейбус.в_парк)
+                        {
+                            str12 = str12 + " (" + Localization.current_.route_in_park + ")";
+                        }
+                        if (троллейбус.нар€д != null)
+                        {
+                            var str16 = str12;
+                            str12 = str16 + "\n" + Localization.current_.order + ": " + троллейбус.нар€д.маршрут.number + "/" + троллейбус.нар€д.номер;
+                            if (троллейбус.рейс != null)
+                            {
+                                if (мир.time < троллейбус.рейс.врем€_отправлени€)
+                                {
+                                    str12 = str12 + "\n" + Localization.current_.departure_time + ": " + троллейбус.рейс.str_врем€_отправлени€;
+                                }
+                                str12 = str12 + "\n" + Localization.current_.arrival_time + ": " + троллейбус.рейс.str_врем€_прибыти€;
+                                if ((((троллейбус.рейс_index < (троллейбус.рейс.pathes.Length - 1)) && (троллейбус.положение.ƒорога != null)) && (троллейбус.положение.ƒорога.следующиеƒороги.Length > 1)) && ((троллейбус.рейс_index > 0) || (троллейбус.положение.ƒорога == троллейбус.рейс.pathes[0])))
+                                {
+                                    var дорога2 = троллейбус.рейс.pathes[троллейбус.рейс_index + 1];
+                                    var str13 = Localization.current_.nr_pryamo;
+                                    if (дорога2.крива€)
+                                    {
+                                        if (дорога2.—тепеньѕоворота0 > 0.0)
+                                        {
+                                            str13 = Localization.current_.nr_right;
+                                        }
+                                        else if (дорога2.—тепеньѕоворота0 < 0.0)
+                                        {
+                                            str13 = Localization.current_.nr_left;
+                                        }
+                                    }
+                                    str12 = str12 + "\n" + Localization.current_.nr + ": " + str13;
+
+                                }
+                            }
+                        }
+                        if (троллейбус.nextStop != null)
+                        {
+                            var str17 = "\n" + Localization.current_.stop + ((_transport.nextStop != null) ? _transport.nextStop.название : "");
+                        }
+                        Common.MyGUI.default_font.DrawString(null, str8 + ": " + control_str + str7 + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km + "\n" + Localization.current_.route + ": " + str12, 15 + MyDirect3D.device.Viewport.X, 15 + MyDirect3D.device.Viewport.Y, Color.Black);
+                    }
                 }
                 if (((MyDirect3D.device.Viewport.X + MyDirect3D.device.Viewport.Width) == MyDirect3D.Window_Width) &&
                     (MyDirect3D.device.Viewport.Y == 0))// continue;
                 {
-                	Common.MyGUI.default_font.DrawString(null, ConvertTime.TimeFromSeconds(мир.time % 86400.0), MyDirect3D.Window_Width - 105/*0x69*/, 15, Color.Black);
-//                	MyGUI.default_font.DrawString(null, "ѕонедельник".PadLeft(27), MyDirect3D.Window_Width - 398, 15, Color.Black);
+                    Common.MyGUI.default_font.DrawString(null, ConvertTime.TimeFromSeconds(мир.time % 86400.0), MyDirect3D.Window_Width - 105/*0x69*/, 15, Color.Black);
+                    //                	MyGUI.default_font.DrawString(null, "ѕонедельник".PadLeft(27), MyDirect3D.Window_Width - 398, 15, Color.Black);
                 }
                 if (!MainForm.debug) continue;
                 var _str = "\ndTmax: " + World.dtmax.ToString("#0.000") + "\nFPS: " + MyDirect3D._newDevice.FPS.ToString("#00")
                     + "\nNewControl: " + ((NewControl) ? Localization.current_.enable : Localization.current_.disable)
-                	+ "\nX: " + MyDirect3D.Camera_Position.x.ToString("#0.0")
-	                + "\nY: " + MyDirect3D.Camera_Position.y.ToString("#0.0")
-	                + "\nZ: " + MyDirect3D.Camera_Position.z.ToString("#0.0")
-	                + "\nrY: " + MyDirect3D.Camera_Rotation.x.ToString("#0.000")
-	                + "\nrZ: " + MyDirect3D.Camera_Rotation.y.ToString("#0.000");
+                    + "\nX: " + MyDirect3D.Camera_Position.x.ToString("#0.0")
+                    + "\nY: " + MyDirect3D.Camera_Position.y.ToString("#0.0")
+                    + "\nZ: " + MyDirect3D.Camera_Position.z.ToString("#0.0")
+                    + "\nrY: " + MyDirect3D.Camera_Rotation.x.ToString("#0.000")
+                    + "\nrZ: " + MyDirect3D.Camera_Rotation.y.ToString("#0.000");
                 Common.MyGUI.default_font.DrawString(null, _str, new Rectangle(MyDirect3D.Window_Width - 160, 15, 160, 500), DrawTextFormat.Right, Color.Black);
             }
             MyDirect3D._newDevice.EndScene();
         }
-        
+
         public void RenderMain()
         {
             for (var i = 0; i < игроки.Length; i++)
             {
-            	игроки[i].cameraPosition.Add(ref игроки[i].cameraPositionChange);// += игроки[i].cameraPositionChange;
+                игроки[i].cameraPosition.Add(ref игроки[i].cameraPositionChange);// += игроки[i].cameraPositionChange;
                 игроки[i].cameraPositionChange.Divide(3.0);// = игроки[i].cameraPositionChange / 3.0;
                 игроки[i].cameraRotation.Add(ref игроки[i].cameraRotationChange);// += игроки[i].cameraRotationChange;
                 if (игроки[i].cameraRotation.x > Math.PI) игроки[i].cameraRotation.x -= Math.PI * 2.0;
@@ -2655,203 +2655,188 @@ namespace Trancity
                 row = (int)Math.Floor(игроки[i].cameraPosition.z / (double)Ground.grid_size);
                 //
                 MyDirect3D.ComputeFrustum();
-				мир.RenderMeshes();
-				string whole_info = "";
+                мир.RenderMeshes();
+                string whole_info = "";
                 if (игроки[i].управл€емыйќбъект != null)
                 {
-                	var _transport = (Transport) игроки[i].управл€емыйќбъект;
-                	var speed_str = (_transport.скорость * 3.6).ToString("###0.00");
-	                var control_str = "";
-	                if (_transport.управление.автоматическое)
-	                {
-	                    control_str = _transport.управление.ручное ? Localization.current_.ctrl_s : Localization.current_.ctrl_a;
-	                }
-	                else
-	                {
-	                    control_str = _transport.управление.ручное ? Localization.current_.ctrl_m : "-";
-	                }
-	                if (MainForm.debug)
-	                {
-	                	MyGUI.stringlist[4 + i] = "\nCS: " + ((_transport.currentStop != null) ? _transport.currentStop.название : "")
-	                    	+ "\nNS: " + ((_transport.nextStop != null) ? _transport.nextStop.название : "")
-	                    	+ "\nSI: " + _transport.stopIndex
-	                        + "\n\nX: " + _transport. оординаты3D.x.ToString("#0.0")
-	                        + "\nY: " + _transport. оординаты3D.y.ToString("#0.0")
-	                        + "\nZ: " + _transport. оординаты3D.z.ToString("#0.0")
-	                        + "\nrY: " + (_transport.direction * 180.0 / Math.PI).ToString("#0.0")
-	                    	+ "\nrZ: " + (_transport.ЌаправлениеY * 180.0 / Math.PI).ToString("#0.0");
-	                }
-	                if (_transport is “рамвай)//(игроки[i].управл€емыйќбъект is “рамвай)
-	                {
-	                    var трамвай = (“рамвай) _transport;//игроки[i].управл€емыйќбъект;
-	                    var str = "-";
-	                    if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
-	                    {
-		                    var трамвай2 = (—истема_управлени€.– —”_“рамвай) трамвай.система_управлени€;
-		                    switch (трамвай2.позици€_контроллера)
-		                    {
-		                        case -5:
-		                            str = "“–";
-		                            break;
-		
-		                        case -4:
-		                            str = "“4";
-		                            break;
-		
-		                        case -3:
-		                            str = "“3";
-		                            break;
-		
-		                        case -2:
-		                            str = "“2";
-		                            break;
-		
-		                        case -1:
-		                            str = "“1";
-		                            break;
-		
-		                        case 0:
-		                            str = "0";
-		                            break;
-		
-		                        case 1:
-		                            str = "ћ";
-		                            break;
-		
-		                        case 2:
-		                            str = "’1";
-		                            break;
-		
-		                        case 3:
-		                            str = "’2";
-		                            break;
-		
-		                        case 4:
-		                            str = "’3";
-		                            break;
-		                    }
-		                    var str2 = (трамвай2.позици€_реверсора == 1) ? Localization.current_.forward : (трамвай2.позици€_реверсора == -1) ? Localization.current_.back : "0";
-		                    str = str + "\n" + Localization.current_.reverse + ": " + str2;
-	                    }
-	                    str = str + "\n" + ((трамвай.токоприЄмник.подн€т) ? Localization.current_.tk_on : Localization.current_.tk_off)
-	                    	 + "\n" + Localization.current_.parking_brake + " " + (трамвай.stand_brake ? Localization.current_.enable : Localization.current_.disable);
-	                    var str5 = трамвай.маршрут.number;
-	                    var str7 = трамвай.nextStop;
-	                    if (трамвай.в_парк)
-	                    {
-	                        str5 = str5 + " (" + Localization.current_.route_in_park + ")";
-	                    }
-	                    if (трамвай.нар€д != null)
-	                    {
-	                        str5 = str5 + "\n" + Localization.current_.order + ": " + трамвай.нар€д.маршрут.number + "/" + трамвай.нар€д.номер;
-	                        if (трамвай.рейс != null)
-	                        {
-	                            if (мир.time < трамвай.рейс.врем€_отправлени€)
-	                            {
-	                                str5 = str5 + "\n" + Localization.current_.departure_time + ": " + трамвай.рейс.str_врем€_отправлени€;
-	                            }
-	                            str5 = str5 + "\n" + Localization.current_.arrival_time + ": " + трамвай.рейс.str_врем€_прибыти€;
-	                            if (((трамвай.рейс_index < (трамвай.рейс.pathes.Length - 1)) && (трамвай.передн€€_ось.текущий_рельс.следующие_рельсы.Length > 1)) && ((трамвай.рейс_index > 0) || (трамвай.передн€€_ось.текущий_рельс == трамвай.рейс.pathes[0])))
-	                            {
-	                                var дорога = трамвай.рейс.pathes[трамвай.рейс_index + 1];
-	                                var str6 = Localization.current_.nr_pryamo;
-	                                if (дорога.крива€)
-	                                {
-	                                    if (дорога.—тепеньѕоворота0 > 0.0)
-	                                    {
-	                                        str6 = Localization.current_.nr_right;
-	                                    }
-	                                    else if (дорога.—тепеньѕоворота0 < 0.0)
-	                                    {
-	                                        str6 = Localization.current_.nr_left;
-	                                    }
-	                                }
-	                                str5 = str5 + "\n" + Localization.current_.nr + ": " + str6;
-	                                
-	                            }
-	                        }
-	                    }
-	                    //str7 = "\nNS: "(трамвай.nextStop.название);
-	                    whole_info = Localization.current_.tram_control + ": " + control_str + "\n" + Localization.current_.ctrl_pos + ": " + str + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km +  "\n" + Localization.current_.route + ": " + str5 + str7;
-	                }
-	                if (_transport is “роллейбус)
-	                {
-	                    var троллейбус = (“роллейбус) _transport;
-	                    var str7 = "-";
-	                    var str8 = "неизвестно чем";
-	                    if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
-	                    {
-	                        str8 = Localization.current_.trol_control;
-	                        str7 = "\n" + Localization.current_.ctrl_pos + ": ";
-	                        var троллейбусна€_—” = (—истема_управлени€.– —”_“роллейбус) троллейбус.система_управлени€;
-	                        switch (троллейбусна€_—”.позици€_контроллера)
-	                        {
-	                            case -2:
-	                                str7 = str7 + "“2";
-	                                break;
-	
-	                            case -1:
-	                                str7 = str7 + "“1";
-	                                break;
-	
-	                            case 0:
-	                                str7 = str7 + "0";
-	                                break;
-	
-	                            case 1:
-	                                str7 = str7 + "ћ";
-	                                break;
-	
-	                            case 2:
-	                                str7 = str7 + "’1";
-	                                break;
-	
-	                            case 3:
-	                                str7 = str7 + "’2";
-	                                break;
-	
-	                            case 4:
-	                                str7 = str7 + "’3";
-	                                break;
-	                        }
-	                        str7 = str7 + "\n" + Localization.current_.air_brake + ": " + ((троллейбусна€_—”.пневматический_тормоз * 100.0)).ToString("0") + "%";
-	                        var str9 = (троллейбусна€_—”.позици€_реверсора == 1) ? Localization.current_.forward : (троллейбусна€_—”.позици€_реверсора == -1) ? Localization.current_.back : "0";
-	                        str7 = str7 + "\n" + Localization.current_.reverse + ": " + str9;
-	                        str7 = str7 + "\n" + ((троллейбус.штанги_подн€ты) ? Localization.current_.st_on : Localization.current_.st_off);
-	                        str7 = str7 + "\n" + Localization.current_.trol + " " + ((троллейбус.включен) ? Localization.current_.enable : Localization.current_.disable);
-	                        /*if (троллейбус.ах != null)
+                    var _transport = (Transport)игроки[i].управл€емыйќбъект;
+                    var speed_str = (_transport.скорость * 3.6).ToString("###0.00");
+                    var control_str = "";
+                    if (_transport.управление.автоматическое)
+                    {
+                        control_str = _transport.управление.ручное ? Localization.current_.ctrl_s : Localization.current_.ctrl_a;
+                    }
+                    else
+                    {
+                        control_str = _transport.управление.ручное ? Localization.current_.ctrl_m : "-";
+                    }
+                    if (MainForm.debug)
+                    {
+                        MyGUI.stringlist[4 + i] = "\nCS: " + ((_transport.currentStop != null) ? _transport.currentStop.название : "")
+                            + "\nNS: " + ((_transport.nextStop != null) ? _transport.nextStop.название : "")
+                            + "\nSI: " + _transport.stopIndex
+                            + "\n\nX: " + _transport. оординаты3D.x.ToString("#0.0")
+                            + "\nY: " + _transport. оординаты3D.y.ToString("#0.0")
+                            + "\nZ: " + _transport. оординаты3D.z.ToString("#0.0")
+                            + "\nrY: " + (_transport.direction * 180.0 / Math.PI).ToString("#0.0")
+                            + "\nrZ: " + (_transport.ЌаправлениеY * 180.0 / Math.PI).ToString("#0.0");
+                    }
+                    if (_transport is “рамвай)//(игроки[i].управл€емыйќбъект is “рамвай)
+                    {
+                        var трамвай = (“рамвай)_transport;//игроки[i].управл€емыйќбъект;
+                        var str = "-";
+                        if (трамвай.система_управлени€ is —истема_управлени€.– —”_“рамвай)
+                        {
+                            var трамвай2 = (—истема_управлени€.– —”_“рамвай)трамвай.система_управлени€;
+                            switch (трамвай2.позици€_контроллера)
+                            {
+                                case -5:
+                                    str = "“–";
+                                    break;
+
+                                case -4:
+                                    str = "“4";
+                                    break;
+
+                                case -3:
+                                    str = "“3";
+                                    break;
+
+                                case -2:
+                                    str = "“2";
+                                    break;
+
+                                case -1:
+                                    str = "“1";
+                                    break;
+
+                                case 0:
+                                    str = "0";
+                                    break;
+
+                                case 1:
+                                    str = "ћ";
+                                    break;
+
+                                case 2:
+                                    str = "’1";
+                                    break;
+
+                                case 3:
+                                    str = "’2";
+                                    break;
+
+                                case 4:
+                                    str = "’3";
+                                    break;
+                            }
+                            var str2 = (трамвай2.позици€_реверсора == 1) ? Localization.current_.forward : (трамвай2.позици€_реверсора == -1) ? Localization.current_.back : "0";
+                            str = str + "\n" + Localization.current_.reverse + ": " + str2;
+                        }
+                        str = str + "\n" + ((трамвай.токоприЄмник.подн€т) ? Localization.current_.tk_on : Localization.current_.tk_off)
+                             + "\n" + Localization.current_.parking_brake + " " + (трамвай.stand_brake ? Localization.current_.enable : Localization.current_.disable);
+                        var str5 = трамвай.маршрут.number;
+                        var str7 = трамвай.nextStop;
+                        if (трамвай.в_парк)
+                        {
+                            str5 = str5 + " (" + Localization.current_.route_in_park + ")";
+                        }
+                        if (трамвай.нар€д != null)
+                        {
+                            str5 = str5 + "\n" + Localization.current_.order + ": " + трамвай.нар€д.маршрут.number + "/" + трамвай.нар€д.номер;
+                            if (трамвай.рейс != null)
+                            {
+                                if (мир.time < трамвай.рейс.врем€_отправлени€)
+                                {
+                                    str5 = str5 + "\n" + Localization.current_.departure_time + ": " + трамвай.рейс.str_врем€_отправлени€;
+                                }
+                                str5 = str5 + "\n" + Localization.current_.arrival_time + ": " + трамвай.рейс.str_врем€_прибыти€;
+                                if (((трамвай.рейс_index < (трамвай.рейс.pathes.Length - 1)) && (трамвай.передн€€_ось.текущий_рельс.следующие_рельсы.Length > 1)) && ((трамвай.рейс_index > 0) || (трамвай.передн€€_ось.текущий_рельс == трамвай.рейс.pathes[0])))
+                                {
+                                    var дорога = трамвай.рейс.pathes[трамвай.рейс_index + 1];
+                                    var str6 = Localization.current_.nr_pryamo;
+                                    if (дорога.крива€)
+                                    {
+                                        if (дорога.—тепеньѕоворота0 > 0.0)
+                                        {
+                                            str6 = Localization.current_.nr_right;
+                                        }
+                                        else if (дорога.—тепеньѕоворота0 < 0.0)
+                                        {
+                                            str6 = Localization.current_.nr_left;
+                                        }
+                                    }
+                                    str5 = str5 + "\n" + Localization.current_.nr + ": " + str6;
+
+                                }
+                            }
+                        }
+                        //str7 = "\nNS: "(трамвай.nextStop.название);
+                        whole_info = Localization.current_.tram_control + ": " + control_str + "\n" + Localization.current_.ctrl_pos + ": " + str + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km + "\n" + Localization.current_.route + ": " + str5 + str7;
+                    }
+                    if (_transport is “роллейбус)
+                    {
+                        var троллейбус = (“роллейбус)_transport;
+                        var str7 = "-";
+                        var str8 = "неизвестно чем";
+                        if (троллейбус.система_управлени€ is —истема_управлени€.– —”_“роллейбус)
+                        {
+                            str8 = Localization.current_.trol_control;
+                            str7 = "\n" + Localization.current_.ctrl_pos + ": ";
+                            var троллейбусна€_—” = (—истема_управлени€.– —”_“роллейбус)троллейбус.система_управлени€;
+                            switch (троллейбусна€_—”.позици€_контроллера)
+                            {
+                                case -2:
+                                    str7 = str7 + "“2";
+                                    break;
+
+                                case -1:
+                                    str7 = str7 + "“1";
+                                    break;
+
+                                case 0:
+                                    str7 = str7 + "0";
+                                    break;
+
+                                case 1:
+                                    str7 = str7 + "ћ";
+                                    break;
+
+                                case 2:
+                                    str7 = str7 + "’1";
+                                    break;
+
+                                case 3:
+                                    str7 = str7 + "’2";
+                                    break;
+
+                                case 4:
+                                    str7 = str7 + "’3";
+                                    break;
+                            }
+                            str7 = str7 + "\n" + Localization.current_.air_brake + ": " + ((троллейбусна€_—”.пневматический_тормоз * 100.0)).ToString("0") + "%";
+                            var str9 = (троллейбусна€_—”.позици€_реверсора == 1) ? Localization.current_.forward : (троллейбусна€_—”.позици€_реверсора == -1) ? Localization.current_.back : "0";
+                            str7 = str7 + "\n" + Localization.current_.reverse + ": " + str9;
+                            str7 = str7 + "\n" + ((троллейбус.штанги_подн€ты) ? Localization.current_.st_on : Localization.current_.st_off);
+                            str7 = str7 + "\n" + Localization.current_.trol + " " + ((троллейбус.включен) ? Localization.current_.enable : Localization.current_.disable);
+                            /*if (троллейбус.ах != null)
 	                        {
 	                        	str7 = str7 + "\n" + Localization.current_.ax + " " + (троллейбус.ах.включЄн ? Localization.current_.enable : Localization.current_.disable) + "\n" + Localization.current_.ax_power + ": " + (троллейбус.ах.текуща€_Ємкость / троллейбус.ах.полна€_Ємкость).ToString("##0%");
 	                        }*/
-                            if (троллейбус.ах != null) {
-	                            //var str99 = (троллейбусна€_—”.включение_ах == 1) ? Localization.current_.enable : (троллейбусна€_—”.включение_ах == 0) ? Localization.current_.disable : "0";
-	                            str7 = str7 + "\n" + Localization.current_.ax + ((троллейбус.ах.включЄн) ? Localization.current_.enable : Localization.current_.disable);
-                                
+                            if (троллейбус.ах != null)
+                            {
+                                //var str99 = (троллейбусна€_—”.включение_ах == 1) ? Localization.current_.enable : (троллейбусна€_—”.включение_ах == 0) ? Localization.current_.disable : "0";
+                                str7 = str7 + "\n" + Localization.current_.ax + ((троллейбус.ах.включЄн) ? Localization.current_.enable : Localization.current_.disable);
+
                                 //str7 = str7 + "\n" + Localization.current_.ax + " " + str99;
                                 str7 = str7 + "\n" + Localization.current_.ax_power + ": " + (троллейбус.ах.текуща€_Ємкость / троллейбус.ах.полна€_Ємкость).ToString("##0%");
                             }
-	                        
-	                    }
-	                    else if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
-	                    {
-	                        str8 = Localization.current_.bus_control;
-	                        var автобусна€_—” = (—истема_управлени€. ѕ_јвто) троллейбус.система_управлени€;
-	                        str7 = (("\n" + Localization.current_.gmod + ": " + автобусна€_—”.текущий_режим) + "\n" + Localization.current_.cur_pos + ": " + автобусна€_—”.текуща€_передача) + "\n" + Localization.current_.pedal_pos + ": ";
-	                        if (автобусна€_—”.положение_педалей > 0.0)
-	                        {
-	                            str7 = str7 + Localization.current_.gas + " ";
-	                        }
-	                        if (автобусна€_—”.положение_педалей < 0.0)
-	                        {
-	                            str7 = str7 + Localization.current_.brake + " ";
-	                        }
-	                        str7 = str7 + ((Math.Abs(автобусна€_—”.положение_педалей) * 100.0)).ToString("0") + "%"
-	                        	+ "\n" + Localization.current_.engine + " " + (троллейбус.включен ? Localization.current_.enable : Localization.current_.disable);
-	                    }
-	                    else if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
+
+                        }
+                        else if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто)
                         {
                             str8 = Localization.current_.bus_control;
-                            var автобусна€_—” = (—истема_управлени€. ѕ_јвто) троллейбус.система_управлени€;
+                            var автобусна€_—” = (—истема_управлени€. ѕ_јвто)троллейбус.система_управлени€;
                             str7 = (("\n" + Localization.current_.gmod + ": " + автобусна€_—”.текущий_режим) + "\n" + Localization.current_.cur_pos + ": " + автобусна€_—”.текуща€_передача) + "\n" + Localization.current_.pedal_pos + ": ";
                             if (автобусна€_—”.положение_педалей > 0.0)
                             {
@@ -2864,77 +2849,93 @@ namespace Trancity
                             str7 = str7 + ((Math.Abs(автобусна€_—”.положение_педалей) * 100.0)).ToString("0") + "%"
                                 + "\n" + Localization.current_.engine + " " + (троллейбус.включен ? Localization.current_.enable : Localization.current_.disable);
                         }
-	                    str7 = str7 + "\n" + Localization.current_.parking_brake + " " + (троллейбус.stand_brake ? Localization.current_.enable : Localization.current_.disable);
-	                    if (троллейбус.поворот–ул€ > 0.0)
-	                    {
-	                        str7 = str7 + "\n" + Localization.current_.sterling + ": " + (((троллейбус.поворот–ул€ * 180.0) / 3.1415926535897931)).ToString("0") + "\x00b0 " + Localization.current_.ster_r;
-	                    }
-	                    else if (троллейбус.поворот–ул€ < 0.0)
-	                    {
-	                        str7 = str7 + "\n" + Localization.current_.sterling + ": " + (((-троллейбус.поворот–ул€ * 180.0) / 3.1415926535897931)).ToString("0") + "\x00b0 " + Localization.current_.ster_l;
-	                    }
-	                    else
-	                    {
-	                        str7 = str7 + "\n" + Localization.current_.sterling + ": " + Localization.current_.nr_pryamo;
-	                    }
-	                    var str12 = троллейбус.маршрут.number;
-	                    var str17 = троллейбус.nextStop;
-	                    if (троллейбус.в_парк)
-	                    {
-	                        str12 = str12 + " (" + Localization.current_.route_in_park + ")";
-	                    }
-	                    if (троллейбус.нар€д != null)
-	                    {
-	                        var str16 = str12;
-	                        str12 = str16 + "\n" + Localization.current_.order + ": " + троллейбус.нар€д.маршрут.number + "/" + троллейбус.нар€д.номер;
-	                        if (троллейбус.рейс != null)
-	                        {
-	                            if (мир.time < троллейбус.рейс.врем€_отправлени€)
-	                            {
-	                                str12 = str12 + "\n" + Localization.current_.departure_time + ": " + троллейбус.рейс.str_врем€_отправлени€;
-	                            }
-	                            str12 = str12 + "\n" + Localization.current_.arrival_time + ": " + троллейбус.рейс.str_врем€_прибыти€;
-	                            if ((((троллейбус.рейс_index < (троллейбус.рейс.pathes.Length - 1)) && (троллейбус.положение.ƒорога != null)) && (троллейбус.положение.ƒорога.следующиеƒороги.Length > 1)) && ((троллейбус.рейс_index > 0) || (троллейбус.положение.ƒорога == троллейбус.рейс.pathes[0])))
-	                            {
-	                                var дорога2 = троллейбус.рейс.pathes[троллейбус.рейс_index + 1];
-	                                var str13 = Localization.current_.nr_pryamo;
-	                                if (дорога2.крива€)
-	                                {
-	                                    if (дорога2.—тепеньѕоворота0 > 0.0)
-	                                    {
-	                                        str13 = Localization.current_.nr_right;
-	                                    }
-	                                    else if (дорога2.—тепеньѕоворота0 < 0.0)
-	                                    {
-	                                        str13 = Localization.current_.nr_left;
-	                                    }
-	                                    
-	                                }
-	                                str12 = str12 + "\n" + Localization.current_.nr + ": " + str13;
-	                            }
-	                        }
-	                    }
-	                    //str17 = "\nNS: "(троллейбус.nextStop.название);
-	                    whole_info = str8 + ": " + control_str + str7 + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km + "\n" 
-	                        + Localization.current_.route + ": " + str12;
-	                    
-	                }
+                        else if (троллейбус.система_управлени€ is —истема_управлени€. ѕ_јвто1)
+                        {
+                            str8 = Localization.current_.bus_control;
+                            var автобусна€_—” = (—истема_управлени€. ѕ_јвто)троллейбус.система_управлени€;
+                            str7 = (("\n" + Localization.current_.gmod + ": " + автобусна€_—”.текущий_режим) + "\n" + Localization.current_.cur_pos + ": " + автобусна€_—”.текуща€_передача) + "\n" + Localization.current_.pedal_pos + ": ";
+                            if (автобусна€_—”.положение_педалей > 0.0)
+                            {
+                                str7 = str7 + Localization.current_.gas + " ";
+                            }
+                            if (автобусна€_—”.положение_педалей < 0.0)
+                            {
+                                str7 = str7 + Localization.current_.brake + " ";
+                            }
+                            str7 = str7 + ((Math.Abs(автобусна€_—”.положение_педалей) * 100.0)).ToString("0") + "%"
+                                + "\n" + Localization.current_.engine + " " + (троллейбус.включен ? Localization.current_.enable : Localization.current_.disable);
+                        }
+                        str7 = str7 + "\n" + Localization.current_.parking_brake + " " + (троллейбус.stand_brake ? Localization.current_.enable : Localization.current_.disable);
+                        if (троллейбус.поворот–ул€ > 0.0)
+                        {
+                            str7 = str7 + "\n" + Localization.current_.sterling + ": " + (((троллейбус.поворот–ул€ * 180.0) / 3.1415926535897931)).ToString("0") + "\x00b0 " + Localization.current_.ster_r;
+                        }
+                        else if (троллейбус.поворот–ул€ < 0.0)
+                        {
+                            str7 = str7 + "\n" + Localization.current_.sterling + ": " + (((-троллейбус.поворот–ул€ * 180.0) / 3.1415926535897931)).ToString("0") + "\x00b0 " + Localization.current_.ster_l;
+                        }
+                        else
+                        {
+                            str7 = str7 + "\n" + Localization.current_.sterling + ": " + Localization.current_.nr_pryamo;
+                        }
+                        var str12 = троллейбус.маршрут.number;
+                        var str17 = троллейбус.nextStop;
+                        if (троллейбус.в_парк)
+                        {
+                            str12 = str12 + " (" + Localization.current_.route_in_park + ")";
+                        }
+                        if (троллейбус.нар€д != null)
+                        {
+                            var str16 = str12;
+                            str12 = str16 + "\n" + Localization.current_.order + ": " + троллейбус.нар€д.маршрут.number + "/" + троллейбус.нар€д.номер;
+                            if (троллейбус.рейс != null)
+                            {
+                                if (мир.time < троллейбус.рейс.врем€_отправлени€)
+                                {
+                                    str12 = str12 + "\n" + Localization.current_.departure_time + ": " + троллейбус.рейс.str_врем€_отправлени€;
+                                }
+                                str12 = str12 + "\n" + Localization.current_.arrival_time + ": " + троллейбус.рейс.str_врем€_прибыти€;
+                                if ((((троллейбус.рейс_index < (троллейбус.рейс.pathes.Length - 1)) && (троллейбус.положение.ƒорога != null)) && (троллейбус.положение.ƒорога.следующиеƒороги.Length > 1)) && ((троллейбус.рейс_index > 0) || (троллейбус.положение.ƒорога == троллейбус.рейс.pathes[0])))
+                                {
+                                    var дорога2 = троллейбус.рейс.pathes[троллейбус.рейс_index + 1];
+                                    var str13 = Localization.current_.nr_pryamo;
+                                    if (дорога2.крива€)
+                                    {
+                                        if (дорога2.—тепеньѕоворота0 > 0.0)
+                                        {
+                                            str13 = Localization.current_.nr_right;
+                                        }
+                                        else if (дорога2.—тепеньѕоворота0 < 0.0)
+                                        {
+                                            str13 = Localization.current_.nr_left;
+                                        }
+
+                                    }
+                                    str12 = str12 + "\n" + Localization.current_.nr + ": " + str13;
+                                }
+                            }
+                        }
+                        //str17 = "\nNS: "(троллейбус.nextStop.название);
+                        whole_info = str8 + ": " + control_str + str7 + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km + "\n"
+                            + Localization.current_.route + ": " + str12;
+
+                    }
                 }
                 Common.MyGUI.stringlist[i] = whole_info;
                 Common.MyGUI.stringlist[i + 8] = "\ndTmax: " + World.dtmax.ToString("#0.000") + "\nFPS: " + MyDirect3D._newDevice.FPS.ToString("#00")
                     + "\nNewControl: " + ((NewControl) ? Localization.current_.enable : Localization.current_.disable)
-                	+ "\nX: " + MyDirect3D.Camera_Position.x.ToString("#0.0")
-	                + "\nY: " + MyDirect3D.Camera_Position.y.ToString("#0.0")
-	                + "\nZ: " + MyDirect3D.Camera_Position.z.ToString("#0.0")
-	                + "\nrY: " + MyDirect3D.Camera_Rotation.x.ToString("#0.000")
-	                + "\nrZ: " + MyDirect3D.Camera_Rotation.y.ToString("#0.000");
+                    + "\nX: " + MyDirect3D.Camera_Position.x.ToString("#0.0")
+                    + "\nY: " + MyDirect3D.Camera_Position.y.ToString("#0.0")
+                    + "\nZ: " + MyDirect3D.Camera_Position.z.ToString("#0.0")
+                    + "\nrY: " + MyDirect3D.Camera_Rotation.x.ToString("#0.000")
+                    + "\nrZ: " + MyDirect3D.Camera_Rotation.y.ToString("#0.000");
             }
             Common.MyGUI.stringlist[12] = ConvertTime.TimeFromSeconds(мир.time % 86400.0);
         }
-        
+
         public void RenderThread()
         {
-        	if (MyDirect3D.device == null) return;
+            if (MyDirect3D.device == null) return;
             if (MainForm.in_editor) goto Label_new;
             MyDirect3D.device.BeginScene();
             MyDirect3D.ResetViewports(игроки.Length);
@@ -2942,40 +2943,40 @@ namespace Trancity
             MyDirect3D.device.Clear(ClearFlags.ZBuffer | ClearFlags.Target, 0, 1f, 0);
             if (!активна)
             {
-            	menu.Draw();
-            	MyDirect3D.device.EndScene();
-            	MyDirect3D.device.Present();
-            	return;
+                menu.Draw();
+                MyDirect3D.device.EndScene();
+                MyDirect3D.device.Present();
+                return;
             }
-            Label_new:
-        	for (var i = 0; i < игроки.Length; i++)
+        Label_new:
+            for (var i = 0; i < игроки.Length; i++)
             {
-        		MyDirect3D.SetViewport(i);
+                MyDirect3D.SetViewport(i);
                 MyDirect3D.device.Clear(ClearFlags.ZBuffer | ClearFlags.Target, 0xb4ff, 1f, 0);
                 MyDirect3D.SetCameraPos(игроки[i].excameraPosition, игроки[i].excameraRotation);
                 мир.RenderMeshes2();
-				MeshObject.RenderList();
-				MyDirect3D.Alpha = true;
-				мир.RenderMeshesA();
-				MeshObject.RenderListA();
-				MyDirect3D.Alpha = false;
-        		if (!string.IsNullOrEmpty(Common.MyGUI.stringlist[i])) Common.MyGUI.default_font.DrawString(null, Common.MyGUI.stringlist[i], 15 + MyDirect3D.device.Viewport.X, 15 + MyDirect3D.device.Viewport.Y, Color.Black);
-        		if (((MyDirect3D.device.Viewport.X + MyDirect3D.device.Viewport.Width) == MyDirect3D.Window_Width) &&
+                MeshObject.RenderList();
+                MyDirect3D.Alpha = true;
+                мир.RenderMeshesA();
+                MeshObject.RenderListA();
+                MyDirect3D.Alpha = false;
+                if (!string.IsNullOrEmpty(Common.MyGUI.stringlist[i])) Common.MyGUI.default_font.DrawString(null, Common.MyGUI.stringlist[i], 15 + MyDirect3D.device.Viewport.X, 15 + MyDirect3D.device.Viewport.Y, Color.Black);
+                if (((MyDirect3D.device.Viewport.X + MyDirect3D.device.Viewport.Width) == MyDirect3D.Window_Width) &&
                     (MyDirect3D.device.Viewport.Y == 0))// continue;
                 {
-                	if (!string.IsNullOrEmpty(Common.MyGUI.stringlist[12])) Common.MyGUI.default_font.DrawString(null, Common.MyGUI.stringlist[12], MyDirect3D.Window_Width - 105/*0x69*/, 15, Color.Black);
+                    if (!string.IsNullOrEmpty(Common.MyGUI.stringlist[12])) Common.MyGUI.default_font.DrawString(null, Common.MyGUI.stringlist[12], MyDirect3D.Window_Width - 105/*0x69*/, 15, Color.Black);
                 }
-        		if (!MainForm.debug) continue;
-        		if (!string.IsNullOrEmpty(Common.MyGUI.stringlist[i + 8])) Common.MyGUI.default_font.DrawString(null, Common.MyGUI.stringlist[i + 8], new Rectangle(MyDirect3D.Window_Width - 160, 15, 160, 500), DrawTextFormat.Right, Color.Black);
-        		if (!string.IsNullOrEmpty(Common.MyGUI.stringlist[i + 4]))
-        		{
-        			Common.MyGUI.default_font.DrawString(null, Common.MyGUI.stringlist[i + 4], (int) (420 + MyDirect3D.device.Viewport.X), (int) (15 + MyDirect3D.device.Viewport.Y), Color.Black);
-            		Common.MyGUI.stringlist[i + 4] = string.Empty;
-        		}
-        	}
+                if (!MainForm.debug) continue;
+                if (!string.IsNullOrEmpty(Common.MyGUI.stringlist[i + 8])) Common.MyGUI.default_font.DrawString(null, Common.MyGUI.stringlist[i + 8], new Rectangle(MyDirect3D.Window_Width - 160, 15, 160, 500), DrawTextFormat.Right, Color.Black);
+                if (!string.IsNullOrEmpty(Common.MyGUI.stringlist[i + 4]))
+                {
+                    Common.MyGUI.default_font.DrawString(null, Common.MyGUI.stringlist[i + 4], (int)(420 + MyDirect3D.device.Viewport.X), (int)(15 + MyDirect3D.device.Viewport.Y), Color.Black);
+                    Common.MyGUI.stringlist[i + 4] = string.Empty;
+                }
+            }
             MyFeatures.MakeScreenshot(false);
-        	MyDirect3D.device.EndScene();
-        	MyDirect3D.device.Present();
+            MyDirect3D.device.EndScene();
+            MyDirect3D.device.Present();
         }
 
         private void ѕрив€зывать(»грок игрок)

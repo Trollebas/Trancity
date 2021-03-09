@@ -1,10 +1,10 @@
+using Common;
+using Engine;
+using SlimDX;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Common;
-using Engine;
-using SlimDX;
 using System.Windows.Forms;
 
 
@@ -22,14 +22,14 @@ namespace Trancity
         public Руль руль = null;
         public АХ ах;
         //public double скорость;
-        
+
         private double abs_r;
         private double nr_abs_r;
 
         private const double stop = 20.0;
         private const double spd = 4.0;
         private const double tg = (16.0 - spd) / (140.0 - stop);
-        
+
         //TODO: осмотреть и этот ужас переделать
         public override void АвтоматическиУправлять(World мир)
         {
@@ -44,7 +44,7 @@ namespace Trancity
             var b1 = false;
             var dont_stop = true;
             var ах = false;
-            
+
             base.stand_brake = false;
             if (положение.Дорога != null)
             {
@@ -213,7 +213,7 @@ namespace Trancity
                         if ((shiftLineTmp >= 0) && (shiftLineTmp < dist_by_lines.Length))
                         {
                             dist_by_lines[shiftLineTmp] = Math.Min(dist_by_lines[shiftLineTmp], (дорога.Длина - положение.расстояние) + положение2.расстояние);
-                        }                  
+                        }
                     }
                 }
                 if (some_other_fucking_distance < 100.0)
@@ -286,24 +286,24 @@ namespace Trancity
                             поворотРуля = target_direction;
                         }
                     }
-                   /* if (возвратРуля < target_direction)
-                    {
-                        возвратРуля += 0.3 * World.прошлоВремени;
-                        if (возвратРуля > target_direction)
-                        {
-                            возвратРуля = target_direction;
-                        }
-                    }
-                    else if (возвратРуля > target_direction)
-                    {
-                        возвратРуля -= 0.3 * World.прошлоВремени;
-                        if (возвратРуля < target_direction)
-                        {
-                            возвратРуля = target_direction;
-                        }
-                    }*/
+                    /* if (возвратРуля < target_direction)
+                     {
+                         возвратРуля += 0.3 * World.прошлоВремени;
+                         if (возвратРуля > target_direction)
+                         {
+                             возвратРуля = target_direction;
+                         }
+                     }
+                     else if (возвратРуля > target_direction)
+                     {
+                         возвратРуля -= 0.3 * World.прошлоВремени;
+                         if (возвратРуля < target_direction)
+                         {
+                             возвратРуля = target_direction;
+                         }
+                     }*/
                 }
-                
+
             }
             var flag = false;
             /*var flag2 = false;
@@ -319,7 +319,7 @@ namespace Trancity
                     flag = (скорость == 0.0);
                     var num24 = (дорога.Длина - положение.расстояние) - 20.0;
                     signals_dist = Math.Min(signals_dist, num24);
-//                    ost_dist = Math.Min(ost_dist, num24);
+                    //                    ost_dist = Math.Min(ost_dist, num24);
                     break;
                 }
             }
@@ -394,8 +394,8 @@ namespace Trancity
                                         if (flag4)
                                         {
                                             var pos = list4[n].FindCoords(list5[n], 0.0);
-                                            if (((мир.Найти_положение(pos, положение.Дорога).Дорога == null) 
-                                                 && (мир.Найти_положение(pos, _следующаяДорога).Дорога == null)) 
+                                            if (((мир.Найти_положение(pos, положение.Дорога).Дорога == null)
+                                                 && (мир.Найти_положение(pos, _следующаяДорога).Дорога == null))
                                                  && ((дорога2 == null) || (мир.Найти_положение(pos, дорога2).Дорога == null)))
                                             {
                                                 flag4 = false;
@@ -539,18 +539,18 @@ namespace Trancity
                 var s1 = 0.0;
                 var dist = 0.0;
                 var v3 = tg * nr_lenght;
-                
-//                if (((nr_abs_r == 0) && ((ost_dist < nr_lenght / 2) && (ost_dist < 10.0))) && (ost_dist != some_other_fucking_distance))
-//                {
-//                    ost_dist += nr_lenght;
-//                    recomend_speed = 1.3 * ost_dist / 4.905;
-//                }
+
+                //                if (((nr_abs_r == 0) && ((ost_dist < nr_lenght / 2) && (ost_dist < 10.0))) && (ost_dist != some_other_fucking_distance))
+                //                {
+                //                    ost_dist += nr_lenght;
+                //                    recomend_speed = 1.3 * ost_dist / 4.905;
+                //                }
 
                 if (abs_r > 0.0)
                 {
                     recomend_speed = 1.3 * abs_r / 4.905;
                 }
-                
+
                 /*if ((nr_abs_r == 0) && ((ost_dist < nr_lenght / 2) && (ost_dist < 10.0)))
                 {
                         ost_dist += nr_lenght;
@@ -571,7 +571,7 @@ namespace Trancity
                 {
                     dist = s1;
                 }
-                
+
                 if (ost_dist < dist)
                 {
                     if (!dont_stop)
@@ -625,7 +625,7 @@ namespace Trancity
                 {
                     recomend_speed = 0.0;
                 }
-//                if (recomend_speed > 16.0) recomend_speed = 16.0;
+                //                if (recomend_speed > 16.0) recomend_speed = 16.0;
                 if (stops_dist <= 20)
                 {
                     осталось_стоять = 8.0 + (Cheats._random.NextDouble() * 5.0);
@@ -657,16 +657,16 @@ namespace Trancity
             {
                 if ((!штанги_подняты) || (штанги_обесточены))
                 {
-                  if (ах == null)
-                  {
-                    return ((!base.включен) || (ах == null) || (!ах.включён));//true;
-                  }
-                  if (ах.есть)
-                  {
-                      return ((!штанги_подняты) && (ах.включён) && (base.включен));
-                  }
+                    if (ах == null)
+                    {
+                        return ((!base.включен) || (ах == null) || (!ах.включён));//true;
+                    }
+                    if (ах.есть)
+                    {
+                        return ((!штанги_подняты) && (ах.включён) && (base.включен));
+                    }
                 }
-                
+
                 return !base.включен;
             }
         }
@@ -693,7 +693,7 @@ namespace Trancity
                 return true;
             }
         }
-        
+
         public bool штанги_обесточены
         {
             get
@@ -721,7 +721,7 @@ namespace Trancity
             public double ускорение;
             public double расход;
             public Троллейбус троллейбус;
-            
+
             public АХ(Троллейбус троллейбус, double полная_ёмкость, double ускорение, double расход)
             {
                 this.троллейбус = троллейбус;
@@ -729,36 +729,36 @@ namespace Trancity
                 this.расход = расход;
                 this.полная_ёмкость = полная_ёмкость;
                 this.текущая_ёмкость = полная_ёмкость;
-                
+
                 if (this.ускорение > 0.0)
                 {
                     this.ускорение = Math.Min(1.0, this.ускорение);
                 }
                 else this.ускорение = Cheats._random.NextDouble();
             }
-            
+
             public bool заряжается
             {
                 get
                 {
                     return ((((!включён) && (троллейбус.включен)) &&
                          ((троллейбус.система_управления is Система_управления.РКСУ_Троллейбус) &&
-                         (троллейбус.штанги_подняты && !троллейбус.штанги_обесточены))) && 
+                         (троллейбус.штанги_подняты && !троллейбус.штанги_обесточены))) &&
                          (текущая_ёмкость < полная_ёмкость));
                 }
             }
-            
+
             public void Simulation()
             {
                 if ((включён) && (троллейбус.штанги_подняты || !троллейбус.штанги_обесточены)) включён = false;
                 if ((включён) && (полная_ёмкость > 0.0))
                 {
                     текущая_ёмкость -= расход * Math.Abs(троллейбус.система_управления.ускорение) * World.прошлоВремени;
-                    if (текущая_ёмкость <= 0.0) 
+                    if (текущая_ёмкость <= 0.0)
                     {
                         текущая_ёмкость = 0.0;
                         включён = false;
-                        
+
                     }
                 }
                 else if (заряжается)
@@ -767,7 +767,7 @@ namespace Trancity
                     текущая_ёмкость = Math.Min(текущая_ёмкость, полная_ёмкость);//if (текущая_ёмкость >= e) текущая_ёмкость = e;
                 }
             }
-            
+
         }
 
         public class Колесо : MeshObject, MeshObject.IFromFile, IMatrixObject
@@ -851,12 +851,12 @@ namespace Trancity
                 {
                     num -= модель.хвостDist1[i] + модель.хвостDist2[i];
                     хвосты[i] = new Хвост(this)
-                                    {
-                                        координаты =
+                    {
+                        координаты =
                                             кузов.координаты +
                                             new Double3DPoint(кузов.направление) * num,//кузов.направление
-                                        направление = кузов.направление
-                                    };
+                        направление = кузов.направление
+                    };
                     сочленения[i] = new Сочленение(this);
                 }
                 for (int i = 0; i < модель.занятыеПоложения.Length; i++)
@@ -976,10 +976,10 @@ namespace Trancity
                         двери.ExtraMeshDirs = strArray;
                     }
                     указатель_наряда.extraMeshDirs = strArray;
-//                    if (табличка != null)
-//                      {
-//                        табличка.extraMeshDirs = strArray;
-//                    }
+                    //                    if (табличка != null)
+                    //                      {
+                    //                        табличка.extraMeshDirs = strArray;
+                    //                    }
                 }
                 кузов.CreateMesh();
                 кузов.ОбновитьМаршрутныйУказатель(маршрут.number, наряд.номер);
@@ -1058,11 +1058,11 @@ namespace Trancity
                 }
                 if (наряд != null)
                 {
-                      указатель_наряда.IsNear = true;
+                    указатель_наряда.IsNear = true;
                 }
                 if (табличка_в_парк != null)
                 {
-                       табличка_в_парк.IsNear = true;
+                    табличка_в_парк.IsNear = true;
                 }
             }
 
@@ -1080,10 +1080,10 @@ namespace Trancity
                 }
                 foreach (var хвост in хвосты)
                 {
-//                       if (!(MyDirect3D.AABBInFrustum(хвост.bounding_box))) continue;
-                        if (!(MyDirect3D.SphereInFrustum(хвост.bounding_sphere))) continue;
-                       visible = true;
-                       lod = Math.Min(хвост.bounding_sphere.LODnum, lod);
+                    //                       if (!(MyDirect3D.AABBInFrustum(хвост.bounding_box))) continue;
+                    if (!(MyDirect3D.SphereInFrustum(хвост.bounding_sphere))) continue;
+                    visible = true;
+                    lod = Math.Min(хвост.bounding_sphere.LODnum, lod);
                     хвост.Render();
                 }
                 if ((!visible) || (lod > 0)) return;
@@ -1144,7 +1144,7 @@ namespace Trancity
                     табличка_в_парк.Render();
                 }
             }
-            
+
             public override void UpdateBoundigBoxes(World world)
             {
                 кузов.bounding_sphere.Update(кузов.координаты, кузов.направление);
@@ -1156,7 +1156,7 @@ namespace Trancity
 
             public override Положение[] НайтиВсеПоложения(World мир)
             {
-//                List<Положение> list = new List<Положение>();
+                //                List<Положение> list = new List<Положение>();
                 base.найденные_положения.Clear();
                 Double3DPoint point = new Double3DPoint(this.кузов.направление);
                 Double3DPoint point2 = Double3DPoint.Rotate(this.кузов.направление, (Math.PI / 2.0));
@@ -1192,7 +1192,7 @@ namespace Trancity
                     collection[k].comment = this;
                 }
                 base.найденные_положения.AddRange(collection);
-//                base.найденные_положения = list;
+                //                base.найденные_положения = list;
                 return base.найденные_положения.ToArray();
             }
 
@@ -1235,7 +1235,7 @@ namespace Trancity
                         num3 = 0;
                         while (num3 < this.хвосты.Length)
                         {
-//                            DoublePoint point = игрок.cameraPosition.xz_point - this.хвосты[num3].координаты.xz_point;
+                            //                            DoublePoint point = игрок.cameraPosition.xz_point - this.хвосты[num3].координаты.xz_point;
                             numArray[num3] = (игрок.cameraPosition.XZPoint - this.хвосты[num3].координаты.XZPoint).Modulus;//point.модуль;
                             num3++;
                         }
@@ -1262,7 +1262,7 @@ namespace Trancity
                         if (!flag)
                         {
                             и_dArray[index] = this.кузов;
-//                            var point3 = игрок.cameraPosition.xz_point - this.кузов.координаты.xz_point;
+                            //                            var point3 = игрок.cameraPosition.xz_point - this.кузов.координаты.xz_point;
                             var num5 = (игрок.cameraPosition.XZPoint - this.кузов.координаты.XZPoint).Modulus;//point3.модуль;
                             for (num3 = 0; num3 < this.хвосты.Length; num3++)
                             {
@@ -1309,7 +1309,7 @@ namespace Trancity
                 {
                     this.Передвинуть(base.скорость * World.прошлоВремени, мир);
                 }
-                            
+
                 if ((this.direction != direction_prev) && (base.поворотРуля != 0.0))
                 {
                     var num6 = this.direction - direction_prev;
@@ -1321,7 +1321,7 @@ namespace Trancity
                     {
                         num6 -= Math.PI * 2.0;
                     }
-                    
+
                     int num7 = Math.Sign((double)(-num6 * base.поворотРуля));
                     if (num7 > 0)
                     {
@@ -1334,7 +1334,7 @@ namespace Trancity
                             }
                         }
                     }
-                    
+
                 }
                 this.времяПоворотников += World.прошлоВремени;
                 while (this.времяПоворотников > this.времяПоворотниковMax)
@@ -1381,7 +1381,7 @@ namespace Trancity
                 base.ОбновитьРейс();
                 UpdateBoundigBoxes(мир);
             }
-            
+
             public override void SetPosition(Road road, double distance, double shift, Double3DPoint pos, DoublePoint rot, World world)
             {
                 if (road != null)
@@ -1410,7 +1410,7 @@ namespace Trancity
                         road = road.предыдущиеДороги[Cheats._random.Next(0, road.предыдущиеДороги.Length)];
                         distance += road.Длина;
                     }
-                    
+
                     point = new Double3DPoint
                     {
                         XZPoint = road.НайтиКоординаты(distance + модель.хвостDist2[i], shift),
@@ -1436,15 +1436,15 @@ namespace Trancity
                 for (var i = 0; i < модель.колёсныеПары.Length; i++)
                 {
                     var троллейбуса = Найти_часть(модель.колёсныеПары[i].часть);
-//                    point = new Double3DPoint(троллейбуса.направление);
+                    //                    point = new Double3DPoint(троллейбуса.направление);
                     point.CopyFromAngle(троллейбуса.направление);
                     point.AngleY += (Math.PI / 2.0);
                     point.Multyply(_радиусКолёс);
                     var point3 = new Double3DPoint(троллейбуса.направление).Multyply(модель.колёсныеПары[i].pos.x);
-//                    _колёса[2 * i].координаты = ((троллейбуса.координаты + (new Double3DPoint(троллейбуса.направление) * модель.колёсныеПары[i].pos.x)) + (Double3DPoint.Поворот(троллейбуса.направление, -MyFeatures.halfPI) * модель.колёсныеПары[i].pos.y)) + (point * _радиусКолёс);
+                    //                    _колёса[2 * i].координаты = ((троллейбуса.координаты + (new Double3DPoint(троллейбуса.направление) * модель.колёсныеПары[i].pos.x)) + (Double3DPoint.Поворот(троллейбуса.направление, -MyFeatures.halfPI) * модель.колёсныеПары[i].pos.y)) + (point * _радиусКолёс);
                     _колёса[2 * i].координаты = троллейбуса.координаты + point3 + Double3DPoint.Rotate(троллейбуса.направление, -(Math.PI / 2.0)).Multyply(модель.колёсныеПары[i].pos.y) + point;
                     _колёса[2 * i].базовоеНаправление = троллейбуса.направление;
-//                    _колёса[(2 * i) + 1].координаты = ((троллейбуса.координаты + (new Double3DPoint(троллейбуса.направление) * модель.колёсныеПары[i].pos.x)) + (Double3DPoint.Поворот(троллейбуса.направление, MyFeatures.halfPI) * модель.колёсныеПары[i].pos.y)) + (point * _радиусКолёс);
+                    //                    _колёса[(2 * i) + 1].координаты = ((троллейбуса.координаты + (new Double3DPoint(троллейбуса.направление) * модель.колёсныеПары[i].pos.x)) + (Double3DPoint.Поворот(троллейбуса.направление, MyFeatures.halfPI) * модель.колёсныеПары[i].pos.y)) + (point * _радиусКолёс);
                     _колёса[(2 * i) + 1].координаты = троллейбуса.координаты + point3 + Double3DPoint.Rotate(троллейбуса.направление, (Math.PI / 2.0)).Multyply(модель.колёсныеПары[i].pos.y) + point;
                     _колёса[(2 * i) + 1].базовоеНаправление = троллейбуса.направление;
                 }
@@ -1519,11 +1519,11 @@ namespace Trancity
                 Double3DPoint[] posArrayBack0 = new Double3DPoint[1 + this.хвосты.Length];
                 Double3DPoint[] posArrayFront0 = new Double3DPoint[1 + this.хвосты.Length];
                 double[] numArray = new double[1 + this.хвосты.Length];
-//                posArrayBack0[0] = (Double3DPoint)((base._колёса[2].координаты + base._колёса[3].координаты) / 2.0);
+                //                posArrayBack0[0] = (Double3DPoint)((base._колёса[2].координаты + base._колёса[3].координаты) / 2.0);
                 base._колёса[2].координаты.CopyTo(ref posArrayBack0[0]);
                 posArrayBack0[0].Add(base._колёса[3].координаты);
                 posArrayBack0[0].Divide(2.0);
-//                posArrayFront0[0] = (Double3DPoint)((base._колёса[0].координаты + base._колёса[1].координаты) / 2.0);
+                //                posArrayFront0[0] = (Double3DPoint)((base._колёса[0].координаты + base._колёса[1].координаты) / 2.0);
                 base._колёса[0].координаты.CopyTo(ref posArrayFront0[0]);
                 posArrayFront0[0].Add(base._колёса[1].координаты);
                 posArrayFront0[0].Divide(2.0);
@@ -1534,16 +1534,16 @@ namespace Trancity
                 numArray[0] = point8.Modulus;
                 for (int i = 1; i < posArrayBack0.Length; i++)
                 {
-//                    posArrayBack0[i] = (Double3DPoint)((base._колёса[(2 * i) + 2].координаты + base._колёса[(2 * i) + 3].координаты) / 2.0);
+                    //                    posArrayBack0[i] = (Double3DPoint)((base._колёса[(2 * i) + 2].координаты + base._колёса[(2 * i) + 3].координаты) / 2.0);
                     base._колёса[(2 * i) + 2].координаты.CopyTo(ref posArrayBack0[i]);
                     posArrayBack0[i].Add(base._колёса[(2 * i) + 3].координаты);
                     posArrayBack0[i].Divide(2.0);
-//                    posArrayFront0[i] = posArrayBack0[i - 1] + (new Double3DPoint(point8.угол).Multiply(-this.модель.хвостDist1[i - 1]));
+                    //                    posArrayFront0[i] = posArrayBack0[i - 1] + (new Double3DPoint(point8.угол).Multiply(-this.модель.хвостDist1[i - 1]));
                     posArrayBack0[i - 1].CopyTo(ref posArrayFront0[i]);
                     point9.CopyFromAngle(point8.Angle.x, point8.Angle.y);
                     point9.Multyply(-this.модель.хвостDist1[i - 1]);
                     posArrayFront0[i].Add(point9);
-//                    point8 = posArrayFront0[i] - posArrayBack0[i];
+                    //                    point8 = posArrayFront0[i] - posArrayBack0[i];
                     posArrayFront0[i].CopyTo(ref point8);
                     point8.Subtract(posArrayBack0[i]);
                     numArray[i] = point8.Modulus;
@@ -1551,9 +1551,9 @@ namespace Trancity
                 double[] numArray2 = new double[base._колёса.Length / 2];
                 for (int j = 0; j < base._колёса.Length; j++)
                 {
-//                    base._колёса[j].координаты += (Double3DPoint)(new Double3DPoint(base._колёса[j].Направление) * расстояние);
+                    //                    base._колёса[j].координаты += (Double3DPoint)(new Double3DPoint(base._колёса[j].Направление) * расстояние);
                     //так интереснее:
-//                    base._колёса[j].координаты.Add(new Double3DPoint(base._колёса[j].Направление).Multiply(расстояние));
+                    //                    base._колёса[j].координаты.Add(new Double3DPoint(base._колёса[j].Направление).Multiply(расстояние));
                     //а так ещё больше:
                     direction = base._колёса[j].Направление;
                     pos.CopyFromAngle(direction);
@@ -1581,7 +1581,7 @@ namespace Trancity
                         double num3 = base._колёса[j].текущееПоложение.Дорога.НайтиНаправлениеY(base._колёса[j].текущееПоложение.расстояние);
                         if (num3 != 0.0)
                         {
-//                            base.скорость += Math.Cos(num3 + MyFeatures.halfPI) * 0.03;//* 10 * World.прошлоВремени;
+                            //                            base.скорость += Math.Cos(num3 + MyFeatures.halfPI) * 0.03;//* 10 * World.прошлоВремени;
                             base.скорость -= Math.Sin(num3) * Math.Cos(_колёса[j].текущееПоложение.Дорога.НайтиНаправление(_колёса[j].текущееПоложение.расстояние)
                                            - (_колёса[j].базовоеНаправление.x + _колёса[j].поворот)) * Road.uklon_koef * World.прошлоВремени;
                         }
@@ -1603,13 +1603,13 @@ namespace Trancity
                 {
                     if (m > 0)
                     {
-//                        posArrayBack[m] = (Double3DPoint)((base._колёса[(2 * m) + 2].координаты + base._колёса[(2 * m) + 3].координаты) / 2.0);
+                        //                        posArrayBack[m] = (Double3DPoint)((base._колёса[(2 * m) + 2].координаты + base._колёса[(2 * m) + 3].координаты) / 2.0);
                         base._колёса[(2 * m) + 2].координаты.CopyTo(ref posArrayBack[m]);
                         posArrayBack[m].Add(base._колёса[(2 * m) + 3].координаты);
                         posArrayBack[m].Divide(2.0);
-//                        Double3DPoint point11 = pointArray4[m - 1] - pointArray3[m - 1];
-//                        pointArray4[m] = pointArray3[m - 1] + ((Double3DPoint)(new Double3DPoint((pointArray4[m - 1] - pointArray3[m - 1]).угол) * -this.модель.хвостDist1[m - 1]));
-//                        posArrayFront[m] = posArrayBack[m - 1] + (new Double3DPoint(ang43).Multiply(-this.модель.хвостDist1[m - 1]));
+                        //                        Double3DPoint point11 = pointArray4[m - 1] - pointArray3[m - 1];
+                        //                        pointArray4[m] = pointArray3[m - 1] + ((Double3DPoint)(new Double3DPoint((pointArray4[m - 1] - pointArray3[m - 1]).угол) * -this.модель.хвостDist1[m - 1]));
+                        //                        posArrayFront[m] = posArrayBack[m - 1] + (new Double3DPoint(ang43).Multiply(-this.модель.хвостDist1[m - 1]));
                         posArrayBack[m - 1].CopyTo(ref posArrayFront[m]);
                         point5.CopyFromAngle(ang43);
                         point5.Multyply(-this.модель.хвостDist1[m - 1]);
@@ -1621,29 +1621,29 @@ namespace Trancity
                     if (Math.Abs(md43 - numArray[m]) > 0.001)
                     {
 
-                            Double3DPoint point13 = posArrayFront[m] - posArrayFront0[m];
-                            double num6 = point13.Modulus;
+                        Double3DPoint point13 = posArrayFront[m] - posArrayFront0[m];
+                        double num6 = point13.Modulus;
 
-                            Double3DPoint point3 = posArrayBack[m] - posArrayFront0[m];
-                            var ang1 = point3.Angle;
-                            Double3DPoint point2 = new Double3DPoint(point13.Angle - ang1);
-                            /*Double3DPoint point16 = point2 - new Double3DPoint(point2.x, 0.0, 0.0);
-                            double y = point16.модуль;
-                            DoublePoint point17 = new DoublePoint(point2.x, y);
-                            double d = point17.угол;*/
-                            //
-                            double x1 = point2.x;
-                            point2.x = 0.0;
-                            double d = new DoublePoint(x1, point2.Modulus).Angle;
-                            //
-                            double num9 = (num6 * Math.Cos(d)) + Math.Sqrt((numArray[m] * numArray[m]) - (((num6 * num6) * Math.Sin(d)) * Math.Sin(d)));
+                        Double3DPoint point3 = posArrayBack[m] - posArrayFront0[m];
+                        var ang1 = point3.Angle;
+                        Double3DPoint point2 = new Double3DPoint(point13.Angle - ang1);
+                        /*Double3DPoint point16 = point2 - new Double3DPoint(point2.x, 0.0, 0.0);
+                        double y = point16.модуль;
+                        DoublePoint point17 = new DoublePoint(point2.x, y);
+                        double d = point17.угол;*/
+                        //
+                        double x1 = point2.x;
+                        point2.x = 0.0;
+                        double d = new DoublePoint(x1, point2.Modulus).Angle;
+                        //
+                        double num9 = (num6 * Math.Cos(d)) + Math.Sqrt((numArray[m] * numArray[m]) - (((num6 * num6) * Math.Sin(d)) * Math.Sin(d)));
 
-                            double md = point3.Modulus;
-//                            posArrayBack[m] = posArrayFront0[m] + (new Double3DPoint(ang1).Multiply(num9));
-                            posArrayFront0[m].CopyTo(ref posArrayBack[m]);
-                            posArrayBack[m].Add(new Double3DPoint(ang1).Multyply(num9));
-                            base._колёса[(2 * m) + 2].пройденноеРасстояние += md - num9; //колесо1.пройденноеРасстояние += point3.модуль - num9;
-                            base._колёса[(2 * m) + 3].пройденноеРасстояние += md - num9; //колесо3.пройденноеРасстояние += point3.модуль - num9;
+                        double md = point3.Modulus;
+                        //                            posArrayBack[m] = posArrayFront0[m] + (new Double3DPoint(ang1).Multiply(num9));
+                        posArrayFront0[m].CopyTo(ref posArrayBack[m]);
+                        posArrayBack[m].Add(new Double3DPoint(ang1).Multyply(num9));
+                        base._колёса[(2 * m) + 2].пройденноеРасстояние += md - num9; //колесо1.пройденноеРасстояние += point3.модуль - num9;
+                        base._колёса[(2 * m) + 3].пройденноеРасстояние += md - num9; //колесо3.пройденноеРасстояние += point3.модуль - num9;
 
                         posArrayFront[m].CopyTo(ref point12);
                         point12.Subtract(posArrayBack[m]);
@@ -1664,7 +1664,7 @@ namespace Trancity
                         posArrayBack[m] = posArrayFront[m] + (new Double3DPoint(ang43).Multyply(-this.модель.хвостDist2[m - 1]));
                         this.хвосты[m - 1].координаты = posArrayBack[m] + (new Double3DPoint(ang43).Multyply(-this.модель.колёсныеПары[m + 1].pos.x));
                         this.хвосты[m - 1].направление = ang43;
-//                        point5 = new Double3DPoint(this.хвосты[m - 1].направление);
+                        //                        point5 = new Double3DPoint(this.хвосты[m - 1].направление);
                         point5.CopyFromAngle(this.хвосты[m - 1].направление);
                         point5.AngleY += (Math.PI / 2.0);
                         this.хвосты[m - 1].координаты.Subtract(point5.Multyply(base._радиусКолёс));
@@ -1681,7 +1681,7 @@ namespace Trancity
                         {
                             this.сочленения[m - 1].направление.y += Math.PI;
                         }
-//                        point5 = new Double3DPoint(this.сочленения[m - 1].направление);
+                        //                        point5 = new Double3DPoint(this.сочленения[m - 1].направление);
                         point5.CopyFromAngle(this.сочленения[m - 1].направление);
                         point5.AngleY += (Math.PI / 2.0);
                         this.сочленения[m - 1].координаты.Subtract(point5.Multyply(base._радиусКолёс));
@@ -1729,8 +1729,8 @@ namespace Trancity
                 }
             }
 
-            
-            
+
+
             public class Дополнение : MeshObject, MeshObject.IFromFile, IMatrixObject
             {
                 public string file;
@@ -1899,7 +1899,7 @@ namespace Trancity
                         return 1;
                     }
                 }
-                
+
                 public DoublePoint position
                 {
                     get
@@ -1907,7 +1907,7 @@ namespace Trancity
                         return this.координаты.XZPoint;
                     }
                 }
-                
+
                 public double direction
                 {
                     get
@@ -1915,7 +1915,7 @@ namespace Trancity
                         return this.направление.x;
                     }
                 }
-                
+
                 public Double3DPoint Координаты3D
                 {
                     get
@@ -1923,7 +1923,7 @@ namespace Trancity
                         return this.координаты;
                     }
                 }
-                
+
                 public double НаправлениеY
                 {
                     get
@@ -1973,7 +1973,7 @@ namespace Trancity
             {
                 double num = 1000.0;
                 DoublePoint point = _основаниеXZ;
-                
+
                 double num2;
                 // FIXME: и тут всё очень плохо, мда...
                 foreach (var провод1 in контактныеПровода)
@@ -2098,12 +2098,12 @@ namespace Trancity
                             var point4 = Провод.начало + new DoublePoint(Провод.направление) * (point3.x + num5);
                             var point5 = Провод.начало + new DoublePoint(Провод.направление) * (point3.x - num5);
                             var num6 = point3.x + num5;
-//                            var point7 = point5 - position;
+                            //                            var point7 = point5 - position;
                             var curPos = position;
                             var dist7 = DoublePoint.Distance(ref point5, ref curPos);
-//                            var point8 = point4 - position;
+                            //                            var point8 = point4 - position;
                             var dist8 = DoublePoint.Distance(ref point4, ref curPos);
-//                            if (point7.Modulus < point8.Modulus)
+                            //                            if (point7.Modulus < point8.Modulus)
                             if (dist7 < dist8)
                             {
                                 point4 = point5;
@@ -2139,12 +2139,12 @@ namespace Trancity
                                     else if (Провод.следующие_провода.Length == 1)
                                     {
                                         Провод = Провод.следующие_провода[0];
-                                    }                                    
+                                    }
                                     else
                                     {
                                         Провод = null;
                                     }
-                                    
+
                                 }
                                 else if (num6 < 0.0)
                                 {
@@ -2165,10 +2165,10 @@ namespace Trancity
                 else
                 {
                     // а зачем, если и так null?
-//                    Провод = null;
+                    //                    Провод = null;
                     // а это что вообще за херня?
-//                    var point10 = new DoublePoint(направление - базовоеНаправление);
-//                    направление = базовоеНаправление + point10.Angle;
+                    //                    var point10 = new DoublePoint(направление - базовоеНаправление);
+                    //                    направление = базовоеНаправление + point10.Angle;
                     угол -= dt;
                     if (угол < уголMin)
                     {
@@ -2177,16 +2177,16 @@ namespace Trancity
                     }
                     // здесь тоже лишняя проверка: условие выполнится только если ывполнено предыдущее =>
                     // перенёс в то выражение
-//                    if (угол == уголMin)
-//                    {
-//                        направление = базовоеНаправление;
-//                    }
+                    //                    if (угол == уголMin)
+                    //                    {
+                    //                        направление = базовоеНаправление;
+                    //                    }
                     else
                     {
                         направление += ((базовоеНаправление - направление) * dt) / ((угол + dt) - уголMin);
                     }
                 }
-              
+
             }
 
             public string Filename
@@ -2204,7 +2204,7 @@ namespace Trancity
                     return 1;
                 }
             }
-            
+
             public Double3DPoint основание
             {
                 get
@@ -2230,7 +2230,7 @@ namespace Trancity
                     return result.Add(ref _основаниеXZ);
                 }
             }
-            
+
             public double direction
             {
                 get
@@ -2281,8 +2281,8 @@ namespace Trancity
                 {
                     if (Провод != null)
                     {
-//                        var point = position - Провод.начало;
-//                        return point.Modulus;
+                        //                        var point = position - Провод.начало;
+                        //                        return point.Modulus;
                         var point = position;
                         return DoublePoint.Distance(ref point, ref Провод.начало);
                     }
@@ -2290,7 +2290,7 @@ namespace Trancity
                 }
             }
         }
-        
+
         public class Руль : MeshObject, MeshObject.IFromFile, IMatrixObject
         {
             private string _filename;

@@ -1,11 +1,9 @@
 ﻿namespace Trancity
 {
     using Common;
-	using Engine;
+    using Engine;
     using SlimDX;
     using System;
-    using System.Drawing;
-    using System.Collections;
 
     public abstract class BaseStop : MeshObject, MeshObject.IFromFile, IMatrixObject, ITest, ITest2
     {
@@ -21,19 +19,19 @@
 
         protected BaseStop(string _name)
         {
-        	name = _name;
-        	ObjectLoader.FindModel(1, _name, ref model, ref meshDir);
-        	if (model != null) base.meshDir = model.dir;
+            name = _name;
+            ObjectLoader.FindModel(1, _name, ref model, ref meshDir);
+            if (model != null) base.meshDir = model.dir;
         }
 
         public Matrix GetMatrix(int index)
         {
             return (last_matrix != MyMatrix.Zero) ? last_matrix : (Matrix.RotationY(-((float)vector)) * Matrix.Translation((float)point_position.x, (float)point_position.y, (float)point_position.z));
         }
-        
+
         public void ComputeMatrix()
         {
-        	if (!MainForm.in_editor) last_matrix = GetMatrix(0);
+            if (!MainForm.in_editor) last_matrix = GetMatrix(0);
         }
 
         public void UpdatePosition(World мир)
@@ -80,31 +78,31 @@
                 return 0;
             }
         }
-        
+
         public Road road
         {
-        	get
-        	{
-        		return this.froad;
-        	}
-        	set
-        	{
-        		if (this.froad != null)
-        		{
-        			this.froad.objects.Remove(this);
-        		}
-        		this.froad = value;
-        		if (value != null)
-        		{
-        			this.froad.objects.Add(this);
-        		}
-        	}
+            get
+            {
+                return this.froad;
+            }
+            set
+            {
+                if (this.froad != null)
+                {
+                    this.froad.objects.Remove(this);
+                }
+                this.froad = value;
+                if (value != null)
+                {
+                    this.froad.objects.Add(this);
+                }
+            }
         }
-        
+
         public void CheckCondition()
         {
-        	if (MainForm.in_editor) return;
-        	base.IsNear = ((Math.Abs(Math.Floor(this.point_position.x / (double)Ground.grid_size) - Game.col) < 1.1) && (Math.Abs(Math.Floor(this.point_position.z / (double)Ground.grid_size) - Game.row) < 1.1));
+            if (MainForm.in_editor) return;
+            base.IsNear = ((Math.Abs(Math.Floor(this.point_position.x / (double)Ground.grid_size) - Game.col) < 1.1) && (Math.Abs(Math.Floor(this.point_position.z / (double)Ground.grid_size) - Game.row) < 1.1));
         }
     }
 }

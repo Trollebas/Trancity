@@ -1,6 +1,5 @@
 ﻿namespace Trancity
 {
-    using System;
     using System.Collections.Generic;
 
     public class Светофорная_система
@@ -28,8 +27,8 @@
         {
             foreach (Светофор светофор in this.светофоры)
             {
-            	светофор.Custom_render(green, yellow, red);
-//                светофор.Render();
+                светофор.Custom_render(green, yellow, red);
+                //                светофор.Render();
             }
         }
 

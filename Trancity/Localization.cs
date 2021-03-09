@@ -8,35 +8,37 @@
  */
 namespace Trancity
 {
-    using System;
-    using Common;
-    using System.IO;
-    using System.Windows.Forms;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
-    using System.Xml;
     using Engine;
-	
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Windows.Forms;
+    using System.Xml;
+
     public static class Localization
     {
         public static ПсевдоЛокализация current_;
-// = null;
+        // = null;
         public static readonly List<ПсевдоЛокализация> localizations = new List<ПсевдоЛокализация>();
-		
+
         static Localization()
         {
-//			var document = new XmlDocument();
+            //			var document = new XmlDocument();
             var path = Application.StartupPath + @"\Data\Localization\";
-            if (!Directory.Exists(path)) {
+            if (!Directory.Exists(path))
+            {
                 Logger.Log("Localization", "Директория " + path + " не найдена!");
                 return;
             }
             string fileext;
-            foreach (var file in Directory.GetFiles(path)) {
+            foreach (var file in Directory.GetFiles(path))
+            {
                 fileext = Path.GetExtension(file);
                 if (fileext != ".xml")
                     continue;
-                try {
+                try
+                {
                     var document = Engine.Xml.TryOpenDocument(file);
                     //----
                     var localization = new ПсевдоЛокализация();
@@ -50,7 +52,7 @@ namespace Trancity
                     var messages = element2["Messages"];
                     var optionsform = element2["Forms"];
                     var editor_menu = element2["Menu_Editor"];
-                    var tooltips = element2["Tips"];            	
+                    var tooltips = element2["Tips"];
                     var general = element2["General"];
                     var tramway = element2["Tramway"];
                     var trolleybus = element2["Trolleybus"];
@@ -111,22 +113,28 @@ namespace Trancity
                     localization.mapnotfound = Engine.Xml.GetString(messages["Map_not_found"]);
                     //----options, another...
                     if (optionsform != null)
-                        foreach (XmlElement el in optionsform.ChildNodes) {
-                            localization.controllist.Add(new TextListStruct() {
+                        foreach (XmlElement el in optionsform.ChildNodes)
+                        {
+                            localization.controllist.Add(new TextListStruct()
+                            {
                                 name = el.Name,
                                 text = el.InnerText
                             });
                         }
                     if (editor_menu != null)
-                        foreach (XmlElement el in editor_menu.ChildNodes) {
-                            localization.menulist.Add(new TextListStruct() {
+                        foreach (XmlElement el in editor_menu.ChildNodes)
+                        {
+                            localization.menulist.Add(new TextListStruct()
+                            {
                                 name = el.Name,
                                 text = el.InnerText
                             });
                         }
                     if (tooltips != null)
-                        foreach (XmlElement el in tooltips.ChildNodes) {
-                            localization.tipslist.Add(new TextListStruct() {
+                        foreach (XmlElement el in tooltips.ChildNodes)
+                        {
+                            localization.tipslist.Add(new TextListStruct()
+                            {
                                 name = el.Name,
                                 text = el.InnerText
                             });
@@ -187,47 +195,56 @@ namespace Trancity
                     localization.pedal_pos = Engine.Xml.GetString(bus["Pedals_position"]);
                     localization.gas = Engine.Xml.GetString(bus["Gas"]);
                     localization.brake = Engine.Xml.GetString(bus["Brake"]);
-                    localizations.Add(localization); 
-                } catch (Exception exc) {
+                    localizations.Add(localization);
+                }
+                catch (Exception exc)
+                {
                     Logger.LogException(exc, "Localization");
                     Logger.Log("Localization", "Error in file " + file);
                     continue;
                 }
             }
         }
-		
+
         public static void ApplyLocalization(Control basecontrol)
         {
             List<Control> finded_ctrl = new List<Control>();
-            foreach (var textl in current_.controllist) {
+            foreach (var textl in current_.controllist)
+            {
                 finded_ctrl = Common.MyGUI.FindControl(basecontrol, textl.name);
-                foreach (var control in finded_ctrl) {
+                foreach (var control in finded_ctrl)
+                {
                     control.Text = textl.text;
                 }
             }
-            if (((Form)basecontrol).Menu != null) {
+            if (((Form)basecontrol).Menu != null)
+            {
                 List<MenuItem> items;
                 var menu = ((Form)basecontrol).Menu;
-                foreach (var textl in current_.menulist) {
+                foreach (var textl in current_.menulist)
+                {
                     items = Common.MyGUI.FindMenuItems(menu, textl.name);
-                    foreach (var item in items) {
+                    foreach (var item in items)
+                    {
                         item.Text = textl.text;
                     }
                 }
             }
         }
-		
+
         public static void ApplyLocalizationToolBar(ToolBar toolbar)
         {
-            foreach (var textl in current_.tipslist) {
-                foreach (ToolBarButton button in toolbar.Buttons) {
+            foreach (var textl in current_.tipslist)
+            {
+                foreach (ToolBarButton button in toolbar.Buttons)
+                {
                     if (button.Name == textl.name)
                         button.ToolTipText = textl.text;
                 }
             }
         }
     }
-	
+
     [StructLayout(LayoutKind.Sequential)]
     public struct ПсевдоЛокализация
     {
@@ -271,9 +288,9 @@ namespace Trancity
         public string route;
         public string order;
         public string departure_time;
-//отправление
+        //отправление
         public string arrival_time;
-//прибытие
+        //прибытие
         public string route_in_park;
         public string nr_pryamo;
         public string nr_left;
@@ -347,7 +364,7 @@ namespace Trancity
         public List<TextListStruct> menulist;
         public List<TextListStruct> tipslist;
     }
-        
+
     [StructLayout(LayoutKind.Sequential)]
     public struct TextListStruct
     {

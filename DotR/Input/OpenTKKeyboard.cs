@@ -6,32 +6,31 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
 
 namespace Engine.Input
 {
-	/// <summary>
-	/// OpenTKKeyboard...
-	/// </summary>
-	public class OpenTKKeyboard : KeyboardDevice
-	{
-		public OpenTKKeyboard()
-		{
-		}
-		
-		public override void RefreshState()
-		{
-			
-		}
-		
-		public override bool IsKeyPressed(int keyCode)
-		{
-			return false;
-		}
-		
-		public override bool IsKeyReleased(int keyCode)
-		{
-			return false;
-		}
-	}
+    /// <summary>
+    /// OpenTKKeyboard...
+    /// </summary>
+    public class OpenTKKeyboard : KeyboardDevice
+    {
+        public OpenTKKeyboard()
+        {
+        }
+
+        public override void RefreshState()
+        {
+
+        }
+
+        public override bool IsKeyPressed(int keyCode)
+        {
+            return false;
+        }
+
+        public override bool IsKeyReleased(int keyCode)
+        {
+            return false;
+        }
+    }
 }

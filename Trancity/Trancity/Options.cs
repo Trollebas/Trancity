@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Common;
+using SlimDX.Direct3D9;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Windows.Forms;
-using SlimDX.Direct3D9;
-using Common;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Trancity
 {
     public partial class Options : Form
     {
-        private Dictionary<string,int> _маршруты = new Dictionary<string,int>();
+        private Dictionary<string, int> _маршруты = new Dictionary<string, int>();
         private Dictionary<string, int> _транспорт = new Dictionary<string, int>();
         private int _видТранспорта = TypeOfTransport.Tramway;
         private bool city_ready;
@@ -65,30 +65,32 @@ namespace Trancity
         private Label Compute_TCount_label;
         private Label Screen_Size_label;
         private Label Splines_Cond_label;
-        private MainForm app = new MainForm { настройки = new MainForm.НастройкиЗапуска() };
+        private static readonly MainForm mainForm = new MainForm { настройки = new MainForm.НастройкиЗапуска() };
+        private MainForm app = mainForm;
 
         private void Add_Button_Click(object sender, EventArgs e)
         {
             // var avp = MainForm app;
             // var app = new MainForm { настройки = new MainForm.НастройкиЗапуска() };
-            var игрокаArray =  app.настройки.игроки;
-            app.настройки.игроки = new MainForm.НастройкиЗапускаИгрока[игрокаArray.Length + 1];
-            app.настройки.количествоИгроков = игрокаArray.Length + 1;
+            MainForm.НастройкиЗапуска настройки = app.настройки;
+            var игрокаArray = настройки.игроки;
+            настройки.игроки = new MainForm.НастройкиЗапускаИгрока[игрокаArray.Length + 1];
+            настройки.количествоИгроков = игрокаArray.Length + 1;
             for (int i = 0; i < игрокаArray.Length; i++)
             {
-                this.app.настройки.игроки[i] = игрокаArray[i];
+                настройки.игроки[i] = игрокаArray[i];
             }
-            app.настройки.игроки[игрокаArray.Length].inputGuid = Guid.Empty;//Microsoft.DirectX.DirectInput.SystemGuid.Keyboard;
-            app.настройки.игроки[игрокаArray.Length].вИгре = true;
-            app.настройки.игроки[игрокаArray.Length].имя = this.Name_Box.Text;
-            app.настройки.игроки[игрокаArray.Length].маршрут = 0;
-            app.настройки.игроки[игрокаArray.Length].наряд = 0;
-            app.настройки.игроки[игрокаArray.Length].подвижнойСостав = "";
+            настройки.игроки[игрокаArray.Length].inputGuid = Guid.Empty;//Microsoft.DirectX.DirectInput.SystemGuid.Keyboard;
+            настройки.игроки[игрокаArray.Length].вИгре = true;
+            настройки.игроки[игрокаArray.Length].имя = this.Name_Box.Text;
+            настройки.игроки[игрокаArray.Length].маршрут = 0;
+            настройки.игроки[игрокаArray.Length].наряд = 0;
+            настройки.игроки[игрокаArray.Length].подвижнойСостав = "";
             this.Name_Box.Clear();
             this.Players_List.Items.Clear();
-            for (int j = 0; j < app.настройки.количествоИгроков; j++)
+            for (int j = 0; j < настройки.количествоИгроков; j++)
             {
-                this.Players_List.Items.Add(app.настройки.игроки[j].имя, app.настройки.игроки[j].вИгре);
+                this.Players_List.Items.Add(настройки.игроки[j].имя, настройки.игроки[j].вИгре);
             }
             this.UpdatePlayers(sender, e);
         }
@@ -130,62 +132,65 @@ namespace Trancity
 
         private void Options_Form_Closing(object sender, CancelEventArgs e)
         {
+            MainForm.НастройкиЗапуска настройки2 = app.настройки;
+            MainForm.НастройкиЗапуска настройки1 = настройки2;
+            MainForm.НастройкиЗапуска настройки = настройки1;
             switch (Screen_Box.SelectedIndex)
             {
                 case 0:
-                    app.настройки.размерЭкрана = new Size(640, 480);
+                    настройки1.размерЭкрана = new Size(640, 480);
                     break;
                 case 1:
-                    app.настройки.размерЭкрана = new Size(800, 600);
+                    настройки1.размерЭкрана = new Size(800, 600);
                     break;
                 case 2:
-                    app.настройки.размерЭкрана = new Size(0x400, 0x300);
+                    настройки1.размерЭкрана = new Size(0x400, 0x300);
                     break;
                 case 3:
-                    app.настройки.размерЭкрана = new Size(0x480, 0x360);
+                    настройки1.размерЭкрана = new Size(0x480, 0x360);
                     break;
                 case 4:
-                    app.настройки.размерЭкрана = new Size(0x500, 960);
+                    настройки1.размерЭкрана = new Size(0x500, 960);
                     break;
                 case 5:
-                    app.настройки.размерЭкрана = new Size(0x500, 0x400);
+                    настройки1.размерЭкрана = new Size(0x500, 0x400);
                     break;
                 case 6:
-                    app.настройки.размерЭкрана = new Size(0x640, 0x4b0);
+                    настройки1.размерЭкрана = new Size(0x640, 0x4b0);
                     break;
                 case 8:
-                    app.настройки.размерЭкрана = new Size(0, 0);
+                    настройки1.размерЭкрана = new Size(0, 0);
                     break;
             }
-            this.app.настройки.deviceType = SlimDX.Direct3D9.DeviceType.Hardware;
+            настройки2.deviceType = SlimDX.Direct3D9.DeviceType.Hardware;
             if (this.VertexProcessing_Box.SelectedIndex == 0)
             {
-                this.app.настройки.createFlags = CreateFlags.HardwareVertexProcessing;
+                настройки2.createFlags = CreateFlags.HardwareVertexProcessing;
             }
             else if (this.VertexProcessing_Box.SelectedIndex == 1)
             {
-                this.app.настройки.createFlags = CreateFlags.SoftwareVertexProcessing;
+                настройки2.createFlags = CreateFlags.SoftwareVertexProcessing;
             }
             else if (this.VertexProcessing_Box.SelectedIndex == 2)
             {
-                this.app.настройки.createFlags = CreateFlags.MixedVertexProcessing;
+                настройки2.createFlags = CreateFlags.MixedVertexProcessing;
             }
-            this.app.настройки.начальноеВремя = this.StartTime_Box.Time_Seconds;
-            this.app.настройки.качествоРельсов = (double)((this.Rail_Box.Maximum + this.Rail_Box.Minimum) - this.Rail_Box.Value) / 100.0;
-            this.app.настройки.количествоИгроков = this.Players_List.Items.Count;
-            this.app.настройки.автоматическоеУправление = this.AutoControl_Box.Checked;
-            this.app.настройки.поворачиватьКамеру = this.RotateCamera_Box.Checked;
-            this.app.настройки.стрелкиНаоборот = this.InvArrows_Box.Checked;
-            this.app.настройки.noSound = !this.EnableSound_Box.Checked;
-            this.app.настройки.soundVolume = this.Volume_TrackBar.Value;
-            this.app.настройки.noStops = this.NoStops_Box.Checked;
-            this.app.настройки.nonExclusiveKeyboard = this.NonExclusiveKeyboard_Box.Checked;
-            this.app.настройки.nonExclusiveMouse = this.NonExclusiveMouse_Box.Checked;
-            this.app.настройки.enableShaders = this.EnableShaders_Box.Checked;
-//            this.app.настройки.deleteFarObject = this.DeleteFarObject_Box.Checked;
-            for (int i = 0; i < this.app.настройки.количествоИгроков; i++)
+            настройки2.начальноеВремя = this.StartTime_Box.Time_Seconds;
+            настройки2.качествоРельсов = (double)((this.Rail_Box.Maximum + this.Rail_Box.Minimum) - this.Rail_Box.Value) / 100.0;
+            настройки2.количествоИгроков = this.Players_List.Items.Count;
+            настройки2.автоматическоеУправление = this.AutoControl_Box.Checked;
+            настройки2.поворачиватьКамеру = this.RotateCamera_Box.Checked;
+            настройки2.стрелкиНаоборот = this.InvArrows_Box.Checked;
+            настройки2.noSound = !this.EnableSound_Box.Checked;
+            настройки2.soundVolume = this.Volume_TrackBar.Value;
+            настройки2.noStops = this.NoStops_Box.Checked;
+            настройки2.nonExclusiveKeyboard = this.NonExclusiveKeyboard_Box.Checked;
+            настройки2.nonExclusiveMouse = this.NonExclusiveMouse_Box.Checked;
+            настройки2.enableShaders = this.EnableShaders_Box.Checked;
+            //            this.app.настройки.deleteFarObject = this.DeleteFarObject_Box.Checked;
+            for (int i = 0; i < настройки2.количествоИгроков; i++)
             {
-                this.app.настройки.игроки[i].вИгре = this.Players_List.CheckedIndices.Contains(i);
+                настройки2.игроки[i].вИгре = this.Players_List.CheckedIndices.Contains(i);
             }
             this.Players_List.SelectedIndex = -1;
             this.UpdatePlayers(sender, new EventArgs());
@@ -195,7 +200,7 @@ namespace Trancity
         {
             this.dialog = new DeviceOptionsDialog(@"Data\DeviceOptions.xml");
             UpdateLocalization();
-//            this.RefreshScreenOptions();
+            //            this.RefreshScreenOptions();
             if (this.app.настройки.размерЭкрана == new Size(640, 480))
             {
                 this.Screen_Box.SelectedIndex = 0;
@@ -216,15 +221,15 @@ namespace Trancity
             {
                 this.Screen_Box.SelectedIndex = 4;
             }
-            else if (this.app.настройки.размерЭкрана == new Size(0x500, 0x400))
+            else if (app.настройки.размерЭкрана == new Size(0x500, 0x400))
             {
                 this.Screen_Box.SelectedIndex = 5;
             }
-            else if (this.app.настройки.размерЭкрана == new Size(0x640, 0x4b0))
+            else if (app.настройки.размерЭкрана == new Size(0x640, 0x4b0))
             {
                 this.Screen_Box.SelectedIndex = 6;
             }
-            else if (this.app.настройки.размерЭкрана == new Size(0, 0))
+            else if (app.настройки.размерЭкрана == new Size(0, 0))
             {
                 this.Screen_Box.SelectedIndex = 8;
             }
@@ -253,7 +258,7 @@ namespace Trancity
             {
                 this.Rail_Box.Value = (this.Rail_Box.Maximum + this.Rail_Box.Minimum) - (int)(this.app.настройки.качествоРельсов * 100.0);
             }
-//            this.Tram_Box.Value = this.app.настройки.количествоОстальныхТрамваев;
+            //            this.Tram_Box.Value = this.app.настройки.количествоОстальныхТрамваев;
             this.AutoControl_Box.Checked = this.app.настройки.автоматическоеУправление;
             RotateCamera_Box.Checked = app.настройки.поворачиватьКамеру;
             InvArrows_Box.Checked = app.настройки.стрелкиНаоборот;
@@ -263,7 +268,7 @@ namespace Trancity
             NonExclusiveKeyboard_Box.Checked = app.настройки.nonExclusiveKeyboard;
             NonExclusiveMouse_Box.Checked = app.настройки.nonExclusiveMouse;
             EnableShaders_Box.Checked = app.настройки.enableShaders;
-//            DeleteFarObject_Box.Checked = app.настройки.deleteFarObject;
+            //            DeleteFarObject_Box.Checked = app.настройки.deleteFarObject;
             Name_Box.Clear();
             Players_List.Items.Clear();
             for (var i = 0; i < app.настройки.количествоИгроков; i++)
@@ -305,11 +310,11 @@ namespace Trancity
         {
             if (dialog.subj.windowed)
             {
-            	Screen_Box.Items[8] = string.Format("{0}x{1}, {2}", dialog.subj.windowedX, dialog.subj.windowedY, Localization.current_.windowed);//dialog.subj.windowed_x + "x" + dialog.subj.windowed_y + ", " + Localization.current_.windowed;//в окне";
+                Screen_Box.Items[8] = string.Format("{0}x{1}, {2}", dialog.subj.windowedX, dialog.subj.windowedY, Localization.current_.windowed);//dialog.subj.windowed_x + "x" + dialog.subj.windowed_y + ", " + Localization.current_.windowed;//в окне";
             }
             else
             {
-            	Screen_Box.Items[8] = string.Format("{0}x{1}, {2}Hz", dialog.subj.fullscreenX, dialog.subj.fullscreenY, dialog.subj.fullscreenRate);
+                Screen_Box.Items[8] = string.Format("{0}x{1}, {2}Hz", dialog.subj.fullscreenX, dialog.subj.fullscreenY, dialog.subj.fullscreenRate);
             }
         }
 
@@ -363,8 +368,8 @@ namespace Trancity
             }
             else
             {
-            	MessageBox.Show(Localization.current_.mapnotfound, "Trancity", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            	city_ready = false;
+                MessageBox.Show(Localization.current_.mapnotfound, "Trancity", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                city_ready = false;
             }
             UpdateRoutes(_видТранспорта);
             UpdateМаршрутBox();
@@ -405,7 +410,7 @@ namespace Trancity
                         игрокаArray[current_player].маршрут = 1;
                         break;
                     default:
-                        игрокаArray[current_player].маршрут = _маршруты[(string) Маршрут_Box.SelectedItem] + 2;
+                        игрокаArray[current_player].маршрут = _маршруты[(string)Маршрут_Box.SelectedItem] + 2;
                         break;
                 }
                 игрокаArray[current_player].наряд = Наряд_Box.SelectedIndex;
@@ -485,11 +490,11 @@ namespace Trancity
             {
                 if (Маршрут_Box.SelectedIndex == 1)
                 {
-                	Наряд_Box.Items.Add(Localization.current_.random);
+                    Наряд_Box.Items.Add(Localization.current_.random);
                 }
-                else if (world.маршруты[_маршруты[(string) Маршрут_Box.SelectedItem]].orders.Length > 0)
+                else if (world.маршруты[_маршруты[(string)Маршрут_Box.SelectedItem]].orders.Length > 0)
                 {
-                	Наряд_Box.Items.Add(Localization.current_.random);
+                    Наряд_Box.Items.Add(Localization.current_.random);
                     foreach (var наряд in world.маршруты[_маршруты[(string)Маршрут_Box.SelectedItem]].orders)
                     {
                         var item = наряд.номер + " (";
@@ -523,7 +528,7 @@ namespace Trancity
             }
             if (Маршрут_Box.Items.Count > 1)
             {
-            	Маршрут_Box.Items.Insert(1, Localization.current_.random);///"Случайный");
+                Маршрут_Box.Items.Insert(1, Localization.current_.random);///"Случайный");
             }
             Маршрут_Box.SelectedIndex = 0;
         }
@@ -540,17 +545,17 @@ namespace Trancity
                 }
             }
         }
-        
+
         private void UpdateLocalization()
         {
-        	Lang_Box.Items.Clear();
-        	Lang_Box.SelectedIndex = -1;
-        	for (int i = 0; i < Localization.localizations.Count; i++)
-        	{
-        		Lang_Box.Items.Add(Localization.localizations[i].name);
-        		if (Localization.localizations[i].name == app.настройки.language) Lang_Box.SelectedIndex = i;
-        	}
-        	if ((Localization.localizations.Count > 0) && (Lang_Box.SelectedIndex == -1)) Lang_Box.SelectedIndex = 0;
+            Lang_Box.Items.Clear();
+            Lang_Box.SelectedIndex = -1;
+            for (int i = 0; i < Localization.localizations.Count; i++)
+            {
+                Lang_Box.Items.Add(Localization.localizations[i].name);
+                if (Localization.localizations[i].name == app.настройки.language) Lang_Box.SelectedIndex = i;
+            }
+            if ((Localization.localizations.Count > 0) && (Lang_Box.SelectedIndex == -1)) Lang_Box.SelectedIndex = 0;
         }
 
         private void ПодвижнойСостав_Box_TextChanged(object sender, EventArgs e)
@@ -558,56 +563,56 @@ namespace Trancity
             //_видТранспорта = _транспорт[(string)ПодвижнойСостав_Box.SelectedItem];
             //UpdateCity();
         }
-        
+
         private void Lang_BoxSelectedIndexChanged(object sender, EventArgs e)
         {
-        	if (Lang_Box.SelectedIndex < 0) return;
-        	Localization.current_ = Localization.localizations[Lang_Box.SelectedIndex];
-        	app.настройки.language = Localization.current_.name;
-        	Localization.ApplyLocalization(this);
-        	if (dialog != null)
-        	{
-        		Localization.ApplyLocalization(dialog);
-        		RefreshScreenOptions();
-        		Screen_Box.Items[7] = Localization.current_.edit;
-        	}
-        	if (Маршрут_Box.Items.Count > 0)
-        	{
-        		Маршрут_Box.Items[0] = Localization.current_.empty;
-        		if (Маршрут_Box.Items.Count > 2) Маршрут_Box.Items[1] = Localization.current_.random;
-        	}
+            if (Lang_Box.SelectedIndex < 0) return;
+            Localization.current_ = Localization.localizations[Lang_Box.SelectedIndex];
+            app.настройки.language = Localization.current_.name;
+            Localization.ApplyLocalization(this);
+            if (dialog != null)
+            {
+                Localization.ApplyLocalization(dialog);
+                RefreshScreenOptions();
+                Screen_Box.Items[7] = Localization.current_.edit;
+            }
+            if (Маршрут_Box.Items.Count > 0)
+            {
+                Маршрут_Box.Items[0] = Localization.current_.empty;
+                if (Маршрут_Box.Items.Count > 2) Маршрут_Box.Items[1] = Localization.current_.random;
+            }
         }
-        
+
         private void Control_buttonClick(object sender, EventArgs e)
         {
-        	var form = new UserControlForm();
+            var form = new UserControlForm();
             var result = form.ShowDialog();
             if (result == DialogResult.OK)
             {
-            	//save table???
-            	
+                //save table???
+
             }
             form.Dispose();
         }
         void City_Name_labelClick(object sender, EventArgs e)
         {
-          
+
         }
         void VertexProcessing_BoxSelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
         }
         void Editor_ButtonClick(object sender, EventArgs e)
         {
-          
+
         }
         void StartTime_BoxLoad(object sender, EventArgs e)
         {
-          
+
         }
         void Label1Click(object sender, EventArgs e)
         {
-          
+
         }
     }
 }

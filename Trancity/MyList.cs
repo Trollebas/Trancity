@@ -126,7 +126,7 @@ namespace Common
             int typeIndex = this.types.IndexOf(typeof(T));
             if (typeIndex >= 0)
             {
-                return (T[]) this.type_lists[typeIndex].ToArray(typeof(T));
+                return (T[])this.type_lists[typeIndex].ToArray(typeof(T));
             }
             return new T[0];
         }

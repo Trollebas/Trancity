@@ -6,18 +6,17 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Collections.Generic;
 using Common;
 using Engine;
-using System.IO;
 using SlimDX.Direct3D9;
-using System.Diagnostics;
-using System.ComponentModel;
 using SlimDX.DirectInput;
-using SlimDX;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 
 
@@ -244,17 +243,17 @@ namespace Trancity
         public static int col = 0;
         public static int row = 0;
         public bool поворачиватьКамеру;
-        
+
         public НастройкиЗапуска настройки;
 
-         private static void Main(string[] args)
+        private static void Main(string[] args)
         {
-        MyFeatures.CheckFolders(Application.StartupPath);
+            MyFeatures.CheckFolders(Application.StartupPath);
             var app = new Editor { настройки = new НастройкиЗапуска() };
             app.ЗагрузитьНастройки();
-         }
-        
-        
+        }
+
+
         /// <summary>
         /// Editor Trancity
         /// </summary>
@@ -266,7 +265,7 @@ namespace Trancity
             InitializeComponent();
             //Logger.Log;
         }
-        
+
         public void ApplyLocalization()
         {
             Localization.ApplyLocalization(this);
@@ -363,7 +362,7 @@ namespace Trancity
         private void Editor_Form_Readme(object sender, CancelEventArgs e)
         {
             if (!this.modified) return;
-            switch (MessageBox.Show( "Вы умеете пользоваться Редактором?", "Transedit", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation))
+            switch (MessageBox.Show("Вы умеете пользоваться Редактором?", "Transedit", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation))
             {
                 case DialogResult.Cancel:
                     e.Cancel = true;
@@ -375,7 +374,7 @@ namespace Trancity
                     return;
             }
         }
-        
+
         private void Editor_Form_Closing(object sender, CancelEventArgs e)
         {
             if (!this.modified) return;
@@ -403,7 +402,7 @@ namespace Trancity
             var deviceGuids = MyDirectInput.DeviceGuids;
             // HACK: убраны системные звуки при нажатии на клавиши
             e.SuppressKeyPress = !this.edit_panel.Enabled;
-            if ((e.KeyCode == Keys.W) && (MyDirect3D.вид_сверху) && e.Control )
+            if ((e.KeyCode == Keys.W) && (MyDirect3D.вид_сверху) && e.Control)
             {
                 MyDirect3D.вид_сверху = true;
                 MyDirect3D.карта = !MyDirect3D.карта;
@@ -693,27 +692,27 @@ namespace Trancity
                 }
             }
             if (e.KeyCode == Keys.Tab)
-                {
-                    MyDirect3D.вид_сверху = !MyDirect3D.вид_сверху;
-                    
+            {
+                MyDirect3D.вид_сверху = !MyDirect3D.вид_сверху;
+
             }
-             if (e.KeyCode == Keys.F10)
-               {
+            if (e.KeyCode == Keys.F10)
+            {
                 var now = DateTime.Now;
                 var path = Application.StartupPath + @"\Screenshots\";
                 var screenshot = string.Format(@"{0}\Transedit {1:00}-{2:00}-{3} {4:00}-{5:00}-{6:00}-{7:000}.jpg", path, now.Day, now.Month, now.Year, now.Hour, now.Minute, now.Second, now.Millisecond);
                 var surface = MyDirect3D.device.GetRenderTarget(0);
                 Surface.ToFile(surface, screenshot, ImageFileFormat.Jpg);
-                surface.Dispose(); 
-            }   
-             if (e.KeyCode == Keys.U && e.Control)
-             {
-                 this.UndoAction();
-             }
-             if (e.KeyCode == Keys.S && e.Control && e.Shift)
-             {
-                 this.SaveAs_Item_Click(sender, e);
-             }
+                surface.Dispose();
+            }
+            if (e.KeyCode == Keys.U && e.Control)
+            {
+                this.UndoAction();
+            }
+            if (e.KeyCode == Keys.S && e.Control && e.Shift)
+            {
+                this.SaveAs_Item_Click(sender, e);
+            }
             if ((this.строящаяся_остановка != null) && (e.KeyCode == Keys.Escape))
             {
                 this.ClearPendingAction();
@@ -795,35 +794,35 @@ namespace Trancity
             {
                 if (e.KeyCode == Keys.D && e.Control)
                 {
-                        this.строящийся_объект.height0 += 0.1;
+                    this.строящийся_объект.height0 += 0.1;
                 }
                 if (e.KeyCode == Keys.C && e.Control)
                 {
-                        this.строящийся_объект.height0 = Math.Max(this.строящийся_объект.height0 - 0.1, 0.0);
+                    this.строящийся_объект.height0 = Math.Max(this.строящийся_объект.height0 - 0.1, 0.0);
                 }
                 if ((e.KeyCode == Keys.D && !e.Control) || (e.KeyCode == Keys.Scroll))
                 {
-                        this.строящийся_объект.height0 += 0.5;
+                    this.строящийся_объект.height0 += 0.5;
                 }
                 if ((e.KeyCode == Keys.C && !e.Control) || (e.KeyCode == Keys.Scroll))
                 {
-                        this.строящийся_объект.height0 = Math.Max(this.строящийся_объект.height0 - 0.5, 0.0);
+                    this.строящийся_объект.height0 = Math.Max(this.строящийся_объект.height0 - 0.5, 0.0);
                 }
-                
+
                 if ((e.KeyCode == Keys.Z) || (e.KeyCode == Keys.Left && !e.Control))
                 {
-                        this.строящийся_объект.angle0 -= Math.PI / 36;
+                    this.строящийся_объект.angle0 -= Math.PI / 36;
                 }
                 if ((e.KeyCode == Keys.A) || (e.KeyCode == Keys.Right && !e.Control))
                 {
-                        this.строящийся_объект.angle0 += Math.PI / 36;
+                    this.строящийся_объект.angle0 += Math.PI / 36;
                 }
                 if (e.KeyCode == Keys.Escape)
                 {
-                        this.строящийся_объект = null;
-                        this.ClearPendingAction();
-                        this.EnableControls(true);
-                        return;
+                    this.строящийся_объект = null;
+                    this.ClearPendingAction();
+                    this.EnableControls(true);
+                    return;
                 }
                 if (строящийся_объект.angle0 > Math.PI)
                 {
@@ -871,8 +870,8 @@ namespace Trancity
                     this.Повернуть_всё(-this.угол_поворота);
                 }
             }
-        
-      }
+
+        }
 
         public void Editor_Form_KeyUp(object sender, KeyEventArgs e)
         {
@@ -895,13 +894,13 @@ namespace Trancity
         {
             var KeyState = MyDirectInput.Key_State;
             Directory.SetCurrentDirectory(Application.StartupPath + @"\Data");
-            
+
             //Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"\Data"));
             // создаём структуру настроек с нуля
             // в дальнейшем надо загружать существующую
             var options = new DeviceOptions
             {
-                
+
                 vSync = true,
                 windowed = true,
                 windowedX = 1600,
@@ -927,14 +926,14 @@ namespace Trancity
                 Stop.неЗагружаемКартинки = false;
                 this.Reset_World();
                 this.игроки = new Игрок[1];
-             
-               
-                    } 
-        }
-            
-            
 
-        
+
+            }
+        }
+
+
+
+
 
         public void EnableControls(bool value)
         {
@@ -945,24 +944,24 @@ namespace Trancity
             {
                 item.Enabled = value;
             }
-            
+
         }
 
         private void Exit_Item_Click(object sender, EventArgs e)
         {
             base.Close();
         }
-        
+
         private void Undo_Item_Click(object sender, EventArgs e)
         {
             this.UndoAction();
         }
-        
+
         private void Infoo(object sender, EventArgs e)
         {
             //using (FileStream fstream = File.Open("...Readme_Editor.txt"));
             Directory.SetCurrentDirectory(Application.StartupPath);
-                Process.Start("notepad.exe", "Readme_Editor.txt");
+            Process.Start("notepad.exe", "Readme_Editor.txt");
         }
 
         private void Find_MinRadius_Item_Click(object sender, EventArgs e)
@@ -1189,7 +1188,7 @@ namespace Trancity
                 this.угол_поворота = 0.0;
             }
         }
-        
+
         private void Reset_World()
         {
             this.мир = new World();
@@ -1202,20 +1201,20 @@ namespace Trancity
             this.угол_поворота = 0.0;
             this.UpdatePanels();
         }
-        
-        
-        
+
+
+
         private void panel_MouseLeave(object sender, EventArgs e)
         {
             this.Cursor_x_Status.Text = "";
             this.Cursor_y_Status.Text = "";
         }
-        
+
         public void panel_MouseMove(object sender, MouseEventArgs e)
         {
             this.mouse_args = e;
             if (this.dragging && !MyDirect3D.вид_сверху)
-            {   
+            {
                 DoublePoint point = new DoublePoint((double)(-e.X + this.drag_point.X), (double)(e.Y - this.drag_point.Y));
                 point = (DoublePoint)(point / MyDirect3D.масштаб);
                 this.игрок.cameraPosition.XZPoint -= point;
@@ -1223,7 +1222,7 @@ namespace Trancity
                 поворачиватьКамеру = true;
                 //MyDirect3D.Camera_Position;
                 //MyDirect3D.Camera_Rotation;
-            } 
+            }
             if (this.dragging && MyDirect3D.вид_сверху)
             {
                 DoublePoint point = new DoublePoint((double)(-e.X + this.drag_point.X), (double)(e.Y - this.drag_point.Y));
@@ -1236,33 +1235,33 @@ namespace Trancity
             this.Cursor_y_Status.Text = "y: " + ((this.cursor_pos.y)).ToString("0.000") + " м";
             //this.игрок.cameraRotation.Add(drag_point);
             //игра.игроки[игрок].cameraPosition = new Double3DPoint(0.0, 2.0, 0.0);
-                //игра.игроки[].cameraRotation = new DoublePoint(0.0, -0.1);
+            //игра.игроки[].cameraRotation = new DoublePoint(0.0, -0.1);
             MyDirect3D.SetViewport(1);
-                MyDirect3D.device.Clear(ClearFlags.ZBuffer | ClearFlags.Target, 0xb4ff, 1f, 0);
-                //игрок.cameraPosition.Add(ref игрок.cameraPositionChange);
-                //игрок.cameraPositionChange.Divide(3.0);
-                this.игрок.cameraRotation = drag_point;
-                игрок.cameraRotation.Add(ref игрок.cameraRotationChange);
-                this.игрок.cameraRotation.CopyFromAngle(e.X - this.drag_point.X);
-                игрок.cameraRotationChange.Divide(1600.0);
-                this.игрок.cameraRotation.CopyFromAngle(e.Y - this.drag_point.Y);
-                this.игрок.cameraRotationChange.Divide(900.0);
-                if (Math.Abs(игрок.cameraRotation.x) > Math.PI)
-                    игрок.cameraRotation.x -= 800.0 * Math.PI * Math.Sign(игрок.cameraRotation.x);
-                if (Math.Abs(игрок.cameraRotation.y) > (Math.PI / 360.0))
-                    игрок.cameraRotation.y = (Math.PI / 360.0) * Math.Sign(игрок.cameraRotation.y);
-                MyDirect3D.SetCameraPos(игрок.cameraPosition, игрок.cameraRotation);
-                //
-                col = (int)Math.Floor(игрок.cameraPosition.x / (double)Ground.grid_size);
-                row = (int)Math.Floor(игрок.cameraPosition.z / (double)Ground.grid_size);
-                if (((MyDirect3D.device.Viewport.X + MyDirect3D.device.Viewport.Width) == MyDirect3D.Window_Width) &&
-                    (MyDirect3D.device.Viewport.Y == 1))// continue;
-                {
-                    Common.MyGUI.default_font.DrawString(null, ConvertTime.TimeFromSeconds(мир.time % 86400.0), MyDirect3D.Window_Width - 105/*0x69*/, 15, Color.Black);
-//                    MyGUI.default_font.DrawString(null, "Понедельник".PadLeft(27), MyDirect3D.Window_Width - 398, 15, Color.Black);
-                }
+            MyDirect3D.device.Clear(ClearFlags.ZBuffer | ClearFlags.Target, 0xb4ff, 1f, 0);
+            //игрок.cameraPosition.Add(ref игрок.cameraPositionChange);
+            //игрок.cameraPositionChange.Divide(3.0);
+            this.игрок.cameraRotation = drag_point;
+            игрок.cameraRotation.Add(ref игрок.cameraRotationChange);
+            this.игрок.cameraRotation.CopyFromAngle(e.X - this.drag_point.X);
+            игрок.cameraRotationChange.Divide(1600.0);
+            this.игрок.cameraRotation.CopyFromAngle(e.Y - this.drag_point.Y);
+            this.игрок.cameraRotationChange.Divide(900.0);
+            if (Math.Abs(игрок.cameraRotation.x) > Math.PI)
+                игрок.cameraRotation.x -= 800.0 * Math.PI * Math.Sign(игрок.cameraRotation.x);
+            if (Math.Abs(игрок.cameraRotation.y) > (Math.PI / 360.0))
+                игрок.cameraRotation.y = (Math.PI / 360.0) * Math.Sign(игрок.cameraRotation.y);
+            MyDirect3D.SetCameraPos(игрок.cameraPosition, игрок.cameraRotation);
+            //
+            col = (int)Math.Floor(игрок.cameraPosition.x / (double)Ground.grid_size);
+            row = (int)Math.Floor(игрок.cameraPosition.z / (double)Ground.grid_size);
+            if (((MyDirect3D.device.Viewport.X + MyDirect3D.device.Viewport.Width) == MyDirect3D.Window_Width) &&
+                (MyDirect3D.device.Viewport.Y == 1))// continue;
+            {
+                Common.MyGUI.default_font.DrawString(null, ConvertTime.TimeFromSeconds(мир.time % 86400.0), MyDirect3D.Window_Width - 105/*0x69*/, 15, Color.Black);
+                //                    MyGUI.default_font.DrawString(null, "Понедельник".PadLeft(27), MyDirect3D.Window_Width - 398, 15, Color.Black);
+            }
         }
-        
+
         public void rotate_MouseMove(object sender, MouseEventArgs j)
         {
             this.mouse_args = j;
@@ -1281,7 +1280,7 @@ namespace Trancity
             }
             this.process_mouse(j, true);
         }
-        
+
         public void panel_MouseUp(object sender, MouseEventArgs e)
         {
             this.mouse_args = e;
@@ -1290,10 +1289,10 @@ namespace Trancity
                 this.dragging = false;
             }
         }
-        
+
         public void panel_OnMouseWheel(object sender, MouseEventArgs e)
         {
-            
+
             this.mouse_args = e;
             var MouseState = MyDirectInput.Mouse_State;
             var KeyState = MyDirectInput.Key_State;
@@ -1301,8 +1300,8 @@ namespace Trancity
             var FJStatesArray = MyDirectInput.Joystick_FilteredStates;
             var joystickDevices = MyDirectInput.JoystickDevices;
             var deviceGuids = MyDirectInput.DeviceGuids;
-//            const int num = 0x400;
-//            byte[] mouseButtons = state.GetMouseButtons();
+            //            const int num = 0x400;
+            //            byte[] mouseButtons = state.GetMouseButtons();
             bool[] mouseButtons = MouseState.GetButtons();
             int x = MouseState.X;
             int y = MouseState.Y;
@@ -1345,10 +1344,10 @@ namespace Trancity
                             игрок.объектПривязки = null;
                         }
                     }*/
-                    
-           }
+
+            }
         }
-        
+
         public void panel_MouseDown(object sender, MouseEventArgs e)
         {
             this.mouse_args = e;
@@ -1359,19 +1358,19 @@ namespace Trancity
             }
             this.process_mouse(e, true);
         }
-        
+
         public void CameraHeight()
         {
-            
+
         }
-        
+
         public void Render()
         {
             if (MyDirect3D.device == null) return;
             if (MainForm.in_editor) goto Label_new;
             if (MyDirect3D._newDevice.IsDeviceLost) return;
             MyDirect3D._newDevice.BeginScene();
-//            MyDirect3D.device.BeginScene();
+            //            MyDirect3D.device.BeginScene();
             MyDirect3D.ResetViewports(игроки.Length);
             MyDirect3D.SetViewport(-1);
             MyDirect3D.device.Clear(ClearFlags.ZBuffer | ClearFlags.Target, 0, 1f, 0);
@@ -1379,11 +1378,11 @@ namespace Trancity
             {
                 menu.Draw();
                 MyDirect3D._newDevice.EndScene();
-//                MyDirect3D.device.EndScene();
-//                MyDirect3D.device.Present();
+                //                MyDirect3D.device.EndScene();
+                //                MyDirect3D.device.Present();
                 return;
             }
-            Label_new:
+        Label_new:
             for (var i = 0; i < игроки.Length; i++)
             {
                 MyDirect3D.SetViewport(i);
@@ -1414,7 +1413,7 @@ namespace Trancity
                 MyDirect3D.Alpha = false;
                 if (игроки[i].управляемыйОбъект != null)
                 {
-                    var _transport = (Transport) игроки[i].управляемыйОбъект;
+                    var _transport = (Transport)игроки[i].управляемыйОбъект;
                     var speed_str = (_transport.скорость * 3.6).ToString("###0.00");
                     var control_str = "";
                     if (_transport.управление.автоматическое)
@@ -1435,53 +1434,53 @@ namespace Trancity
                             + "\nZ: " + _transport.Координаты3D.z.ToString("#0.0")
                             + "\nrY: " + (_transport.direction * 180.0 / Math.PI).ToString("#0.0")
                             + "\nrZ: " + (_transport.НаправлениеY * 180.0 / Math.PI).ToString("#0.0");
-                        Common.MyGUI.default_font.DrawString(null, str111, (int) (420 + MyDirect3D.device.Viewport.X), (int) (15 + MyDirect3D.device.Viewport.Y), Color.Black);
+                        Common.MyGUI.default_font.DrawString(null, str111, (int)(420 + MyDirect3D.device.Viewport.X), (int)(15 + MyDirect3D.device.Viewport.Y), Color.Black);
                     }
                     if (_transport is Трамвай)//(игроки[i].управляемыйОбъект is Трамвай)
                     {
-                        var трамвай = (Трамвай) _transport;//игроки[i].управляемыйОбъект;
+                        var трамвай = (Трамвай)_transport;//игроки[i].управляемыйОбъект;
                         var str = "-";
                         if (трамвай.система_управления is Система_управления.РКСУ_Трамвай)
                         {
-                            var трамвай2 = (Система_управления.РКСУ_Трамвай) трамвай.система_управления;
+                            var трамвай2 = (Система_управления.РКСУ_Трамвай)трамвай.система_управления;
                             switch (трамвай2.позиция_контроллера)
                             {
                                 case -5:
                                     str = "ТР";
                                     break;
-        
+
                                 case -4:
                                     str = "Т4";
                                     break;
-        
+
                                 case -3:
                                     str = "Т3";
                                     break;
-        
+
                                 case -2:
                                     str = "Т2";
                                     break;
-        
+
                                 case -1:
                                     str = "Т1";
                                     break;
-        
+
                                 case 0:
                                     str = "0";
                                     break;
-        
+
                                 case 1:
                                     str = "М";
                                     break;
-        
+
                                 case 2:
                                     str = "Х1";
                                     break;
-        
+
                                 case 3:
                                     str = "Х2";
                                     break;
-        
+
                                 case 4:
                                     str = "Х3";
                                     break;
@@ -1498,7 +1497,7 @@ namespace Trancity
                         }
                         if (трамвай.наряд != null)
                         {
-//                            var str15 = str5;
+                            //                            var str15 = str5;
                             str5 = str5 + "\n" + Localization.current_.order + ": " + трамвай.наряд.маршрут.number + "/" + трамвай.наряд.номер;
                             if (трамвай.рейс != null)
                             {
@@ -1527,44 +1526,44 @@ namespace Trancity
                                 }
                             }
                         }
-                        Common.MyGUI.default_font.DrawString(null, Localization.current_.tram_control + ": " + control_str + "\n" + Localization.current_.ctrl_pos + ": " + str + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km +  "\n" + Localization.current_.route + ": " + str5, (int) (15 + MyDirect3D.device.Viewport.X), (int) (15 + MyDirect3D.device.Viewport.Y), Color.Black);
+                        Common.MyGUI.default_font.DrawString(null, Localization.current_.tram_control + ": " + control_str + "\n" + Localization.current_.ctrl_pos + ": " + str + "\n" + Localization.current_.speed + ": " + speed_str + " " + Localization.current_.speed_km + "\n" + Localization.current_.route + ": " + str5, (int)(15 + MyDirect3D.device.Viewport.X), (int)(15 + MyDirect3D.device.Viewport.Y), Color.Black);
                     }
                     if (_transport is Троллейбус)// (игроки[i].управляемыйОбъект is Троллейбус)
                     {
-                        var троллейбус = (Троллейбус) _transport;//игроки[i].управляемыйОбъект;
+                        var троллейбус = (Троллейбус)_transport;//игроки[i].управляемыйОбъект;
                         var str7 = "-";
                         var str8 = "неизвестно чем";
                         if (троллейбус.система_управления is Система_управления.РКСУ_Троллейбус)
                         {
                             str8 = Localization.current_.trol_control;
                             str7 = "\n" + Localization.current_.ctrl_pos + ": ";
-                            var троллейбус2 = (Система_управления.РКСУ_Троллейбус) троллейбус.система_управления;
+                            var троллейбус2 = (Система_управления.РКСУ_Троллейбус)троллейбус.система_управления;
                             switch (троллейбус2.позиция_контроллера)
                             {
                                 case -2:
                                     str7 = str7 + "Т2";
                                     break;
-    
+
                                 case -1:
                                     str7 = str7 + "Т1";
                                     break;
-    
+
                                 case 0:
                                     str7 = str7 + "0";
                                     break;
-    
+
                                 case 1:
                                     str7 = str7 + "М";
                                     break;
-    
+
                                 case 2:
                                     str7 = str7 + "Х1";
                                     break;
-    
+
                                 case 3:
                                     str7 = str7 + "Х2";
                                     break;
-    
+
                                 case 4:
                                     str7 = str7 + "Х3";
                                     break;
@@ -1582,7 +1581,7 @@ namespace Trancity
                         else if (троллейбус.система_управления is Система_управления.КП_Авто)
                         {
                             str8 = Localization.current_.bus_control;
-                            var авто = (Система_управления.КП_Авто) троллейбус.система_управления;
+                            var авто = (Система_управления.КП_Авто)троллейбус.система_управления;
                             str7 = (("\n" + Localization.current_.gmod + ": " + авто.текущий_режим) + "\n" + Localization.current_.cur_pos + ": " + авто.текущая_передача) + "\n" + Localization.current_.pedal_pos + ": ";
                             if (авто.положение_педалей > 0.0)
                             {
@@ -1651,7 +1650,7 @@ namespace Trancity
                     (MyDirect3D.device.Viewport.Y == 0))// continue;
                 {
                     Common.MyGUI.default_font.DrawString(null, ConvertTime.TimeFromSeconds(мир.time % 86400.0), MyDirect3D.Window_Width - 105/*0x69*/, 15, Color.Black);
-//                    MyGUI.default_font.DrawString(null, "Понедельник".PadLeft(27), MyDirect3D.Window_Width - 398, 15, Color.Black);
+                    //                    MyGUI.default_font.DrawString(null, "Понедельник".PadLeft(27), MyDirect3D.Window_Width - 398, 15, Color.Black);
                 }
                 if (!MainForm.debug) continue;
                 var _str = "\ndTmax: " + World.dtmax.ToString("#0.000") + "\nFPS: " + MyDirect3D._newDevice.FPS.ToString("  00")
@@ -1661,59 +1660,59 @@ namespace Trancity
                     + "\nrY: " + MyDirect3D.Camera_Rotation.x.ToString("#0.000")
                     + "\nrZ: " + MyDirect3D.Camera_Rotation.y.ToString("#0.000");
                 Common.MyGUI.default_font.DrawString(null, _str, new Rectangle(MyDirect3D.Window_Width - 160, 15, 160, 500), DrawTextFormat.Right, Color.Black);
-//                MyGUI.default_font.DrawString(null, _str, MyDirect3D.Window_Width - 160, 15, Color.Black);
+                //                MyGUI.default_font.DrawString(null, _str, MyDirect3D.Window_Width - 160, 15, Color.Black);
             }
             MyDirect3D._newDevice.EndScene();
-//            MyDirect3D.device.EndScene();
-//            MyDirect3D.device.Present();
+            //            MyDirect3D.device.EndScene();
+            //            MyDirect3D.device.Present();
         }
-                
-        
+
+
         public void InGame()
         {
-           this._транспортPosIndex++;
-                if (this._транспортPosIndex >= мир.транспорты.Count)//.Length)
+            this._транспортPosIndex++;
+            if (this._транспортPosIndex >= мир.транспорты.Count)//.Length)
+            {
+                this._транспортPosIndex = 0;
+            }
+            foreach (var положение in ((Transport)мир.транспорты[this._транспортPosIndex]).найденные_положения)
+            {
+                if (положение.Дорога != null)
                 {
-                    this._транспортPosIndex = 0;
+                    положение.Дорога.занятыеПоложения.Remove(положение);
                 }
-                foreach (var положение in ((Transport)мир.транспорты[this._транспортPosIndex]).найденные_положения)
-                {
-                    if (положение.Дорога != null)
-                    {
-                        положение.Дорога.занятыеПоложения.Remove(положение);
-                    }
-                }
+            }
                 ((Transport)мир.транспорты[_транспортPosIndex]).НайтиВсеПоложения(мир);
-                foreach (var положение2 in ((Transport)мир.транспорты[_транспортPosIndex]).найденные_положения)
+            foreach (var положение2 in ((Transport)мир.транспорты[_транспортPosIndex]).найденные_положения)
+            {
+                if (положение2.Дорога != null)
                 {
-                    if (положение2.Дорога != null)
-                    {
-                        положение2.Дорога.занятыеПоложения.Add(положение2);
-                    }
+                    положение2.Дорога.занятыеПоложения.Add(положение2);
                 }
-                foreach (Transport транспорт in мир.транспорты)
+            }
+            foreach (Transport транспорт in мир.транспорты)
+            {
+                if (транспорт.управление.автоматическое)
                 {
-                    if (транспорт.управление.автоматическое)
-                    {
-                        транспорт.АвтоматическиУправлять(мир);
-                    }
+                    транспорт.АвтоматическиУправлять(мир);
                 }
+            }
             var MouseState = MyDirectInput.Mouse_State;
             var KeyState = MyDirectInput.Key_State;
             var JStatesArray = MyDirectInput.Joystick_States;
             var FJStatesArray = MyDirectInput.Joystick_FilteredStates;
             var joystickDevices = MyDirectInput.JoystickDevices;
             var deviceGuids = MyDirectInput.DeviceGuids;
-//            const int num = 0x400;
-//            byte[] mouseButtons = state.GetMouseButtons();
+            //            const int num = 0x400;
+            //            byte[] mouseButtons = state.GetMouseButtons();
             bool[] mouseButtons = MouseState.GetButtons();
             int x = MouseState.X;
             int y = MouseState.Y;
             int z = MouseState.Z;
             if (MyDirectInput.alt_f4) return;
-            
+
             //var changed = true;
-            
+
             if (KeyState[Key.Escape])
             {
                 активна = !активна;
@@ -1729,110 +1728,110 @@ namespace Trancity
             {
                 foreach (var игрок in игроки)
                 {
-                    
+
                     int current_joystick = -1;
                     for (int k = 0; k < joystickDevices.Length; k++)
                     {
-                        
+
                     }
                     if (current_joystick == -1)//(игрок.inputGuid == MyDirectInput.Keyboard_Device.Information.InstanceGuid)//SystemGuid.Keyboard)
-                    {}
-                        if (!MyDirect3D.вид_сверху)
+                    { }
+                    if (!MyDirect3D.вид_сверху)
+                    {
+                        //                            if (mouseButtons[0] == 0)
+                        if (!mouseButtons[0])
                         {
-//                            if (mouseButtons[0] == 0)
-                            if (!mouseButtons[0])
-                            {
-                                игрок.cameraRotationChange.x -= 0.001 * x;
-                                игрок.cameraRotationChange.y -= 0.001 * y;
-                            }
-                            else
-                            {
-                                DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                                point.x -= 0.01 * y;
-                                point.y -= 0.01 * x;
-                                игрок.cameraPositionChange.x = (point * new DoublePoint(игрок.cameraRotation.x)).x;
-                                игрок.cameraPositionChange.z = (point * new DoublePoint(игрок.cameraRotation.x)).y;
-                            }
-                            игрок.cameraPositionChange.y += 0.001 * z;
-                        }
-                        else
-                        {                            
-                            MyDirect3D.масштаб += 0.001 * z;
-                            if (MyDirect3D.масштаб <= 2.5) MyDirect3D.масштаб = 2.5;
-//                            if (mouseButtons[0] != 0)
-                            if (mouseButtons[0])
-                            {
-                                DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z);
-                                point.x += 0.01 * x;
-                                point.y -= 0.01 * y;
-                                игрок.cameraPositionChange.x = point.x;
-                                игрок.cameraPositionChange.z = point.y;
-                            }
-                        }
-                        this._lastMouseButtons = mouseButtons;
-                  
-               
-                        FilteredJoystickState Current_FJState = FJStatesArray[current_joystick];
-                        JoystickState Current_JState = JStatesArray[current_joystick];
-                        
-                        double num8 = (0.05 * Current_JState.X) / ((double) num);
-                        double num9 = (0.02 * Current_JState.Y) / ((double) num);
-                        double num10 = (0.05 * Current_JState.Z) / ((double) num);
-                        switch (Current_JState.GetPointOfViewControllers()[0])//.GetPointOfView()[0])
-                        {
-                            case 0:
-                                num10 = 0.04;
-                                break;
-
-                            case 0x4650:
-                                num10 = -0.04;
-                                break;
-
-                            default:
-                                num10 = 0.0;
-                                break;
-                        }
-                        if (((игрок.управляемыйОбъект != null) && (игрок.управляемыйОбъект is Безрельсовый_Транспорт)) && игрок.управляемыйОбъект.управление.ручное)
-                        {
-                            if (!Current_FJState[4, false])
-                            {
-                                int num12 = 6;
-                                if (((Transport) игрок.управляемыйОбъект).система_управления is Система_управления.Автобусная)
-                                {
-                                    num12 = 10;
-                                }
-                                if (Current_FJState[num12, false])
-                                {
-                                    игрок.cameraRotationChange.x -= num8;
-                                    игрок.cameraRotationChange.y -= num9;
-                                }
-                            }
-                            else
-                            {
-                                DoublePoint point2 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                                point2.x -= 10.0 * num9;
-                                point2.y -= 10.0 * num8;
-                                игрок.cameraPositionChange.x = (point2 * new DoublePoint(игрок.cameraRotation.x)).x;
-                                игрок.cameraPositionChange.z = (point2 * new DoublePoint(игрок.cameraRotation.x)).y;
-                                игрок.cameraPositionChange.y += num10;
-                            }
-                        }
-                        else if (!Current_FJState[4, false])
-                        {
-                            игрок.cameraRotationChange.x -= num8;
-                            игрок.cameraRotationChange.y -= num9;
+                            игрок.cameraRotationChange.x -= 0.001 * x;
+                            игрок.cameraRotationChange.y -= 0.001 * y;
                         }
                         else
                         {
-                            DoublePoint point3 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
-                            point3.x -= 10.0 * num9;
-                            point3.y -= 10.0 * num8;
-                            игрок.cameraPositionChange.x = (point3 * new DoublePoint(игрок.cameraRotation.x)).x;
-                            игрок.cameraPositionChange.z = (point3 * new DoublePoint(игрок.cameraRotation.x)).y;
+                            DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                            point.x -= 0.01 * y;
+                            point.y -= 0.01 * x;
+                            игрок.cameraPositionChange.x = (point * new DoublePoint(игрок.cameraRotation.x)).x;
+                            игрок.cameraPositionChange.z = (point * new DoublePoint(игрок.cameraRotation.x)).y;
+                        }
+                        игрок.cameraPositionChange.y += 0.001 * z;
+                    }
+                    else
+                    {
+                        MyDirect3D.масштаб += 0.001 * z;
+                        if (MyDirect3D.масштаб <= 2.5) MyDirect3D.масштаб = 2.5;
+                        //                            if (mouseButtons[0] != 0)
+                        if (mouseButtons[0])
+                        {
+                            DoublePoint point = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z);
+                            point.x += 0.01 * x;
+                            point.y -= 0.01 * y;
+                            игрок.cameraPositionChange.x = point.x;
+                            игрок.cameraPositionChange.z = point.y;
+                        }
+                    }
+                    this._lastMouseButtons = mouseButtons;
+
+
+                    FilteredJoystickState Current_FJState = FJStatesArray[current_joystick];
+                    JoystickState Current_JState = JStatesArray[current_joystick];
+
+                    double num8 = (0.05 * Current_JState.X) / ((double)num);
+                    double num9 = (0.02 * Current_JState.Y) / ((double)num);
+                    double num10 = (0.05 * Current_JState.Z) / ((double)num);
+                    switch (Current_JState.GetPointOfViewControllers()[0])//.GetPointOfView()[0])
+                    {
+                        case 0:
+                            num10 = 0.04;
+                            break;
+
+                        case 0x4650:
+                            num10 = -0.04;
+                            break;
+
+                        default:
+                            num10 = 0.0;
+                            break;
+                    }
+                    if (((игрок.управляемыйОбъект != null) && (игрок.управляемыйОбъект is Безрельсовый_Транспорт)) && игрок.управляемыйОбъект.управление.ручное)
+                    {
+                        if (!Current_FJState[4, false])
+                        {
+                            int num12 = 6;
+                            if (((Transport)игрок.управляемыйОбъект).система_управления is Система_управления.Автобусная)
+                            {
+                                num12 = 10;
+                            }
+                            if (Current_FJState[num12, false])
+                            {
+                                игрок.cameraRotationChange.x -= num8;
+                                игрок.cameraRotationChange.y -= num9;
+                            }
+                        }
+                        else
+                        {
+                            DoublePoint point2 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                            point2.x -= 10.0 * num9;
+                            point2.y -= 10.0 * num8;
+                            игрок.cameraPositionChange.x = (point2 * new DoublePoint(игрок.cameraRotation.x)).x;
+                            игрок.cameraPositionChange.z = (point2 * new DoublePoint(игрок.cameraRotation.x)).y;
                             игрок.cameraPositionChange.y += num10;
                         }
-                        
-                    } 
+                    }
+                    else if (!Current_FJState[4, false])
+                    {
+                        игрок.cameraRotationChange.x -= num8;
+                        игрок.cameraRotationChange.y -= num9;
+                    }
+                    else
+                    {
+                        DoublePoint point3 = new DoublePoint(игрок.cameraPositionChange.x, игрок.cameraPositionChange.z) / new DoublePoint(игрок.cameraRotation.x);
+                        point3.x -= 10.0 * num9;
+                        point3.y -= 10.0 * num8;
+                        игрок.cameraPositionChange.x = (point3 * new DoublePoint(игрок.cameraRotation.x)).x;
+                        игрок.cameraPositionChange.z = (point3 * new DoublePoint(игрок.cameraRotation.x)).y;
+                        игрок.cameraPositionChange.y += num10;
+                    }
+
+                }
             }
             if (KeyState[Key.F1])
             {
@@ -1844,15 +1843,15 @@ namespace Trancity
                 //MainForm.IsMnemonic = MainForm.IsMnemonic;
             }
             if (KeyState[Key.F10])
-               {
-               var now = DateTime.Now;
+            {
+                var now = DateTime.Now;
                 var path = Application.StartupPath + @"\Screenshots\";
                 var screenshot = string.Format(@"{0}\Transedit {1:00}-{2:00}-{3} {4:00}-{5:00}-{6:00}-{7:000}.jpg", path, now.Day, now.Month, now.Year, now.Hour, now.Minute, now.Second, now.Millisecond);
                 var surface = MyDirect3D.device.GetRenderTarget(0);
                 Surface.ToFile(surface, screenshot, ImageFileFormat.Jpg);
-                surface.Dispose(); 
+                surface.Dispose();
             }
-            
+
             /*if (KeyState[Key.F9])
                {
                var now = DateTime.Now;
@@ -1874,10 +1873,10 @@ namespace Trancity
             // Кладём в буфер обмена "вырезанный" кусок
             Clipboard.SetImage(bmpCopy);
             }*/
-         
-            
-        } 
-    
+
+
+        }
+
 
         private void Park_Add_Button_Click(object sender, EventArgs e)
         {
@@ -1889,7 +1888,7 @@ namespace Trancity
         {
             Check_All_Park_Boxes();
         }
-        
+
         private void Check_All_Park_Boxes()
         {
             bool flag = this.Park_Box.SelectedIndex >= 0;
@@ -1974,7 +1973,7 @@ namespace Trancity
                         DoublePoint point5 = point4.Add(ref point40);
                         DoublePoint point6 = point3 - this.строящаяся_дорога.концы[0];
                         point20 = point5.Subtract(ref this.строящаяся_дорога.концы[0]);
-                        
+
                         DoublePoint ang0 = new DoublePoint(point20.Angle);
                         point6.Divide(ref ang0);
                         point6.y = 0.0;
@@ -1990,7 +1989,7 @@ namespace Trancity
                         DoublePoint point8 = point7.Add(ref point40);
                         DoublePoint point9 = point3 - this.строящаяся_дорога.концы[1];
                         DoublePoint point21 = point8.Subtract(ref this.строящаяся_дорога.концы[1]);
-                        
+
                         DoublePoint ang1 = new DoublePoint(point21.Angle);
                         point9.Divide(ref ang1);
                         point9.y = 0.0;
@@ -2189,7 +2188,7 @@ namespace Trancity
                             }
                             if (action == null)
                                 action = new AddRoadsAction(this.строящаяся_дорога);
-                            
+
                             DoRegisterAction(action);
                             this.modified = true;
                             this.строящаяся_дорога = null;
@@ -2213,7 +2212,7 @@ namespace Trancity
                         DoRegisterAction(new RemoveTramWireAction(this.ближайший_провод));
                         this.modified = true;
                     }
-                    
+
                 }
             }
             if (this.строящиеся_провода == null)
@@ -2230,7 +2229,7 @@ namespace Trancity
             else
             {
                 DoublePoint point12 = new DoublePoint(7.5, 0.0);
-                DoublePoint point13 = new DoublePoint(-7.5,0.0);
+                DoublePoint point13 = new DoublePoint(-7.5, 0.0);
                 DoublePoint point14 = (this.shift) ? this.cursor_pos.RoundPoint : this.cursor_pos;
 
                 switch (this.строящиеся_провода.стадия)
@@ -2360,7 +2359,7 @@ namespace Trancity
                                 {
                                     flag3 = true;
                                     this.строящиеся_провода.концы[1] = _провод.начало;
-                                    this.строящиеся_провода.конец =  new DoublePoint[1] { _провод.начало };
+                                    this.строящиеся_провода.конец = new DoublePoint[1] { _провод.начало };
                                     this.строящиеся_провода.высота[1] = _провод.высота[0];
                                     if (this.строящиеся_провода.стадия == Стадия_стоительства.Нет)
                                     {
@@ -2721,11 +2720,11 @@ namespace Trancity
                         arpos = i;
                     }
                 }
-                if (arpos >= 0) 
+                if (arpos >= 0)
                     this.Objects_Instance_Box.SelectedIndex = arpos;
             }
         }
-        
+
         private void UpdateStatusBar()
         {
             double num18;
@@ -2836,7 +2835,7 @@ namespace Trancity
                 this.Height0_Status.Text = "h: " + this.строящийся_объект.height0.ToString("0.0") + " м";
             }
         }
-        
+
         private void Refresh_All_TripStop_Lists_Item_Click(object sender, EventArgs e)
         {
             this.мир.остановки.Sort((IComparer<Stop>)null);
@@ -2854,8 +2853,8 @@ namespace Trancity
         {
             if (!Refresh_Timer.Enabled)
                 return;
-            Refresh_Timer.Enabled = false; 
-            
+            Refresh_Timer.Enabled = false;
+
             // HACK: немнго из рендера
             this.мир.Обновить_время();
             MyDirect3D.device.BeginScene();
@@ -2921,7 +2920,8 @@ namespace Trancity
                 }
                 */
             }
-            else if (this.строящаяся_остановка != null) {
+            else if (this.строящаяся_остановка != null)
+            {
                 this.строящаяся_остановка.Render();
             }
             else if (this.строящийся_объект != null)
@@ -2939,7 +2939,7 @@ namespace Trancity
                 this.ОбновитьРаскрашенныеСплайны();
             }
         }
-        
+
         private void RefreshPanelSize(object sender, EventArgs e)
         {
             MyDirect3D.Window_Width = this.Sizable_Panel.ClientSize.Width;
@@ -3143,7 +3143,7 @@ namespace Trancity
         {
             narad_panel.Visible = Route_ShowNarads_Box.Checked;
         }
-        
+
         /*private void TrolleybusAXBox(object sender, EventArgs e)
         {
             
@@ -3425,7 +3425,7 @@ namespace Trancity
         {
             Check_All_Stops_Boxes();
         }
-        
+
         private void Check_All_Stops_Boxes()
         {
             var stopSelected = this.Stops_Box.SelectedIndex >= 0;
@@ -3441,7 +3441,7 @@ namespace Trancity
             this.Stops_EditLocation_Button.Enabled = stopSelected;
             this.ОбновитьРаскрашенныеСплайны();
             this.UpdateStatusBar();
-            
+
             if (!stopSelected)
                 return;
             var selectedStop = мир.остановки[Stops_Box.SelectedIndex];
@@ -3492,7 +3492,7 @@ namespace Trancity
             int selectedIndex = this.Stops_Box.SelectedIndex;
             if (selectedIndex < 0)
                 return;
-            
+
             this.игрок.cameraPosition.XZPoint = this.мир.остановки[selectedIndex].road.НайтиКоординаты(this.мир.остановки[selectedIndex].distance, 0.0);
         }
 
@@ -3621,7 +3621,7 @@ namespace Trancity
             int selectedIndex = this.Svetofor_Element_Box.SelectedIndex;
             if (selectedIndex < 0)
                 return;
-            
+
             if (selectedIndex < this.выбранная_светофорная_система.светофоры.Count)
             {
                 this.игрок.cameraPosition.XZPoint = this.выбранная_светофорная_система.светофоры[selectedIndex].положение.Координаты.XZPoint;
@@ -3662,7 +3662,7 @@ namespace Trancity
         {
             if (this.мир.ВсеДороги.Length <= 0)
                 return;
-            
+
             this.выбранная_светофорная_система.светофорные_сигналы.Add(new Светофорный_сигнал(this.мир.ВсеДороги[0], 0.0));
             this.UpdateSvetoforControls(this.выбранная_светофорная_система);
             this.Svetofor_Element_Box.SelectedIndex = this.Svetofor_Element_Box.Items.Count - 1;
@@ -3673,7 +3673,7 @@ namespace Trancity
         {
             if (this.мир.ВсеДороги.Length <= 0)
                 return;
-            
+
             Светофор item = new Светофор(this.Svetofor_Model_Box.Items[this.Svetofor_Model_Box.SelectedIndex].ToString());
             item.CreateMesh();
             item.положение = new Положение();
@@ -3941,7 +3941,7 @@ namespace Trancity
                 this.TrollWireOverRoad.Visible = splines_aviable;
                 this.TramWireOverRail.Visible = splines_aviable;
                 this.Road_Button.Visible = splines_aviable;
-//                this.Road_Button.Enabled = false;
+                //                this.Road_Button.Enabled = false;
             }
             else
             {
@@ -4108,14 +4108,14 @@ namespace Trancity
             {
                 this.Rail_Edit_Button.Pushed = false;
                 this.TramWireOverRail.Pushed = false;
-                 MessageBox.Show(this, Localization.current_.functionnowork, "Transedit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, Localization.current_.functionnowork, "Transedit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             if (this.TramWireOverRail.Pushed)
             {
                 this.Rail_Edit_Button.Pushed = false;
                 this.Road_Button.Pushed = false;
                 this.TrollWireOverRoad.Pushed = false;
-                 MessageBox.Show(this, Localization.current_.functionnowork, "Transedit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, Localization.current_.functionnowork, "Transedit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             if (this.Rail_Build_Direct_Button.Pushed || this.Rail_Build_Curve_Button.Pushed)
             {
@@ -4220,13 +4220,13 @@ namespace Trancity
                         /*RegisterPendingAction(new AddTramWireAction(this.строящиеся_провода.провода[0] as Трамвайный_контактный_провод));
                         this.строящиеся_провода = new Строящиеся_параллельные_провода();*/
                         //}
-                         MessageBox.Show(this, Localization.current_.functionnowork, "Transedit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(this, Localization.current_.functionnowork, "Transedit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     if (this.Troll_lines_Against.Pushed)
                     {
                         //this.Troll_lines_Doblue.Pushed = false;
-                       // if (!this.Troll_lines_Flag_Button.Pushed)
-                       // {
+                        // if (!this.Troll_lines_Flag_Button.Pushed)
+                        // {
                         //this.строящиеся_провода = new Строящиеся_провода();
                         /*RegisterPendingAction(new AddWiresAction(this.строящиеся_провода.провода[0], this.строящиеся_провода.провода[1]));
                         this.строящиеся_провода = new Строящиеся_двойные_троллейбусные_провода();*/
@@ -4237,7 +4237,7 @@ namespace Trancity
                         /*RegisterPendingAction(new AddTramWireAction(this.строящиеся_провода.провода[1] as Трамвайный_контактный_провод));
                         this.строящиеся_провода = new Строящиеся_двойные_провода();*/
                         //}
-                         MessageBox.Show(this, Localization.current_.functionnowork, "Transedit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(this, Localization.current_.functionnowork, "Transedit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -4409,7 +4409,7 @@ namespace Trancity
             Splines_Models_Box.SelectedIndex = (splines_aviable) ? 0 : -1;
             UpdateSplinesList();
         }
-        
+
         private void UpdateObjectsList()
         {
             Objects_Instance_Box.Items.Clear();
@@ -4426,19 +4426,19 @@ namespace Trancity
             }
             Check_All_Objects_Boxes();
         }
-        
+
         private void UpdateSplinesList()
         {
             Splines_Instance_Box.Items.Clear();
             var rails = мир.Рельсы;
             for (int i = 1; i < rails.Length + 1; i++)
             {
-                Splines_Instance_Box.Items.Add("Rail " + i + ", " + rails[i-1].name);
+                Splines_Instance_Box.Items.Add("Rail " + i + ", " + rails[i - 1].name);
             }
             var roads = мир.Дороги;
             for (int i = 1; i < roads.Length + 1; i++)
             {
-                Splines_Instance_Box.Items.Add("Road " + i + ", " + roads[i-1].name);
+                Splines_Instance_Box.Items.Add("Road " + i + ", " + roads[i - 1].name);
             }
             if (Splines_Instance_Box.Items.Count > 0)
             {
@@ -4446,7 +4446,7 @@ namespace Trancity
             }
             this.Check_All_Splines_Boxes();
         }
-        
+
         private void UpdateStopsList()
         {
             Stops_Box.Items.Clear();
@@ -4456,7 +4456,7 @@ namespace Trancity
             }
             if (Stops_Box.Items.Count > 0)
                 Stops_Box.SelectedIndex = 0;
-            else 
+            else
                 Check_All_Stops_Boxes();
         }
 
@@ -4535,7 +4535,7 @@ namespace Trancity
             }
             Svetofor_Element_Box_SelectedIndexChanged(null, new EventArgs());
         }
-        
+
         private void UpdateParksList()
         {
             Park_Box.Items.Clear();
@@ -4768,11 +4768,11 @@ namespace Trancity
                 return null;
             }
         }
-        
+
         public Контактный_провод[] баганные_провода
         {
             get
-            { 
+            {
                 DoublePoint point1 = this.cursor_pos;
                 List<Контактный_провод> list = new List<Контактный_провод>();
                 List<int> list2 = new List<int>();
@@ -4794,10 +4794,10 @@ namespace Trancity
                     return list.ToArray();
                 }
                 return null;
-              
+
             }
         }
-        
+
         public Трамвайный_контактный_провод ближайший_провод
         {
             get
@@ -4814,7 +4814,7 @@ namespace Trancity
                             return item;
                         }
                     }
-                    
+
                 }
                 return null;
             }
@@ -5106,7 +5106,7 @@ namespace Trancity
             Второй_конец,
             Первый_конец
         }
-        
+
         private class Строящиеся_провода
         {
             public double[] высота = new double[2];
@@ -5148,7 +5148,7 @@ namespace Trancity
                     this.провода[2].конец = this.провода[0].начало;
                     this.провода[3].начало = this.провода[1].начало - ((DoublePoint)(new DoublePoint(2.0 * this.направления[0]) * 10.0));
                     this.провода[3].конец = this.провода[1].начало;
-                } 
+                }
                 else
                 {
                     this.провода[2].начало = this.провода[0].конец;
@@ -5187,7 +5187,7 @@ namespace Trancity
                     this.провода[1].конец = this.конец[1];
                 }
             }
-            
+
             protected virtual void Create()
             {
                 for (int i = 0; i < this.провода.Length; i++)
@@ -5199,11 +5199,11 @@ namespace Trancity
                 }
             }
         }
-        
+
         private class Строящиеся_трамвайные_провода : Строящиеся_провода
         {
             public bool flag = false;
-            
+
             public Строящиеся_трамвайные_провода()
             {
                 this.провода = new Контактный_провод[2];
@@ -5258,7 +5258,7 @@ namespace Trancity
                     this.провода[0].конец = this.конец[0];
                 }
             }
-            
+
             protected override void Create()
             {
                 for (int i = 0; i < this.провода.Length; i++)
@@ -5269,11 +5269,11 @@ namespace Trancity
                 }
             }
         }
-        
+
         private class Строящиеся_параллельные_провода : Строящиеся_провода
         {
             public bool flag = false;
-            
+
             public Строящиеся_параллельные_провода()
             {
                 this.провода = new Контактный_провод[6];
@@ -5307,7 +5307,7 @@ namespace Trancity
                 {
                     this.провода[1].начало = this.провода[0].конец;
                     this.провода[1].конец = this.провода[0].конец + ((DoublePoint)(new DoublePoint(4.0 * this.направления[1]) * 10.0));
-                    
+
                 }
                 this.провода[0].высота[0] = this.высота[0];
                 this.провода[0].высота[1] = this.высота[1];
@@ -5332,7 +5332,7 @@ namespace Trancity
 
                 }
             }
-            
+
             protected override void Create()
             {
                 for (int i = 1; i < this.провода.Length; i++)
@@ -5343,11 +5343,11 @@ namespace Trancity
                 }
             }
         }
-        
+
         private class Строящиеся_параллельные_троллейбусные_провода : Строящиеся_провода
         {
             public bool flag = false;
-            
+
             public Строящиеся_параллельные_троллейбусные_провода()
             {
                 this.провода = new Контактный_провод[8];
@@ -5417,7 +5417,7 @@ namespace Trancity
                     this.провода[1].конец = this.конец[1];
                 }
             }
-            
+
             protected override void Create()
             {
                 for (int i = 1; i < this.провода.Length; i++)
@@ -5428,11 +5428,11 @@ namespace Trancity
                 }
             }
         }
-        
+
         private class Строящиеся_двойные_провода : Строящиеся_провода
         {
             public bool flag = false;
-            
+
             public Строящиеся_двойные_провода()
             {
                 this.провода = new Контактный_провод[6];
@@ -5487,7 +5487,7 @@ namespace Trancity
                     this.провода[0].конец = this.конец[0];
                 }
             }
-            
+
             protected override void Create()
             {
                 for (int i = 1; i < this.провода.Length; i++)
@@ -5498,11 +5498,11 @@ namespace Trancity
                 }
             }
         }
-        
+
         private class Строящиеся_двойные_троллейбусные_провода : Строящиеся_провода
         {
             public bool flag = false;
-            
+
             public Строящиеся_двойные_троллейбусные_провода()
             {
                 this.провода = new Контактный_провод[8];
@@ -5572,7 +5572,7 @@ namespace Trancity
                     this.провода[1].конец = this.конец[1];
                 }
             }
-            
+
             protected override void Create()
             {
                 for (int i = 1; i < this.провода.Length; i++)
@@ -5809,7 +5809,7 @@ namespace Trancity
                 }
             }
         }*/
-       
+
         private void Objects_Box_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Check_All_Objects_Boxes();
@@ -5896,7 +5896,7 @@ namespace Trancity
             RegisterPendingAction(new MoveObjectAction(строящийся_объект), true);
             EnableControls(false);
         }
-        
+
         private void Objects_ShowLocation_Button_Click(object sender, EventArgs e)
         {
             int selectedIndex = Objects_Instance_Box.SelectedIndex;
@@ -5932,13 +5932,13 @@ namespace Trancity
 
         private void TrolleybusAXBox_Click(object sender, EventArgs e)
         {
-            
-            
-            
-            
+
+
+
+
             this.ОбновитьРаскрашенныеСплайны();
         }
-        
+
         private void BusBox_Click(object sender, EventArgs e)
         {
             var selectedIndex = Stops_Box.SelectedIndex;
@@ -5955,7 +5955,7 @@ namespace Trancity
             stop_list_form.ShowDialog();
             stop_list_form.Dispose();
         }
-        
+
         private void Splines_Remove_ButtonClick(object sender, EventArgs e)
         {
             if (Splines_Instance_Box.SelectedIndex < 0)
@@ -5968,7 +5968,7 @@ namespace Trancity
             }
             this.modified = true;
         }
-        
+
         private void Check_All_Splines_Boxes()
         {
             Splines_Models_Box.Enabled = !(this.Rail_Build_Curve_Button.Pushed || this.Rail_Build_Direct_Button.Pushed) && splines_aviable;
@@ -5979,7 +5979,7 @@ namespace Trancity
             Splines_Location_label.Enabled = Splines_Remove_Button.Enabled;
             Splines_Instance_BoxSelectedIndexChanged(null, null);
         }
-        
+
         private void Splines_Models_BoxSelectedIndexChanged(object sender, EventArgs e)
         {
             if (Splines_Models_Box.SelectedIndex < 0) return;
@@ -5991,7 +5991,7 @@ namespace Trancity
                 break;
             }
         }
-        
+
         private void Splines_ChangeModel_ButtonClick(object sender, EventArgs e)
         {
             foreach (var model in SplineLoader.splines)
@@ -6009,7 +6009,7 @@ namespace Trancity
                 break;
             }
         }
-        
+
         private void Splines_ShowLocation_ButtonClick(object sender, EventArgs e)
         {
             int selectedIndex = Splines_Instance_Box.SelectedIndex;
@@ -6021,12 +6021,12 @@ namespace Trancity
             time_color = 2.0;
             this.ОбновитьРаскрашенныеСплайны();
         }
-        
+
         private void Rails_NumericBoxEnterPressed(object sender, EventArgs e)
         {
             ((Рельс)this.мир.ВсеДороги[Splines_Instance_Box.SelectedIndex]).расстояние_добавочных_проводов = this.Rail_Box_NumericBox.Value;
         }
-        
+
         private void Splines_Instance_BoxSelectedIndexChanged(object sender, EventArgs e)
         {
             Rail_Box_NumericBox.Text = string.Empty;
@@ -6036,18 +6036,18 @@ namespace Trancity
                 return;
             Rail_Box_NumericBox.Value = ((Рельс)this.мир.ВсеДороги[selectedIndex]).расстояние_добавочных_проводов;
         }
-        
+
         private void EditorDeactivate(object sender, EventArgs e)
         {
             this.Refresh_Timer.Enabled = false;
         }
-        
+
         private void EditorActivated(object sender, EventArgs e)
         {
             if (!this.Refresh_Timer.Enabled)
                 this.Refresh_Timer.Enabled = true;
         }
-        
+
         /* public void ReadmeEditor()
         {
             //ReadmeEditor = new ReadmeEditor();
@@ -6063,7 +6063,7 @@ namespace Trancity
             }
             
         }*/
-        
+
         public void ЗагрузитьНастройки()
         {
             Directory.SetCurrentDirectory(Application.StartupPath);
@@ -6074,21 +6074,21 @@ namespace Trancity
             }
         }
 
-        
-          public void СохранитьНастройки()
+
+        public void СохранитьНастройки()
         {
             Directory.SetCurrentDirectory(Application.StartupPath);
             using (var ini = new Ini(@".\options.ini", StreamWorkMode.Write))
             {
                 ini.Write("Common", "readme_editor", ToString());
             }
-          }
+        }
         void RenderPanelLoad(object sender, EventArgs e)
         {
-          
+
         }
-          
-          public struct НастройкиЗапуска
+
+        public struct НастройкиЗапуска
         {
             public bool readme_editor;
             public Size размерЭкрана;

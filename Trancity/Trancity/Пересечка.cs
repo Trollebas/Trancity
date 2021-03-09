@@ -1,7 +1,5 @@
 ﻿namespace Trancity
 {
-    using System;
-
     public class Пересечка
     {
         public double расстояние;

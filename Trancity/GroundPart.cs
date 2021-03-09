@@ -6,67 +6,67 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
 using Common;
+using Engine;
 using SlimDX;
 using SlimDX.Direct3D9;
-using Engine;
+using System;
 
 namespace Trancity
 {
-	/// <summary>
-	/// Кусок террейна
-	/// </summary>
-	public class GroundPart : MeshObject, IMatrixObject, MeshObject.ICustomCreation
-	{
-		private MeshVertex[] vertexes = null;
-    	private int[] indexes = null;
-    	private int poly_count;
-    	private int row;
-    	private int col;
-		
-		public GroundPart(int x, int y)
-		{
-			row = x;
-			col = y;
-		}
-		
-		public void CreateCustomMesh()
+    /// <summary>
+    /// Кусок террейна
+    /// </summary>
+    public class GroundPart : MeshObject, IMatrixObject, MeshObject.ICustomCreation
+    {
+        private MeshVertex[] vertexes = null;
+        private int[] indexes = null;
+        private int poly_count;
+        private int row;
+        private int col;
+
+        public GroundPart(int x, int y)
         {
-        	//TODO: создание террейна
-        	//схема в тетради по п.м.
-        	//Система координат:
-        	// ^ rows (1, 2, ...)
-        	// | * - *
-        	// | | \ | <- схема индексирования полигонов
-        	// | * - *
-        	// + - > colls (0, rows_count, rows_count * 2, ...)
-        	poly_count = 2 * (Ground.grid_step - 1) * (Ground.grid_step - 1);//Плевать, что кривое возведение в квадрат - зато типы не преобразовываю//(int)(Math.Pow(2.0, Ground.grid_step) + 0.1);
-        	indexes = new int[poly_count * 3];
-        	vertexes = new MeshVertex[Ground.grid_step * Ground.grid_step];
-        	for (int i = 0; i < Ground.grid_step; i++)
-        	{
-        		for (int j = 0; j < Ground.grid_step; j++)
-        		{
-        			vertexes[i * Ground.grid_step + j].Position = new Vector3((float)((-Ground.grid_size / 2) + i * (Ground.grid_size / (double)(Ground.grid_step - 1))), (float)Cheats._random.NextDouble() * 2.0f, (float)((-Ground.grid_size / 2) + j * (Ground.grid_size / (double)(Ground.grid_step - 1))));
-        			vertexes[i * Ground.grid_step + j].Normal = new Vector3(0.0f, 1.0f, 0.0f);
-        			vertexes[i * Ground.grid_step + j].texcoord = new Vector2((float)i, (float)(Ground.grid_step - j - 1));
-        		}
-        	}
-        	for (int i = 0; i < Ground.grid_step - 1; i++)
-        	{
-        		for (int j = 0; j < Ground.grid_step - 1; j++)
-        		{
-        			indexes[(j + (Ground.grid_step - 1) * i) * 6] = i * Ground.grid_step + j;
-        			indexes[(j + (Ground.grid_step - 1) * i) * 6 + 1] = indexes[(j + (Ground.grid_step - 1) * i) * 6] + 1;
-        			indexes[(j + (Ground.grid_step - 1) * i) * 6 + 2] = indexes[(j + (Ground.grid_step - 1) * i) * 6] + Ground.grid_step;
-        			indexes[(j + (Ground.grid_step - 1) * i) * 6 + 3] = indexes[(j + (Ground.grid_step - 1) * i) * 6 + 1];
-        			indexes[(j + (Ground.grid_step - 1) * i) * 6 + 4] = indexes[(j + (Ground.grid_step - 1) * i) * 6 + 1] + Ground.grid_step;
-        			indexes[(j + (Ground.grid_step - 1) * i) * 6 + 5] = indexes[(j + (Ground.grid_step - 1) * i) * 6 + 2];
-        		}
-        	}
-        	/**/
-        	/**
+            row = x;
+            col = y;
+        }
+
+        public void CreateCustomMesh()
+        {
+            //TODO: создание террейна
+            //схема в тетради по п.м.
+            //Система координат:
+            // ^ rows (1, 2, ...)
+            // | * - *
+            // | | \ | <- схема индексирования полигонов
+            // | * - *
+            // + - > colls (0, rows_count, rows_count * 2, ...)
+            poly_count = 2 * (Ground.grid_step - 1) * (Ground.grid_step - 1);//Плевать, что кривое возведение в квадрат - зато типы не преобразовываю//(int)(Math.Pow(2.0, Ground.grid_step) + 0.1);
+            indexes = new int[poly_count * 3];
+            vertexes = new MeshVertex[Ground.grid_step * Ground.grid_step];
+            for (int i = 0; i < Ground.grid_step; i++)
+            {
+                for (int j = 0; j < Ground.grid_step; j++)
+                {
+                    vertexes[i * Ground.grid_step + j].Position = new Vector3((float)((-Ground.grid_size / 2) + i * (Ground.grid_size / (double)(Ground.grid_step - 1))), (float)Cheats._random.NextDouble() * 2.0f, (float)((-Ground.grid_size / 2) + j * (Ground.grid_size / (double)(Ground.grid_step - 1))));
+                    vertexes[i * Ground.grid_step + j].Normal = new Vector3(0.0f, 1.0f, 0.0f);
+                    vertexes[i * Ground.grid_step + j].texcoord = new Vector2((float)i, (float)(Ground.grid_step - j - 1));
+                }
+            }
+            for (int i = 0; i < Ground.grid_step - 1; i++)
+            {
+                for (int j = 0; j < Ground.grid_step - 1; j++)
+                {
+                    indexes[(j + (Ground.grid_step - 1) * i) * 6] = i * Ground.grid_step + j;
+                    indexes[(j + (Ground.grid_step - 1) * i) * 6 + 1] = indexes[(j + (Ground.grid_step - 1) * i) * 6] + 1;
+                    indexes[(j + (Ground.grid_step - 1) * i) * 6 + 2] = indexes[(j + (Ground.grid_step - 1) * i) * 6] + Ground.grid_step;
+                    indexes[(j + (Ground.grid_step - 1) * i) * 6 + 3] = indexes[(j + (Ground.grid_step - 1) * i) * 6 + 1];
+                    indexes[(j + (Ground.grid_step - 1) * i) * 6 + 4] = indexes[(j + (Ground.grid_step - 1) * i) * 6 + 1] + Ground.grid_step;
+                    indexes[(j + (Ground.grid_step - 1) * i) * 6 + 5] = indexes[(j + (Ground.grid_step - 1) * i) * 6 + 2];
+                }
+            }
+            /**/
+            /**
         	indexes = new int[32 * 3];
         	vertexes = new MeshVertex[25];
         	vertexes[0].Position = new Vector3(-20.0f, (float)Cheats._random.NextDouble() * 2.0f, -20.0f);
@@ -282,97 +282,97 @@ namespace Trancity
 			vertexes[2].Position = new Vector3(500.0f, 0.0f, -500.0f);
 			vertexes[2].texcoord = new Vector2(4.749745e-08f, 0.0f);
 			vertexes[2].Normal = new Vector3(0.0f, 1.0f, 0.0f);*/
-			_meshMaterials = new Material[1];
+            _meshMaterials = new Material[1];
             _meshMaterials[0].Diffuse = new Color4(1.0f, 1.0f, 1.0f, 1.0f);//0.949f
             _meshMaterials[0].Specular = new Color4(1.0f, 1.0f, 1.0f, 1.0f);
             _meshMaterials[0].Ambient = new Color4(1.0f, 0.0f, 0.0f, 0.0f);
             _meshMaterials[0].Emissive = new Color4(1.0f, 0.0f, 0.0f, 0.0f);
             _meshMaterials[0].Power = 0;
-			_meshTextures = new Texture[1];
-//			_addTexList = new MeshObject.AdditionalTexStruct[1];
-			LoadTexture(0, "Ground_test.png");
-			_meshTextures[0].LevelOfDetail = 0;
-			
+            _meshTextures = new Texture[1];
+            //			_addTexList = new MeshObject.AdditionalTexStruct[1];
+            LoadTexture(0, "Ground_test.png");
+            _meshTextures[0].LevelOfDetail = 0;
+
         }
-		
-		public void CustomRender()
-		{
-			if (MyDirect3D.Alpha) return;
-//			MyDirect3D.test_effect.SetTexture("texture0", _meshTextures[0]);
-//			MyDirect3D.test_effect.SetValue("hasTexture", true);
-//			MyDirect3D.test_effect.SetValue("intencity", MyDirect3D.light_intency);
-//			MyDirect3D.test_effect.SetValue("worldViewProjection", ((IMatrixObject)this).GetMatrix(0) * MyDirect3D.device.GetTransform(TransformState.Projection));
-//			MyDirect3D.test_effect.Begin(0);
-//			MyDirect3D.test_effect.BeginPass(0);
-			MyDirect3D.device.Material = _meshMaterials[0];
-			MyDirect3D.device.SetTexture(0, _meshTextures[0]);
-			MyDirect3D.device.SetTransform(TransformState.World, ((IMatrixObject)this).GetMatrix(0));
-			MyDirect3D.device.DrawIndexedUserPrimitives<int, MeshVertex>(PrimitiveType.TriangleList, 0, 0, 0, vertexes.Length, poly_count, indexes, Format.Index32, vertexes, 32);
-//            MyDirect3D.test_effect.EndPass();
-//            MyDirect3D.test_effect.End();
-		}
-		
-		public Matrix GetMatrix(int index)
-		{
-			return Matrix.Translation((float)(Ground.grid_size * row), 0.0f, (float)(Ground.grid_size * col));
-		}
-		
-		public int MatricesCount
-		{
-			get
-			{
-				return 1;
-			}
-		}
-		
-		/// <summary>
+
+        public void CustomRender()
+        {
+            if (MyDirect3D.Alpha) return;
+            //			MyDirect3D.test_effect.SetTexture("texture0", _meshTextures[0]);
+            //			MyDirect3D.test_effect.SetValue("hasTexture", true);
+            //			MyDirect3D.test_effect.SetValue("intencity", MyDirect3D.light_intency);
+            //			MyDirect3D.test_effect.SetValue("worldViewProjection", ((IMatrixObject)this).GetMatrix(0) * MyDirect3D.device.GetTransform(TransformState.Projection));
+            //			MyDirect3D.test_effect.Begin(0);
+            //			MyDirect3D.test_effect.BeginPass(0);
+            MyDirect3D.device.Material = _meshMaterials[0];
+            MyDirect3D.device.SetTexture(0, _meshTextures[0]);
+            MyDirect3D.device.SetTransform(TransformState.World, ((IMatrixObject)this).GetMatrix(0));
+            MyDirect3D.device.DrawIndexedUserPrimitives<int, MeshVertex>(PrimitiveType.TriangleList, 0, 0, 0, vertexes.Length, poly_count, indexes, Format.Index32, vertexes, 32);
+            //            MyDirect3D.test_effect.EndPass();
+            //            MyDirect3D.test_effect.End();
+        }
+
+        public Matrix GetMatrix(int index)
+        {
+            return Matrix.Translation((float)(Ground.grid_size * row), 0.0f, (float)(Ground.grid_size * col));
+        }
+
+        public int MatricesCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        /// <summary>
         /// Based on netlib.narod.ru/library/book0032/ch13_05.htm
         /// </summary>
         /// <param name="pos">XZ-point</param>
         /// <returns>height</returns>
         public double GetHeight(DoublePoint pos)
         {
-        	//TODO: нахождение высоты
-        	pos.x += Ground.grid_size / 2.0;//20.0;
-        	pos.y += Ground.grid_size / 2.0;//20.0;
-        	pos.x /= Ground.grid_size / (Ground.grid_step - 1);//10.0;
-        	pos.y /= Ground.grid_size / (Ground.grid_step - 1);//10.0;
-        	int coll = (int)Math.Floor(pos.x);
-        	int row = (int)Math.Floor(pos.y);
-        	//^c d
-        	//|a b
-        	// - >
-        	var A = GetVertexHeight(coll, row);
-        	var B = GetVertexHeight(coll + 1, row);
-        	var C = GetVertexHeight(coll, row + 1);
-        	var D = GetVertexHeight(coll + 1, row + 1);
-        	var dx = pos.x - coll;
-        	var dy = pos.y - row;
-        	double height = 0.0;
-        	if(dy < 1.0 - dx)
-			{
-			     double uy = B - A;
-			     double vy = C - A;
-			
-			     height = A + MyFeatures.Lerp(0.0, uy, dx) +
-			                  MyFeatures.Lerp(0.0, vy, dy);
-			}
-			else
-			{
-			     double uy = C - D;
-			     double vy = B - D;
-			
-			     height = D + MyFeatures.Lerp(0.0, uy, 1.0 - dx) +
-			                  MyFeatures.Lerp(0.0, vy, 1.0 - dy);
-			}
-        	return height;
+            //TODO: нахождение высоты
+            pos.x += Ground.grid_size / 2.0;//20.0;
+            pos.y += Ground.grid_size / 2.0;//20.0;
+            pos.x /= Ground.grid_size / (Ground.grid_step - 1);//10.0;
+            pos.y /= Ground.grid_size / (Ground.grid_step - 1);//10.0;
+            int coll = (int)Math.Floor(pos.x);
+            int row = (int)Math.Floor(pos.y);
+            //^c d
+            //|a b
+            // - >
+            var A = GetVertexHeight(coll, row);
+            var B = GetVertexHeight(coll + 1, row);
+            var C = GetVertexHeight(coll, row + 1);
+            var D = GetVertexHeight(coll + 1, row + 1);
+            var dx = pos.x - coll;
+            var dy = pos.y - row;
+            double height = 0.0;
+            if (dy < 1.0 - dx)
+            {
+                double uy = B - A;
+                double vy = C - A;
+
+                height = A + MyFeatures.Lerp(0.0, uy, dx) +
+                             MyFeatures.Lerp(0.0, vy, dy);
+            }
+            else
+            {
+                double uy = C - D;
+                double vy = B - D;
+
+                height = D + MyFeatures.Lerp(0.0, uy, 1.0 - dx) +
+                             MyFeatures.Lerp(0.0, vy, 1.0 - dy);
+            }
+            return height;
         }
-		
-		private double GetVertexHeight(int coll, int row)
+
+        private double GetVertexHeight(int coll, int row)
         {
-//			try {
-				return vertexes[row + Ground.grid_step * coll].Position.Y;
-//			} catch { return -0.1; };
+            //			try {
+            return vertexes[row + Ground.grid_step * coll].Position.Y;
+            //			} catch { return -0.1; };
         }
-	}
+    }
 }

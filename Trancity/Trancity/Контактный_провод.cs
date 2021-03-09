@@ -1,10 +1,10 @@
 ﻿using Common;
+using Engine;
 using SlimDX;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using Engine;
 
 namespace Trancity
 {
@@ -29,11 +29,11 @@ namespace Trancity
 
         public Matrix GetMatrix(int index)
         {
-        	if (last_matrix != MyMatrix.Zero)//.Zero)
-        	{
-        		return last_matrix;
-        	}
-        	float num = MyDirect3D.вид_сверху ? 1.5f : 0.5f;
+            if (last_matrix != MyMatrix.Zero)//.Zero)
+            {
+                return last_matrix;
+            }
+            float num = MyDirect3D.вид_сверху ? 1.5f : 0.5f;
             if (MyDirect3D.карта)
             {
                 num *= 10.0f;
@@ -48,14 +48,14 @@ namespace Trancity
             matrix.M22 = 1f;
             matrix.M33 = 1f;
             matrix.M44 = 1f;
-            matrix.M12 = ((float) (this.высота[1] - this.высота[0])) / y;
-            return (((matrix * Matrix.Scaling((float) num2, y, num)) * Matrix.RotationY(-((float) num3))) * Matrix.Translation((float) this.начало.x, (float) num4, (float) this.начало.y));
+            matrix.M12 = ((float)(this.высота[1] - this.высота[0])) / y;
+            return (((matrix * Matrix.Scaling((float)num2, y, num)) * Matrix.RotationY(-((float)num3))) * Matrix.Translation((float)this.начало.x, (float)num4, (float)this.начало.y));
         }
 
         public void ComputeMatrix()
         {
-        	if (MainForm.in_editor) return;
-        	last_matrix = GetMatrix(0);
+            if (MainForm.in_editor) return;
+            last_matrix = GetMatrix(0);
         }
 
         public double FindHeight(double расстояние)
@@ -78,7 +78,7 @@ namespace Trancity
             List<Контактный_провод> list2 = new List<Контактный_провод>();
             foreach (Контактный_провод _провод in провода)
             {
-            	if ((_провод == this) || (_провод is Трамвайный_контактный_провод)) continue;
+                if ((_провод == this) || (_провод is Трамвайный_контактный_провод)) continue;
                 DoublePoint point4;
                 DoublePoint point = _провод.начало - this.конец;
                 if (point.Modulus < 0.01)
@@ -200,71 +200,71 @@ namespace Trancity
             }
         }
     }
-    
-    
+
+
     public class Трамвайный_контактный_провод : Контактный_провод
     {
-    	public Трамвайный_контактный_провод[] следующие_провода2 = new Трамвайный_контактный_провод[0];
-    	public Трамвайный_контактный_провод[] предыдущие_провода2 = new Трамвайный_контактный_провод[0];
-    	
-    	public Трамвайный_контактный_провод(double начало_x, double начало_y, double конец_x, double конец_y) : base(начало_x, начало_y, конец_x, конец_y, false)
+        public Трамвайный_контактный_провод[] следующие_провода2 = new Трамвайный_контактный_провод[0];
+        public Трамвайный_контактный_провод[] предыдущие_провода2 = new Трамвайный_контактный_провод[0];
+
+        public Трамвайный_контактный_провод(double начало_x, double начало_y, double конец_x, double конец_y) : base(начало_x, начало_y, конец_x, конец_y, false)
         {
-    		
+
         }
-    	
-    	public override void UpdateNextWires(Контактный_провод[] провода)
+
+        public override void UpdateNextWires(Контактный_провод[] провода)
         {
             List<Трамвайный_контактный_провод> list = new List<Трамвайный_контактный_провод>();
             List<Трамвайный_контактный_провод> list2 = new List<Трамвайный_контактный_провод>();
             foreach (Контактный_провод провод in провода)
             {
-            	if ((провод == this) || !(провод is Трамвайный_контактный_провод)) continue;
-            	var _провод = (Трамвайный_контактный_провод)провод;
+                if ((провод == this) || !(провод is Трамвайный_контактный_провод)) continue;
+                var _провод = (Трамвайный_контактный_провод)провод;
                 DoublePoint point4;
                 DoublePoint point = _провод.начало - base.конец;
                 if (point.Modulus < 0.01)
                 {
-                	for (int i = 0; i < list.Count; i++)
-                	{
-                		DoublePoint point2 = new DoublePoint(((Трамвайный_контактный_провод)_провод).tan_z - this.tan_z);
-                    	DoublePoint point3 = new DoublePoint(((Трамвайный_контактный_провод)list[i]).tan_z - this.tan_z);
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        DoublePoint point2 = new DoublePoint(((Трамвайный_контактный_провод)_провод).tan_z - this.tan_z);
+                        DoublePoint point3 = new DoublePoint(((Трамвайный_контактный_провод)list[i]).tan_z - this.tan_z);
                         if (point2.Angle < point3.Angle)
                         {
                             list.Insert(i, _провод);
                             goto Label_009F;
                         }
-                	}
+                    }
                     list.Add(_провод);
                 }
-            	Label_009F:
+            Label_009F:
                 point4 = _провод.конец - base.начало;
                 if (point4.Modulus < 0.01)
                 {
-                	for (int k = 0; k < list2.Count; k++)
-                	{
-                		DoublePoint point5 = new DoublePoint(((Трамвайный_контактный_провод)_провод).tan_z - this.tan_z);
-                    	DoublePoint point6 = new DoublePoint(((Трамвайный_контактный_провод)list2[k]).tan_z - this.tan_z);
+                    for (int k = 0; k < list2.Count; k++)
+                    {
+                        DoublePoint point5 = new DoublePoint(((Трамвайный_контактный_провод)_провод).tan_z - this.tan_z);
+                        DoublePoint point6 = new DoublePoint(((Трамвайный_контактный_провод)list2[k]).tan_z - this.tan_z);
                         if (point5.Angle < point6.Angle)
                         {
                             list2.Insert(k, _провод);
                             goto Label_009F2;
                         }
-                	}
+                    }
                     list2.Add(_провод);
                 }
-                Label_009F2:;
+            Label_009F2:;
             }
             this.следующие_провода2 = list.ToArray();
             this.предыдущие_провода2 = list2.ToArray();
         }
-    	
-    	private double tan_z
-    	{
-    		get
-    		{
-    			return (this.высота[1] - this.высота[0]) / base.длина;
-    		}
-    	}
+
+        private double tan_z
+        {
+            get
+            {
+                return (this.высота[1] - this.высота[0]) / base.длина;
+            }
+        }
     }
 }
 

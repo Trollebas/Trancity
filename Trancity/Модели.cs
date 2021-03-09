@@ -1,9 +1,9 @@
+using Engine;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Engine;
 
 namespace Trancity
 {
@@ -14,22 +14,22 @@ namespace Trancity
         public static readonly List<МодельТранспорта> Трамваи = new List<МодельТранспорта>();
         public static readonly List<МодельТранспорта> Электробус = new List<МодельТранспорта>();
         public static readonly List<МодельТранспорта> Траффик = new List<МодельТранспорта>();
-        
+
         static Модели()
         {
             var document = new XmlDocument();
             var path = Application.StartupPath + @"\Data\Transport\";
-//            var s = Directory.GetDirectories(path);
+            //            var s = Directory.GetDirectories(path);
             foreach (var directory in Directory.GetDirectories(path))
             {
-                var directory1 = directory+ @"\";
+                var directory1 = directory + @"\";
                 try
                 {
                     document.Load(directory1 + "model.xml");
                 }
                 catch (Exception)
                 {
-                	Logger.Log("ModelLoader", "model.xml не обнаружен в " + directory1);
+                    Logger.Log("ModelLoader", "model.xml не обнаружен в " + directory1);
                     continue;
                 }
                 var element = document["Trancity"];
@@ -37,7 +37,7 @@ namespace Trancity
                 var element1 = element["Doors"];
                 if (element1 == null) continue;
                 //Двери = new МодельДверей[element2.ChildNodes.Count];
-                var транспорт = new МодельТранспорта();                
+                var транспорт = new МодельТранспорта();
                 for (var i = 0; i < element1.ChildNodes.Count; i++)
                 {
                     var node = element1.ChildNodes[i];
@@ -60,7 +60,7 @@ namespace Trancity
                     switch (element3.Name.ToLower())
                     {
                         case "trolleybus":
-                    		LoadTrolleybus(транспорт, directory1, element3);
+                            LoadTrolleybus(транспорт, directory1, element3);
                             Троллейбусы.Add(транспорт);
                             break;
                         case "bus":
@@ -80,103 +80,105 @@ namespace Trancity
                             Трамваи.Add(транспорт);
                             break;
                     }
-                    
+
                 }
                 catch (Exception)
                 {
-                	Logger.Log("ModelLoader", "Ошибка в " + directory1 + "model.xml");
+                    Logger.Log("ModelLoader", "Ошибка в " + directory1 + "model.xml");
                     continue;
                 }
             }
         }
-        
+
         private static void LoadTrolleybus(МодельТранспорта транспорт, string directory1, XmlNode element3)
         {
-	        транспорт.name = element3["name"].InnerText;
-	        транспорт.dir = directory1 + element3["dir"].InnerText;
-	        транспорт.filename = element3["filename"].InnerText;
-//	        транспорт.количествоХвостов = (int)Xml.GetDouble(element3["tail_count"]);
-	        транспорт.хвостFilename = LoadStrings(element3["tail_filename"]);
-	        транспорт.хвостDist1 = LoadDoubles(element3["tail_dist_1"]);
-	        транспорт.хвостDist2 = LoadDoubles(element3["tail_dist_2"]);
-	        транспорт.сочленениеFilename = LoadStrings(element3["middle_filename"]);
-	        транспорт.дополнения = LoadAdditions(element3["additions"]);
-	        транспорт.количествоДверей = (int)Xml.GetDouble(element3["door_count"]);
-	        транспорт.двери = LoadDoors(транспорт,element3["doors"]);
-	        транспорт.радиусКолёс = Xml.GetDouble(element3["wheel_radius"]);
-	        транспорт.колёсныеПары = LoadWheels(directory1,element3["wheels"]);
-	        транспорт.штангиDir = directory1 + element3["shtangi_dir"].InnerText;
-	        транспорт.штангиFilename = element3["shtangi_filename"].InnerText;
-	        транспорт.штангиПолнаяДлина = Xml.GetDouble(element3["shtangi_full_length"]);
-	        транспорт.штангиУголMin = Xml.GetDouble(element3["shtangi_angle_min"]);
-	        транспорт.штанги = LoadShtangi(element3["shtangi"]);
-	        транспорт.руль = LoadSteering(directory1, element3["steering"]);
-	        транспорт.ах = LoadStandaloneMotion(element3["standalone_motion"]);
-	        транспорт.табличка = Load_VPark_Tabl(element3["tabl_v_park"]);
-	        транспорт.нарядPos = LoadDouble_3DPoint(element3["narad_pos"]);
-	        транспорт.cameras = LoadCameras(element3["cameras"]);
-	        try//for tests
-	        {
-	        	//транспорт.bbox = LoadDouble_3DPoints(element3["bounding_box"]);
-				//транспорт.tails_bbox = LoadArrayOfDouble_3DPoints(element3["tails_bounding_box"]);
-				транспорт.bsphere = LoadBSphere(element3["bounding_sphere"]);
-				транспорт.tails_bsphere = LoadBSpheres(element3["tails_bounding_sphere"]);
-	        }
-	        catch
-	        {
-	        	транспорт.hasnt_bbox = true;
-	        	Logger.Log("ModelLoader", "Bounding spheres not loaded for " + транспорт.name);
-	        }
-	        транспорт.занятыеПоложения = LoadDoublePoints(element3["occupied_locations"]);
-	        транспорт.занятыеПоложенияХвостов = LoadArrayOfDoublePoints(element3["tails_occupied_locations"]);
-	        транспорт.системаУправления = element3["control_system"].InnerText; 
+            транспорт.name = element3["name"].InnerText;
+            транспорт.dir = directory1 + element3["dir"].InnerText;
+            транспорт.filename = element3["filename"].InnerText;
+            //	        транспорт.количествоХвостов = (int)Xml.GetDouble(element3["tail_count"]);
+            транспорт.хвостFilename = LoadStrings(element3["tail_filename"]);
+            транспорт.хвостDist1 = LoadDoubles(element3["tail_dist_1"]);
+            транспорт.хвостDist2 = LoadDoubles(element3["tail_dist_2"]);
+            транспорт.сочленениеFilename = LoadStrings(element3["middle_filename"]);
+            транспорт.дополнения = LoadAdditions(element3["additions"]);
+            транспорт.количествоДверей = (int)Xml.GetDouble(element3["door_count"]);
+            транспорт.двери = LoadDoors(транспорт, element3["doors"]);
+            транспорт.радиусКолёс = Xml.GetDouble(element3["wheel_radius"]);
+            транспорт.колёсныеПары = LoadWheels(directory1, element3["wheels"]);
+            транспорт.штангиDir = directory1 + element3["shtangi_dir"].InnerText;
+            транспорт.штангиFilename = element3["shtangi_filename"].InnerText;
+            транспорт.штангиПолнаяДлина = Xml.GetDouble(element3["shtangi_full_length"]);
+            транспорт.штангиУголMin = Xml.GetDouble(element3["shtangi_angle_min"]);
+            транспорт.штанги = LoadShtangi(element3["shtangi"]);
+            транспорт.руль = LoadSteering(directory1, element3["steering"]);
+            транспорт.ах = LoadStandaloneMotion(element3["standalone_motion"]);
+            транспорт.табличка = Load_VPark_Tabl(element3["tabl_v_park"]);
+            транспорт.нарядPos = LoadDouble_3DPoint(element3["narad_pos"]);
+            транспорт.cameras = LoadCameras(element3["cameras"]);
+            try//for tests
+            {
+                //транспорт.bbox = LoadDouble_3DPoints(element3["bounding_box"]);
+                //транспорт.tails_bbox = LoadArrayOfDouble_3DPoints(element3["tails_bounding_box"]);
+                транспорт.bsphere = LoadBSphere(element3["bounding_sphere"]);
+                транспорт.tails_bsphere = LoadBSpheres(element3["tails_bounding_sphere"]);
+            }
+            catch
+            {
+                транспорт.hasnt_bbox = true;
+                Logger.Log("ModelLoader", "Bounding spheres not loaded for " + транспорт.name);
+            }
+            транспорт.занятыеПоложения = LoadDoublePoints(element3["occupied_locations"]);
+            транспорт.занятыеПоложенияХвостов = LoadArrayOfDoublePoints(element3["tails_occupied_locations"]);
+            транспорт.системаУправления = element3["control_system"].InnerText;
         }
-        
+
         private static void LoadTramway(МодельТранспорта трамвай, string directory1, XmlNode element3)
         {
-			трамвай.name = element3["name"].InnerText;
-			трамвай.dir = directory1 + element3["dir"].InnerText;
-			трамвай.filename = element3["filename"].InnerText;
-//			трамвай.количествоХвостов = (int)Xml.GetDouble(element3["tails_count"]);
-			трамвай.tails = LoadTails(element3["tails"]);
-			try{
-//			трамвай.количествоСочленений = (int)Xml.GetDouble(element3["middles_count"]);
-			трамвай.сочленения = LoadNewMiddles(element3["middles"]);}
-			catch { };
-			трамвай.дополнения = LoadAdditions(element3["additions"]);
-			трамвай.количествоДверей = (int)Xml.GetDouble(element3["door_count"]);
-			трамвай.двери = LoadDoors(трамвай,element3["doors"]);
-			трамвай.axisfilename = element3["axis_filename"].InnerText;
-			трамвай.telegafilename = element3["telegi_filename"].InnerText;
-			трамвай.расстояние_между_осями = (double)Xml.GetDouble(element3["axis_dist"]);
-			трамвай.axis_radius = (double)Xml.GetDouble(element3["axis_radius"]);
-			//Убрать:
-//			трамвай.расстояние_между_тележками = (double)Xml.GetDouble(element3["telegi_dist"]);
-			трамвай.тележки = LoadBoogies(element3["telegi"]);
-			трамвай.пантограф = LoadPantograph(directory1, element3["pantograph"]);
-			/*трамвай.штангиDir = directory1 + element3["shtangi_dir"].InnerText;
+            трамвай.name = element3["name"].InnerText;
+            трамвай.dir = directory1 + element3["dir"].InnerText;
+            трамвай.filename = element3["filename"].InnerText;
+            //			трамвай.количествоХвостов = (int)Xml.GetDouble(element3["tails_count"]);
+            трамвай.tails = LoadTails(element3["tails"]);
+            try
+            {
+                //			трамвай.количествоСочленений = (int)Xml.GetDouble(element3["middles_count"]);
+                трамвай.сочленения = LoadNewMiddles(element3["middles"]);
+            }
+            catch { };
+            трамвай.дополнения = LoadAdditions(element3["additions"]);
+            трамвай.количествоДверей = (int)Xml.GetDouble(element3["door_count"]);
+            трамвай.двери = LoadDoors(трамвай, element3["doors"]);
+            трамвай.axisfilename = element3["axis_filename"].InnerText;
+            трамвай.telegafilename = element3["telegi_filename"].InnerText;
+            трамвай.расстояние_между_осями = (double)Xml.GetDouble(element3["axis_dist"]);
+            трамвай.axis_radius = (double)Xml.GetDouble(element3["axis_radius"]);
+            //Убрать:
+            //			трамвай.расстояние_между_тележками = (double)Xml.GetDouble(element3["telegi_dist"]);
+            трамвай.тележки = LoadBoogies(element3["telegi"]);
+            трамвай.пантограф = LoadPantograph(directory1, element3["pantograph"]);
+            /*трамвай.штангиDir = directory1 + element3["shtangi_dir"].InnerText;
             трамвай.штангиFilename = element3["shtangi_filename"].InnerText;
             трамвай.штангиПолнаяДлина = Xml.GetDouble(element3["shtangi_full_length"]);
             трамвай.штангиУголMin = Xml.GetDouble(element3["shtangi_angle_min"]);
             трамвай.штанги = LoadShtangi(element3["shtangi"]);*/
-			трамвай.табличка = Load_VPark_Tabl(element3["tabl_v_park"]);
-			трамвай.нарядPos = LoadDouble_3DPoint(element3["narad_pos"]);
-			трамвай.cameras = LoadCameras(element3["cameras"]);
-			try//for tests
-	        {
-	        	//трамвай.bbox = LoadDouble_3DPoints(element3["bounding_box"]);
-				//трамвай.tails_bbox = LoadArrayOfDouble_3DPoints(element3["tails_bounding_box"]);
-				трамвай.bsphere = LoadBSphere(element3["bounding_sphere"]);
-				трамвай.tails_bsphere = LoadBSpheres(element3["tails_bounding_sphere"]);
-	        }
-	        catch
-	        {
-	        	трамвай.hasnt_bbox = true;
-	        	Logger.Log("ModelLoader", "Bounding spheres not loaded for " + трамвай.name);
-	        }
-			трамвай.занятыеПоложения = LoadDoublePoints(element3["occupied_locations"]);
-			трамвай.занятыеПоложенияХвостов = LoadArrayOfDoublePoints(element3["tails_occupied_locations"]);
-			трамвай.системаУправления = element3["control_system"].InnerText;
+            трамвай.табличка = Load_VPark_Tabl(element3["tabl_v_park"]);
+            трамвай.нарядPos = LoadDouble_3DPoint(element3["narad_pos"]);
+            трамвай.cameras = LoadCameras(element3["cameras"]);
+            try//for tests
+            {
+                //трамвай.bbox = LoadDouble_3DPoints(element3["bounding_box"]);
+                //трамвай.tails_bbox = LoadArrayOfDouble_3DPoints(element3["tails_bounding_box"]);
+                трамвай.bsphere = LoadBSphere(element3["bounding_sphere"]);
+                трамвай.tails_bsphere = LoadBSpheres(element3["tails_bounding_sphere"]);
+            }
+            catch
+            {
+                трамвай.hasnt_bbox = true;
+                Logger.Log("ModelLoader", "Bounding spheres not loaded for " + трамвай.name);
+            }
+            трамвай.занятыеПоложения = LoadDoublePoints(element3["occupied_locations"]);
+            трамвай.занятыеПоложенияХвостов = LoadArrayOfDoublePoints(element3["tails_occupied_locations"]);
+            трамвай.системаУправления = element3["control_system"].InnerText;
         }
 
         private static МодельТранспорта.Руль LoadSteering(string directory, XmlNode node)
@@ -193,7 +195,7 @@ namespace Trancity
             }
             return null;
         }
-        
+
         private static МодельТранспорта.АХ LoadStandaloneMotion(XmlNode node)
         {
             if (node != null)
@@ -201,14 +203,15 @@ namespace Trancity
                 var z = Xml.GetDouble(node["battery_power"]);
                 var a = Xml.GetDouble(node["acceleration"]);
                 var h = Xml.GetDouble(node["charge_consumption"]);
-                if (h == null) {
+                if (h == null)
+                {
                     h = 0.20;
                 }
                 return new МодельТранспорта.АХ(z, a, h);
             }
             return null;
         }
-      
+
         private static МодельТранспорта.Дополнение[] LoadAdditions(XmlNode items)
         {
             var дополнениеArray = new МодельТранспорта.Дополнение[items.ChildNodes.Count];
@@ -232,7 +235,7 @@ namespace Trancity
             }
             return pointArray;
         }
-        
+
         private static Double3DPoint[][] LoadArrayOfDouble_3DPoints(XmlNode items)
         {
             var pointArray = new Double3DPoint[items.ChildNodes.Count][];
@@ -270,7 +273,7 @@ namespace Trancity
         {
             return new Double3DPoint(Xml.GetDouble(items["x"]), Xml.GetDouble(items["y"]), Xml.GetDouble(items["z"]));
         }
-        
+
         private static Double3DPoint[] LoadDouble_3DPoints(XmlNode items)
         {
             var pointArray = new Double3DPoint[items.ChildNodes.Count];
@@ -322,18 +325,18 @@ namespace Trancity
 
         private static string[] LoadStrings(XmlNode items)
         {
-        	if (items != null)
-        	{
-            	var strArray = new string[items.ChildNodes.Count];
-            	for (var i = 0; i < strArray.Length; i++)
-            	{
-                	strArray[i] = items.ChildNodes[i].InnerText;
-            	}
-            	return strArray;
-        	}
-        	return null;
+            if (items != null)
+            {
+                var strArray = new string[items.ChildNodes.Count];
+                for (var i = 0; i < strArray.Length; i++)
+                {
+                    strArray[i] = items.ChildNodes[i].InnerText;
+                }
+                return strArray;
+            }
+            return null;
         }
-        
+
         private static МодельТранспорта.КолёснаяПара[] LoadWheels(string directory, XmlNode items)
         {
             var параArray = new МодельТранспорта.КолёснаяПара[items.ChildNodes.Count];
@@ -349,40 +352,40 @@ namespace Trancity
             }
             return параArray;
         }
-        
+
         private static МодельТранспорта.Хвост[] LoadTails(XmlNode items)
         {
             var tailsArray = new МодельТранспорта.Хвост[items.ChildNodes.Count];
             for (var i = 0; i < tailsArray.Length; i++)
             {
-            	XmlNode node = items.ChildNodes[i];
-            	double dist = (double)Xml.GetDouble(node["distance"]);
-            	string filename = node["filename"].InnerText;
-//            	var flag = Xml.GetDouble(node["have_middle"]) != 0.0;
-//            	string mfilename = node["middle_filename"].InnerText;
-//            	double ad = (double)Xml.GetDouble(node["axis_dist"]);
-//            	double td = (double)Xml.GetDouble(node["telegi_dist"]);
-            	tailsArray[i] = new МодельТранспорта.Хвост(dist, filename);//, td);//mfilename, flag,
+                XmlNode node = items.ChildNodes[i];
+                double dist = (double)Xml.GetDouble(node["distance"]);
+                string filename = node["filename"].InnerText;
+                //            	var flag = Xml.GetDouble(node["have_middle"]) != 0.0;
+                //            	string mfilename = node["middle_filename"].InnerText;
+                //            	double ad = (double)Xml.GetDouble(node["axis_dist"]);
+                //            	double td = (double)Xml.GetDouble(node["telegi_dist"]);
+                tailsArray[i] = new МодельТранспорта.Хвост(dist, filename);//, td);//mfilename, flag,
             }
             return tailsArray;
         }
-        
+
         private static МодельТранспорта.Сочленение_new[] LoadNewMiddles(XmlNode items)
         {
             var middlesArray = new МодельТранспорта.Сочленение_new[items.ChildNodes.Count];
             for (var i = 0; i < middlesArray.Length; i++)
             {
-            	XmlNode node = items.ChildNodes[i];
-            	int ind = (int)Xml.GetDouble(node["index"]);
-            	int tar = (int)Xml.GetDouble(node["target"]);
-            	double dist = (double)Xml.GetDouble(node["distance"]);
-            	string filename = node["filename"].InnerText;
-//            	var flag = Xml.GetDouble(node["reverse"]) != 0.0;
-            	middlesArray[i] = new МодельТранспорта.Сочленение_new(dist, filename, ind, tar);//, flag);
+                XmlNode node = items.ChildNodes[i];
+                int ind = (int)Xml.GetDouble(node["index"]);
+                int tar = (int)Xml.GetDouble(node["target"]);
+                double dist = (double)Xml.GetDouble(node["distance"]);
+                string filename = node["filename"].InnerText;
+                //            	var flag = Xml.GetDouble(node["reverse"]) != 0.0;
+                middlesArray[i] = new МодельТранспорта.Сочленение_new(dist, filename, ind, tar);//, flag);
             }
             return middlesArray;
         }
-        
+
         /*private static МодельТранспорта.Пантограф LoadPantograph(string directory, XmlNode node)
         {
         	МодельТранспорта.Пантограф._Type t;
@@ -403,7 +406,7 @@ namespace Trancity
             var z = Xml.GetDouble(node["z"]);
         	return new МодельТранспорта.Пантограф(t, d, f, pr, pn, x, y, z);
         }*/
-        
+
         private static МодельТранспорта.Пантограф LoadPantograph(string directory, XmlNode node)
         {
             var d = directory + node["dir"].InnerText;
@@ -415,96 +418,96 @@ namespace Trancity
             var dist = Math.Abs(Xml.GetDouble(node["dist"]));
             return new МодельТранспорта.Пантограф(d, x, y, z, min_h, max_h, dist, LoadPantographsParts(node["parts"]));
         }
-        
+
         private static МодельТранспорта.Часть_пантографа[] LoadPantographsParts(XmlNode node)
         {
             var partsArray = new МодельТранспорта.Часть_пантографа[node.ChildNodes.Count];
             for (var i = 0; i < partsArray.Length; i++)
             {
-            	XmlNode node1 = node.ChildNodes[i];
-//            	int ind = (int)Xml.GetDouble(node1["index"]);
-            	var height = Xml.GetDouble(node1["height"]);
-            	string filename = node1["filename"].InnerText;
-            	var width = Xml.GetDouble(node1["width"]);
-            	var length = Xml.GetDouble(node1["length"]);
-            	var ang = Xml.GetDouble(node1["norm_angel"]);
-            	partsArray[i] = new МодельТранспорта.Часть_пантографа(filename, height, width, length, ang);
+                XmlNode node1 = node.ChildNodes[i];
+                //            	int ind = (int)Xml.GetDouble(node1["index"]);
+                var height = Xml.GetDouble(node1["height"]);
+                string filename = node1["filename"].InnerText;
+                var width = Xml.GetDouble(node1["width"]);
+                var length = Xml.GetDouble(node1["length"]);
+                var ang = Xml.GetDouble(node1["norm_angel"]);
+                partsArray[i] = new МодельТранспорта.Часть_пантографа(filename, height, width, length, ang);
             }
             return partsArray;
         }
 
         private static МодельТранспорта.Табличка Load_VPark_Tabl(XmlNode node)
         {
-        	if (node != null)
-        	{
+            if (node != null)
+            {
                 var f = node["filename"].InnerText;
                 var x = Xml.GetDouble(node["x"]);
                 var y = Xml.GetDouble(node["y"]);
                 var z = Xml.GetDouble(node["z"]);
                 return new МодельТранспорта.Табличка(f, x, y, z);
-        	}
-        	return null;
+            }
+            return null;
         }
-        
+
         private static МодельТранспорта.SphereModel LoadBSphere(XmlNode node)
         {
-        	/*if (node != null)
+            /*if (node != null)
         	{*/
-                var r = Xml.GetDouble(node["r"]);
-                var x = Xml.GetDouble(node["x"]);
-                var y = Xml.GetDouble(node["y"]);
-                var z = Xml.GetDouble(node["z"]);
-                return new МодельТранспорта.SphereModel(r, x, y, z);
-        	/*}
+            var r = Xml.GetDouble(node["r"]);
+            var x = Xml.GetDouble(node["x"]);
+            var y = Xml.GetDouble(node["y"]);
+            var z = Xml.GetDouble(node["z"]);
+            return new МодельТранспорта.SphereModel(r, x, y, z);
+            /*}
         	return null;*/
         }
-        
+
         private static МодельТранспорта.SphereModel[] LoadBSpheres(XmlNode node)
         {
-        	/*if (node != null)
+            /*if (node != null)
         	{*/
-        		var spheres = new МодельТранспорта.SphereModel[node.ChildNodes.Count];
-        		for (int i = 0; i < spheres.Length; i++)
-        		{
-        			spheres[i] = LoadBSphere(node.ChildNodes[i]);
-        		}
-                return spheres;
-        	/*}
+            var spheres = new МодельТранспорта.SphereModel[node.ChildNodes.Count];
+            for (int i = 0; i < spheres.Length; i++)
+            {
+                spheres[i] = LoadBSphere(node.ChildNodes[i]);
+            }
+            return spheres;
+            /*}
         	return null;*/
         }
-        
+
         private static МодельТранспорта.Тележка[] LoadBoogies(XmlNode node)
         {
             var boogieArray = new МодельТранспорта.Тележка[node.ChildNodes.Count];
             for (var i = 0; i < boogieArray.Length; i++)
             {
-            	XmlNode node1 = node.ChildNodes[i];
-            	int ind = (int)Xml.GetDouble(node1["index"]);
-            	string filename = Xml.GetString(node1["filename"]);
-            	double dist = Xml.GetDouble(node1["dist"]);
-            	boogieArray[i] = new МодельТранспорта.Тележка(ind, dist, filename);
+                XmlNode node1 = node.ChildNodes[i];
+                int ind = (int)Xml.GetDouble(node1["index"]);
+                string filename = Xml.GetString(node1["filename"]);
+                double dist = Xml.GetDouble(node1["dist"]);
+                boogieArray[i] = new МодельТранспорта.Тележка(ind, dist, filename);
             }
             return boogieArray;
         }
-        
+
         private static МодельТранспорта.Camera[] LoadCameras(XmlNode node)
         {
-        	if (node != null)
-        	{
-        		var cameras = new МодельТранспорта.Camera[node.ChildNodes.Count];
-        		for (int i = 0; i < cameras.Length; i++)
-        		{
-        			XmlNode node1 = node.ChildNodes[i];
-        			var x = Xml.GetDouble(node1["x"]);
-        			var y = Xml.GetDouble(node1["y"]);
-        			var z = Xml.GetDouble(node1["z"]);
-        			var rx = Xml.GetDouble(node1["rot_y"]);
-        			var ry = Xml.GetDouble(node1["rot_z"]);
-        			cameras[i] = new МодельТранспорта.Camera(x, y, z, rx, ry);
-        		}
+            if (node != null)
+            {
+                var cameras = new МодельТранспорта.Camera[node.ChildNodes.Count];
+                for (int i = 0; i < cameras.Length; i++)
+                {
+                    XmlNode node1 = node.ChildNodes[i];
+                    var x = Xml.GetDouble(node1["x"]);
+                    var y = Xml.GetDouble(node1["y"]);
+                    var z = Xml.GetDouble(node1["z"]);
+                    var rx = Xml.GetDouble(node1["rot_y"]);
+                    var ry = Xml.GetDouble(node1["rot_z"]);
+                    cameras[i] = new МодельТранспорта.Camera(x, y, z, rx, ry);
+                }
                 return cameras;
-        	}
-        	return null;
+            }
+            return null;
         }
     }
 }

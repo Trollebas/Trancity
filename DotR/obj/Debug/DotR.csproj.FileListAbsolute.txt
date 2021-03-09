@@ -26,3 +26,17 @@ F:\Projects\Trancity\DotR\bin\Debug\DotR.dll
 F:\Projects\Trancity\DotR\bin\Debug\DotR.pdb
 F:\Projects\Trancity\DotR\obj\Debug\DotR.dll
 F:\Projects\Trancity\DotR\obj\Debug\DotR.pdb
+C:\Users\User\Source\Repos\Trancity\DotR\bin\Debug\SlimDX.dll
+C:\Users\User\Source\Repos\Trancity\DotR\bin\Debug\SlimDX.pdb
+C:\Users\User\Source\Repos\Trancity\DotR\bin\Debug\SlimDX.xml
+C:\Users\User\Source\Repos\Trancity\DotR\obj\Debug\DotR.csprojAssemblyReference.cache
+C:\Users\User\Source\Repos\Trancity\DotR\obj\Debug\Engine.Controls.RenderForm.resources
+C:\Users\User\Source\Repos\Trancity\DotR\obj\Debug\ODE_Test.ExceptionHandlerForm.resources
+C:\Users\User\Source\Repos\Trancity\DotR\obj\Debug\DotR.csproj.GenerateResource.cache
+C:\Users\User\Source\Repos\Trancity\DotR\obj\Debug\DotR.csproj.CoreCompileInputs.cache
+C:\Users\User\Source\Repos\Trancity\DotR\obj\Debug\DotR.csproj.CopyComplete
+C:\Users\User\Source\Repos\Trancity\DotR\bin\Debug\DotR.dll.config
+C:\Users\User\Source\Repos\Trancity\DotR\bin\Debug\DotR.dll
+C:\Users\User\Source\Repos\Trancity\DotR\bin\Debug\DotR.pdb
+C:\Users\User\Source\Repos\Trancity\DotR\obj\Debug\DotR.dll
+C:\Users\User\Source\Repos\Trancity\DotR\obj\Debug\DotR.pdb

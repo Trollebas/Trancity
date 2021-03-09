@@ -12,15 +12,15 @@ namespace Engine
         public double x;
         public double y;
         public double z;
-        
+
         public static readonly Double3DPoint Zero = new Double3DPoint(0.0, 0.0, 0.0);
-        
+
         // TODO: rename function as far as understand wat it exactly does
         public static Double3DPoint Rotate(DoublePoint baseAngel, double planeAngel)
         {
             return Rotate(ref baseAngel, planeAngel);
         }
-        
+
         public static Double3DPoint Rotate(ref DoublePoint baseAngel, double planeAngel)
         {
             // ещё вроде как соптимизировал
@@ -36,7 +36,7 @@ namespace Engine
             point.XZPoint = point.XZPoint.Multyply(point2.x).Add(ref addit_ang);
             return point;
         }
-        
+
         public static Double3DPoint Multiply(Double3DPoint _point, Double3DPoint body, DoublePoint direction)
         {
             Double3DPoint point = new Double3DPoint(ref direction).Multyply(_point.x);
@@ -78,7 +78,7 @@ namespace Engine
         public Double3DPoint(DoublePoint angle) : this(angle.x, angle.y)
         {
         }
-        
+
         public Double3DPoint(ref DoublePoint angle) : this(angle.x, angle.y)
         {
         }
@@ -95,7 +95,7 @@ namespace Engine
                 this.z = value.y;
             }
         }
-        
+
         public DoublePoint XYPoint
         {
             get
@@ -108,12 +108,12 @@ namespace Engine
                 this.y = value.y;
             }
         }
-        
+
         public DoublePoint YPoint
         {
             get
             {
-//                return new DoublePoint(this.XZPoint.Modulus, this.y);
+                //                return new DoublePoint(this.XZPoint.Modulus, this.y);
                 return new DoublePoint(Math.Sqrt(x * x + z * z), this.y);
             }
             set
@@ -122,7 +122,7 @@ namespace Engine
                 this.y = value.y;
             }
         }
-        
+
         public double Modulus
         {
             get
@@ -135,12 +135,12 @@ namespace Engine
                 this.Multyply(num);
             }
         }
-        
+
         public DoublePoint Angle
         {
             get
             {
-//                return new DoublePoint(this.XZPoint.Angle, this.YPoint.Angle);
+                //                return new DoublePoint(this.XZPoint.Angle, this.YPoint.Angle);
                 return new DoublePoint(AngleX, AngleY);
             }
             set
@@ -148,54 +148,54 @@ namespace Engine
                 this = new Double3DPoint(value).Multyply(this.Modulus);
             }
         }
-        
+
         public double AngleX
         {
             get
             {
-//                return this.Angle.x;
+                //                return this.Angle.x;
                 return this.XZPoint.Angle;
             }
             set
             {
-//                this.Angle = new DoublePoint(value, this.Angle.y);
+                //                this.Angle = new DoublePoint(value, this.Angle.y);
                 this.Angle = new DoublePoint(value, this.AngleY);
             }
         }
-        
+
         public double AngleY
         {
             get
             {
-//                return this.Angle.y;
+                //                return this.Angle.y;
                 return this.YPoint.Angle;
             }
             set
             {
-//                this.Angle = new DoublePoint(this.Angle.x, value);
+                //                this.Angle = new DoublePoint(this.Angle.x, value);
                 this.Angle = new DoublePoint(this.AngleX, value);
             }
         }
-        
+
         public void CopyTo(ref Double3DPoint point)
         {
             point.x = this.x;
             point.y = this.y;
             point.z = this.z;
         }
-        
+
         public void CopyFromAngle(double angleX, double angleY)
         {
             this.x = Math.Cos(angleX) * Math.Cos(angleY);
             this.z = Math.Sin(angleX) * Math.Cos(angleY);
             this.y = Math.Sin(angleY);
         }
-        
+
         public void CopyFromAngle(DoublePoint angle)
         {
             CopyFromAngle(angle.x, angle.y);
         }
-        
+
         public Double3DPoint Add(ref Double3DPoint point)
         {
             this.x += point.x;
@@ -203,7 +203,7 @@ namespace Engine
             this.z += point.z;
             return this;
         }
-        
+
         public Double3DPoint Subtract(ref Double3DPoint point)
         {
             this.x -= point.x;
@@ -211,7 +211,7 @@ namespace Engine
             this.z -= point.z;
             return this;
         }
-        
+
         public Double3DPoint Add(Double3DPoint point)
         {
             this.x += point.x;
@@ -219,7 +219,7 @@ namespace Engine
             this.z += point.z;
             return this;
         }
-        
+
         public Double3DPoint Subtract(Double3DPoint point)
         {
             this.x -= point.x;
@@ -227,7 +227,7 @@ namespace Engine
             this.z -= point.z;
             return this;
         }
-        
+
         public Double3DPoint Add(double value)
         {
             this.x += value;
@@ -235,7 +235,7 @@ namespace Engine
             this.z += value;
             return this;
         }
-        
+
         public Double3DPoint Subtract(double value)
         {
             this.x -= value;
@@ -243,7 +243,7 @@ namespace Engine
             this.z -= value;
             return this;
         }
-        
+
         public Double3DPoint Multyply(double value)
         {
             this.x *= value;
@@ -251,7 +251,7 @@ namespace Engine
             this.z *= value;
             return this;
         }
-        
+
         public Double3DPoint Divide(double value)
         {
             this.x /= value;
@@ -259,7 +259,7 @@ namespace Engine
             this.z /= value;
             return this;
         }
-        
+
         public Double3DPoint Mod(double value)
         {
             this.x %= value;
@@ -267,17 +267,17 @@ namespace Engine
             this.z %= value;
             return this;
         }
-        
+
         public static double Distance(Double3DPoint left, Double3DPoint right)
         {
             return Distance(ref left, ref right);
         }
-        
+
         public static double Distance(ref Double3DPoint left, ref Double3DPoint right)
         {
             return Math.Sqrt((left.x - right.x) * (left.x - right.x) + (left.y - right.y) * (left.y - right.y) + (left.z - right.z) * (left.z - right.z));
         }
-        
+
         public static Double3DPoint operator +(Double3DPoint a)
         {
             return new Double3DPoint(a.x, a.y, a.z);
@@ -312,39 +312,40 @@ namespace Engine
         {
             return new Double3DPoint(a.x % d, a.y % d, a.z % d);
         }
-        
+
         public override string ToString()
         {
             return string.Format("{0}; {1}; {2};", this.x.ToString(), this.y.ToString(), this.z.ToString());
         }
-        
+
         #region Equals and GetHashCode implementation
         public override bool Equals(object obj)
         {
             return (obj is Double3DPoint) && Equals((Double3DPoint)obj);
         }
-        
+
         public bool Equals(Double3DPoint other)
         {
             return object.Equals(this.x, other.x) && object.Equals(this.y, other.y) && object.Equals(this.z, other.z);
         }
-        
+
         public override int GetHashCode()
         {
             int hashCode = 0;
-            unchecked {
+            unchecked
+            {
                 hashCode += 1000000007 * x.GetHashCode();
                 hashCode += 1000000009 * y.GetHashCode();
                 hashCode += 1000000021 * z.GetHashCode();
             }
             return hashCode;
         }
-        
+
         public static bool operator ==(Double3DPoint lhs, Double3DPoint rhs)
         {
             return lhs.Equals(rhs);
         }
-        
+
         public static bool operator !=(Double3DPoint lhs, Double3DPoint rhs)
         {
             return !(lhs == rhs);

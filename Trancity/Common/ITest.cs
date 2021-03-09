@@ -9,13 +9,13 @@
 
 namespace Common
 {
-	public interface ITest
-	{
-		void ComputeMatrix();
-	}
-	
-	public interface ITest2
-	{
-		void CheckCondition();
-	}
+    public interface ITest
+    {
+        void ComputeMatrix();
+    }
+
+    public interface ITest2
+    {
+        void CheckCondition();
+    }
 }

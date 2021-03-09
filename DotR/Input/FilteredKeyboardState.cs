@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Reflection;
 
 namespace Engine.Input
 {
-	/// <summary>
-	/// Оригинальный класс из Трансити, переделанный
-	/// </summary>
+    /// <summary>
+    /// Оригинальный класс из Трансити, переделанный
+    /// </summary>
     public class FilteredKeyboardState
     {
         public KeyboardDevice device;
@@ -31,12 +30,12 @@ namespace Engine.Input
             {
                 numArray[i] = OtherTicks;
             }
-			numArray[0x4d/*(int)Key.LeftAlt*/] = 0;
-			numArray[0x4b/*(int)Key.LeftControl*/] = 0;
-			numArray[0x4e/*(int)Key.LeftShift*/] = 0;
-			numArray[0x77/*(int)Key.RightAlt*/] = 0;
-			numArray[0x74/*(int)Key.RightControl*/] = 0;
-			numArray[120/*(int)Key.RightShift*/] = 0;
+            numArray[0x4d/*(int)Key.LeftAlt*/] = 0;
+            numArray[0x4b/*(int)Key.LeftControl*/] = 0;
+            numArray[0x4e/*(int)Key.LeftShift*/] = 0;
+            numArray[0x77/*(int)Key.RightAlt*/] = 0;
+            numArray[0x74/*(int)Key.RightControl*/] = 0;
+            numArray[120/*(int)Key.RightShift*/] = 0;
             numArray[0x84/*(int)Key.UpArrow*/] = ArrowTicks;
             numArray[50/*(int)Key.DownArrow*/] = ArrowTicks;
             numArray[0x4c/*(int)Key.LeftArrow*/] = ArrowTicks;
@@ -46,12 +45,12 @@ namespace Engine.Input
 
         public void Refresh()
         {
-        	device.RefreshState();
+            device.RefreshState();
             int num = Environment.TickCount - this.lasttick;
             this.lasttick = Environment.TickCount;
             for (int i = 0; i < Max_Available_Keys; i++)
             {
-            	if (device.IsKeyPressed(i))
+                if (device.IsKeyPressed(i))
                 {
                     if (!this.key_pressed[i] && (this.keyticks[i] == 0))
                     {

@@ -122,7 +122,7 @@ namespace Engine
 		}
 	}
 	
-	#region Страница
+#region Страница
 	
 	public class MyControlPage : MyControl
 	{
@@ -156,9 +156,9 @@ namespace Engine
 			if (selectedpos < 0) selectedpos = 0;
 		}
 	}
-	#endregion
+#endregion
 	
-	#region Abstract...:
+#region Abstract...:
 	
 	public abstract class MyControl
 	{
@@ -171,6 +171,6 @@ namespace Engine
 		public int Width, Height, Left, Top;
 		
 	}
-	#endregion
+#endregion
 }
 #endif

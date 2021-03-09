@@ -11,22 +11,22 @@ using System.Reflection;
 
 namespace Engine
 {
-	public class Utilities
-	{
-		public readonly static Random Random = new Random();
-		
-		
-		
-		/// <summary>
-		/// http://www.cyberforum.ru/post6102903.html
-		/// </summary>
-		public static DateTime GetBuildDate(Assembly assembly)
-		{
-			var version = assembly.GetName().Version;
-			return new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
-		}
-		
-		/*public static double Lerp(double a, double b, double t)
+    public class Utilities
+    {
+        public readonly static Random Random = new Random();
+
+
+
+        /// <summary>
+        /// http://www.cyberforum.ru/post6102903.html
+        /// </summary>
+        public static DateTime GetBuildDate(Assembly assembly)
+        {
+            var version = assembly.GetName().Version;
+            return new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
+        }
+
+        /*public static double Lerp(double a, double b, double t)
         {
         	//return a - (a * t) + (b * t);
         	return a + t * (b - a);
@@ -41,7 +41,7 @@ namespace Engine
 			pos.y -= _pos[1] * Ground.grid_size;
 			return _pos;
 		}*/
-		/*
+        /*
 		//screenshots...
 		private static bool screenshot_requested = false;
 		
@@ -61,5 +61,5 @@ namespace Engine
             Surface.ToFile(surface, screenshot, ImageFileFormat.Png);
             surface.Dispose();
 		}*/
-	}
+    }
 }

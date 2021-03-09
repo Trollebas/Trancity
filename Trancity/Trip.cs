@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System;
 
 namespace Trancity
 {
@@ -87,17 +86,17 @@ namespace Trancity
             tripStopList = new List<TripStop>();
             this.AddToTripStopList(route);
         }
-        
+
         public void UpdateTripStopList(Route route)
         {
-			tripStopList.Clear();
-			this.AddToTripStopList(route);
+            tripStopList.Clear();
+            this.AddToTripStopList(route);
         }
-        
+
         private void AddToTripStopList(Route route)
         {
-        	bool flag = false;
-        	foreach (Road path in pathes)
+            bool flag = false;
+            foreach (Road path in pathes)
             {
                 foreach (var obj in path.objects)
                 {
@@ -105,21 +104,21 @@ namespace Trancity
                     Stop stop = (Stop)obj;
                     if (stop.typeOfTransport[route.typeOfTransport])
                     {
-                    	if (flag)
-                    	{
-                    		int i = 0;
-                    		while (((i < tripStopList.Count - 1) || ((tripStopList.Count == 1) && (i == 0))) && (tripStopList[tripStopList.Count - 1 - i].stop.distance > stop.distance) && (tripStopList[tripStopList.Count - 1 - i].stop.road == stop.road))
-                    		{//TODO: ÕŒ–Ã¿À‹Õ¿ﬂ —Œ–“»–Œ¬ ¿ Œ—“¿ÕŒ¬Œ !!!
-                    			i++;
-                    		}
-                    		tripStopList.Insert(tripStopList.Count - i, new TripStop(stop, true));
-                    		continue;
-                    	}
-                    	else
-                    	{
-                    		tripStopList.Add(new TripStop(stop, true));
-                    		flag = true;
-                    	}
+                        if (flag)
+                        {
+                            int i = 0;
+                            while (((i < tripStopList.Count - 1) || ((tripStopList.Count == 1) && (i == 0))) && (tripStopList[tripStopList.Count - 1 - i].stop.distance > stop.distance) && (tripStopList[tripStopList.Count - 1 - i].stop.road == stop.road))
+                            {//TODO: ÕŒ–Ã¿À‹Õ¿ﬂ —Œ–“»–Œ¬ ¿ Œ—“¿ÕŒ¬Œ !!!
+                                i++;
+                            }
+                            tripStopList.Insert(tripStopList.Count - i, new TripStop(stop, true));
+                            continue;
+                        }
+                        else
+                        {
+                            tripStopList.Add(new TripStop(stop, true));
+                            flag = true;
+                        }
                     }
                 }
                 flag = false;

@@ -9,22 +9,22 @@ namespace Common
     public class Xml
     {
         public static XmlDocument document;
-        
+
         public static XmlDocument Connect(string filename)
         {
-        	document = new XmlDocument();
-        	document.Load(filename);
-        	return document;
+            document = new XmlDocument();
+            document.Load(filename);
+            return document;
         }
-        
+
         public static void Disconnect()
         {
-        	document = null;
+            document = null;
         }
 
         public static XmlElement AddElement(XmlNode parent, string name)
         {
-        	return AddElement(parent, name, string.Empty);//"");
+            return AddElement(parent, name, string.Empty);//"");
         }
 
         public static XmlElement AddElement(XmlNode parent, string name, double value)
@@ -42,10 +42,10 @@ namespace Common
             parent.AppendChild(newChild);
             return newChild;
         }
-        
+
         public static double GetDouble(XmlNode element)
         {
-        	return GetDouble(element, 0.0);
+            return GetDouble(element, 0.0);
         }
 
         public static double GetDouble(XmlNode element, double default_value)
@@ -104,12 +104,12 @@ namespace Common
 
         public static string GetString(XmlNode element)
         {
-        	return GetString(element, string.Empty);
+            return GetString(element, string.Empty);
         }
-        
+
         public static string GetString(XmlNode element, string default_value)
         {
-        	if (element != null)
+            if (element != null)
             {
                 return element.InnerText;
             }
@@ -120,11 +120,11 @@ namespace Common
         {
             get
             {
-                var info = new NumberFormatInfo {NumberDecimalSeparator = "."};
+                var info = new NumberFormatInfo { NumberDecimalSeparator = "." };
                 return info;
             }
         }
-        
+
         /*public static bool GetSimpleBool(XmlNode element)
         {
         	if (element != null)

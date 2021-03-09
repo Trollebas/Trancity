@@ -6,15 +6,14 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
 
 namespace Engine
 {
-	/// <summary>
-	/// Description of IRawDevice.
-	/// </summary>
-	public interface IRawDevice<T>
-	{
-		T RawDevice { get; }
-	}
+    /// <summary>
+    /// Description of IRawDevice.
+    /// </summary>
+    public interface IRawDevice<T>
+    {
+        T RawDevice { get; }
+    }
 }

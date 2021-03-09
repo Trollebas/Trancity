@@ -1,5 +1,5 @@
-using System.Runtime.InteropServices;
 using Engine;
+using System.Runtime.InteropServices;
 
 namespace Trancity
 {
@@ -34,7 +34,7 @@ namespace Trancity
             {
                 if ((_container != null) && (_container is Road))
                 {
-                    return (Road) _container;
+                    return (Road)_container;
                 }
                 return null;
             }
@@ -49,7 +49,7 @@ namespace Trancity
             {
                 if ((_container != null) && (_container is Πελόρ))
                 {
-                    return (Πελόρ) _container;
+                    return (Πελόρ)_container;
                 }
                 return null;
             }

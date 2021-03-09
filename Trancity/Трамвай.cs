@@ -1,10 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using Common;
 using Engine;
 using SlimDX;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Trancity
@@ -14,8 +13,8 @@ namespace Trancity
     /// </summary>
     public abstract class Трамвай : Рельсовый_Транспорт//Transport
     {
-//        public Трамвай[] вагоны = new Трамвай[0];
-//        private Трамвай _первыйВагон;
+        //        public Трамвай[] вагоны = new Трамвай[0];
+        //        private Трамвай _первыйВагон;
         public Токоприёмник_new токоприёмник;
         public Тележка[] тележки;
 
@@ -83,7 +82,7 @@ namespace Trancity
                     if (obj3 is Stop)
                     {
                         var остановка2 = (Stop)obj3;
-                        if (((рейс == null) || остановка2.ПутьПодходит(рейс.pathes)) && ((маршрут != null) && (остановка2.typeOfTransport[маршрут.typeOfTransport]) && (остановка2==nextStop) ))
+                        if (((рейс == null) || остановка2.ПутьПодходит(рейс.pathes)) && ((маршрут != null) && (остановка2.typeOfTransport[маршрут.typeOfTransport]) && (остановка2 == nextStop)))
                         {
                             stops_dist = Math.Min(stops_dist,
                                             (передняя_ось.текущий_рельс.Длина -
@@ -108,7 +107,7 @@ namespace Trancity
                         }
                     }
                     //пропускаем других на стрелке, часть 2:
-                    if (передняя_ось.текущий_рельс.следующие_рельсы.Length <=1) continue;
+                    if (передняя_ось.текущий_рельс.следующие_рельсы.Length <= 1) continue;
                     if (obj3 is Ось)
                     {
                         var ось = (Ось)obj3;
@@ -139,7 +138,7 @@ namespace Trancity
                         {
                             if (!(obj4 is Ось)) continue;
                             var ось = (Ось)obj4;
-    //                        if ((!ось.передняя) && (!ось.задняя)) continue;
+                            //                        if ((!ось.передняя) && (!ось.задняя)) continue;
                             //пропускаем других на стрелке, часть 3:
                             if (((ось.пройденное_расстояние_по_рельсу > (ось.текущий_рельс.Длина - ось.текущий_рельс.расстояние_добавочных_проводов - 10.0)) &&
                                  (j < 0/*ось.трамвай.скорость > this.скорость*/)) || (ось.задняя && ось.текущий_рельс != ось.трамвай.передняя_ось.текущий_рельс))// && (передняя_ось.пройденное_расстояние_по_рельсу < передняя_ось.текущий_рельс.расстояние_добавочных_проводов))
@@ -197,8 +196,8 @@ namespace Trancity
                 }*
             }*/
             var list = new List<Положение>(текущее_положение.Дорога.занятыеПоложения);
-//            List<Положение> list2 = new List<Положение>();
-//            if (рельс != null) list2 = new List<Положение>(рельс.занятыеПоложения);
+            //            List<Положение> list2 = new List<Положение>();
+            //            if (рельс != null) list2 = new List<Положение>(рельс.занятыеПоложения);
             foreach (var положение in list)
             {
                 if ((положение.comment == this) || (положение.расстояние <= текущее_положение.расстояние))
@@ -409,7 +408,7 @@ namespace Trancity
             var sw = false;
             if (передняя_ось.текущий_рельс.следующие_рельсы.Length > 1)
             {
-//                var num11 = -1;
+                //                var num11 = -1;
                 index = Cheats._random.Next(2);
                 if (рейс != null)
                 {
@@ -471,12 +470,12 @@ namespace Trancity
         public abstract Ось[] все_оси { get; }
 
         public abstract Ось задняя_ось { get; }
-        
+
         public abstract Ось передняя_ось { get; }
 
         public abstract Double3DPoint координаты_токоприёмника { get; }
 
-//        public abstract double направление_токоприёмника { get; }
+        //        public abstract double направление_токоприёмника { get; }
 
         public abstract Matrix преобразование_токоприёмника { get; }
 
@@ -493,76 +492,79 @@ namespace Trancity
         /// </summary>
         public class ОбычныйТрамвай : Трамвай, IVector, IОбъектПривязки3D
         {
-//            private int[] frequency = new int[3];
-//            private int[] volume = new int[3];
-//            private int volume_muting;
+            //            private int[] frequency = new int[3];
+            //            private int[] volume = new int[3];
+            //            private int volume_muting;
             public Вагон вагон;
             public БазовыйВагон[] хвосты;
             private double axis_radius;
-//            public double времяПоворотников;
-//            public double времяПоворотниковMax = 1.0;
-//            public double времяПоворотниковВыкл = 0.5;
-//            public Трамвай.Маршрутный_Указатель маршрутный_указатель;
-//            public double расстояние_между_вагонами = 16.5;
-//            public double расстояние_между_тележками = 7.5;// 7.5;
+            //            public double времяПоворотников;
+            //            public double времяПоворотниковMax = 1.0;
+            //            public double времяПоворотниковВыкл = 0.5;
+            //            public Трамвай.Маршрутный_Указатель маршрутный_указатель;
+            //            public double расстояние_между_вагонами = 16.5;
+            //            public double расстояние_между_тележками = 7.5;// 7.5;
             public double расстояние_между_осями = 1.94;//1.94
-//            public Трамвай.ТабличкаВПарк табличка_в_парк;
-//            public Сочленение[] сочленения;
+                                                        //            public Трамвай.ТабличкаВПарк табличка_в_парк;
+                                                        //            public Сочленение[] сочленения;
             public Сочленение_new[] сочленения2 = new Сочленение_new[0];
             public Дополнение[] дополнения = new Дополнение[0];
-            
+
             public ОбычныйТрамвай(МодельТранспорта модель, Рельс рельс, double расстояние_по_рельсу, Управление управление, Парк парк, Route маршрут, Order наряд)//, bool test)//, int количество_вагонов)
             {
-                 this.модель = модель;
+                this.модель = модель;
                 основная_папка = модель.dir;
                 this.наряд = наряд;
-//                this.расстояние_между_тележками = модель.расстояние_между_тележками;
+                //                this.расстояние_между_тележками = модель.расстояние_между_тележками;
                 this.расстояние_между_осями = модель.расстояние_между_осями;
                 this.axis_radius = модель.axis_radius;
                 var num = 0.0;
                 this.тележки = new Трамвай.Тележка[модель.тележки.Length];
                 for (int i = 0; i < this.тележки.Length; i++)
                 {
-                    if ((модель.тележки[i].index > 0) && (модель.тележки[i].index != модель.тележки[i-1].index)) num += модель.tails[модель.тележки[i].index - 1].dist;
+                    if ((модель.тележки[i].index > 0) && (модель.тележки[i].index != модель.тележки[i - 1].index)) num += модель.tails[модель.тележки[i].index - 1].dist;
                     this.тележки[i] = new Трамвай.Тележка(рельс, расстояние_по_рельсу, модель.тележки[0].dist - модель.тележки[i].dist + ((модель.тележки[i].index > 0) ? /*модель.tails[модель.тележки[i].index - 1].dist*/num : 0), axis_radius, this);
                 }
-/*                this.расстояние_между_вагонами = модель.расстояние_между_вагонами;
-                this.тележки = new Трамвай.Тележка[модель.количество_вагонов * 2];
-                for (int i = 0; i < this.тележки.Length; i++)
-                {
-                    this.тележки[i] = new Трамвай.Тележка(рельс, (расстояние_по_рельсу - (расстояние_между_вагонами * i)) - расстояние_между_тележками, this);
-                }
- */                вагон = new Вагон(this);//, new Трамвай.Тележка(рельс, расстояние_по_рельсу, 0.0f, axis_radius, this), new Трамвай.Тележка(рельс, расстояние_по_рельсу, расстояние_между_тележками, axis_radius, this));
-//                this.сочленения = new Сочленение[модель.количествоХвостов];
+                /*                this.расстояние_между_вагонами = модель.расстояние_между_вагонами;
+                                this.тележки = new Трамвай.Тележка[модель.количество_вагонов * 2];
+                                for (int i = 0; i < this.тележки.Length; i++)
+                                {
+                                    this.тележки[i] = new Трамвай.Тележка(рельс, (расстояние_по_рельсу - (расстояние_между_вагонами * i)) - расстояние_между_тележками, this);
+                                }
+                 */
+                вагон = new Вагон(this);//, new Трамвай.Тележка(рельс, расстояние_по_рельсу, 0.0f, axis_radius, this), new Трамвай.Тележка(рельс, расстояние_по_рельсу, расстояние_между_тележками, axis_radius, this));
+                                        //                this.сочленения = new Сочленение[модель.количествоХвостов];
                 this.хвосты = new БазовыйВагон[модель.tails.Length];//количествоХвостов];
                 for (int z = 0; z < this.хвосты.Length; z++)
                 {
                     this.хвосты[z] = new Задний_Вагон(this);//, new Трамвай.Тележка(рельс, расстояние_по_рельсу, (модель.tails[z].dist * (z + 1)), axis_radius, this), new Трамвай.Тележка(рельс, расстояние_по_рельсу, (модель.tails[z].dist * (z + 1)) + модель.tails[z].t_dist, axis_radius, this));
-                     /*if (z == 0)
-                     {
-                         this.сочленения[z] = new Сочленение(this, вагон.передняя_тележка, хвосты[z].задняя_тележка, вагон.задняя_тележка, модель.tails[z].have);
-                     }
-                     else
-                     {
-                         this.сочленения[z] = new Сочленение(this, хвосты[z - 1].передняя_тележка, хвосты[z].задняя_тележка, хвосты[z - 1].задняя_тележка, модель.tails[z].have);
-                    }*/
+                    /*if (z == 0)
+                    {
+                        this.сочленения[z] = new Сочленение(this, вагон.передняя_тележка, хвосты[z].задняя_тележка, вагон.задняя_тележка, модель.tails[z].have);
+                    }
+                    else
+                    {
+                        this.сочленения[z] = new Сочленение(this, хвосты[z - 1].передняя_тележка, хвосты[z].задняя_тележка, хвосты[z - 1].задняя_тележка, модель.tails[z].have);
+                   }*/
                 }
-                try {
-                this.сочленения2 = new Сочленение_new[модель.сочленения.Length];//количествоСочленений];
-                for (int k = 0; k < this.сочленения2.Length; k++)
+                try
                 {
-                    this.сочленения2[k] = new Сочленение_new(/*k,*/ this, модель.сочленения[k].index, модель.сочленения[k].target, модель.сочленения[k].dist);
-                }}
-                catch {};
-//                this.сочленения2[0] = new Сочленение_new(this, 0, 1, 3.456);
-//                vs = модель.пантограф.pos.y + 1.5;
-//                маршрутный_указатель = new Трамвай.Маршрутный_Указатель();
+                    this.сочленения2 = new Сочленение_new[модель.сочленения.Length];//количествоСочленений];
+                    for (int k = 0; k < this.сочленения2.Length; k++)
+                    {
+                        this.сочленения2[k] = new Сочленение_new(/*k,*/ this, модель.сочленения[k].index, модель.сочленения[k].target, модель.сочленения[k].dist);
+                    }
+                }
+                catch { };
+                //                this.сочленения2[0] = new Сочленение_new(this, 0, 1, 3.456);
+                //                vs = модель.пантограф.pos.y + 1.5;
+                //                маршрутный_указатель = new Трамвай.Маршрутный_Указатель();
                 указатель_наряда = new УказательНаряда();
                 табличка_в_парк = new ТабличкаВПарк(this);
                 this.управление = управление;
                 this.маршрут = маршрут;
                 this.парк = парк;
-//                токоприёмник = Токоприёмник.Build(модель.пантограф);
+                //                токоприёмник = Токоприёмник.Build(модель.пантограф);
                 токоприёмник = new Токоприёмник_new.Пантограф(this, модель.пантограф.pos.y, модель.пантограф.pos.y + модель.пантограф.min_height, модель.пантограф.pos.y + модель.пантограф.max_height);//модель.пантограф.pos, this.Найти_часть(0));
                 /*токоприёмник.трамвай = this;
                 токоприёмник.части = new Трамвай.Токоприёмник_new.Часть[модель.пантограф.parts.Length];
@@ -577,7 +579,7 @@ namespace Trancity
                 for (int j = 0; j < модель.дополнения.Length; j++)
                 {
                     this.дополнения[j] = new Дополнение(this.Найти_часть(модель.дополнения[j].часть), модель.дополнения[j].filename, модель.дополнения[j].тип);
-                }                 
+                }
                 _количествоДверей = модель.количествоДверей;
                 _двери = new Двери[модель.двери.Length];
                 for (var n = 0; n < модель.двери.Length; n++)
@@ -631,7 +633,7 @@ namespace Trancity
                 }
                 LoadCameras();
             }
- 
+
             public override void CreateMesh(World мир)
             {
                 if (мир.filename != null)
@@ -648,15 +650,15 @@ namespace Trancity
                     //маршрутный_указатель.extraMeshDirs = strArray;
                     указатель_наряда.extraMeshDirs = strArray;
                     табличка_в_парк.extraMeshDirs = strArray;
-    //                токоприёмник.extraMeshDirs = strArray;
-    //                токоприёмник.дуга.extraMeshDirs = strArray;
+                    //                токоприёмник.extraMeshDirs = strArray;
+                    //                токоприёмник.дуга.extraMeshDirs = strArray;
                     foreach (Двери дверь in _двери)
                     {
                         дверь.ExtraMeshDirs = strArray;
                     }
                     foreach (Трамвай.ОбычныйТрамвай.БазовыйВагон tail in хвосты)
                     {
-                          tail.extraMeshDirs = strArray;
+                        tail.extraMeshDirs = strArray;
                     }
                     /*foreach (Трамвай.ОбычныйТрамвай.Сочленение middle in сочленения)
                     {
@@ -718,13 +720,13 @@ namespace Trancity
                     telega.оси[1].CreateMesh();
                 }*/
                 токоприёмник.CreateMesh();
-    //            токоприёмник.дуга.CreateMesh();
+                //            токоприёмник.дуга.CreateMesh();
                 foreach (var дополнение in дополнения)
                 {
                     дополнение.CreateMesh();
                 }
-    //            маршрутный_указатель.CreateMesh();
-    //            маршрутный_указатель.Обновить(маршрут.number);
+                //            маршрутный_указатель.CreateMesh();
+                //            маршрутный_указатель.Обновить(маршрут.number);
                 вагон.Обновить_маршрутный_указатель(маршрут.number, наряд.номер);
                 указатель_наряда.CreateMesh();
                 if (наряд != null)
@@ -736,12 +738,13 @@ namespace Trancity
                 {
                     двери2.CreateMesh();
                 }
-    /*          foreach (Трамвай трамвай in вагоны)
-                  {
-                      трамвай.CreateMesh(мир);
-                  }
-    */        }
-        
+                /*          foreach (Трамвай трамвай in вагоны)
+                              {
+                                  трамвай.CreateMesh(мир);
+                              }
+                */
+            }
+
             protected override void CheckCondition()
             {
                 var cnd = !base.condition;
@@ -778,7 +781,7 @@ namespace Trancity
                     двери.CheckCondition();
                 }
             }
-        
+
             public override void Render()
             {
                 CheckCondition();
@@ -875,8 +878,8 @@ namespace Trancity
                         дополнение.Render();
                     }
                 }
-//                маршрутный_указатель.matrix = Matrix.Translation(1.756f, 1.05f, -1.3f) * вагон.GetMatrix(0);
-//                маршрутный_указатель.Render();
+                //                маршрутный_указатель.matrix = Matrix.Translation(1.756f, 1.05f, -1.3f) * вагон.GetMatrix(0);
+                //                маршрутный_указатель.Render();
                 if (наряд != null)
                 {
                     указатель_наряда.matrix = Matrix.Translation((float)модель.нарядPos.x, (float)модель.нарядPos.y, (float)модель.нарядPos.z) * вагон.last_matrix;//.GetMatrix(0);
@@ -889,10 +892,10 @@ namespace Trancity
                     двери.Render();
                 }
             }
-            
+
             public override void UpdateBoundigBoxes(World world)
             {
-//                if (!world.simple_timer.flag) return;
+                //                if (!world.simple_timer.flag) return;
                 /*foreach (var хвост in хвосты)
                 {
                     хвост.bounding_box.Update(хвост.Координаты3D, хвост.направление);
@@ -904,12 +907,12 @@ namespace Trancity
                     хвост.bounding_sphere.Update(хвост.Координаты3D, хвост.направление);
                 }
             }
-            
+
             /*public override void UpdateSound(Игрок[] игроки, bool игра_активна)
             {
                 base.система_управления.UpdateSound(игроки, игра_активна);
             }*/
-              
+
             public ЧастьТрамвая Найти_часть(int index)
             {
                 if (index > 0)
@@ -922,10 +925,10 @@ namespace Trancity
                 }
                 return this.вагон;
             }
-              
+
             public override Положение[] НайтиВсеПоложения(World мир)
             {
-//                var list = new List<Положение>();//
+                //                var list = new List<Положение>();//
                 base.найденные_положения.Clear();
                 var point = new Double3DPoint(this.вагон.направление);
                 var point2 = Double3DPoint.Rotate(this.вагон.направление, (Math.PI / 2.0));
@@ -961,10 +964,10 @@ namespace Trancity
                     collection[i].comment = this;
                 }
                 base.найденные_положения.AddRange(collection);
-//                найденные_положения = list;
+                //                найденные_положения = list;
                 return base.найденные_положения.ToArray();
             }
-                           
+
             public override void Обновить(World мир, Игрок[] игроки_в_игре)
             {
                 var list = new List<Игрок>();
@@ -1066,7 +1069,7 @@ namespace Trancity
                 {
                     Передвинуть(скорость * World.прошлоВремени, мир);
                 }
-//                токоприёмник.position = вагон.Координаты3D + ((Double3DPoint)(new Double3DPoint(вагон.направление) * модель.пантограф.pos.x));
+                //                токоприёмник.position = вагон.Координаты3D + ((Double3DPoint)(new Double3DPoint(вагон.направление) * модель.пантограф.pos.x));
                 токоприёмник.Обновить(мир);
                 this.времяПоворотников += World.прошлоВремени;
                 while (this.времяПоворотников > this.времяПоворотниковMax)
@@ -1152,9 +1155,9 @@ namespace Trancity
                 {
                     tail.Обновить_маршрутный_указатель(маршрут.number, наряд == null ? "" : наряд.номер);
                 }
-//                маршрутный_указатель.Обновить(маршрут.number);
+                //                маршрутный_указатель.Обновить(маршрут.number);
             }
-            
+
             public override void SetPosition(Road road, double distance, double shift, Double3DPoint pos, DoublePoint rot, World world)
             {
                 for (int i = 0; i < this.тележки.Length; i++)
@@ -1182,7 +1185,7 @@ namespace Trancity
                 /**/
                 var pos = new Double3DPoint[1 + this.хвосты.Length];
                 var dir = new DoublePoint[1 + this.хвосты.Length];
-//                var flag = false;
+                //                var flag = false;
                 for (int i = 0; i < тележки.Length; i++)
                 {
                     for (int j = 0; j < тележки[i].оси.Length; j++)
@@ -1192,10 +1195,10 @@ namespace Trancity
                 }
                 for (int i = 0; i < тележки.Length; i++)
                 {
-                    if ((i < тележки.Length - 1) && (модель.тележки[i].index == модель.тележки[i+1].index))
+                    if ((i < тележки.Length - 1) && (модель.тележки[i].index == модель.тележки[i + 1].index))
                     {
-//                        var p = тележки[i].координаты_3D - тележки[i+1].координаты_3D;
-                        dir[модель.тележки[i].index] = (тележки[i].координаты_3D - тележки[i+1].координаты_3D).Angle;
+                        //                        var p = тележки[i].координаты_3D - тележки[i+1].координаты_3D;
+                        dir[модель.тележки[i].index] = (тележки[i].координаты_3D - тележки[i + 1].координаты_3D).Angle;
                         pos[модель.тележки[i].index] = тележки[i].координаты_3D + (new Double3DPoint(dir[модель.тележки[i].index]).Multyply(-модель.тележки[i].dist));
                         i++;
                         continue;
@@ -1204,7 +1207,7 @@ namespace Trancity
                     pos[модель.тележки[i].index] = тележки[i].координаты_3D;
                 }
                 if (тележки.Length == 1) dir[0] = тележки[0].координаты_3D.Angle;
-                
+
                 Double3DPoint point1;
                 DoublePoint point01;
                 Double3DPoint point2;
@@ -1239,16 +1242,16 @@ namespace Trancity
                     {
                         сочленения2[k]._direction.y += Math.PI;
                     }
-//                    point2 = new Double3DPoint(this.сочленения2[k].направление);
-//                    point2.угол_y += 1.5707963267948966;
-//                    сочленения2[k].координаты -= (Double3DPoint)(point2 * (axis_radius * 2));
+                    //                    point2 = new Double3DPoint(this.сочленения2[k].направление);
+                    //                    point2.угол_y += 1.5707963267948966;
+                    //                    сочленения2[k].координаты -= (Double3DPoint)(point2 * (axis_radius * 2));
                 }
                 вагон._Координаты3D = pos[0];
                 вагон._direction = dir[0];
                 for (int j = 1; j < pos.Length; j++)
                 {
-                    хвосты[j-1]._Координаты3D = pos[j];
-                    хвосты[j-1]._direction = dir[j];
+                    хвосты[j - 1]._Координаты3D = pos[j];
+                    хвосты[j - 1]._direction = dir[j];
                 }
                 /*///комментить отсюда
                 foreach (var telega in вагон.тележки)
@@ -1291,248 +1294,248 @@ namespace Trancity
 //                    сочленения2[k].координаты -= (Double3DPoint)(point3 * (axis_radius * 2));
                 }/**/
             }
-          
-            
-        public class ЧастьТрамвая : MeshObject, IОбъектПривязки3D, IVector, IMatrixObject
-        {
-            public ОбычныйТрамвай трамвай;
-            public Double3DPoint _Координаты3D;
-            public DoublePoint _direction;
-            
-            public virtual Matrix GetMatrix(int index)
-            {
-                  Matrix matrix = Matrix.RotationZ((float)НаправлениеY) * Matrix.RotationY(-((float)direction));
-                last_matrix = (matrix * Matrix.Translation((float)Координаты3D.x, (float)Координаты3D.y, (float)Координаты3D.z));
-                return last_matrix;//(matrix * Matrix.Translation((float)point.x, (float)point.y, (float)point.z));
-            }
-            
-            public virtual int MatricesCount
-            {
-                get
-                {
-                    return 1;
-                }
-            }
 
-            public virtual DoublePoint position
+
+            public class ЧастьТрамвая : MeshObject, IОбъектПривязки3D, IVector, IMatrixObject
             {
-                get
+                public ОбычныйТрамвай трамвай;
+                public Double3DPoint _Координаты3D;
+                public DoublePoint _direction;
+
+                public virtual Matrix GetMatrix(int index)
                 {
-                    /*if (middle_index != -1)
+                    Matrix matrix = Matrix.RotationZ((float)НаправлениеY) * Matrix.RotationY(-((float)direction));
+                    last_matrix = (matrix * Matrix.Translation((float)Координаты3D.x, (float)Координаты3D.y, (float)Координаты3D.z));
+                    return last_matrix;//(matrix * Matrix.Translation((float)point.x, (float)point.y, (float)point.z));
+                }
+
+                public virtual int MatricesCount
+                {
+                    get
                     {
-                        DoublePoint point0;
-                        DoublePoint point1;
-                        if (middle_front)
-                        {
-                            point0 = трамвай.сочленения2[middle_index].position;
-                            point1 = тележки[0].position;
-                        }
-                        else
-                        {
-                            point0 = тележки[0].position;
-                            point1 = трамвай.сочленения2[middle_index].position;
-                        }
-                        return (DoublePoint)((point0 + point1) / 2.0);
+                        return 1;
                     }
-                    return (DoublePoint)((тележки[0].position + тележки[1].position) / 2.0);*/
-                    return Координаты3D.XZPoint;
                 }
-            }
 
-            public virtual Double3DPoint Координаты3D
-            {
-                get
+                public virtual DoublePoint position
                 {
-                    /*if (middle_index != -1)
+                    get
                     {
-                        Double3DPoint point0;
-                        Double3DPoint point1;
-                        if (middle_front)
+                        /*if (middle_index != -1)
                         {
-                            point0 = трамвай.сочленения2[middle_index].Координаты3D;
-                            point1 = тележки[0].координаты_3D;
+                            DoublePoint point0;
+                            DoublePoint point1;
+                            if (middle_front)
+                            {
+                                point0 = трамвай.сочленения2[middle_index].position;
+                                point1 = тележки[0].position;
+                            }
+                            else
+                            {
+                                point0 = тележки[0].position;
+                                point1 = трамвай.сочленения2[middle_index].position;
+                            }
+                            return (DoublePoint)((point0 + point1) / 2.0);
                         }
-                        else
-                        {
-                            point0 = тележки[0].координаты_3D;
-                            point1 = трамвай.сочленения2[middle_index].Координаты3D;
-                        }
-                        return (Double3DPoint)((point1 + point0) / 2.0);
+                        return (DoublePoint)((тележки[0].position + тележки[1].position) / 2.0);*/
+                        return Координаты3D.XZPoint;
                     }
-                    return (Double3DPoint)((тележки[1].координаты_3D + тележки[0].координаты_3D) / 2.0);*/
-                    return _Координаты3D;
                 }
-            }
 
-            public virtual double direction
-            {
-                get
+                public virtual Double3DPoint Координаты3D
                 {
-                    /*DoublePoint point;
-                    if (middle_index != -1)
+                    get
                     {
-                        DoublePoint point0;
-                        DoublePoint point1;
-                        if (middle_front)
+                        /*if (middle_index != -1)
                         {
-                            point0 = трамвай.сочленения2[middle_index].position;
-                            point1 = тележки[0].position;
+                            Double3DPoint point0;
+                            Double3DPoint point1;
+                            if (middle_front)
+                            {
+                                point0 = трамвай.сочленения2[middle_index].Координаты3D;
+                                point1 = тележки[0].координаты_3D;
+                            }
+                            else
+                            {
+                                point0 = тележки[0].координаты_3D;
+                                point1 = трамвай.сочленения2[middle_index].Координаты3D;
+                            }
+                            return (Double3DPoint)((point1 + point0) / 2.0);
                         }
-                        else
-                        {
-                            point0 = тележки[0].position;
-                            point1 = трамвай.сочленения2[middle_index].position;
-                        }
-                        point = point0 - point1;
-                        return point.угол;
+                        return (Double3DPoint)((тележки[1].координаты_3D + тележки[0].координаты_3D) / 2.0);*/
+                        return _Координаты3D;
                     }
-                    point = тележки[0].position - тележки[1].position;
-                    return point.угол;*/
-                    return _direction.x;
                 }
-            }
 
-            public DoublePoint направление_3D
-            {
-                get
+                public virtual double direction
                 {
-                    return new DoublePoint(direction, НаправлениеY);
-                }
-            }
-
-            public DoublePoint направление
-            {
-                get
-                {
-                    /*DoublePoint point3 = new DoublePoint(direction, НаправлениеY);
-                    return point3;*/
-                    return _direction;
-                }
-            }
-                
-            public virtual double НаправлениеY
-            {
-                get
-                {
-                    /*Double3DPoint point;
-                    DoublePoint point3;
-                    if (middle_index != -1)
+                    get
                     {
-                        Double3DPoint point0;
-                        Double3DPoint point1;
-                        if (middle_front)
+                        /*DoublePoint point;
+                        if (middle_index != -1)
                         {
-                            point0 = трамвай.сочленения2[middle_index].Координаты3D;
-                            point1 = тележки[0].координаты_3D;
+                            DoublePoint point0;
+                            DoublePoint point1;
+                            if (middle_front)
+                            {
+                                point0 = трамвай.сочленения2[middle_index].position;
+                                point1 = тележки[0].position;
+                            }
+                            else
+                            {
+                                point0 = тележки[0].position;
+                                point1 = трамвай.сочленения2[middle_index].position;
+                            }
+                            point = point0 - point1;
+                            return point.угол;
                         }
-                        else
+                        point = тележки[0].position - тележки[1].position;
+                        return point.угол;*/
+                        return _direction.x;
+                    }
+                }
+
+                public DoublePoint направление_3D
+                {
+                    get
+                    {
+                        return new DoublePoint(direction, НаправлениеY);
+                    }
+                }
+
+                public DoublePoint направление
+                {
+                    get
+                    {
+                        /*DoublePoint point3 = new DoublePoint(direction, НаправлениеY);
+                        return point3;*/
+                        return _direction;
+                    }
+                }
+
+                public virtual double НаправлениеY
+                {
+                    get
+                    {
+                        /*Double3DPoint point;
+                        DoublePoint point3;
+                        if (middle_index != -1)
                         {
-                            point0 = тележки[0].координаты_3D;
-                            point1 = трамвай.сочленения2[middle_index].Координаты3D;
+                            Double3DPoint point0;
+                            Double3DPoint point1;
+                            if (middle_front)
+                            {
+                                point0 = трамвай.сочленения2[middle_index].Координаты3D;
+                                point1 = тележки[0].координаты_3D;
+                            }
+                            else
+                            {
+                                point0 = тележки[0].координаты_3D;
+                                point1 = трамвай.сочленения2[middle_index].Координаты3D;
+                            }
+                            point = point0 - point1;
+                            point3 = new DoublePoint(point.xz_point.модуль, point.y);
+                            return point3.угол;
                         }
-                        point = point0 - point1;
+                        point = тележки[0].координаты_3D - тележки[1].координаты_3D;
                         point3 = new DoublePoint(point.xz_point.модуль, point.y);
-                        return point3.угол;
+                        return point3.угол;*/
+                        return _direction.y;
                     }
-                    point = тележки[0].координаты_3D - тележки[1].координаты_3D;
-                    point3 = new DoublePoint(point.xz_point.модуль, point.y);
-                    return point3.угол;*/
-                    return _direction.y;
-                }
-            }
-        }
-        
-        public class Дополнение : MeshObject, MeshObject.IFromFile, IMatrixObject
-        {
-            public string file;
-            public Тип_дополнения тип;
-            public ЧастьТрамвая частьТрамвая;
-
-            public Дополнение(ЧастьТрамвая частьТрамвая, string filename, Тип_дополнения тип)
-            {
-                this.частьТрамвая = частьТрамвая;
-                this.file = filename;
-                this.тип = тип;
-            }
-
-            public Matrix GetMatrix(int index)
-            {
-                return частьТрамвая.last_matrix;//.GetMatrix(0);
-            }
-
-            public string Filename
-            {
-                get
-                {
-                    base.meshDir = this.частьТрамвая.meshDir;
-                    return this.file;
                 }
             }
 
-            public int MatricesCount
+            public class Дополнение : MeshObject, MeshObject.IFromFile, IMatrixObject
             {
-                get
+                public string file;
+                public Тип_дополнения тип;
+                public ЧастьТрамвая частьТрамвая;
+
+                public Дополнение(ЧастьТрамвая частьТрамвая, string filename, Тип_дополнения тип)
                 {
-                    return 1;
+                    this.частьТрамвая = частьТрамвая;
+                    this.file = filename;
+                    this.тип = тип;
                 }
-            }
-        }
-        
-        public class Вагон : БазовыйВагон
-        {
-            public Вагон(Трамвай.ОбычныйТрамвай трамвай)//, Трамвай.Тележка передняя_тележка, Трамвай.Тележка задняя_тележка)
-            {
-                base.трамвай = трамвай;
-//                base.тележки[0] = передняя_тележка;
-//                base.тележки[1] = задняя_тележка;
-            }
-            public override string Filename
-            {
-                get
+
+                public Matrix GetMatrix(int index)
                 {
-                    base.meshDir = трамвай.модель.dir;
-                    return base.трамвай.модель.filename;
+                    return частьТрамвая.last_matrix;//.GetMatrix(0);
                 }
-            }
-        }
-        
-        public class Задний_Вагон : БазовыйВагон
-        {
-            public Задний_Вагон(Трамвай.ОбычныйТрамвай трамвай)//, Трамвай.Тележка передняя_тележка, Трамвай.Тележка задняя_тележка)
-            {
-                base.трамвай = трамвай;
-//                base.тележки[0] = передняя_тележка;
-//                base.тележки[1] = задняя_тележка;
-            }
-            public override string Filename
-            {
-                get
+
+                public string Filename
                 {
-                    base.meshDir = трамвай.модель.dir;
-                    int index = 0;
-                    for (int i=0; i < трамвай.хвосты.Length; i++)
+                    get
                     {
-                        if (this.трамвай.хвосты[i] == this)
-                        {
-                            index = i;
-                            break;
-                        }
+                        base.meshDir = this.частьТрамвая.meshDir;
+                        return this.file;
                     }
-                    return this.трамвай.модель.tails[index].filename;
+                }
+
+                public int MatricesCount
+                {
+                    get
+                    {
+                        return 1;
+                    }
                 }
             }
-        }
-        
-        public abstract class БазовыйВагон : Трамвай.ОбычныйТрамвай.ЧастьТрамвая, MeshObject.IFromFile, IMatrixObject
-        {
-            protected БазовыйВагон()
+
+            public class Вагон : БазовыйВагон
             {
+                public Вагон(Трамвай.ОбычныйТрамвай трамвай)//, Трамвай.Тележка передняя_тележка, Трамвай.Тележка задняя_тележка)
+                {
+                    base.трамвай = трамвай;
+                    //                base.тележки[0] = передняя_тележка;
+                    //                base.тележки[1] = задняя_тележка;
+                }
+                public override string Filename
+                {
+                    get
+                    {
+                        base.meshDir = трамвай.модель.dir;
+                        return base.трамвай.модель.filename;
+                    }
+                }
             }
-            public abstract string Filename { get; }
-            
+
+            public class Задний_Вагон : БазовыйВагон
+            {
+                public Задний_Вагон(Трамвай.ОбычныйТрамвай трамвай)//, Трамвай.Тележка передняя_тележка, Трамвай.Тележка задняя_тележка)
+                {
+                    base.трамвай = трамвай;
+                    //                base.тележки[0] = передняя_тележка;
+                    //                base.тележки[1] = задняя_тележка;
+                }
+                public override string Filename
+                {
+                    get
+                    {
+                        base.meshDir = трамвай.модель.dir;
+                        int index = 0;
+                        for (int i = 0; i < трамвай.хвосты.Length; i++)
+                        {
+                            if (this.трамвай.хвосты[i] == this)
+                            {
+                                index = i;
+                                break;
+                            }
+                        }
+                        return this.трамвай.модель.tails[index].filename;
+                    }
+                }
+            }
+
+            public abstract class БазовыйВагон : Трамвай.ОбычныйТрамвай.ЧастьТрамвая, MeshObject.IFromFile, IMatrixObject
+            {
+                protected БазовыйВагон()
+                {
+                }
+                public abstract string Filename { get; }
+
                 public void Обновить_маршрутный_указатель(string маршрут, string наряд)
                 {
-                      if (_meshTextureFilenames == null) return;
+                    if (_meshTextureFilenames == null) return;
                     for (var i = 0; i < _meshTextureFilenames.Length; i++)
                     {
                         if (string.IsNullOrEmpty(_meshTextureFilenames[i])) continue;
@@ -1572,7 +1575,7 @@ namespace Trancity
                         }
                     }
                 }
-        }
+            }
 
             /*public class Сочленение : ЧастьТрамвая, MeshObject.IFromFile //MeshObject, MeshObject.IFromFile, IMatrixObject, IVector, IОбъектПривязки3D
             {
@@ -1679,31 +1682,31 @@ namespace Trancity
                     }
                 }
             }*/
-            
+
             public class Сочленение_new : ЧастьТрамвая, MeshObject.IFromFile //MeshObject, MeshObject.IFromFile, IОбъектПривязки3D, IVector, IMatrixObject
             {
                 /*public Double3DPoint _Координаты3D;
                 public DoublePoint _direction;
                 public ОбычныйТрамвай трамвай;*/
-//                public int index = 0;
-//                public int target = 1;
+                //                public int index = 0;
+                //                public int target = 1;
                 public double dist = 0;//3.456;
                 public int _index = 0;
                 public int _target = 0;
-//                public ЧастьТрамвая index = null;
-//                public ЧастьТрамвая target = null;
-                
+                //                public ЧастьТрамвая index = null;
+                //                public ЧастьТрамвая target = null;
+
                 public Сочленение_new(/*int _index, */ОбычныйТрамвай трамвай, int ind, int tar, double distance)
                 {
                     this.трамвай = трамвай;
-//                    this.index = трамвай.Найти_часть(ind);
-//                    this.target = трамвай.Найти_часть(tar);
+                    //                    this.index = трамвай.Найти_часть(ind);
+                    //                    this.target = трамвай.Найти_часть(tar);
                     _index = ind;
                     _target = tar;
                     this.dist = distance;
-//                    this.target.middle_index = _index;
-//                    this.target.middle_front = (ind < tar);
-//                    this.target.УбратьТележку();
+                    //                    this.target.middle_index = _index;
+                    //                    this.target.middle_front = (ind < tar);
+                    //                    this.target.УбратьТележку();
                 }
 
                 public override Matrix GetMatrix(int index)
@@ -1712,7 +1715,7 @@ namespace Trancity
                     last_matrix = (matrix * Matrix.Translation((float)_Координаты3D.x, (float)_Координаты3D.y, (float)_Координаты3D.z));
                     return last_matrix;
                 }
-                
+
                 public string Filename
                 {
                     get
@@ -1728,7 +1731,7 @@ namespace Trancity
                             }
                         }
                         return трамвай.модель.сочленения[index].filename;
-//                        return "сочленение2.x";
+                        //                        return "сочленение2.x";
                     }
                 }
 
@@ -1771,8 +1774,8 @@ namespace Trancity
                         return _direction.y;
                     }
                 }*/
-            }            
-        
+            }
+
             public override Трамвай.Ось[] все_оси
             {
                 get
@@ -1796,7 +1799,7 @@ namespace Trancity
                     return list.ToArray();
                 }
             }
-            
+
             public override Трамвай.Ось задняя_ось
             {
                 get
@@ -1809,16 +1812,16 @@ namespace Trancity
                     return тележки[тележки.Length - 1].оси[тележки[тележки.Length - 1].оси.Length - 1];
                 }
             }
-            
+
             public override Трамвай.Ось передняя_ось
             {
                 get
                 {
-//                    return вагон.тележки[0].оси[0];//.передняя_тележка.оси[0];
+                    //                    return вагон.тележки[0].оси[0];//.передняя_тележка.оси[0];
                     return тележки[0].оси[0];
                 }
             }
-            
+
             public override DoublePoint position
             {
                 get
@@ -1831,9 +1834,9 @@ namespace Trancity
             {
                 get
                 {
-//                    var point = (вагон.middle_index == -1) ? вагон.тележки[1].position : сочленения2[вагон.middle_index].position;
-//                    var point2 = вагон.тележки[0].position - point;
-//                    return (point2 != Double3DPoint.Zero.xz_point) ? (point + ((DoublePoint)((point2 / point2.модуль) * модель.расстояние_между_тележками))) : point;//модель.расстояние_между_тележками)));
+                    //                    var point = (вагон.middle_index == -1) ? вагон.тележки[1].position : сочленения2[вагон.middle_index].position;
+                    //                    var point2 = вагон.тележки[0].position - point;
+                    //                    return (point2 != Double3DPoint.Zero.xz_point) ? (point + ((DoublePoint)((point2 / point2.модуль) * модель.расстояние_между_тележками))) : point;//модель.расстояние_между_тележками)));
                     return вагон.Координаты3D + (new Double3DPoint(вагон.направление).Multyply(модель.пантограф.pos.x - модель.пантограф.dist));
                 }
             }
@@ -1845,7 +1848,7 @@ namespace Trancity
                     return вагон.direction;
                 }
             }
-            
+
             public override Double3DPoint Координаты3D
             {
                 get
@@ -1853,7 +1856,7 @@ namespace Trancity
                     return this.вагон.Координаты3D;
                 }
             }
-            
+
             public override double НаправлениеY
             {
                 get
@@ -1866,10 +1869,10 @@ namespace Trancity
             {
                 get
                 {
-                    return (Matrix.Translation((float)модель.пантограф.pos.x,(float)модель.пантограф.pos.y, (float)модель.пантограф.pos.z) * вагон.GetMatrix(0));
+                    return (Matrix.Translation((float)модель.пантограф.pos.x, (float)модель.пантограф.pos.y, (float)модель.пантограф.pos.z) * вагон.GetMatrix(0));
                 }
             }
-            
+
             public int направление
             {
                 get
@@ -1889,53 +1892,53 @@ namespace Trancity
         /// END_NEW
         /// </summary>
 
-     
-/*        public class Маршрутный_Указатель : MeshObject, MeshObject.IFromFile, IMatrixObject
-        {
-            public Matrix matrix;
 
-            public Matrix GetMatrix(int index)
-            {
-                return matrix;
-            }
-
-            public void Обновить(string маршрут)
-            {
-                if (_meshTextureFilenames != null)
+        /*        public class Маршрутный_Указатель : MeshObject, MeshObject.IFromFile, IMatrixObject
                 {
-                    for (int i = 0; i < _meshTextureFilenames.Length; i++)
+                    public Matrix matrix;
+
+                    public Matrix GetMatrix(int index)
                     {
-                        if (_meshTextureFilenames[i] == "Маршрут.PNG")
+                        return matrix;
+                    }
+
+                    public void Обновить(string маршрут)
+                    {
+                        if (_meshTextureFilenames != null)
                         {
-                            try
+                            for (int i = 0; i < _meshTextureFilenames.Length; i++)
                             {
-                                LoadTexture(i, "Маршрут" + маршрут + ".png");
-                            }
-                            catch
-                            {
-                                LoadTexture(i, "Маршрут.png");
+                                if (_meshTextureFilenames[i] == "Маршрут.PNG")
+                                {
+                                    try
+                                    {
+                                        LoadTexture(i, "Маршрут" + маршрут + ".png");
+                                    }
+                                    catch
+                                    {
+                                        LoadTexture(i, "Маршрут.png");
+                                    }
+                                }
                             }
                         }
                     }
-                }
-            }
 
-            public string Filename
-            {
-                get
-                {
-                    return "маршрут.x";
-                }
-            }
+                    public string Filename
+                    {
+                        get
+                        {
+                            return "маршрут.x";
+                        }
+                    }
 
-            public int MatricesCount
-            {
-                get
-                {
-                    return 1;
-                }
-            }
-        }*/
+                    public int MatricesCount
+                    {
+                        get
+                        {
+                            return 1;
+                        }
+                    }
+                }*/
 
         public class Ось : MeshObject, MeshObject.IFromFile, IMatrixObject, IVector
         {
@@ -1952,7 +1955,7 @@ namespace Trancity
                 радиус = _радиус;
                 текущий_рельс = рельс;
                 пройденное_расстояние_по_рельсу = расстояние_по_рельсу;
-//                текущий_рельс.objects.Add(this);
+                //                текущий_рельс.objects.Add(this);
             }
 
             public void cменить_текущий_рельс(Рельс рельс)
@@ -1995,9 +1998,9 @@ namespace Trancity
                         пройденное_расстояние_по_рельсу = dist + расстояние;
                         расстояние *= reverse_dir;
                     }
-//                    double d = текущий_рельс.НайтиНаправлениеY(пройденное_расстояние_по_рельсу) + 1.5707963267948966;
+                    //                    double d = текущий_рельс.НайтиНаправлениеY(пройденное_расстояние_по_рельсу) + 1.5707963267948966;
                     трамвай.скорость -= Math.Sin(текущий_рельс.НайтиНаправлениеY(пройденное_расстояние_по_рельсу)) * Road.uklon_koef * World.прошлоВремени;//* 0.03;
-//                    трамвай.скорость += Math.Cos(текущий_рельс.НайтиНаправлениеY(пройденное_расстояние_по_рельсу) + MyFeatures.halfPI) * 0.03;
+                                                                                                                                                           //                    трамвай.скорость += Math.Cos(текущий_рельс.НайтиНаправлениеY(пройденное_расстояние_по_рельсу) + MyFeatures.halfPI) * 0.03;
                 }
                 пройденное_расстояние_общее += расстояние;
                 Проверить_контакты(dist, пройденное_расстояние_по_рельсу);
@@ -2018,36 +2021,36 @@ namespace Trancity
             private void Проверить_контакты(double расстояние_old, double расстояние_new)
             {
                 if (!(передняя)) return;
-                    foreach (object obj2 in текущий_рельс.objects)
+                foreach (object obj2 in текущий_рельс.objects)
+                {
+                    if (!(obj2 is Сигнальная_система.Контакт)) continue;
+                    var контакт = (Сигнальная_система.Контакт)obj2;
+                    if ((контакт.расстояние < расстояние_new) && (контакт.расстояние >= расстояние_old))
                     {
-                        if (!(obj2 is Сигнальная_система.Контакт)) continue;
-                        var контакт = (Сигнальная_система.Контакт)obj2;
-                        if ((контакт.расстояние < расстояние_new) && (контакт.расстояние >= расстояние_old))
-                        {
-                            if (!контакт.минус)
-                            {
-                                контакт.система.состояние++;
-                            }
-                            else
-                            {
-                                контакт.система.состояние--;
-                            }
-                        }
-                        if ((контакт.расстояние >= расстояние_old) || (контакт.расстояние < расстояние_new)) continue;
-                        if (контакт.минус)
+                        if (!контакт.минус)
                         {
                             контакт.система.состояние++;
-                            continue;
                         }
-                        контакт.система.состояние--;
+                        else
+                        {
+                            контакт.система.состояние--;
+                        }
                     }
+                    if ((контакт.расстояние >= расстояние_old) || (контакт.расстояние < расстояние_new)) continue;
+                    if (контакт.минус)
+                    {
+                        контакт.система.состояние++;
+                        continue;
+                    }
+                    контакт.система.состояние--;
+                }
             }
 
             public string Filename
             {
                 get
                 {
-//                    return "ось.x";
+                    //                    return "ось.x";
                     base.meshDir = трамвай.модель.dir;
                     return this.трамвай.модель.axisfilename;
                 }
@@ -2077,7 +2080,7 @@ namespace Trancity
                     point.XZPoint = position;
                     point.y = текущий_рельс.НайтиВысоту(пройденное_расстояние_по_рельсу) + 0.05;
                     double d = текущий_рельс.НайтиНаправлениеY(пройденное_расстояние_по_рельсу) + (Math.PI / 2.0);
-//                    point.xz_point += (DoublePoint)((new DoublePoint(direction) * радиус) * Math.Cos(d));
+                    //                    point.xz_point += (DoublePoint)((new DoublePoint(direction) * радиус) * Math.Cos(d));
                     point.XZPoint = point.XZPoint.Add(new DoublePoint(direction).Multyply(радиус * Math.Cos(d)));
                     point.y += радиус * Math.Sin(d);
                     return point;
@@ -2099,7 +2102,7 @@ namespace Trancity
                     return ((трамвай != null) && (this == трамвай.передняя_ось));
                 }
             }
-            
+
             public bool задняя
             {
                 get
@@ -2114,7 +2117,7 @@ namespace Trancity
             public Ось[] оси;
             public readonly ОбычныйТрамвай трамвай;
             public double default_dist;
- 
+
             public Тележка(Рельс рельс, double расстояниеПоРельсу, double dist, double axis_radius, ОбычныйТрамвай трамвай)
             {
                 оси = new[] { new Ось(рельс, расстояниеПоРельсу - dist, axis_radius, трамвай), new Ось(рельс, расстояниеПоРельсу - dist - трамвай.расстояние_между_осями, axis_radius, трамвай) };
@@ -2135,7 +2138,7 @@ namespace Trancity
                 {
                     base.meshDir = трамвай.модель.dir;
                     return this.трамвай.модель.telegafilename;
-//                    return "тележка.x";
+                    //                    return "тележка.x";
                 }
             }
 
@@ -2182,27 +2185,27 @@ namespace Trancity
                 }
             }
         }
-        
+
         public abstract class Токоприёмник_new : ITest2
         {
             private Трамвайный_контактный_провод _fпровод;
             public double высота = 0.0;
             public double высота_max = 5.0;
             public double высота_min = 4.0;
-//            public double высота_дуги = 0.2;
+            //            public double высота_дуги = 0.2;
             public double высота_основания = 3.35;
-//            public double lenght = 0.2;
+            //            public double lenght = 0.2;
             public double width = 0.53;
             protected double dist = 0.0;
-            
+
             public Double3DPoint position;
             public Часть[] части;
             public bool поднимается = true;
             public Трамвай трамвай;
-            
+
             public abstract Matrix GetMatrix(int index);
             public abstract void Обновить(World мир);
-            
+
             public virtual void Render()
             {
                 foreach (var часть in части)
@@ -2210,7 +2213,7 @@ namespace Trancity
                     часть.Render();
                 }
             }
-            
+
             public virtual void CreateMesh()
             {
                 foreach (var часть in части)
@@ -2218,7 +2221,7 @@ namespace Trancity
                     часть.CreateMesh();
                 }
             }
-            
+
             public void CheckCondition()
             {
                 foreach (var часть in части)
@@ -2226,18 +2229,18 @@ namespace Trancity
                     часть.IsNear = true;
                 }
             }
-            
+
             public void НайтиПровод(Контактный_провод[] контактныеПровода)
             {
                 double minHeight = 1000.0;
                 double curHeight = -1000.0;
-                
+
                 var position2D = position.XZPoint;
                 foreach (var провод in контактныеПровода)
                 {
                     if (провод.обесточенный)
                         continue;
-                    
+
                     var pantRelativePos = position2D - провод.начало;
                     pantRelativePos.Angle -= провод.направление;
                     if ((Math.Abs(pantRelativePos.y) <= width) && ((pantRelativePos.x >= 0.0) && (pantRelativePos.x <= провод.длина)))
@@ -2254,7 +2257,7 @@ namespace Trancity
                     }
                 }
             }
-            
+
             public double обычная_высота_max
             {
                 get
@@ -2282,7 +2285,7 @@ namespace Trancity
                     return ((Провод != null) && (высота >= обычная_высота_max));
                 }
             }
-            
+
             public Трамвайный_контактный_провод Провод
             {
                 get
@@ -2309,15 +2312,15 @@ namespace Trancity
                 {
                     if (Провод != null)
                     {
-//                        var point = position.XZPoint - Провод.начало;
-//                        return point.Modulus;
+                        //                        var point = position.XZPoint - Провод.начало;
+                        //                        return point.Modulus;
                         var positionXZ = position.XZPoint;
                         return DoublePoint.Distance(ref positionXZ, ref Провод.начало);
                     }
                     return 0.0;
                 }
             }
-            
+
             public class Часть : MeshObject, MeshObject.IFromFile, IMatrixObject
             {
                 private readonly Токоприёмник_new токоприёмник;
@@ -2361,11 +2364,11 @@ namespace Trancity
                     }
                 }
             }
-            
+
             public class Пантограф : Токоприёмник_new
             {
-//                private const double num4 = 1.5;
-                
+                //                private const double num4 = 1.5;
+
                 public Пантограф(Трамвай tramway, double base_height, double min_height, double max_height)
                 {
                     base.трамвай = tramway;
@@ -2379,7 +2382,7 @@ namespace Trancity
                         base.части[i] = new Часть(this, трамвай.модель.пантограф.parts[i].filename, i, трамвай.модель.пантограф.parts[i].height, трамвай.модель.пантограф.parts[i].width, трамвай.модель.пантограф.parts[i].length, трамвай.модель.пантограф.parts[i].ang);//трамвай.модель.пантограф.parts[i].index
                     }
                 }
-                
+
                 public override void Обновить(World мир)
                 {
                     position = трамвай.координаты_токоприёмника;//Trash.PointFromMatrix(трамвай.преобразование_токоприёмника);//tr.вагон.Координаты3D + ((Double3DPoint)(new Double3DPoint(tr.вагон.направление) * tr.модель.пантограф.pos.x));
@@ -2433,7 +2436,7 @@ namespace Trancity
                         высота = обычная_высота_max;//высота_max;
                     }
                 }
-                
+
                 public override Matrix GetMatrix(int index)
                 {
                     var matrix = трамвай.преобразование_токоприёмника;

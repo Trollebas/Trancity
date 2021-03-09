@@ -1,8 +1,7 @@
-using System;
-
-using SlimDX;
 using Common;
 using Engine;
+using SlimDX;
+using System;
 
 namespace Trancity
 {
@@ -20,13 +19,13 @@ namespace Trancity
         public Объект(string filename, double x0, double y0, double angle0, double height0)
         {
             this.filename = filename;
-            
+
             this.x0 = x0;
             this.y0 = y0;
             this.angle0 = angle0;
             this.height0 = height0;
         }
-        
+
         public override void CreateMesh()
         {
             ObjectLoader.FindModel(0, filename, ref model, ref meshDir);
@@ -38,7 +37,7 @@ namespace Trancity
             base.bounding_sphere = new Sphere(model.bsphere.pos, model.bsphere.radius);
             base.bounding_sphere.Update(Position3D, direction2);
         }
-        
+
         private void OnPositionUpdate()
         {
             this.bounding_sphere.Update(this.Position3D, this.direction2);
@@ -49,7 +48,7 @@ namespace Trancity
 
         public string Filename
         {
-            get 
+            get
             {
                 return model.filename;
             }
@@ -75,9 +74,9 @@ namespace Trancity
                 return 1;
             }
         }
-        
+
         #endregion
-        
+
         public void ComputeMatrix()
         {
             if (!MainForm.in_editor)
@@ -85,7 +84,7 @@ namespace Trancity
             col = (int)Math.Floor(x0 / (double)Ground.grid_size);
             row = (int)Math.Floor(y0 / (double)Ground.grid_size);
         }
-        
+
         public DoublePoint position
         {
             get
@@ -99,7 +98,7 @@ namespace Trancity
                 this.OnPositionUpdate();
             }
         }
-        
+
         public Double3DPoint Position3D
         {
             get
@@ -114,7 +113,7 @@ namespace Trancity
                 this.OnPositionUpdate();
             }
         }
-        
+
         public DoublePoint direction2
         {
             get
@@ -122,7 +121,7 @@ namespace Trancity
                 return new DoublePoint(angle0);
             }
         }
-        
+
         public double direction
         {
             get
@@ -130,7 +129,7 @@ namespace Trancity
                 return this.angle0;
             }
         }
-        
+
         public void CheckCondition()
         {
             if (MainForm.in_editor)

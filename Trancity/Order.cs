@@ -18,14 +18,14 @@ namespace Trancity
             this.transport = transport;
         }
 
-/*
-        public bool ≈жедневно
-        {
-            get
-            {
-                return (по–абочим && по¬ыходным);
-            }
-        }
-*/
+        /*
+                public bool ≈жедневно
+                {
+                    get
+                    {
+                        return (по–абочим && по¬ыходным);
+                    }
+                }
+        */
     }
 }

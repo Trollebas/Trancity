@@ -1,12 +1,10 @@
 ﻿using Common;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Reflection;
-using System.Xml;
 using Engine;
 using Engine.Sound;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 using Xml = Common.Xml;
 
 namespace Trancity
@@ -33,43 +31,43 @@ namespace Trancity
             switch (text)
             {
                 case "РКСУ_Трамвай":
-                    return new РКСУ_Трамвай((Трамвай) transport);
+                    return new РКСУ_Трамвай((Трамвай)transport);
 
                 case "ТИСУ_Трамвай":
-                    return new РКСУ_Трамвай((Трамвай) transport);
+                    return new РКСУ_Трамвай((Трамвай)transport);
 
                 case "ТРСУ_Трамвай":
-                    return new РКСУ_Трамвай((Трамвай) transport);
+                    return new РКСУ_Трамвай((Трамвай)transport);
 
                 case "НСУ_Трамвай":
-                    return new РКСУ_Трамвай((Трамвай) transport);
+                    return new РКСУ_Трамвай((Трамвай)transport);
 
                 case "КНРКСУ_Трамвай":
-                    return new РКСУ_Трамвай((Трамвай) transport);
+                    return new РКСУ_Трамвай((Трамвай)transport);
 
                 case "РКСУ_Троллейбус":
-                    return new РКСУ_Троллейбус((Троллейбус) transport);
+                    return new РКСУ_Троллейбус((Троллейбус)transport);
 
                 case "ТРСУ_Троллейбус":
-                    return new РКСУ_Троллейбус((Троллейбус) transport);
+                    return new РКСУ_Троллейбус((Троллейбус)transport);
 
                 case "ТИСУ_Троллейбус":
-                    return new РКСУ_Троллейбус((Троллейбус) transport);
+                    return new РКСУ_Троллейбус((Троллейбус)transport);
 
                 case "КП_Авто":
-                    return new КП_Авто((Троллейбус) transport);
+                    return new КП_Авто((Троллейбус)transport);
 
                 case "КП_Авто1":
-                    return new КП_Авто1((Троллейбус) transport);
+                    return new КП_Авто1((Троллейбус)transport);
 
                 case "РКП":
-                    return new КП_Авто1((Троллейбус) transport);
+                    return new КП_Авто1((Троллейбус)transport);
 
                 case "Электробус":
-                    return new КП_Авто((Троллейбус) transport);
+                    return new КП_Авто((Троллейбус)transport);
 
                 case "Траффик":
-                    return new КП_Авто((Троллейбус) transport);
+                    return new КП_Авто((Троллейбус)transport);
             }
 
             return null;
@@ -149,7 +147,7 @@ namespace Trancity
             private Троллейбус автобус;
             public int передача;
             public double положение_педалей = -1.0;
-            public string[] режимы = new string[] {"P", "R", "N", "D", "2", "1"};
+            public string[] режимы = new string[] { "P", "R", "N", "D", "2", "1" };
 
             public КП_Авто(Троллейбус автобус)
             {
@@ -176,7 +174,7 @@ namespace Trancity
                     return;
                 int num = Math.Max(1, Math.Abs(this.передача));
                 double num2 = (this.ход_или_тормоз > 0) ? ((num + 0.5) / 5.0) : 1.0;
-                double num3 = 4.3 - ((4.3 - (this.автобус.скорость_abs / ((double) num))) * num2);
+                double num3 = 4.3 - ((4.3 - (this.автобус.скорость_abs / ((double)num))) * num2);
                 double num4 = (400.0 * this.автобус.скорость_abs) + 1000.0;
                 double num5 = (400.0 * num3) + 1000.0;
                 if (this.автобус.скорость_abs < 2.0)
@@ -196,14 +194,14 @@ namespace Trancity
                     num5 = 0.0;
                 }
 
-                SoundBuffers[0].Frequency = (float) Math.Max(num4 * 2.8, 100.0) / 10000f;
-                SoundBuffers[1].Frequency = (float) Math.Max(num4 * 4.2, 100.0) / 10000f;
-                SoundBuffers[2].Frequency = (float) ((this.автобус._soundУскоряется || this.автобус._soundЗамедляется)
+                SoundBuffers[0].Frequency = (float)Math.Max(num4 * 2.8, 100.0) / 10000f;
+                SoundBuffers[1].Frequency = (float)Math.Max(num4 * 4.2, 100.0) / 10000f;
+                SoundBuffers[2].Frequency = (float)((this.автобус._soundУскоряется || this.автобус._soundЗамедляется)
                                                 ? Math.Max(num5 * 6.0, 0x1f40)
                                                 : 0x1f40) / 10000f;
-                SoundBuffers[3].Frequency = (float) Math.Max(num5 * 10.5, 100.0) / 10000f;
-                SoundBuffers[4].Frequency = (float) Math.Max(num5 * 15.0, 100.0) / 10000f;
-                SoundBuffers[5].Frequency = (float) Math.Max(num5 * 15.0, 100.0) / 10000f;
+                SoundBuffers[3].Frequency = (float)Math.Max(num5 * 10.5, 100.0) / 10000f;
+                SoundBuffers[4].Frequency = (float)Math.Max(num5 * 15.0, 100.0) / 10000f;
+                SoundBuffers[5].Frequency = (float)Math.Max(num5 * 15.0, 100.0) / 10000f;
             }
 
             //TODO: осмотреть и переделать моменты
@@ -302,7 +300,7 @@ namespace Trancity
                 else if (num2 < 0.0)
                 {
                     num3 = (((num2 - 3.0) * ((num + рекомендуемая_скорость) / 2.0)) /
-                            Math.Max((double) (оставшееся_расстояние - 5.0), (double) 0.6)) / 1.8;
+                            Math.Max((double)(оставшееся_расстояние - 5.0), (double)0.6)) / 1.8;
                     if (num3 > 0.0)
                     {
                         num3 = 0.0;
@@ -415,7 +413,7 @@ namespace Trancity
                 {
                     if ((this.режим == 0) || (this.автобус.stand_brake))
                     {
-                        return (double) (-2 * Math.Sign(this.автобус.скорость)); //-50
+                        return (double)(-2 * Math.Sign(this.автобус.скорость)); //-50
                     }
 
                     double num = 0.0;
@@ -478,7 +476,7 @@ namespace Trancity
 
                     try
                     {
-                        return (double) ((num * this.направление) - (num2 * Math.Sign(this.автобус.скорость)));
+                        return (double)((num * this.направление) - (num2 * Math.Sign(this.автобус.скорость)));
                     }
                     catch
                     {
@@ -538,11 +536,11 @@ namespace Trancity
                 if (!PreUpdateSound(this.автобус1, игра_активна))
                     return;
 
-                if(SoundBuffers == null || SoundBuffers.Length < 6) return;
+                if (SoundBuffers == null || SoundBuffers.Length < 6) return;
 
                 int num = Math.Max(1, Math.Abs(this.передача));
                 double num2 = (this.ход_или_тормоз > 0) ? ((num + 0.5) / 5.0) : 1.0;
-                double num3 = 4.3 - ((4.3 - (this.автобус1.скорость_abs / ((double) num))) * num2);
+                double num3 = 4.3 - ((4.3 - (this.автобус1.скорость_abs / ((double)num))) * num2);
                 double num4 = (400.0 * this.автобус1.скорость_abs) + 1000.0;
                 double num5 = (400.0 * num3) + 1000.0;
                 if (this.автобус1.скорость_abs < 2.0)
@@ -562,14 +560,14 @@ namespace Trancity
                     num5 = 0.0;
                 }
 
-                SoundBuffers[0].Frequency = (float) Math.Max(num4 * 2.8, 100.0) / 10000f;
-                SoundBuffers[1].Frequency = (float) Math.Max(num4 * 4.2, 100.0) / 10000f;
-                SoundBuffers[2].Frequency = (float) ((this.автобус1._soundУскоряется || this.автобус1._soundЗамедляется)
+                SoundBuffers[0].Frequency = (float)Math.Max(num4 * 2.8, 100.0) / 10000f;
+                SoundBuffers[1].Frequency = (float)Math.Max(num4 * 4.2, 100.0) / 10000f;
+                SoundBuffers[2].Frequency = (float)((this.автобус1._soundУскоряется || this.автобус1._soundЗамедляется)
                                                 ? Math.Max(num5 * 6.0, 0x1f40)
                                                 : 0x1f40) / 10000f;
-                SoundBuffers[3].Frequency = (float) Math.Max(num5 * 10.5, 100.0) / 10000f;
-                SoundBuffers[4].Frequency = (float) Math.Max(num5 * 15.0, 100.0) / 10000f;
-                SoundBuffers[5].Frequency = (float) Math.Max(num5 * 15.0, 100.0) / 10000f;
+                SoundBuffers[3].Frequency = (float)Math.Max(num5 * 10.5, 100.0) / 10000f;
+                SoundBuffers[4].Frequency = (float)Math.Max(num5 * 15.0, 100.0) / 10000f;
+                SoundBuffers[5].Frequency = (float)Math.Max(num5 * 15.0, 100.0) / 10000f;
             }
 
             public override void автоматически_управлять(double рекомендуемая_скорость, double оставшееся_расстояние,
@@ -667,7 +665,7 @@ namespace Trancity
                 else if (num2 < 0.0)
                 {
                     num3 = (((num2 - 3.0) * ((num + рекомендуемая_скорость) / 2.0)) /
-                            Math.Max((double) (оставшееся_расстояние - 5.0), (double) 0.6)) / 1.8;
+                            Math.Max((double)(оставшееся_расстояние - 5.0), (double)0.6)) / 1.8;
                     if (num3 > 0.0)
                     {
                         num3 = 0.0;
@@ -811,7 +809,7 @@ namespace Trancity
                 {
                     if (this.автобус1.stand_brake)
                     {
-                        return (double) (-2 * Math.Sign(this.автобус1.скорость)); //-50
+                        return (double)(-2 * Math.Sign(this.автобус1.скорость)); //-50
                     }
 
                     double num = 0.0;
@@ -876,7 +874,7 @@ namespace Trancity
 
                     try
                     {
-                        return (double) ((num * this.направление) - (num2 * Math.Sign(this.автобус1.скорость)));
+                        return (double)((num * this.направление) - (num2 * Math.Sign(this.автобус1.скорость)));
                     }
                     catch
                     {
@@ -950,7 +948,7 @@ namespace Trancity
                 if (!PreUpdateSound(this.трамвай, игра_активна))
                     return;
                 SoundBuffers[0].Frequency = ((трамвай.скорость_abs > 1.0)
-                                                ? (((float) (3000.0 * трамвай.скорость_abs)) + 1000)
+                                                ? (((float)(3000.0 * трамвай.скорость_abs)) + 1000)
                                                 : /*5*/000) / 10000.0f;
                 SoundBuffers[1].Frequency = SoundBuffers[0].Frequency * 2;
                 SoundBuffers[2].Frequency = (SoundBuffers[0].Frequency * 25) / 16; // + 153;
@@ -958,7 +956,7 @@ namespace Trancity
                 SoundBuffers[0].Volume = (трамвай._soundУскоряется || трамвай._soundЗамедляется) ? 0.8f : 0.2f;
                 SoundBuffers[1].Volume = SoundBuffers[0].Volume;
                 SoundBuffers[2].Volume = (трамвай.скорость_abs < 6.0)
-                    ? ((((((SoundBuffers[0].Volume * 10000) - 10000 + 2000) * (float) (трамвай.скорость_abs)) / 6.0f) +
+                    ? ((((((SoundBuffers[0].Volume * 10000) - 10000 + 2000) * (float)(трамвай.скорость_abs)) / 6.0f) +
                         8000.0f) / (10000.0f))
                     : SoundBuffers[0].Volume;
 
@@ -1091,78 +1089,78 @@ namespace Trancity
                     switch (позиция_контроллера)
                     {
                         case -5:
-                        {
-                            num = -2.1;
-                        }
+                            {
+                                num = -2.1;
+                            }
                             break;
 
                         case -4:
-                        {
-                            num = -2.0;
-                        }
+                            {
+                                num = -2.0;
+                            }
                             break;
 
                         case -3:
-                        {
-                            num = -1.5;
-                        }
+                            {
+                                num = -1.5;
+                            }
                             break;
 
                         case -2:
-                        {
-                            num = -1.1;
-                        }
+                            {
+                                num = -1.1;
+                            }
                             break;
 
                         case -1:
-                        {
-                            num = -0.7;
-                        }
+                            {
+                                num = -0.7;
+                            }
                             break;
 
                         case 1:
-                        {
-                            num = 0.8;
-                            if (num2 > 2.0)
                             {
-                                num *= Math.Pow(2.0 / num2, 4.0);
+                                num = 0.8;
+                                if (num2 > 2.0)
+                                {
+                                    num *= Math.Pow(2.0 / num2, 4.0);
+                                }
                             }
-                        }
                             break;
 
                         case 2:
-                        {
-                            num = 1.1;
-                            if (num2 > 8.0)
                             {
-                                num *= Math.Pow(8.0 / num2, 4.0);
+                                num = 1.1;
+                                if (num2 > 8.0)
+                                {
+                                    num *= Math.Pow(8.0 / num2, 4.0);
+                                }
                             }
-                        }
                             break;
 
                         case 3:
-                        {
-                            num = 1.3;
-                            if (num2 > 8.0)
                             {
-                                num *= Math.Pow(8.0 / num2, 4.0);
+                                num = 1.3;
+                                if (num2 > 8.0)
+                                {
+                                    num *= Math.Pow(8.0 / num2, 4.0);
+                                }
                             }
-                        }
                             break;
 
                         case 4:
-                        {
-                            num = 1.5;
-                            if (num2 > 6.0)
                             {
-                                num *= 6.0 / num2;
-                            }
+                                num = 1.5;
+                                if (num2 > 6.0)
+                                {
+                                    num *= 6.0 / num2;
+                                }
 
-                            if (num2 > 15.0)
-                            {
-                                num *= Math.Pow(15.0 / num2, 4.0);
+                                if (num2 > 15.0)
+                                {
+                                    num *= Math.Pow(15.0 / num2, 4.0);
+                                }
                             }
-                        }
                             break;
                     }
 
@@ -1321,7 +1319,7 @@ namespace Trancity
                 //Лямбды для того чтобы получать реальные значения и не захламлять апдейт присвоениями (которого тут нет)
                 //TODO: вывести прописку в базовый класс, а тут оставить только специфические для типа значения
                 _Variables = new Dictionary<string, Func<float>>();
-                _Variables.Add("speed", () => (float) this.троллейбус.скорость_abs*3.6f);
+                _Variables.Add("speed", () => (float)this.троллейбус.скорость_abs * 3.6f);
                 _Variables.Add("accelerates", () => (this.троллейбус._soundУскоряется || this.троллейбус._soundЗамедляется) ? 1 : 0);
                 _Variables.Add("enabled", () => this.троллейбус.включен ? 1 : 0);
                 _Variables.Add("wiresConnected", () => this.троллейбус.обесточен ? 0 : 1);
@@ -1451,7 +1449,7 @@ namespace Trancity
                                     Xml.GetFloatAttrib(
                                         node["conditions"].ChildNodes[j].Attributes.GetNamedItem("ifvalue"), 0f);
                                 conditions[j].CompareType =
-                                    (ControlledSound.ComparsionType) Xml.GetIntAttrib(
+                                    (ControlledSound.ComparsionType)Xml.GetIntAttrib(
                                         node["conditions"].ChildNodes[j].Attributes.GetNamedItem("compareType"), 1);
                             }
                         }
@@ -1804,7 +1802,7 @@ namespace Trancity
                         {
                             пневматический_тормоз =
                                 (((dspeed - 2.0) * ((current_speed + рекомендуемаяСкорость) / 2.0)) /
-                                 Math.Max((double) (оставшеесяРасстояние - 5.0), (double) 0.6)) / -1.8;
+                                 Math.Max((double)(оставшеесяРасстояние - 5.0), (double)0.6)) / -1.8;
                             if (пневматический_тормоз < 0.0)
                             {
                                 пневматический_тормоз = 0.0;
@@ -1845,55 +1843,55 @@ namespace Trancity
                         switch (this.позиция_контроллера)
                         {
                             case -2:
-                            {
-                                num = -1.1 * num3;
-                            }
+                                {
+                                    num = -1.1 * num3;
+                                }
                                 break;
                             case -1:
-                            {
-                                num = -0.7 * num3;
-                            }
+                                {
+                                    num = -0.7 * num3;
+                                }
                                 break;
                             case 1:
-                            {
-                                num = 0.8 * num3;
-                                if (num2 > 2.0 * num3)
                                 {
-                                    num *= Math.Pow((2.0 * num3) / num2, 4.0);
+                                    num = 0.8 * num3;
+                                    if (num2 > 2.0 * num3)
+                                    {
+                                        num *= Math.Pow((2.0 * num3) / num2, 4.0);
+                                    }
                                 }
-                            }
                                 break;
                             case 2:
-                            {
-                                num = 1.1 * num3;
-                                if (num2 > 8.0 * num3)
                                 {
-                                    num *= Math.Pow((8.0 * num3) / num2, 4.0);
+                                    num = 1.1 * num3;
+                                    if (num2 > 8.0 * num3)
+                                    {
+                                        num *= Math.Pow((8.0 * num3) / num2, 4.0);
+                                    }
                                 }
-                            }
                                 break;
                             case 3:
-                            {
-                                num = 1.3 * num3;
-                                if (num2 > 8.0 * num3)
                                 {
-                                    num *= Math.Pow((8.0 * num3) / num2, 4.0);
+                                    num = 1.3 * num3;
+                                    if (num2 > 8.0 * num3)
+                                    {
+                                        num *= Math.Pow((8.0 * num3) / num2, 4.0);
+                                    }
                                 }
-                            }
                                 break;
                             case 4:
-                            {
-                                num = 1.5;
-                                if (num2 > 6.0 * num3)
                                 {
-                                    num *= (6.0 * num3) / num2;
-                                }
+                                    num = 1.5;
+                                    if (num2 > 6.0 * num3)
+                                    {
+                                        num *= (6.0 * num3) / num2;
+                                    }
 
-                                if (num2 > 15.0 * num3)
-                                {
-                                    num *= Math.Pow((15.0 * num3) / num2, 4.0);
+                                    if (num2 > 15.0 * num3)
+                                    {
+                                        num *= Math.Pow((15.0 * num3) / num2, 4.0);
+                                    }
                                 }
-                            }
                                 break;
                         }
                     }

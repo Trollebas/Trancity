@@ -1,18 +1,18 @@
+using Engine;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Engine;
 
 namespace Trancity
 {
     [StructLayout(LayoutKind.Sequential)]
     public class МодельТранспорта
     {
-    	public bool hasnt_bbox = false;
+        public bool hasnt_bbox = false;
         public List<МодельДверей> модельДверей = new List<МодельДверей>();
         public string name;
         public string dir;
         public string filename;
-//        public int количествоХвостов;
+        //        public int количествоХвостов;
         //
         public string[] хвостFilename;
         public double[] хвостDist1;
@@ -20,7 +20,7 @@ namespace Trancity
         public string[] сочленениеFilename;
         //
         public Хвост[] tails;
-//        public int количествоСочленений;
+        //        public int количествоСочленений;
         public Сочленение_new[] сочленения;
         //
         public Дополнение[] дополнения;
@@ -30,7 +30,7 @@ namespace Trancity
         public string axisfilename;
         public string telegafilename;
         public double расстояние_между_осями;
-//        public double расстояние_между_тележками;
+        //        public double расстояние_между_тележками;
         public double axis_radius;
         public Тележка[] тележки;
         //
@@ -121,7 +121,7 @@ namespace Trancity
                 pos = new Double3DPoint(x, y, z);
             }
         }
-		
+
         [StructLayout(LayoutKind.Sequential)]
         public class Руль
         {
@@ -137,7 +137,7 @@ namespace Trancity
                 angle = a;
             }
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public class АХ
         {
@@ -151,43 +151,43 @@ namespace Trancity
                 this.расход = расход;
             }
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public struct Хвост
         {
-        	public double dist;
-        	public string filename;
-//        	public bool have;
-//        	public string m_f;
-//            public double t_dist;
+            public double dist;
+            public string filename;
+            //        	public bool have;
+            //        	public string m_f;
+            //            public double t_dist;
             public Хвост(double ds, string filename)//, double t_d)//string middle_f, bool h,
             {
-            	this.dist = ds;
+                this.dist = ds;
                 this.filename = filename;
-//                this.have = h;
-//                this.m_f = middle_f;
-//                this.t_dist = t_d;
+                //                this.have = h;
+                //                this.m_f = middle_f;
+                //                this.t_dist = t_d;
             }
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public struct Сочленение_new
         {
-        	public double dist;
-        	public string filename;
-        	public int index;
-        	public int target;
-//        	public bool flag;
-        	public Сочленение_new(double ds, string filename, int ind, int att)//, bool flag)
+            public double dist;
+            public string filename;
+            public int index;
+            public int target;
+            //        	public bool flag;
+            public Сочленение_new(double ds, string filename, int ind, int att)//, bool flag)
             {
-            	this.dist = ds;
+                this.dist = ds;
                 this.filename = filename;
                 this.index = ind;
                 this.target = att;
-//                this.flag = flag;
+                //                this.flag = flag;
             }
         }
-        
+
         /*[StructLayout(LayoutKind.Sequential)]
         public struct Пантограф
         {
@@ -213,16 +213,16 @@ namespace Trancity
             	SemiPantograph
             }
         }*/
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public class Пантограф
         {
             public string dir;
             public Часть_пантографа[] parts;
-           	public Double3DPoint pos;
-           	public double dist;
-           	public double min_height;
-           	public double max_height;
+            public Double3DPoint pos;
+            public double dist;
+            public double min_height;
+            public double max_height;
             public Пантограф(string d, double x, double y, double z, double minh, double maxh, double _dist, Часть_пантографа[] prts)
             {
                 dir = d;
@@ -233,11 +233,11 @@ namespace Trancity
                 parts = (Часть_пантографа[])prts.Clone();
             }
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public class Часть_пантографа
         {
-//        	public int index;//int _index, 
+            //        	public int index;//int _index, 
             public string filename;
             public double height;
             public double width;
@@ -245,7 +245,7 @@ namespace Trancity
             public double ang;
             public Часть_пантографа(string _filename, double _height, double _width, double _length, double _ang)
             {
-//            	index = _index;
+                //            	index = _index;
                 filename = _filename;
                 height = _height;
                 width = _width;
@@ -253,37 +253,37 @@ namespace Trancity
                 ang = _ang;
             }
         }
-		
+
         [StructLayout(LayoutKind.Sequential)]
         public class Табличка
         {
-            public string filename;            
-           	public Double3DPoint pos;
+            public string filename;
+            public Double3DPoint pos;
             public Табличка(string f, double x, double y, double z)
             {
                 filename = f;
                 pos = new Double3DPoint(x, y, z);
             }
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public class SphereModel
         {
-           	public Double3DPoint pos;
-           	public double radius;
+            public Double3DPoint pos;
+            public double radius;
             public SphereModel(double _radius, double x, double y, double z)
             {
                 pos = new Double3DPoint(x, y, z);
                 radius = _radius;
             }
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public struct Тележка
         {
-           	public int index;
-           	public double dist;
-           	public string filename;
+            public int index;
+            public double dist;
+            public string filename;
             public Тележка(int _index, double _dist, string _filename)
             {
                 index = _index;
@@ -291,12 +291,12 @@ namespace Trancity
                 filename = _filename;
             }
         }
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public class Camera
         {
-           	public Double3DPoint pos;
-           	public DoublePoint rot;
+            public Double3DPoint pos;
+            public DoublePoint rot;
             public Camera(double x, double y, double z, double rx, double ry)
             {
                 pos = new Double3DPoint(x, y, z);

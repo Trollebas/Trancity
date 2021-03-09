@@ -1,10 +1,10 @@
 ﻿namespace Common
 {
+    using Engine;
     using SlimDX.DirectInput;
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
-	using System.Collections.Generic;
-	using Engine;
 
     public class MyDirectInput
     {
@@ -17,10 +17,10 @@
         public static Joystick[] JoystickDevices;
         public static FilteredKeyboardState Key_State;
         public static FilteredKeyboardState Key_State1;
-		public static Keyboard Keyboard_Device = null;
-		public static Keyboard Keyboard_Device_1 = null;
+        public static Keyboard Keyboard_Device = null;
+        public static Keyboard Keyboard_Device_1 = null;
         public static byte[] last_buttons = new byte[5];
-		public static Mouse Mouse_Device = null;
+        public static Mouse Mouse_Device = null;
         public static MouseState Mouse_State;
         private static DirectInput dinput;
 
@@ -45,9 +45,9 @@
 
         public static void EnumerateDevices()
         {
-        	dinput = new DirectInput();
-        	var devices = new List<DeviceInstance>(dinput.GetDevices(DeviceClass.Keyboard, DeviceEnumerationFlags.AttachedOnly));
-        	var list2 = new List<DeviceInstance>(dinput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AttachedOnly));
+            dinput = new DirectInput();
+            var devices = new List<DeviceInstance>(dinput.GetDevices(DeviceClass.Keyboard, DeviceEnumerationFlags.AttachedOnly));
+            var list2 = new List<DeviceInstance>(dinput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AttachedOnly));
             DeviceGuids = new Guid[list2.Count + 1];
             DeviceNames = new string[list2.Count + 1];
             int index = 0;
@@ -57,7 +57,8 @@
                 DeviceNames[index] = instance.InstanceName;
                 index++;
             }
-            foreach (DeviceInstance instance2 in devices) {
+            foreach (DeviceInstance instance2 in devices)
+            {
                 /*if (instance2.Type == DeviceType.Keyboard)
                 {*/
                 DeviceGuids[index] = instance2.InstanceGuid;
@@ -76,16 +77,16 @@
                 }
                 }
             }*/
-               /* foreach (DeviceInstance instance3 in devices)
-            {
-                if (instance2.Type == DeviceType.Keyboard)
-                {
-                    DeviceGuids[index] = instance2.InstanceGuid;
-                    DeviceNames[index] = "Клавиатура 1";
-                    index++;
-                    break;
-                }
-            }*/
+                /* foreach (DeviceInstance instance3 in devices)
+             {
+                 if (instance2.Type == DeviceType.Keyboard)
+                 {
+                     DeviceGuids[index] = instance2.InstanceGuid;
+                     DeviceNames[index] = "Клавиатура 1";
+                     index++;
+                     break;
+                 }
+             }*/
             }
         }
 
@@ -129,7 +130,7 @@
         {
             try
             {
-            	Keyboard_Device = new Keyboard(dinput);
+                Keyboard_Device = new Keyboard(dinput);
                 if (Key_State == null)
                 {
                     Key_State = new FilteredKeyboardState(Keyboard_Device, 200, -1);
@@ -171,7 +172,7 @@
             }
             catch (DirectInputException e)
             {
-            	Logger.LogException(e);
+                Logger.LogException(e);
                 Free();
                 return false;
             }

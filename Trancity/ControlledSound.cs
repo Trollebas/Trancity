@@ -12,12 +12,12 @@ namespace Trancity
         /// </summary>
         public enum ComparsionType
         {
-            NotEqual        = 0,
-            Equal           = 1,
-            LessThan        = 2,
-            BiggerThan      = 3,
-            LessOrEqual     = 4,
-            BiggerOrEqual   = 5
+            NotEqual = 0,
+            Equal = 1,
+            LessThan = 2,
+            BiggerThan = 3,
+            LessOrEqual = 4,
+            BiggerOrEqual = 5
         }
 
         /// <summary>
