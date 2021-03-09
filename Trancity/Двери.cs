@@ -15,6 +15,7 @@ namespace Trancity
         public int номер;
 //        private IMatrixObject _объект;
         private MeshObject _объект;
+
         public bool открываются;
         private bool _правые;
         private double _состояние;

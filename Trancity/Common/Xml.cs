@@ -1,4 +1,6 @@
-﻿namespace Common
+﻿using Engine;
+
+namespace Common
 {
     using System;
     using System.Globalization;
@@ -57,7 +59,49 @@
                 return default_value;
             }
         }
-        
+
+        public static float GetFloat(XmlNode element, float default_value)
+        {
+            if (float.TryParse(element.InnerText, NumberStyles.Float, CultureInfo.InvariantCulture, out float value))
+            {
+                return value;
+            }
+
+            return default_value;
+        }
+
+        public static float GetFloatAttrib(XmlNode element, float default_value)
+        {
+            if (float.TryParse(element.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out float value))
+            {
+                return value;
+            }
+
+            return default_value;
+        }
+
+        public static int GetIntAttrib(XmlNode element, int default_value)
+        {
+            if (int.TryParse(element.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value))
+            {
+                return value;
+            }
+
+            return default_value;
+        }
+
+        //TODO: Maybe add some checks
+        public static Double3DPoint GetPosition(XmlNode element)
+        {
+            Double3DPoint point = Double3DPoint.Zero;
+
+            point.x = GetFloat(element["x"], 0f);
+            point.y = GetFloat(element["y"], 0f);
+            point.z = GetFloat(element["z"], 0f);
+
+            return point;
+        }
+
         public static string GetString(XmlNode element)
         {
         	return GetString(element, string.Empty);

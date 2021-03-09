@@ -1081,7 +1081,7 @@ namespace Trancity
                 foreach (var хвост in хвосты)
                 {
 //                       if (!(MyDirect3D.AABBInFrustum(хвост.bounding_box))) continue;
-                       if (!(MyDirect3D.SphereInFrustum(хвост.bounding_sphere))) continue;
+                        if (!(MyDirect3D.SphereInFrustum(хвост.bounding_sphere))) continue;
                        visible = true;
                        lod = Math.Min(хвост.bounding_sphere.LODnum, lod);
                     хвост.Render();
@@ -1135,13 +1135,13 @@ namespace Trancity
                 }
                 if (наряд != null)
                 {
-                      указатель_наряда.matrix = Matrix.Translation((float)модель.нарядPos.x, (float)модель.нарядPos.y, (float)модель.нарядPos.z) * кузов.last_matrix;//.GetMatrix(0);//(float)модель.нарядPos.x, (float)модель.нарядPos.y, (float)модель.нарядPos.z  кузов.GetMatrix(0)
+                    указатель_наряда.matrix = Matrix.Translation((float)модель.нарядPos.x, (float)модель.нарядPos.y, (float)модель.нарядPos.z) * кузов.last_matrix;//.GetMatrix(0);//(float)модель.нарядPos.x, (float)модель.нарядPos.y, (float)модель.нарядPos.z  кузов.GetMatrix(0)
                     указатель_наряда.Render();
                 }
                 if (табличка_в_парк != null)
                 {
-                       табличка_в_парк.matrix = Matrix.Translation((float)модель.табличка.pos.x, (float)модель.табличка.pos.y, (float)модель.табличка.pos.z) * кузов.last_matrix;//.GetMatrix(0); //((float)модель.табличка.pos.x, (float)модель.табличка.pos.y, (float)модель.табличка.pos.z) * вагон.GetMatrix(0);
-                      табличка_в_парк.Render();
+                    табличка_в_парк.matrix = Matrix.Translation((float)модель.табличка.pos.x, (float)модель.табличка.pos.y, (float)модель.табличка.pos.z) * кузов.last_matrix;//.GetMatrix(0); //((float)модель.табличка.pos.x, (float)модель.табличка.pos.y, (float)модель.табличка.pos.z) * вагон.GetMatrix(0);
+                    табличка_в_парк.Render();
                 }
             }
             

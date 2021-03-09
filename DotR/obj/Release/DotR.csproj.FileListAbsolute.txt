@@ -5,3 +5,10 @@ D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Release\ODE_Test.ExceptionHandlerForm.resources
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Release\DotR.csproj.GenerateResource.Cache
 D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\DotR\obj\Release\DotR.dll
+F:\Projects\Trancity\DotR\bin\Release\ODE_Test64.dll.config
+F:\Projects\Trancity\DotR\bin\Release\ODE_Test64.dll
+F:\Projects\Trancity\DotR\obj\Release\Engine.Controls.RenderForm.resources
+F:\Projects\Trancity\DotR\obj\Release\ODE_Test.ExceptionHandlerForm.resources
+F:\Projects\Trancity\DotR\obj\Release\DotR.csproj.GenerateResource.cache
+F:\Projects\Trancity\DotR\obj\Release\DotR.csproj.CoreCompileInputs.cache
+F:\Projects\Trancity\DotR\obj\Release\ODE_Test64.dll
