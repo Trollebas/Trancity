@@ -6,7 +6,7 @@
  * 
  * Для изменения этого шаблона используйте Сервис | Настройка | Кодирование | Правка стандартных заголовков.
  */
-/*namespace Trancity
+namespace Trancity
 {
 	/// <summary>
 	/// Very simple timer. For tests
@@ -34,4 +34,4 @@
 			}
 		}
 	}
-}*/
+}

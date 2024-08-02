@@ -1,7 +1,9 @@
 ﻿namespace Common
 {
-    using SlimDX.DirectInput;
+//    using Microsoft.DirectX.DirectInput;
+	using SlimDX.DirectInput;
     using System;
+    using System.Reflection;
 
     public class FilteredJoystickState
     {
@@ -46,12 +48,12 @@
         public void Refresh()
         {
             this.device.Poll();
-            this.InputState = this.device.GetCurrentState();
+            this.InputState = this.device.GetCurrentState();//.CurrentJoystickState;
             int num = Environment.TickCount - this.lasttick;
             this.lasttick = Environment.TickCount;
             for (int i = 0; i < 0x10; i++)
             {
-                if ((this.InputState.GetButtons().Length > i) && (this.InputState.GetButtons()[i]))
+            	if ((this.InputState.GetButtons().Length > i) && (this.InputState.GetButtons()[i]))// & 0x80) != 0))
                 {
                     this.key_pressed_unfiltered[i] = true;
                     if (!this.key_pressed[i] && (this.keyticks[i] == 0))
@@ -80,7 +82,7 @@
                     this.keyticks[i] = 0;
                 }
             }
-            int num3 = this.InputState.GetPointOfViewControllers()[0];
+            int num3 = this.InputState.GetPointOfViewControllers()[0];//.GetPointOfView()[0];
             if (num3 != -1)
             {
                 if ((!this.Arrow_Pressed && (this.Arrow_Tick == 0)) || (num3 != this.Arrow_State))

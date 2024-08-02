@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Common
+﻿namespace Common
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+
     public class MyList : ICollection, IEnumerable
     {
         public object[] array;
@@ -45,10 +47,9 @@ namespace Common
                 }
                 foreach (object obj2 in list)
                 {
-                    int typeIndex = this.types.IndexOf(obj2.GetType());
-                    if (typeIndex >= 0)
+                    if (this.types.Contains(obj2.GetType()))
                     {
-                        this.type_lists[typeIndex].Add(obj2);
+                        this.type_lists[this.types.IndexOf(obj2.GetType())].Add(obj2);
                     }
                 }
             }
@@ -59,10 +60,9 @@ namespace Common
             ArrayList list = new ArrayList(this.array);
             list.Add(value);
             this.array = list.ToArray();
-            int typeIndex = this.types.IndexOf(value.GetType());
-            if (typeIndex >= 0)
+            if (this.types.Contains(value.GetType()))
             {
-                this.type_lists[typeIndex].Add(value);
+                this.type_lists[this.types.IndexOf(value.GetType())].Add(value);
             }
             if (this.changed != null)
             {
@@ -79,10 +79,9 @@ namespace Common
             {
                 foreach (object obj2 in c)
                 {
-                    int typeIndex = this.types.IndexOf(obj2.GetType());
-                    if (typeIndex >= 0)
+                    if (this.types.Contains(obj2.GetType()))
                     {
-                        this.type_lists[typeIndex].Add(obj2);
+                        this.type_lists[this.types.IndexOf(obj2.GetType())].Add(obj2);
                     }
                 }
             }
@@ -121,14 +120,13 @@ namespace Common
             this.array.CopyTo(array, index);
         }
 
-        public T[] Get_array<T>()
+        public type[] Get_array<type>()
         {
-            int typeIndex = this.types.IndexOf(typeof(T));
-            if (typeIndex >= 0)
+            if (this.types.Contains(typeof(type)))
             {
-                return (T[])this.type_lists[typeIndex].ToArray(typeof(T));
+                return (type[]) this.type_lists[this.types.IndexOf(typeof(type))].ToArray(typeof(type));
             }
-            return new T[0];
+            return new type[0];
         }
 
         public IEnumerator GetEnumerator()
@@ -147,10 +145,9 @@ namespace Common
             ArrayList list = new ArrayList(this.array);
             list.Insert(index, value);
             this.array = list.ToArray();
-            int typeIndex = this.types.IndexOf(value.GetType());
-            if (typeIndex >= 0)
+            if (this.types.Contains(value.GetType()))
             {
-                this.type_lists[typeIndex].Insert(index, value);
+                this.type_lists[this.types.IndexOf(value.GetType())].Add(value);
             }
             if (this.changed != null)
             {
@@ -173,10 +170,9 @@ namespace Common
             ArrayList list = new ArrayList(this.array);
             list.Remove(value);
             this.array = list.ToArray();
-            int typeIndex = this.types.IndexOf(value.GetType());
-            if (typeIndex >= 0)
+            if (this.types.Contains(value.GetType()))
             {
-                this.type_lists[typeIndex].Remove(value);
+                this.type_lists[this.types.IndexOf(value.GetType())].Remove(value);
             }
             if (this.changed != null)
             {
@@ -186,11 +182,10 @@ namespace Common
 
         public void RemoveAt(int index)
         {
-            object value = this.array[index];
-            int typeIndex = this.types.IndexOf(value.GetType());
-            if (typeIndex >= 0)
+            object obj2 = this.array[index];
+            if (this.types.Contains(obj2.GetType()))
             {
-                this.type_lists[typeIndex].RemoveAt(index);
+                this.type_lists[this.types.IndexOf(obj2.GetType())].Remove(obj2);
             }
             ArrayList list = new ArrayList(this.array);
             list.RemoveAt(index);

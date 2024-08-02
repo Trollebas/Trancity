@@ -1,0 +1,12 @@
+E:\Trancity_Dev\obj\Debug\net20\Trancity.csprojAssemblyReference.cache
+E:\Trancity_Dev\obj\Debug\net20\Trancity.Editor.resources
+E:\Trancity_Dev\obj\Debug\net20\Trancity.csproj.GenerateResource.cache
+E:\Trancity_Dev\bin\Debug\net20\Trancity.exe.config
+E:\Trancity_Dev\bin\Debug\net20\Trancity.exe
+E:\Trancity_Dev\bin\Debug\net20\Trancity.pdb
+E:\Trancity_Dev\bin\Debug\net20\DotR.dll
+E:\Trancity_Dev\bin\Debug\net20\SlimDX.dll
+E:\Trancity_Dev\obj\Debug\net20\Trancity.csproj.CopyComplete
+E:\Trancity_Dev\obj\Debug\net20\Trancity.exe
+E:\Trancity_Dev\obj\Debug\net20\Trancity.pdb
+E:\Trancity_Dev\obj\Debug\net20\Trancity.Options.resources

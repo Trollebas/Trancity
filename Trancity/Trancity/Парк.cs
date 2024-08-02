@@ -1,5 +1,7 @@
 ﻿namespace Trancity
 {
+    using System;
+
     public class Парк
     {
         public Road въезд;

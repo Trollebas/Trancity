@@ -1,4 +1,3 @@
-using Engine;
 using System.Runtime.InteropServices;
 
 namespace Trancity
@@ -11,12 +10,22 @@ namespace Trancity
         public double отклонение;
         public double высота;
         public object comment;
-        public ѕоложение(IObjectContainer container, double рассто€ние) : this(container, рассто€ние, 0.0, 0.0)
+        public ѕоложение(IObjectContainer container, double рассто€ние)
         {
+            _container = container;
+            this.рассто€ние = рассто€ние;
+            отклонение = 0.0;
+            высота = 0.0;
+            comment = null;
         }
 
-        public ѕоложение(IObjectContainer container, double рассто€ние, double отклонение) : this(container, рассто€ние, отклонение, 0.0)
+        public ѕоложение(IObjectContainer container, double рассто€ние, double отклонение)
         {
+            _container = container;
+            this.рассто€ние = рассто€ние;
+            this.отклонение = отклонение;
+            высота = 0.0;
+            comment = null;
         }
 
         public ѕоложение(IObjectContainer container, double рассто€ние, double отклонение, double высота)
@@ -34,7 +43,7 @@ namespace Trancity
             {
                 if ((_container != null) && (_container is Road))
                 {
-                    return (Road)_container;
+                    return (Road) _container;
                 }
                 return null;
             }
@@ -49,7 +58,7 @@ namespace Trancity
             {
                 if ((_container != null) && (_container is –ельс))
                 {
-                    return (–ельс)_container;
+                    return (–ельс) _container;
                 }
                 return null;
             }

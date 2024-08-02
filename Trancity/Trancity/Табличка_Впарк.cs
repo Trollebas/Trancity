@@ -8,30 +8,31 @@
  */
 namespace Trancity
 {
-    using Common;
-    //	using Microsoft.DirectX;
-    using SlimDX;
-
-    public class ТабличкаВПарк : MeshObject, MeshObject.IFromFile, IMatrixObject
+	using System;
+	using Common;
+//	using Microsoft.DirectX;
+	using SlimDX;
+	
+	public class ТабличкаВПарк : MeshObject, MeshObject.IFromFile, IMatrixObject
     {
-        public Matrix matrix;
+    	public Matrix matrix;
         private Transport _транспорт;
 
         public ТабличкаВПарк(Transport транспорт)
         {
-            _транспорт = транспорт;
+        	_транспорт = транспорт;
         }
 
         public Matrix GetMatrix(int index)
         {
-            return matrix;
+        	return matrix;
         }
 
         public string Filename
         {
-            get
+        	get
             {
-                base.meshDir = _транспорт.модель.dir;
+            	base.meshDir = _транспорт.модель.dir;
                 return _транспорт.модель.табличка.filename;
             }
         }
@@ -43,5 +44,5 @@ namespace Trancity
                 return _транспорт.в_парк ? 1 : 0;
             }
         }
-    }
+	}
 }

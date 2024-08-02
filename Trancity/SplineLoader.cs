@@ -7,38 +7,39 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 
-using Engine;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using System.Xml;
+using Common;
 
 namespace Trancity
 {
-    public static class SplineLoader
+	public static class SplineLoader
     {
         public static readonly List<SplineModel> splines = new List<SplineModel>();
-
+        
         static SplineLoader()
         {
             var document = new XmlDocument();
+            Xml.document = document;
             var path = Application.StartupPath + @"\Data\Splines\";
             if (!Directory.Exists(path))
             {
-                Logger.Log("SplineLoader", "Directory " + path + " не найден!");
-                return;
+            	Logging.Write("SplineLoader", "Directory " + path + " not found!");
+            	return;
             }
             foreach (var directory in Directory.GetDirectories(path))
             {
-                var directory1 = directory + @"\";
+                var directory1 = directory+ @"\";
                 try
                 {
                     document.Load(directory1 + "spline.xml");
                 }
                 catch (Exception)
                 {
-                    Logger.Log("SplineLoader", "spline.xml не обнаружен в " + directory1);
+                	Logging.Write("SplineLoader", "spline.xml not found in directory " + directory1);
                     continue;
                 }
                 var element = document["Trancity"];
@@ -48,11 +49,11 @@ namespace Trancity
                 var model = new SplineModel();
                 try
                 {
-                    model.dir = directory1 + node["dir"].InnerText;
-                    model.name = node["name"].InnerText;
-                    model.type = (int)Engine.Xml.GetDouble(node["type"]);
-                    model.noscale = Engine.Xml.GetDouble(node["noscale"]) != 0.0;
-                    model.length = Engine.Xml.GetDouble(node["length"]);
+                	model.dir = directory1 + node["dir"].InnerText;
+                	model.name = node["name"].InnerText;
+                	model.type = (int)Xml.GetDouble(node["type"]);
+                    model.noscale = Xml.GetDouble(node["noscale"]) != 0.0;
+                    model.length = Xml.GetDouble(node["length"]);
                     model.texture_filename = node["texture_filename"].InnerText;
                     model.points = LoadSplinePoints(node["points"]);
                     model.mesh_filename = node["mesh_filename"].InnerText;
@@ -60,12 +61,12 @@ namespace Trancity
                 }
                 catch (Exception)
                 {
-                    Logger.Log("SplineLoader", "Ошибка в " + directory1 + "spline.xml");
+                	Logging.Write("SplineLoader", "Error in " + directory1 + "spline.xml");
                     continue;
                 }
             }
         }
-
+        
         private static Double3DPoint[] LoadSplinePoints(XmlNode items)
         {
             var pointArray = new Double3DPoint[items.ChildNodes.Count];
@@ -75,10 +76,10 @@ namespace Trancity
             }
             return pointArray;
         }
-
+        
         private static Double3DPoint LoadSplinePoint(XmlNode items)
         {
-            return new Double3DPoint(Engine.Xml.GetDouble(items["x"]), Engine.Xml.GetDouble(items["y"]), Engine.Xml.GetDouble(items["texv"]));
+            return new Double3DPoint(Xml.GetDouble(items["x"]), Xml.GetDouble(items["y"]), Xml.GetDouble(items["texv"]));
         }
     }
 }

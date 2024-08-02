@@ -1,5 +1,6 @@
 ﻿namespace Common
 {
+//    using Microsoft.DirectX;
     using SlimDX;
 
     public interface IMatrixObject

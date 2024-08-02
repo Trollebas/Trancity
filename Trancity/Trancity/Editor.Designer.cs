@@ -10,7 +10,6 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System;
 using System.Drawing;
-using  Trancity;
 
 namespace Trancity
 {
@@ -20,7 +19,7 @@ namespace Trancity
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private IContainer components = null;
-
+		
 		/// <summary>
 		/// Disposes resources used by the form.
 		/// </summary>
@@ -35,14 +34,12 @@ namespace Trancity
 			base.Dispose(disposing);
 		}
 		
-		
-		
 		/// <summary>
 		/// This method is required for Windows Forms designer support.
 		/// Do not change the method contents inside the source code editor. The Forms designer might
 		/// not be able to load this method if it was changed manually.
 		/// </summary>
-		public void InitializeComponent()
+		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
@@ -93,7 +90,6 @@ namespace Trancity
 			this.Play_Button = new System.Windows.Forms.ToolBarButton();
 			this.SeparatorButton3 = new System.Windows.Forms.ToolBarButton();
 			this.SeparatorButton4 = new System.Windows.Forms.ToolBarButton();
-			this.ButtonUndo = new System.Windows.Forms.ToolBarButton();
 			this.Edit_Button = new System.Windows.Forms.ToolBarButton();
 			this.Rail_Button = new System.Windows.Forms.ToolBarButton();
 			this.Troll_lines_Button = new System.Windows.Forms.ToolBarButton();
@@ -105,7 +101,6 @@ namespace Trancity
 			this.Signals_Button = new System.Windows.Forms.ToolBarButton();
 			this.Svetofor_Button = new System.Windows.Forms.ToolBarButton();
 			this.Object_Button = new System.Windows.Forms.ToolBarButton();
-			this.Info = new System.Windows.Forms.ToolBarButton();
 			this.toolBarButton3 = new System.Windows.Forms.ToolBarButton();
 			this.SeparatorButton8 = new System.Windows.Forms.ToolBarButton();
 			this.Rail_Edit_Button = new System.Windows.Forms.ToolBarButton();
@@ -120,8 +115,6 @@ namespace Trancity
 			this.Rail_Build_встречки1_Button = new System.Windows.Forms.ToolBarButton();
 			this.Rail_Build_встречки2_Button = new System.Windows.Forms.ToolBarButton();
 			this.Rail_Build_встречки3_Button = new System.Windows.Forms.ToolBarButton();
-			this.TramWireOverRail = new System.Windows.Forms.ToolBarButton();
-			this.TrollWireOverRoad = new System.Windows.Forms.ToolBarButton();
 			this.Park_Edit_Button = new System.Windows.Forms.ToolBarButton();
 			this.Park_In_Button = new System.Windows.Forms.ToolBarButton();
 			this.Park_Out_Button = new System.Windows.Forms.ToolBarButton();
@@ -129,10 +122,8 @@ namespace Trancity
 			this.Troll_lines_Edit_Button = new System.Windows.Forms.ToolBarButton();
 			this.Troll_lines_Draw_Button = new System.Windows.Forms.ToolBarButton();
 			this.Troll_lines_Flag_Button = new System.Windows.Forms.ToolBarButton();
-			this.Troll_lines_Doblue = new System.Windows.Forms.ToolBarButton();
-			this.Troll_lines_Against = new System.Windows.Forms.ToolBarButton();
 			this.imageList = new System.Windows.Forms.ImageList(this.components);
-			this.renderPanel = new Engine.Controls.RenderPanel();
+			this.panel = new System.Windows.Forms.Panel();
 			this.object_panel = new System.Windows.Forms.Panel();
 			this.Objects_Instance_Box = new System.Windows.Forms.ComboBox();
 			this.Objects_Instance_label = new System.Windows.Forms.Label();
@@ -147,10 +138,9 @@ namespace Trancity
 			this.StopsButton = new System.Windows.Forms.Button();
 			this.Route_TransportType_Box = new System.Windows.Forms.ComboBox();
 			this.Route_TransportType_label = new System.Windows.Forms.Label();
-			this.TrolleybusAXBox = new System.Windows.Forms.CheckBox();
 			this.Route_ShowNarads_Box = new System.Windows.Forms.CheckBox();
 			this.Route_Runs_ComputeTime_Button = new System.Windows.Forms.Button();
-			this.Route_Runs_Time_Box = new TimeBox();
+			this.Route_Runs_Time_Box = new Trancity.TimeBox();
 			this.Route_Runs_ToParkIndex_UpDown = new System.Windows.Forms.NumericUpDown();
 			this.Route_Runs_ToPark_Box = new System.Windows.Forms.CheckBox();
 			this.Route_Runs_Park_Box = new System.Windows.Forms.CheckBox();
@@ -173,11 +163,12 @@ namespace Trancity
 			this.Svetofor_Svetofor_ArrowRed_Box = new System.Windows.Forms.ComboBox();
 			this.Svetofor_Svetofor_ArrowYellow_Box = new System.Windows.Forms.ComboBox();
 			this.Svetofor_Svetofor_ArrowGreen_Box = new System.Windows.Forms.ComboBox();
-			this.Svetofor_Cycle_Box = new TimeBox();
-			this.Svetofor_OfGreen_Box = new TimeBox();
-			this.Svetofor_End_Box = new TimeBox();
-			this.Svetofor_ToGreen_Box = new TimeBox();
-			this.Svetofor_Begin_Box = new TimeBox();
+			this.Svetofor_Cycle_Box = new Trancity.TimeBox();
+			this.Svetofor_OfGreen_Box = new Trancity.TimeBox();
+			this.Svetofor_End_Box = new Trancity.TimeBox();
+			this.Svetofor_ToGreen_Box = new Trancity.TimeBox();
+			this.Svetofor_Begin_Box = new Trancity.TimeBox();
+			this.Svetofor_Svetofor_Arrow_Box = new System.Windows.Forms.CheckBox();
 			this.Svetofor_Element_Location_label = new System.Windows.Forms.Label();
 			this.Svetofor_Cycle_label = new System.Windows.Forms.Label();
 			this.Svetofor_Green_label = new System.Windows.Forms.Label();
@@ -202,7 +193,6 @@ namespace Trancity
 			this.Splines_Instance_Box = new System.Windows.Forms.ComboBox();
 			this.Splines_Instance_label = new System.Windows.Forms.Label();
 			this.Splines_ShowLocation_Button = new System.Windows.Forms.Button();
-			this.Rail_Box_dist_Label = new System.Windows.Forms.Label();
 			this.Splines_Location_label = new System.Windows.Forms.Label();
 			this.Splines_ChangeModel_Button = new System.Windows.Forms.Button();
 			this.Splines_Remove_Button = new System.Windows.Forms.Button();
@@ -259,8 +249,8 @@ namespace Trancity
 			this.narad_panel = new System.Windows.Forms.Panel();
 			this.RollingStockBox = new System.Windows.Forms.ComboBox();
 			this.Transport_label = new System.Windows.Forms.Label();
-			this.Narad_Runs_Time2_Box = new TimeBox();
-			this.Narad_Runs_Time1_Box = new TimeBox();
+			this.Narad_Runs_Time2_Box = new Trancity.TimeBox();
+			this.Narad_Runs_Time1_Box = new Trancity.TimeBox();
 			this.Narad_Runs_Time2_label = new System.Windows.Forms.Label();
 			this.Narad_Runs_Time1_label = new System.Windows.Forms.Label();
 			this.Narad_Runs_label = new System.Windows.Forms.Label();
@@ -278,6 +268,7 @@ namespace Trancity
 			this.Narad_Runs_Run_Box = new System.Windows.Forms.ComboBox();
 			this.Narad_Runs_Box = new System.Windows.Forms.ComboBox();
 			this.Narad_Box = new System.Windows.Forms.ComboBox();
+			this.Rail_Box_dist_Label = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.Cursor_x_Status)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cursor_y_Status)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.SeparatorPanel1)).BeginInit();
@@ -300,6 +291,7 @@ namespace Trancity
 			((System.ComponentModel.ISupportInitialize)(this.Maschtab)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.SeparatorPanel5)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Ugol)).BeginInit();
+			this.panel.SuspendLayout();
 			this.object_panel.SuspendLayout();
 			this.route_panel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Route_Runs_ToParkIndex_UpDown)).BeginInit();
@@ -317,30 +309,32 @@ namespace Trancity
 			// mainMenu
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-			this.City_Item});
+									this.City_Item});
 			// 
 			// City_Item
 			// 
 			this.City_Item.Index = 0;
 			this.City_Item.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-			this.New_Item,
-			this.Open_Item,
-			this.Save_Item,
-			this.SaveAs_Item,
-			this.SeparatorItem1,
-			this.Refresh_All_TripStop_Lists_Item,
-			this.Check_Joints_Item,
-			this.Find_MinRadius_Item,
-			this.ComputeAllTime_Item,
-			this.Run_Item,
-			this.SeparatorItem2,
-			this.Exit_Item});
-			this.City_Item.Text = "Карта";
+									this.New_Item,
+									this.Open_Item,
+									this.Save_Item,
+									this.SaveAs_Item,
+									this.SeparatorItem1,
+									this.Refresh_All_TripStop_Lists_Item,
+									this.Check_Joints_Item,
+									this.Find_MinRadius_Item,
+									this.ComputeAllTime_Item,
+									this.Run_Item,
+									this.SeparatorItem2,
+									this.Exit_Item});
+			this.City_Item.Name = "City_Item";
+			this.City_Item.Text = "Город";
 			// 
 			// New_Item
 			// 
 			this.New_Item.Index = 0;
 			this.New_Item.Shortcut = System.Windows.Forms.Shortcut.CtrlN;
+			this.New_Item.Name = "New_Item";
 			this.New_Item.Text = "Новый";
 			this.New_Item.Click += new System.EventHandler(this.New_Item_Click);
 			// 
@@ -348,6 +342,7 @@ namespace Trancity
 			// 
 			this.Open_Item.Index = 1;
 			this.Open_Item.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
+			this.Open_Item.Name = "Open_Item";
 			this.Open_Item.Text = "Открыть...";
 			this.Open_Item.Click += new System.EventHandler(this.Open_Item_Click);
 			// 
@@ -355,12 +350,14 @@ namespace Trancity
 			// 
 			this.Save_Item.Index = 2;
 			this.Save_Item.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
+			this.Save_Item.Name = "Save_Item";
 			this.Save_Item.Text = "Сохранить";
 			this.Save_Item.Click += new System.EventHandler(this.Save_Item_Click);
 			// 
 			// SaveAs_Item
 			// 
 			this.SaveAs_Item.Index = 3;
+			this.SaveAs_Item.Name = "SaveAs_Item";
 			this.SaveAs_Item.Text = "Сохранить как...";
 			this.SaveAs_Item.Click += new System.EventHandler(this.SaveAs_Item_Click);
 			// 
@@ -373,6 +370,7 @@ namespace Trancity
 			// 
 			this.Refresh_All_TripStop_Lists_Item.Index = 5;
 			this.Refresh_All_TripStop_Lists_Item.Shortcut = System.Windows.Forms.Shortcut.F3;
+			this.Refresh_All_TripStop_Lists_Item.Name = "Refresh_All_TripStop_Lists_Item";
 			this.Refresh_All_TripStop_Lists_Item.Text = "Обновить все остановки рейсов...";
 			this.Refresh_All_TripStop_Lists_Item.Click += new System.EventHandler(this.Refresh_All_TripStop_Lists_Item_Click);
 			// 
@@ -380,18 +378,21 @@ namespace Trancity
 			// 
 			this.Check_Joints_Item.Index = 6;
 			this.Check_Joints_Item.Shortcut = System.Windows.Forms.Shortcut.F4;
+			this.Check_Joints_Item.Name = "Check_Joints_Item";
 			this.Check_Joints_Item.Text = "Проверить стыки...";
 			this.Check_Joints_Item.Click += new System.EventHandler(this.Check_стыки_Item_Click);
 			// 
 			// Find_MinRadius_Item
 			// 
 			this.Find_MinRadius_Item.Index = 7;
+			this.Find_MinRadius_Item.Name = "Find_MinRadius_Item";
 			this.Find_MinRadius_Item.Text = "Найти минимальный радиус кривой...";
 			this.Find_MinRadius_Item.Click += new System.EventHandler(this.Find_MinRadius_Item_Click);
 			// 
 			// ComputeAllTime_Item
 			// 
 			this.ComputeAllTime_Item.Index = 8;
+			this.ComputeAllTime_Item.Name = "ComputeAllTime_Item";
 			this.ComputeAllTime_Item.Text = "Посчитать время всех рейсов...";
 			this.ComputeAllTime_Item.Click += new System.EventHandler(this.ComputeAllTime_Item_Click);
 			// 
@@ -399,6 +400,7 @@ namespace Trancity
 			// 
 			this.Run_Item.Index = 9;
 			this.Run_Item.Shortcut = System.Windows.Forms.Shortcut.F5;
+			this.Run_Item.Name = "Run_Item";
 			this.Run_Item.Text = "Запустить";
 			this.Run_Item.Click += new System.EventHandler(this.RunItemClick);
 			// 
@@ -411,38 +413,39 @@ namespace Trancity
 			// 
 			this.Exit_Item.Index = 11;
 			this.Exit_Item.Shortcut = System.Windows.Forms.Shortcut.AltF4;
+			this.Exit_Item.Name = "Exit_Item";
 			this.Exit_Item.Text = "Выход";
 			this.Exit_Item.Click += new System.EventHandler(this.Exit_Item_Click);
 			// 
 			// statusBar
 			// 
-			this.statusBar.Location = new System.Drawing.Point(0, 851);
+			this.statusBar.Location = new System.Drawing.Point(0, 984);
 			this.statusBar.Name = "statusBar";
 			this.statusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
-			this.Cursor_x_Status,
-			this.Cursor_y_Status,
-			this.SeparatorPanel1,
-			this.Coord_x1_Status,
-			this.Coord_y1_Status,
-			this.Angle1_Status,
-			this.SeparatorPanel2,
-			this.Coord_x2_Status,
-			this.Coord_y2_Status,
-			this.Angle2_Status,
-			this.SeparatorPanel3,
-			this.Length_Status,
-			this.Radius_Status,
-			this.Angle_Status,
-			this.Wide0_Status,
-			this.Wide1_Status,
-			this.Height0_Status,
-			this.Height1_Status,
-			this.SeparatorPanel4,
-			this.Maschtab,
-			this.SeparatorPanel5,
-			this.Ugol});
+									this.Cursor_x_Status,
+									this.Cursor_y_Status,
+									this.SeparatorPanel1,
+									this.Coord_x1_Status,
+									this.Coord_y1_Status,
+									this.Angle1_Status,
+									this.SeparatorPanel2,
+									this.Coord_x2_Status,
+									this.Coord_y2_Status,
+									this.Angle2_Status,
+									this.SeparatorPanel3,
+									this.Length_Status,
+									this.Radius_Status,
+									this.Angle_Status,
+									this.Wide0_Status,
+									this.Wide1_Status,
+									this.Height0_Status,
+									this.Height1_Status,
+									this.SeparatorPanel4,
+									this.Maschtab,
+									this.SeparatorPanel5,
+									this.Ugol});
 			this.statusBar.ShowPanels = true;
-			this.statusBar.Size = new System.Drawing.Size(850, 22);
+			this.statusBar.Size = new System.Drawing.Size(692, 22);
 			this.statusBar.TabIndex = 0;
 			// 
 			// Cursor_x_Status
@@ -587,53 +590,47 @@ namespace Trancity
 			// toolBar
 			// 
 			this.toolBar.Buttons.AddRange(new System.Windows.Forms.ToolBarButton[] {
-			this.New_Button,
-			this.Open_Button,
-			this.Save_Button,
-			this.SeparatorButton1,
-			this.SeparatorButton2,
-			this.Run_Button,
-			this.Play_Button,
-			this.SeparatorButton3,
-			this.SeparatorButton4,
-			this.ButtonUndo,
-			this.Edit_Button,
-			this.Rail_Button,
-			this.Troll_lines_Button,
-			this.SeparatorButton5,
-			this.SeparatorButton6,
-			this.Stops_Button,
-			this.Park_Button,
-			this.Route_Button,
-			this.Signals_Button,
-			this.Svetofor_Button,
-			this.Object_Button,
-			this.Info,
-			this.toolBarButton3,
-			this.SeparatorButton8,
-			this.Rail_Edit_Button,
-			this.Rail_Build_Direct_Button,
-			this.Rail_Build_Curve_Button,
-			this.Road_Button,
-			this.Rail_Build_попутки_Button,
-			this.Rail_Build_попутки1_Button,
-			this.Rail_Build_попутки2_Button,
-			this.Rail_Build_попутки3_Button,
-			this.Rail_Build_встречки_Button,
-			this.Rail_Build_встречки1_Button,
-			this.Rail_Build_встречки2_Button,
-			this.Rail_Build_встречки3_Button,
-			this.TramWireOverRail,
-			this.TrollWireOverRoad,
-			this.Park_Edit_Button,
-			this.Park_In_Button,
-			this.Park_Out_Button,
-			this.Park_Rails_Button,
-			this.Troll_lines_Edit_Button,
-			this.Troll_lines_Draw_Button,
-			this.Troll_lines_Flag_Button,
-			this.Troll_lines_Doblue,
-			this.Troll_lines_Against});
+									this.New_Button,
+									this.Open_Button,
+									this.Save_Button,
+									this.SeparatorButton1,
+									this.SeparatorButton2,
+									this.Run_Button,
+									this.Play_Button,
+									this.SeparatorButton3,
+									this.SeparatorButton4,
+									this.Edit_Button,
+									this.Rail_Button,
+									this.Troll_lines_Button,
+									this.SeparatorButton5,
+									this.SeparatorButton6,
+									this.Stops_Button,
+									this.Park_Button,
+									this.Route_Button,
+									this.Signals_Button,
+									this.Svetofor_Button,
+									this.Object_Button,
+									this.toolBarButton3,
+									this.SeparatorButton8,
+									this.Rail_Edit_Button,
+									this.Rail_Build_Direct_Button,
+									this.Rail_Build_Curve_Button,
+									this.Road_Button,
+									this.Rail_Build_попутки_Button,
+									this.Rail_Build_попутки1_Button,
+									this.Rail_Build_попутки2_Button,
+									this.Rail_Build_попутки3_Button,
+									this.Rail_Build_встречки_Button,
+									this.Rail_Build_встречки1_Button,
+									this.Rail_Build_встречки2_Button,
+									this.Rail_Build_встречки3_Button,
+									this.Park_Edit_Button,
+									this.Park_In_Button,
+									this.Park_Out_Button,
+									this.Park_Rails_Button,
+									this.Troll_lines_Edit_Button,
+									this.Troll_lines_Draw_Button,
+									this.Troll_lines_Flag_Button});
 			this.toolBar.DropDownArrows = true;
 			this.toolBar.ImageList = this.imageList;
 			this.toolBar.Location = new System.Drawing.Point(0, 0);
@@ -647,19 +644,19 @@ namespace Trancity
 			// 
 			this.New_Button.ImageIndex = 2;
 			this.New_Button.Name = "New_Button";
-			this.New_Button.ToolTipText = "Новая карта";
+			this.New_Button.ToolTipText = "Новый город";
 			// 
 			// Open_Button
 			// 
 			this.Open_Button.ImageIndex = 0;
 			this.Open_Button.Name = "Open_Button";
-			this.Open_Button.ToolTipText = "Открыть карту";
+			this.Open_Button.ToolTipText = "Открыть город";
 			// 
 			// Save_Button
 			// 
 			this.Save_Button.ImageIndex = 1;
 			this.Save_Button.Name = "Save_Button";
-			this.Save_Button.ToolTipText = "Сохранить карту";
+			this.Save_Button.ToolTipText = "Сохранить город";
 			// 
 			// SeparatorButton1
 			// 
@@ -675,7 +672,7 @@ namespace Trancity
 			// 
 			this.Run_Button.ImageIndex = 3;
 			this.Run_Button.Name = "Run_Button";
-			this.Run_Button.ToolTipText = "Запустить игру на карте";
+			this.Run_Button.ToolTipText = "Запустить игру в городе";
 			// 
 			// Play_Button
 			// 
@@ -696,17 +693,12 @@ namespace Trancity
 			this.SeparatorButton4.Name = "SeparatorButton4";
 			this.SeparatorButton4.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
 			// 
-			// ButtonUndo
-			// 
-			this.ButtonUndo.ImageIndex = 26;
-			this.ButtonUndo.Name = "ButtonUndo";
-			this.ButtonUndo.ToolTipText = "Отменить";
-			// 
 			// Edit_Button
 			// 
 			this.Edit_Button.ImageIndex = 4;
 			this.Edit_Button.Name = "Edit_Button";
 			this.Edit_Button.Pushed = true;
+			this.Edit_Button.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
 			// 
 			// Rail_Button
 			// 
@@ -717,7 +709,7 @@ namespace Trancity
 			// 
 			// Troll_lines_Button
 			// 
-			this.Troll_lines_Button.ImageIndex = 28;
+			this.Troll_lines_Button.ImageIndex = 6;
 			this.Troll_lines_Button.Name = "Troll_lines_Button";
 			this.Troll_lines_Button.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
 			this.Troll_lines_Button.ToolTipText = "Контактные провода троллейбуса";
@@ -773,12 +765,6 @@ namespace Trancity
 			this.Object_Button.Name = "Object_Button";
 			this.Object_Button.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
 			this.Object_Button.ToolTipText = "Объекты";
-			// 
-			// Info
-			// 
-			this.Info.ImageIndex = 27;
-			this.Info.Name = "Info";
-			this.Info.ToolTipText = "Помощь по редактору";
 			// 
 			// toolBarButton3
 			// 
@@ -867,20 +853,6 @@ namespace Trancity
 			this.Rail_Build_встречки3_Button.Name = "Rail_Build_встречки3_Button";
 			this.Rail_Build_встречки3_Button.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
 			// 
-			// TramWireOverRail
-			// 
-			this.TramWireOverRail.ImageIndex = 29;
-			this.TramWireOverRail.Name = "TramWireOverRail";
-			this.TramWireOverRail.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
-			this.TramWireOverRail.ToolTipText = "Трамвайная КС";
-			// 
-			// TrollWireOverRoad
-			// 
-			this.TrollWireOverRoad.ImageIndex = 6;
-			this.TrollWireOverRoad.Name = "TrollWireOverRoad";
-			this.TrollWireOverRoad.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
-			this.TrollWireOverRoad.ToolTipText = "Троллейбусная КС";
-			// 
 			// Park_Edit_Button
 			// 
 			this.Park_Edit_Button.ImageIndex = 4;
@@ -915,14 +887,12 @@ namespace Trancity
 			this.Troll_lines_Edit_Button.Name = "Troll_lines_Edit_Button";
 			this.Troll_lines_Edit_Button.Pushed = true;
 			this.Troll_lines_Edit_Button.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
-			this.Troll_lines_Edit_Button.ToolTipText = "Редактировать КС";
 			// 
 			// Troll_lines_Draw_Button
 			// 
 			this.Troll_lines_Draw_Button.ImageIndex = 6;
 			this.Troll_lines_Draw_Button.Name = "Troll_lines_Draw_Button";
 			this.Troll_lines_Draw_Button.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
-			this.Troll_lines_Draw_Button.ToolTipText = "Троллейбусная КС";
 			// 
 			// Troll_lines_Flag_Button
 			// 
@@ -930,20 +900,6 @@ namespace Trancity
 			this.Troll_lines_Flag_Button.Name = "Troll_lines_Flag_Button";
 			this.Troll_lines_Flag_Button.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
 			this.Troll_lines_Flag_Button.ToolTipText = "Трамвайная КС";
-			// 
-			// Troll_lines_Doblue
-			// 
-			this.Troll_lines_Doblue.ImageIndex = 20;
-			this.Troll_lines_Doblue.Name = "Troll_lines_Doblue";
-			this.Troll_lines_Doblue.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
-			this.Troll_lines_Doblue.ToolTipText = "Две линии КС";
-			// 
-			// Troll_lines_Against
-			// 
-			this.Troll_lines_Against.ImageIndex = 21;
-			this.Troll_lines_Against.Name = "Troll_lines_Against";
-			this.Troll_lines_Against.Style = System.Windows.Forms.ToolBarButtonStyle.ToggleButton;
-			this.Troll_lines_Against.ToolTipText = "КС паралельно";
 			// 
 			// imageList
 			// 
@@ -974,23 +930,24 @@ namespace Trancity
 			this.imageList.Images.SetKeyName(22, "1.PNG");
 			this.imageList.Images.SetKeyName(23, "2.PNG");
 			this.imageList.Images.SetKeyName(24, "3.PNG");
-			this.imageList.Images.SetKeyName(25, "кс.png");
-			this.imageList.Images.SetKeyName(26, "Undo.ico");
-			this.imageList.Images.SetKeyName(27, "info.ico");
-			this.imageList.Images.SetKeyName(28, "Contact_Wire");
-			this.imageList.Images.SetKeyName(29, "Catenary_Tram");
 			// 
-			// renderPanel
+			// panel
 			// 
-			this.renderPanel.Location = new System.Drawing.Point(0, 0);
-			this.renderPanel.Name = "renderPanel";
-			this.renderPanel.Size = new System.Drawing.Size(1600, 1200);
-			this.renderPanel.TabIndex = 2;
-			this.renderPanel.Load += new System.EventHandler(this.RenderPanelLoad);
-			this.renderPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_MouseDown);
-			this.renderPanel.MouseLeave += new System.EventHandler(this.panel_MouseLeave);
-			this.renderPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_MouseMove);
-			this.renderPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_MouseUp);
+			this.panel.Controls.Add(this.object_panel);
+			this.panel.Controls.Add(this.route_panel);
+			this.panel.Controls.Add(this.svetofor_panel);
+			this.panel.Controls.Add(this.splines_panel);
+			this.panel.Controls.Add(this.signals_panel);
+			this.panel.Controls.Add(this.stops_panel);
+			this.panel.Controls.Add(this.park_panel);
+			this.panel.Location = new System.Drawing.Point(0, 0);
+			this.panel.Name = "panel";
+			this.panel.Size = new System.Drawing.Size(1600, 1200);
+			this.panel.TabIndex = 2;
+			this.panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_MouseDown);
+			this.panel.MouseLeave += new System.EventHandler(this.panel_MouseLeave);
+			this.panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_MouseMove);
+			this.panel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_MouseUp);
 			// 
 			// object_panel
 			// 
@@ -1024,7 +981,7 @@ namespace Trancity
 			this.Objects_Instance_label.AutoSize = true;
 			this.Objects_Instance_label.Location = new System.Drawing.Point(11, 63);
 			this.Objects_Instance_label.Name = "Objects_Instance_label";
-			this.Objects_Instance_label.Size = new System.Drawing.Size(75, 13);
+			this.Objects_Instance_label.Size = new System.Drawing.Size(85, 13);
 			this.Objects_Instance_label.TabIndex = 7;
 			this.Objects_Instance_label.Text = "Экземпляры:";
 			// 
@@ -1053,7 +1010,7 @@ namespace Trancity
 			this.Objects_Location_label.AutoSize = true;
 			this.Objects_Location_label.Location = new System.Drawing.Point(11, 193);
 			this.Objects_Location_label.Name = "Objects_Location_label";
-			this.Objects_Location_label.Size = new System.Drawing.Size(98, 13);
+			this.Objects_Location_label.Size = new System.Drawing.Size(111, 13);
 			this.Objects_Location_label.TabIndex = 4;
 			this.Objects_Location_label.Text = "Местоположение:";
 			// 
@@ -1092,7 +1049,7 @@ namespace Trancity
 			this.Objects_label.AutoSize = true;
 			this.Objects_label.Location = new System.Drawing.Point(11, 20);
 			this.Objects_label.Name = "Objects_label";
-			this.Objects_label.Size = new System.Drawing.Size(56, 13);
+			this.Objects_label.Size = new System.Drawing.Size(64, 13);
 			this.Objects_label.TabIndex = 0;
 			this.Objects_label.Text = "Объекты:";
 			// 
@@ -1101,7 +1058,6 @@ namespace Trancity
 			this.route_panel.Controls.Add(this.StopsButton);
 			this.route_panel.Controls.Add(this.Route_TransportType_Box);
 			this.route_panel.Controls.Add(this.Route_TransportType_label);
-			this.route_panel.Controls.Add(this.TrolleybusAXBox);
 			this.route_panel.Controls.Add(this.Route_ShowNarads_Box);
 			this.route_panel.Controls.Add(this.Route_Runs_ComputeTime_Button);
 			this.route_panel.Controls.Add(this.Route_Runs_Time_Box);
@@ -1143,9 +1099,9 @@ namespace Trancity
 			this.Route_TransportType_Box.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Route_TransportType_Box.FormattingEnabled = true;
 			this.Route_TransportType_Box.Items.AddRange(new object[] {
-			"Трамвай",
-			"Троллейбус",
-			"Автобус"});
+									"Трамвай",
+									"Троллейбус",
+									"Автобус"});
 			this.Route_TransportType_Box.Location = new System.Drawing.Point(11, 233);
 			this.Route_TransportType_Box.Name = "Route_TransportType_Box";
 			this.Route_TransportType_Box.Size = new System.Drawing.Size(136, 21);
@@ -1157,27 +1113,16 @@ namespace Trancity
 			this.Route_TransportType_label.AutoSize = true;
 			this.Route_TransportType_label.Location = new System.Drawing.Point(11, 217);
 			this.Route_TransportType_label.Name = "Route_TransportType_label";
-			this.Route_TransportType_label.Size = new System.Drawing.Size(90, 13);
+			this.Route_TransportType_label.Size = new System.Drawing.Size(104, 13);
 			this.Route_TransportType_label.TabIndex = 10;
 			this.Route_TransportType_label.Text = "Вид транспорта:";
-			// 
-			// TrolleybusAXBox
-			// 
-			this.TrolleybusAXBox.AutoSize = true;
-			this.TrolleybusAXBox.Location = new System.Drawing.Point(11, 260);
-			this.TrolleybusAXBox.Name = "TrolleybusAXBox";
-			this.TrolleybusAXBox.Size = new System.Drawing.Size(182, 27);
-			this.TrolleybusAXBox.TabIndex = 10;
-			this.TrolleybusAXBox.Text = "Маршрут с АХ";
-			this.TrolleybusAXBox.UseVisualStyleBackColor = true;
-			this.TrolleybusAXBox.Click += new System.EventHandler(this.TrolleybusAXBox_Click);
 			// 
 			// Route_ShowNarads_Box
 			// 
 			this.Route_ShowNarads_Box.AutoSize = true;
 			this.Route_ShowNarads_Box.Location = new System.Drawing.Point(11, 578);
 			this.Route_ShowNarads_Box.Name = "Route_ShowNarads_Box";
-			this.Route_ShowNarads_Box.Size = new System.Drawing.Size(116, 17);
+			this.Route_ShowNarads_Box.Size = new System.Drawing.Size(129, 17);
 			this.Route_ShowNarads_Box.TabIndex = 9;
 			this.Route_ShowNarads_Box.Text = "Показать наряды";
 			this.Route_ShowNarads_Box.UseVisualStyleBackColor = true;
@@ -1214,7 +1159,7 @@ namespace Trancity
 			// 
 			this.Route_Runs_ToParkIndex_UpDown.Location = new System.Drawing.Point(11, 453);
 			this.Route_Runs_ToParkIndex_UpDown.Name = "Route_Runs_ToParkIndex_UpDown";
-			this.Route_Runs_ToParkIndex_UpDown.Size = new System.Drawing.Size(136, 20);
+			this.Route_Runs_ToParkIndex_UpDown.Size = new System.Drawing.Size(136, 21);
 			this.Route_Runs_ToParkIndex_UpDown.TabIndex = 6;
 			this.Route_Runs_ToParkIndex_UpDown.ValueChanged += new System.EventHandler(this.RouteRunsToParkIndexUpDownValueChanged);
 			// 
@@ -1223,7 +1168,7 @@ namespace Trancity
 			this.Route_Runs_ToPark_Box.AutoSize = true;
 			this.Route_Runs_ToPark_Box.Location = new System.Drawing.Point(11, 404);
 			this.Route_Runs_ToPark_Box.Name = "Route_Runs_ToPark_Box";
-			this.Route_Runs_ToPark_Box.Size = new System.Drawing.Size(60, 17);
+			this.Route_Runs_ToPark_Box.Size = new System.Drawing.Size(66, 17);
 			this.Route_Runs_ToPark_Box.TabIndex = 5;
 			this.Route_Runs_ToPark_Box.Text = "В парк";
 			this.Route_Runs_ToPark_Box.UseVisualStyleBackColor = true;
@@ -1234,7 +1179,7 @@ namespace Trancity
 			this.Route_Runs_Park_Box.AutoSize = true;
 			this.Route_Runs_Park_Box.Location = new System.Drawing.Point(11, 381);
 			this.Route_Runs_Park_Box.Name = "Route_Runs_Park_Box";
-			this.Route_Runs_Park_Box.Size = new System.Drawing.Size(105, 17);
+			this.Route_Runs_Park_Box.Size = new System.Drawing.Size(116, 17);
 			this.Route_Runs_Park_Box.TabIndex = 5;
 			this.Route_Runs_Park_Box.Text = "Парковый рейс";
 			this.Route_Runs_Park_Box.UseVisualStyleBackColor = true;
@@ -1245,7 +1190,7 @@ namespace Trancity
 			this.Route_Runs_Time_label.AutoSize = true;
 			this.Route_Runs_Time_label.Location = new System.Drawing.Point(11, 477);
 			this.Route_Runs_Time_label.Name = "Route_Runs_Time_label";
-			this.Route_Runs_Time_label.Size = new System.Drawing.Size(77, 13);
+			this.Route_Runs_Time_label.Size = new System.Drawing.Size(89, 13);
 			this.Route_Runs_Time_label.TabIndex = 4;
 			this.Route_Runs_Time_label.Text = "Время в пути:";
 			// 
@@ -1254,7 +1199,7 @@ namespace Trancity
 			this.Route_Runs_ToParkIndex_label.AutoSize = true;
 			this.Route_Runs_ToParkIndex_label.Location = new System.Drawing.Point(11, 424);
 			this.Route_Runs_ToParkIndex_label.Name = "Route_Runs_ToParkIndex_label";
-			this.Route_Runs_ToParkIndex_label.Size = new System.Drawing.Size(113, 26);
+			this.Route_Runs_ToParkIndex_label.Size = new System.Drawing.Size(130, 26);
 			this.Route_Runs_ToParkIndex_label.TabIndex = 4;
 			this.Route_Runs_ToParkIndex_label.Text = "Номер пути, начиная\r\nс которого в парк:";
 			// 
@@ -1263,7 +1208,7 @@ namespace Trancity
 			this.Route_Runs_label.AutoSize = true;
 			this.Route_Runs_label.Location = new System.Drawing.Point(11, 280);
 			this.Route_Runs_label.Name = "Route_Runs_label";
-			this.Route_Runs_label.Size = new System.Drawing.Size(102, 13);
+			this.Route_Runs_label.Size = new System.Drawing.Size(114, 13);
 			this.Route_Runs_label.TabIndex = 4;
 			this.Route_Runs_label.Text = "Трассы маршрута:";
 			// 
@@ -1272,7 +1217,7 @@ namespace Trancity
 			this.Route_Name_label.AutoSize = true;
 			this.Route_Name_label.Location = new System.Drawing.Point(11, 131);
 			this.Route_Name_label.Name = "Route_Name_label";
-			this.Route_Name_label.Size = new System.Drawing.Size(113, 13);
+			this.Route_Name_label.Size = new System.Drawing.Size(128, 13);
 			this.Route_Name_label.TabIndex = 4;
 			this.Route_Name_label.Text = "Название маршрута:";
 			// 
@@ -1280,7 +1225,7 @@ namespace Trancity
 			// 
 			this.Route_Name_Box.Location = new System.Drawing.Point(11, 147);
 			this.Route_Name_Box.Name = "Route_Name_Box";
-			this.Route_Name_Box.Size = new System.Drawing.Size(136, 20);
+			this.Route_Name_Box.Size = new System.Drawing.Size(136, 21);
 			this.Route_Name_Box.TabIndex = 3;
 			this.Route_Name_Box.ModifiedChanged += new System.EventHandler(this.RouteNameBoxModifiedChanged);
 			// 
@@ -1339,7 +1284,7 @@ namespace Trancity
 			this.Route_label.AutoSize = true;
 			this.Route_label.Location = new System.Drawing.Point(11, 20);
 			this.Route_label.Name = "Route_label";
-			this.Route_label.Size = new System.Drawing.Size(63, 13);
+			this.Route_label.Size = new System.Drawing.Size(72, 13);
 			this.Route_label.TabIndex = 1;
 			this.Route_label.Text = "Маршруты:";
 			// 
@@ -1375,6 +1320,7 @@ namespace Trancity
 			this.svetofor_panel.Controls.Add(this.Svetofor_End_Box);
 			this.svetofor_panel.Controls.Add(this.Svetofor_ToGreen_Box);
 			this.svetofor_panel.Controls.Add(this.Svetofor_Begin_Box);
+			this.svetofor_panel.Controls.Add(this.Svetofor_Svetofor_Arrow_Box);
 			this.svetofor_panel.Controls.Add(this.Svetofor_Element_Location_label);
 			this.svetofor_panel.Controls.Add(this.Svetofor_Cycle_label);
 			this.svetofor_panel.Controls.Add(this.Svetofor_Green_label);
@@ -1404,7 +1350,7 @@ namespace Trancity
 			// 
 			this.Svetofor_Model_Box.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Svetofor_Model_Box.FormattingEnabled = true;
-			this.Svetofor_Model_Box.Location = new System.Drawing.Point(11, 653);
+			this.Svetofor_Model_Box.Location = new System.Drawing.Point(11, 686);
 			this.Svetofor_Model_Box.Name = "Svetofor_Model_Box";
 			this.Svetofor_Model_Box.Size = new System.Drawing.Size(136, 21);
 			this.Svetofor_Model_Box.TabIndex = 11;
@@ -1412,9 +1358,9 @@ namespace Trancity
 			// Svetofor_Model_label
 			// 
 			this.Svetofor_Model_label.AutoSize = true;
-			this.Svetofor_Model_label.Location = new System.Drawing.Point(11, 637);
+			this.Svetofor_Model_label.Location = new System.Drawing.Point(11, 670);
 			this.Svetofor_Model_label.Name = "Svetofor_Model_label";
-			this.Svetofor_Model_label.Size = new System.Drawing.Size(49, 13);
+			this.Svetofor_Model_label.Size = new System.Drawing.Size(57, 13);
 			this.Svetofor_Model_label.TabIndex = 10;
 			this.Svetofor_Model_label.Text = "Модель:";
 			// 
@@ -1422,7 +1368,7 @@ namespace Trancity
 			// 
 			this.Svetofor_Svetofor_ArrowRed_Box.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Svetofor_Svetofor_ArrowRed_Box.FormattingEnabled = true;
-			this.Svetofor_Svetofor_ArrowRed_Box.Location = new System.Drawing.Point(11, 511);
+			this.Svetofor_Svetofor_ArrowRed_Box.Location = new System.Drawing.Point(11, 544);
 			this.Svetofor_Svetofor_ArrowRed_Box.Name = "Svetofor_Svetofor_ArrowRed_Box";
 			this.Svetofor_Svetofor_ArrowRed_Box.Size = new System.Drawing.Size(136, 21);
 			this.Svetofor_Svetofor_ArrowRed_Box.TabIndex = 8;
@@ -1432,7 +1378,7 @@ namespace Trancity
 			// 
 			this.Svetofor_Svetofor_ArrowYellow_Box.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Svetofor_Svetofor_ArrowYellow_Box.FormattingEnabled = true;
-			this.Svetofor_Svetofor_ArrowYellow_Box.Location = new System.Drawing.Point(11, 469);
+			this.Svetofor_Svetofor_ArrowYellow_Box.Location = new System.Drawing.Point(11, 502);
 			this.Svetofor_Svetofor_ArrowYellow_Box.Name = "Svetofor_Svetofor_ArrowYellow_Box";
 			this.Svetofor_Svetofor_ArrowYellow_Box.Size = new System.Drawing.Size(136, 21);
 			this.Svetofor_Svetofor_ArrowYellow_Box.TabIndex = 8;
@@ -1442,7 +1388,7 @@ namespace Trancity
 			// 
 			this.Svetofor_Svetofor_ArrowGreen_Box.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Svetofor_Svetofor_ArrowGreen_Box.FormattingEnabled = true;
-			this.Svetofor_Svetofor_ArrowGreen_Box.Location = new System.Drawing.Point(11, 429);
+			this.Svetofor_Svetofor_ArrowGreen_Box.Location = new System.Drawing.Point(11, 462);
 			this.Svetofor_Svetofor_ArrowGreen_Box.Name = "Svetofor_Svetofor_ArrowGreen_Box";
 			this.Svetofor_Svetofor_ArrowGreen_Box.Size = new System.Drawing.Size(136, 21);
 			this.Svetofor_Svetofor_ArrowGreen_Box.TabIndex = 8;
@@ -1533,12 +1479,24 @@ namespace Trancity
 			this.Svetofor_Begin_Box.ViewSeconds = true;
 			this.Svetofor_Begin_Box.TimeChanged += new System.EventHandler(this.Svetofor_Begin_Box_TimeChanged);
 			// 
+			// Svetofor_Svetofor_Arrow_Box
+			// 
+			this.Svetofor_Svetofor_Arrow_Box.AutoSize = true;
+			this.Svetofor_Svetofor_Arrow_Box.Location = new System.Drawing.Point(11, 413);
+			this.Svetofor_Svetofor_Arrow_Box.Name = "Svetofor_Svetofor_Arrow_Box";
+			this.Svetofor_Svetofor_Arrow_Box.Size = new System.Drawing.Size(128, 30);
+			this.Svetofor_Svetofor_Arrow_Box.TabIndex = 6;
+			this.Svetofor_Svetofor_Arrow_Box.Text = "Только зелёная\r\nсекция (стрелка)";
+			this.Svetofor_Svetofor_Arrow_Box.UseVisualStyleBackColor = true;
+			this.Svetofor_Svetofor_Arrow_Box.Visible = false;
+			this.Svetofor_Svetofor_Arrow_Box.CheckedChanged += new System.EventHandler(this.Svetofor_Svetofor_Arrow_Box_CheckedChanged);
+			// 
 			// Svetofor_Element_Location_label
 			// 
 			this.Svetofor_Element_Location_label.AutoSize = true;
-			this.Svetofor_Element_Location_label.Location = new System.Drawing.Point(11, 548);
+			this.Svetofor_Element_Location_label.Location = new System.Drawing.Point(11, 581);
 			this.Svetofor_Element_Location_label.Name = "Svetofor_Element_Location_label";
-			this.Svetofor_Element_Location_label.Size = new System.Drawing.Size(98, 13);
+			this.Svetofor_Element_Location_label.Size = new System.Drawing.Size(111, 13);
 			this.Svetofor_Element_Location_label.TabIndex = 4;
 			this.Svetofor_Element_Location_label.Text = "Местоположение:";
 			// 
@@ -1547,7 +1505,7 @@ namespace Trancity
 			this.Svetofor_Cycle_label.AutoSize = true;
 			this.Svetofor_Cycle_label.Location = new System.Drawing.Point(11, 171);
 			this.Svetofor_Cycle_label.Name = "Svetofor_Cycle_label";
-			this.Svetofor_Cycle_label.Size = new System.Drawing.Size(107, 13);
+			this.Svetofor_Cycle_label.Size = new System.Drawing.Size(126, 13);
 			this.Svetofor_Cycle_label.TabIndex = 4;
 			this.Svetofor_Cycle_label.Text = "Светофорный цикл:";
 			// 
@@ -1556,7 +1514,7 @@ namespace Trancity
 			this.Svetofor_Green_label.AutoSize = true;
 			this.Svetofor_Green_label.Location = new System.Drawing.Point(11, 211);
 			this.Svetofor_Green_label.Name = "Svetofor_Green_label";
-			this.Svetofor_Green_label.Size = new System.Drawing.Size(122, 26);
+			this.Svetofor_Green_label.Size = new System.Drawing.Size(138, 26);
 			this.Svetofor_Green_label.TabIndex = 4;
 			this.Svetofor_Green_label.Text = "Время и длительность\r\nзелёного сигнала:";
 			// 
@@ -1565,7 +1523,7 @@ namespace Trancity
 			this.Svetofor_Work_label.AutoSize = true;
 			this.Svetofor_Work_label.Location = new System.Drawing.Point(11, 131);
 			this.Svetofor_Work_label.Name = "Svetofor_Work_label";
-			this.Svetofor_Work_label.Size = new System.Drawing.Size(83, 13);
+			this.Svetofor_Work_label.Size = new System.Drawing.Size(94, 13);
 			this.Svetofor_Work_label.TabIndex = 4;
 			this.Svetofor_Work_label.Text = "Время работы:";
 			// 
@@ -1582,27 +1540,27 @@ namespace Trancity
 			// Svetofor_Svetofor_ArrowRed_label
 			// 
 			this.Svetofor_Svetofor_ArrowRed_label.AutoSize = true;
-			this.Svetofor_Svetofor_ArrowRed_label.Location = new System.Drawing.Point(11, 495);
+			this.Svetofor_Svetofor_ArrowRed_label.Location = new System.Drawing.Point(11, 528);
 			this.Svetofor_Svetofor_ArrowRed_label.Name = "Svetofor_Svetofor_ArrowRed_label";
-			this.Svetofor_Svetofor_ArrowRed_label.Size = new System.Drawing.Size(97, 13);
+			this.Svetofor_Svetofor_ArrowRed_label.Size = new System.Drawing.Size(111, 13);
 			this.Svetofor_Svetofor_ArrowRed_label.TabIndex = 4;
 			this.Svetofor_Svetofor_ArrowRed_label.Text = "Красная стрелка:";
 			// 
 			// Svetofor_Svetofor_ArrowYellow_label
 			// 
 			this.Svetofor_Svetofor_ArrowYellow_label.AutoSize = true;
-			this.Svetofor_Svetofor_ArrowYellow_label.Location = new System.Drawing.Point(11, 453);
+			this.Svetofor_Svetofor_ArrowYellow_label.Location = new System.Drawing.Point(11, 486);
 			this.Svetofor_Svetofor_ArrowYellow_label.Name = "Svetofor_Svetofor_ArrowYellow_label";
-			this.Svetofor_Svetofor_ArrowYellow_label.Size = new System.Drawing.Size(94, 13);
+			this.Svetofor_Svetofor_ArrowYellow_label.Size = new System.Drawing.Size(106, 13);
 			this.Svetofor_Svetofor_ArrowYellow_label.TabIndex = 4;
 			this.Svetofor_Svetofor_ArrowYellow_label.Text = "Жёлтая стрелка:";
 			// 
 			// Svetofor_Svetofor_ArrowGreen_label
 			// 
 			this.Svetofor_Svetofor_ArrowGreen_label.AutoSize = true;
-			this.Svetofor_Svetofor_ArrowGreen_label.Location = new System.Drawing.Point(11, 413);
+			this.Svetofor_Svetofor_ArrowGreen_label.Location = new System.Drawing.Point(11, 446);
 			this.Svetofor_Svetofor_ArrowGreen_label.Name = "Svetofor_Svetofor_ArrowGreen_label";
-			this.Svetofor_Svetofor_ArrowGreen_label.Size = new System.Drawing.Size(97, 13);
+			this.Svetofor_Svetofor_ArrowGreen_label.Size = new System.Drawing.Size(111, 13);
 			this.Svetofor_Svetofor_ArrowGreen_label.TabIndex = 4;
 			this.Svetofor_Svetofor_ArrowGreen_label.Text = "Зелёная стрелка:";
 			// 
@@ -1611,7 +1569,7 @@ namespace Trancity
 			this.Svetofor_Element_label.AutoSize = true;
 			this.Svetofor_Element_label.Location = new System.Drawing.Point(11, 276);
 			this.Svetofor_Element_label.Name = "Svetofor_Element_label";
-			this.Svetofor_Element_label.Size = new System.Drawing.Size(62, 13);
+			this.Svetofor_Element_label.Size = new System.Drawing.Size(70, 13);
 			this.Svetofor_Element_label.TabIndex = 4;
 			this.Svetofor_Element_label.Text = "Элементы:";
 			// 
@@ -1627,7 +1585,7 @@ namespace Trancity
 			// 
 			// Svetofor_Element_EditLocation_Button
 			// 
-			this.Svetofor_Element_EditLocation_Button.Location = new System.Drawing.Point(11, 593);
+			this.Svetofor_Element_EditLocation_Button.Location = new System.Drawing.Point(11, 626);
 			this.Svetofor_Element_EditLocation_Button.Name = "Svetofor_Element_EditLocation_Button";
 			this.Svetofor_Element_EditLocation_Button.Size = new System.Drawing.Size(136, 23);
 			this.Svetofor_Element_EditLocation_Button.TabIndex = 2;
@@ -1637,7 +1595,7 @@ namespace Trancity
 			// 
 			// Svetofor_Element_ShowLocation_Button
 			// 
-			this.Svetofor_Element_ShowLocation_Button.Location = new System.Drawing.Point(11, 564);
+			this.Svetofor_Element_ShowLocation_Button.Location = new System.Drawing.Point(11, 597);
 			this.Svetofor_Element_ShowLocation_Button.Name = "Svetofor_Element_ShowLocation_Button";
 			this.Svetofor_Element_ShowLocation_Button.Size = new System.Drawing.Size(136, 23);
 			this.Svetofor_Element_ShowLocation_Button.TabIndex = 2;
@@ -1650,7 +1608,7 @@ namespace Trancity
 			this.Svetofor_label.AutoSize = true;
 			this.Svetofor_label.Location = new System.Drawing.Point(11, 20);
 			this.Svetofor_label.Name = "Svetofor_label";
-			this.Svetofor_label.Size = new System.Drawing.Size(128, 13);
+			this.Svetofor_label.Size = new System.Drawing.Size(144, 13);
 			this.Svetofor_label.TabIndex = 1;
 			this.Svetofor_label.Text = "Светофорные системы:";
 			// 
@@ -1727,7 +1685,7 @@ namespace Trancity
 			// 
 			this.Rail_Box_NumericBox.Location = new System.Drawing.Point(11, 252);
 			this.Rail_Box_NumericBox.Name = "Rail_Box_NumericBox";
-			this.Rail_Box_NumericBox.Size = new System.Drawing.Size(136, 20);
+			this.Rail_Box_NumericBox.Size = new System.Drawing.Size(136, 21);
 			this.Rail_Box_NumericBox.TabIndex = 10;
 			this.Rail_Box_NumericBox.Text = "0";
 			this.Rail_Box_NumericBox.Value = 0D;
@@ -1757,7 +1715,7 @@ namespace Trancity
 			this.Splines_Instance_label.AutoSize = true;
 			this.Splines_Instance_label.Location = new System.Drawing.Point(11, 63);
 			this.Splines_Instance_label.Name = "Splines_Instance_label";
-			this.Splines_Instance_label.Size = new System.Drawing.Size(75, 13);
+			this.Splines_Instance_label.Size = new System.Drawing.Size(85, 13);
 			this.Splines_Instance_label.TabIndex = 7;
 			this.Splines_Instance_label.Text = "Экземпляры:";
 			// 
@@ -1771,21 +1729,12 @@ namespace Trancity
 			this.Splines_ShowLocation_Button.UseVisualStyleBackColor = true;
 			this.Splines_ShowLocation_Button.Click += new System.EventHandler(this.Splines_ShowLocation_ButtonClick);
 			// 
-			// Rail_Box_dist_Label
-			// 
-			this.Rail_Box_dist_Label.AutoSize = true;
-			this.Rail_Box_dist_Label.Location = new System.Drawing.Point(11, 237);
-			this.Rail_Box_dist_Label.Name = "Rail_Box_dist_Label";
-			this.Rail_Box_dist_Label.Size = new System.Drawing.Size(115, 13);
-			this.Rail_Box_dist_Label.TabIndex = 4;
-			this.Rail_Box_dist_Label.Text = "Расстояние коробки:";
-			// 
 			// Splines_Location_label
 			// 
 			this.Splines_Location_label.AutoSize = true;
 			this.Splines_Location_label.Location = new System.Drawing.Point(11, 193);
 			this.Splines_Location_label.Name = "Splines_Location_label";
-			this.Splines_Location_label.Size = new System.Drawing.Size(98, 13);
+			this.Splines_Location_label.Size = new System.Drawing.Size(111, 13);
 			this.Splines_Location_label.TabIndex = 4;
 			this.Splines_Location_label.Text = "Местоположение:";
 			// 
@@ -1824,7 +1773,7 @@ namespace Trancity
 			this.Splines_label.AutoSize = true;
 			this.Splines_label.Location = new System.Drawing.Point(11, 20);
 			this.Splines_label.Name = "Splines_label";
-			this.Splines_label.Size = new System.Drawing.Size(55, 13);
+			this.Splines_label.Size = new System.Drawing.Size(65, 13);
 			this.Splines_label.TabIndex = 0;
 			this.Splines_label.Text = "Сплайны:";
 			// 
@@ -1868,7 +1817,7 @@ namespace Trancity
 			this.Signals_Model_label.AutoSize = true;
 			this.Signals_Model_label.Location = new System.Drawing.Point(11, 485);
 			this.Signals_Model_label.Name = "Signals_Model_label";
-			this.Signals_Model_label.Size = new System.Drawing.Size(49, 13);
+			this.Signals_Model_label.Size = new System.Drawing.Size(57, 13);
 			this.Signals_Model_label.TabIndex = 7;
 			this.Signals_Model_label.Text = "Модель:";
 			// 
@@ -1877,7 +1826,7 @@ namespace Trancity
 			this.Signals_Element_Minus_Box.AutoSize = true;
 			this.Signals_Element_Minus_Box.Location = new System.Drawing.Point(11, 357);
 			this.Signals_Element_Minus_Box.Name = "Signals_Element_Minus_Box";
-			this.Signals_Element_Minus_Box.Size = new System.Drawing.Size(125, 17);
+			this.Signals_Element_Minus_Box.Size = new System.Drawing.Size(139, 17);
 			this.Signals_Element_Minus_Box.TabIndex = 6;
 			this.Signals_Element_Minus_Box.Text = "Минусовой контакт";
 			this.Signals_Element_Minus_Box.UseVisualStyleBackColor = true;
@@ -1888,7 +1837,7 @@ namespace Trancity
 			// 
 			this.Signals_Bound_UpDown.Location = new System.Drawing.Point(11, 147);
 			this.Signals_Bound_UpDown.Name = "Signals_Bound_UpDown";
-			this.Signals_Bound_UpDown.Size = new System.Drawing.Size(136, 20);
+			this.Signals_Bound_UpDown.Size = new System.Drawing.Size(136, 21);
 			this.Signals_Bound_UpDown.TabIndex = 5;
 			this.Signals_Bound_UpDown.ValueChanged += new System.EventHandler(this.Signals_Bound_UpDown_ValueChanged);
 			// 
@@ -1897,7 +1846,7 @@ namespace Trancity
 			this.Signals_Element_Location_label.AutoSize = true;
 			this.Signals_Element_Location_label.Location = new System.Drawing.Point(11, 397);
 			this.Signals_Element_Location_label.Name = "Signals_Element_Location_label";
-			this.Signals_Element_Location_label.Size = new System.Drawing.Size(98, 13);
+			this.Signals_Element_Location_label.Size = new System.Drawing.Size(111, 13);
 			this.Signals_Element_Location_label.TabIndex = 4;
 			this.Signals_Element_Location_label.Text = "Местоположение:";
 			// 
@@ -1906,7 +1855,7 @@ namespace Trancity
 			this.Signals_Bound_label.AutoSize = true;
 			this.Signals_Bound_label.Location = new System.Drawing.Point(11, 131);
 			this.Signals_Bound_label.Name = "Signals_Bound_label";
-			this.Signals_Bound_label.Size = new System.Drawing.Size(126, 13);
+			this.Signals_Bound_label.Size = new System.Drawing.Size(147, 13);
 			this.Signals_Bound_label.TabIndex = 4;
 			this.Signals_Bound_label.Text = "Красный при значении:";
 			// 
@@ -1925,7 +1874,7 @@ namespace Trancity
 			this.Signals_Element_label.AutoSize = true;
 			this.Signals_Element_label.Location = new System.Drawing.Point(11, 204);
 			this.Signals_Element_label.Name = "Signals_Element_label";
-			this.Signals_Element_label.Size = new System.Drawing.Size(62, 13);
+			this.Signals_Element_label.Size = new System.Drawing.Size(70, 13);
 			this.Signals_Element_label.TabIndex = 4;
 			this.Signals_Element_label.Text = "Элементы:";
 			// 
@@ -1964,7 +1913,7 @@ namespace Trancity
 			this.Signals_label.AutoSize = true;
 			this.Signals_label.Location = new System.Drawing.Point(11, 20);
 			this.Signals_label.Name = "Signals_label";
-			this.Signals_label.Size = new System.Drawing.Size(120, 13);
+			this.Signals_label.Size = new System.Drawing.Size(135, 13);
 			this.Signals_label.TabIndex = 1;
 			this.Signals_label.Text = "Сигнальные системы:";
 			// 
@@ -2054,7 +2003,7 @@ namespace Trancity
 			this.Stops_Model_label.AutoSize = true;
 			this.Stops_Model_label.Location = new System.Drawing.Point(11, 415);
 			this.Stops_Model_label.Name = "Stops_Model_label";
-			this.Stops_Model_label.Size = new System.Drawing.Size(49, 13);
+			this.Stops_Model_label.Size = new System.Drawing.Size(57, 13);
 			this.Stops_Model_label.TabIndex = 12;
 			this.Stops_Model_label.Text = "Модель:";
 			// 
@@ -2075,7 +2024,7 @@ namespace Trancity
 			this.BusBox.AutoSize = true;
 			this.BusBox.Location = new System.Drawing.Point(15, 67);
 			this.BusBox.Name = "BusBox";
-			this.BusBox.Size = new System.Drawing.Size(67, 17);
+			this.BusBox.Size = new System.Drawing.Size(73, 17);
 			this.BusBox.TabIndex = 2;
 			this.BusBox.Text = "Автобус";
 			this.BusBox.UseVisualStyleBackColor = true;
@@ -2086,7 +2035,7 @@ namespace Trancity
 			this.TrolleybusBox.AutoSize = true;
 			this.TrolleybusBox.Location = new System.Drawing.Point(15, 44);
 			this.TrolleybusBox.Name = "TrolleybusBox";
-			this.TrolleybusBox.Size = new System.Drawing.Size(86, 17);
+			this.TrolleybusBox.Size = new System.Drawing.Size(95, 17);
 			this.TrolleybusBox.TabIndex = 1;
 			this.TrolleybusBox.Text = "Троллейбус";
 			this.TrolleybusBox.UseVisualStyleBackColor = true;
@@ -2097,7 +2046,7 @@ namespace Trancity
 			this.TramwayBox.AutoSize = true;
 			this.TramwayBox.Location = new System.Drawing.Point(15, 21);
 			this.TramwayBox.Name = "TramwayBox";
-			this.TramwayBox.Size = new System.Drawing.Size(71, 17);
+			this.TramwayBox.Size = new System.Drawing.Size(75, 17);
 			this.TramwayBox.TabIndex = 0;
 			this.TramwayBox.Text = "Трамвай";
 			this.TramwayBox.UseVisualStyleBackColor = true;
@@ -2108,7 +2057,7 @@ namespace Trancity
 			this.Stops_Location_label.AutoSize = true;
 			this.Stops_Location_label.Location = new System.Drawing.Point(11, 327);
 			this.Stops_Location_label.Name = "Stops_Location_label";
-			this.Stops_Location_label.Size = new System.Drawing.Size(98, 13);
+			this.Stops_Location_label.Size = new System.Drawing.Size(111, 13);
 			this.Stops_Location_label.TabIndex = 4;
 			this.Stops_Location_label.Text = "Местоположение:";
 			// 
@@ -2117,7 +2066,7 @@ namespace Trancity
 			this.Stops_Name_label.AutoSize = true;
 			this.Stops_Name_label.Location = new System.Drawing.Point(11, 131);
 			this.Stops_Name_label.Name = "Stops_Name_label";
-			this.Stops_Name_label.Size = new System.Drawing.Size(116, 13);
+			this.Stops_Name_label.Size = new System.Drawing.Size(132, 13);
 			this.Stops_Name_label.TabIndex = 4;
 			this.Stops_Name_label.Text = "Название остановки:";
 			// 
@@ -2125,7 +2074,7 @@ namespace Trancity
 			// 
 			this.Stops_Name_Box.Location = new System.Drawing.Point(11, 147);
 			this.Stops_Name_Box.Name = "Stops_Name_Box";
-			this.Stops_Name_Box.Size = new System.Drawing.Size(136, 20);
+			this.Stops_Name_Box.Size = new System.Drawing.Size(136, 21);
 			this.Stops_Name_Box.TabIndex = 3;
 			this.Stops_Name_Box.ModifiedChanged += new System.EventHandler(this.Stops_Name_Box_ModifiedChanged);
 			// 
@@ -2184,7 +2133,7 @@ namespace Trancity
 			this.Stops_label.AutoSize = true;
 			this.Stops_label.Location = new System.Drawing.Point(11, 20);
 			this.Stops_label.Name = "Stops_label";
-			this.Stops_label.Size = new System.Drawing.Size(65, 13);
+			this.Stops_label.Size = new System.Drawing.Size(74, 13);
 			this.Stops_label.TabIndex = 1;
 			this.Stops_label.Text = "Остановки:";
 			// 
@@ -2219,7 +2168,7 @@ namespace Trancity
 			this.Park_Name_label.AutoSize = true;
 			this.Park_Name_label.Location = new System.Drawing.Point(11, 131);
 			this.Park_Name_label.Name = "Park_Name_label";
-			this.Park_Name_label.Size = new System.Drawing.Size(93, 13);
+			this.Park_Name_label.Size = new System.Drawing.Size(107, 13);
 			this.Park_Name_label.TabIndex = 4;
 			this.Park_Name_label.Text = "Название парка:";
 			// 
@@ -2227,7 +2176,7 @@ namespace Trancity
 			// 
 			this.Park_Name_Box.Location = new System.Drawing.Point(11, 147);
 			this.Park_Name_Box.Name = "Park_Name_Box";
-			this.Park_Name_Box.Size = new System.Drawing.Size(136, 20);
+			this.Park_Name_Box.Size = new System.Drawing.Size(136, 21);
 			this.Park_Name_Box.TabIndex = 3;
 			this.Park_Name_Box.ModifiedChanged += new System.EventHandler(this.Park_Name_Box_ModifiedChanged);
 			// 
@@ -2266,7 +2215,7 @@ namespace Trancity
 			this.Park_label.AutoSize = true;
 			this.Park_label.Location = new System.Drawing.Point(11, 20);
 			this.Park_label.Name = "Park_label";
-			this.Park_label.Size = new System.Drawing.Size(96, 13);
+			this.Park_label.Size = new System.Drawing.Size(112, 13);
 			this.Park_label.TabIndex = 1;
 			this.Park_label.Text = "Выбранный парк:";
 			// 
@@ -2289,11 +2238,11 @@ namespace Trancity
 			// Sizable_Panel
 			// 
 			this.Sizable_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-			| System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+									| System.Windows.Forms.AnchorStyles.Left) 
+									| System.Windows.Forms.AnchorStyles.Right)));
 			this.Sizable_Panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.Sizable_Panel.Controls.Add(this.renderPanel);
-			this.Sizable_Panel.Location = new System.Drawing.Point(0, 28);
+			this.Sizable_Panel.Controls.Add(this.panel);
+			this.Sizable_Panel.Location = new System.Drawing.Point(-2, 28);
 			this.Sizable_Panel.Name = "Sizable_Panel";
 			this.Sizable_Panel.Size = new System.Drawing.Size(1012, 1009);
 			this.Sizable_Panel.TabIndex = 3;
@@ -2302,16 +2251,18 @@ namespace Trancity
 			// openFileDialog
 			// 
 			this.openFileDialog.DefaultExt = "city";
-			this.openFileDialog.Filter = "Trancity Maps (*.city)|*.city|All files (*.*)|*.*";
+			this.openFileDialog.Filter = "Города Trancity (*.city)|*.city|Все файлы (*.*)|*.*";
 			this.openFileDialog.InitialDirectory = "..\\Cities";
-			this.openFileDialog.Title = "Открыть карту";
+			this.openFileDialog.RestoreDirectory = true;
+			this.openFileDialog.Title = "Открыть город";
 			// 
 			// saveFileDialog
 			// 
 			this.saveFileDialog.DefaultExt = "city";
-			this.saveFileDialog.Filter = "Trancity Maps (*.city)|*.city";
+			this.saveFileDialog.Filter = "Города Trancity (*.city)|*.city";
 			this.saveFileDialog.InitialDirectory = "..\\Cities";
-			this.saveFileDialog.Title = "Сохранить карту";
+			this.saveFileDialog.RestoreDirectory = true;
+			this.saveFileDialog.Title = "Сохранить город";
 			// 
 			// edit_panel
 			// 
@@ -2319,7 +2270,7 @@ namespace Trancity
 			this.edit_panel.Location = new System.Drawing.Point(850, 28);
 			this.edit_panel.Name = "edit_panel";
 			this.edit_panel.Padding = new System.Windows.Forms.Padding(8, 20, 8, 0);
-			this.edit_panel.Size = new System.Drawing.Size(158, 845);
+			this.edit_panel.Size = new System.Drawing.Size(158, 978);
 			this.edit_panel.TabIndex = 4;
 			// 
 			// narad_panel
@@ -2349,8 +2300,8 @@ namespace Trancity
 			this.narad_panel.Location = new System.Drawing.Point(692, 28);
 			this.narad_panel.Name = "narad_panel";
 			this.narad_panel.Padding = new System.Windows.Forms.Padding(8, 20, 8, 0);
-			this.narad_panel.Size = new System.Drawing.Size(158, 823);
-			this.narad_panel.TabIndex = 1;
+			this.narad_panel.Size = new System.Drawing.Size(158, 978);
+			this.narad_panel.TabIndex = 5;
 			this.narad_panel.Visible = false;
 			// 
 			// RollingStockBox
@@ -2567,62 +2518,70 @@ namespace Trancity
 			this.Narad_Box.TabIndex = 0;
 			this.Narad_Box.SelectedIndexChanged += new System.EventHandler(this.Narad_Box_SelectedIndexChanged);
 			// 
+			// Rail_Box_dist_Label
+			// 
+			this.Rail_Box_dist_Label.AutoSize = true;
+			this.Rail_Box_dist_Label.Location = new System.Drawing.Point(11, 237);
+			this.Rail_Box_dist_Label.Name = "Rail_Box_dist_Label";
+			this.Rail_Box_dist_Label.Size = new System.Drawing.Size(131, 13);
+			this.Rail_Box_dist_Label.TabIndex = 4;
+			this.Rail_Box_dist_Label.Text = "Расстояние коробки:";
+			// 
 			// Editor
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(6, 14);
-			this.ClientSize = new System.Drawing.Size(1008, 873);
-			this.Controls.Add(this.narad_panel);
+			this.ClientSize = new System.Drawing.Size(1008, 1006);
 			this.Controls.Add(this.statusBar);
+			this.Controls.Add(this.narad_panel);
 			this.Controls.Add(this.edit_panel);
 			this.Controls.Add(this.Sizable_Panel);
 			this.Controls.Add(this.toolBar);
-			this.Font = new Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
+			this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.KeyPreview = true;
 			this.Menu = this.mainMenu;
 			this.Name = "Editor";
-			this.StartPosition = FormStartPosition.CenterScreen;
-			this.WindowState = FormWindowState.Maximized;
-			this.Activated += new System.EventHandler(this.EditorActivated);
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "Transedit";
+			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.Closing += new System.ComponentModel.CancelEventHandler(this.Editor_Form_Closing);
-			this.Deactivate += new System.EventHandler(this.EditorDeactivate);
 			this.Load += new System.EventHandler(this.Editor_Form_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Editor_Form_KeyDown);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Editor_Form_KeyUp);
-			((ISupportInitialize)(this.Cursor_x_Status)).EndInit();
-			((ISupportInitialize)(this.Cursor_y_Status)).EndInit();
-			((ISupportInitialize)(this.SeparatorPanel1)).EndInit();
-			((ISupportInitialize)(this.Coord_x1_Status)).EndInit();
-			((ISupportInitialize)(this.Coord_y1_Status)).EndInit();
-			((ISupportInitialize)(this.Angle1_Status)).EndInit();
-			((ISupportInitialize)(this.SeparatorPanel2)).EndInit();
-			((ISupportInitialize)(this.Coord_x2_Status)).EndInit();
-			((ISupportInitialize)(this.Coord_y2_Status)).EndInit();
-			((ISupportInitialize)(this.Angle2_Status)).EndInit();
-			((ISupportInitialize)(this.SeparatorPanel3)).EndInit();
-			((ISupportInitialize)(this.Length_Status)).EndInit();
-			((ISupportInitialize)(this.Radius_Status)).EndInit();
-			((ISupportInitialize)(this.Angle_Status)).EndInit();
-			((ISupportInitialize)(this.Wide0_Status)).EndInit();
-			((ISupportInitialize)(this.Wide1_Status)).EndInit();
-			((ISupportInitialize)(this.Height0_Status)).EndInit();
-			((ISupportInitialize)(this.Height1_Status)).EndInit();
-			((ISupportInitialize)(this.SeparatorPanel4)).EndInit();
-			((ISupportInitialize)(this.Maschtab)).EndInit();
-			((ISupportInitialize)(this.SeparatorPanel5)).EndInit();
-			((ISupportInitialize)(this.Ugol)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Cursor_x_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Cursor_y_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.SeparatorPanel1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Coord_x1_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Coord_y1_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Angle1_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.SeparatorPanel2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Coord_x2_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Coord_y2_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Angle2_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.SeparatorPanel3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Length_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Radius_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Angle_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Wide0_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Wide1_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Height0_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Height1_Status)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.SeparatorPanel4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Maschtab)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.SeparatorPanel5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Ugol)).EndInit();
+			this.panel.ResumeLayout(false);
 			this.object_panel.ResumeLayout(false);
 			this.object_panel.PerformLayout();
 			this.route_panel.ResumeLayout(false);
 			this.route_panel.PerformLayout();
-			((ISupportInitialize)(this.Route_Runs_ToParkIndex_UpDown)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Route_Runs_ToParkIndex_UpDown)).EndInit();
 			this.svetofor_panel.ResumeLayout(false);
 			this.svetofor_panel.PerformLayout();
 			this.splines_panel.ResumeLayout(false);
 			this.splines_panel.PerformLayout();
 			this.signals_panel.ResumeLayout(false);
 			this.signals_panel.PerformLayout();
-			((ISupportInitialize)(this.Signals_Bound_UpDown)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Signals_Bound_UpDown)).EndInit();
 			this.stops_panel.ResumeLayout(false);
 			this.stops_panel.PerformLayout();
 			this.TypeOfTransportBox.ResumeLayout(false);
@@ -2634,29 +2593,27 @@ namespace Trancity
 			this.narad_panel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
-
-		}
-		private Label Rail_Box_dist_Label;
+        }
+		private System.Windows.Forms.Label Rail_Box_dist_Label;
 		private Common.NumericBox Rail_Box_NumericBox;
-//		private ToolBarButton Rail_Build_Direct_Button;
-		private ToolBarButton Rail_Build_Curve_Button;
-		private Label Stops_Model_label;
-		private ComboBox Stops_Model_Box;
-		private Label Svetofor_Model_label;
-		private ComboBox Svetofor_Model_Box;
-		private Label Signals_Model_label;
-		private ComboBox Signals_Model_Box;
-		private CheckBox Spline_Select_mode_Box;
-		private Label Splines_label;
-		private ComboBox Splines_Models_Box;
-		private Button Splines_Remove_Button;
-		private Button Splines_ChangeModel_Button;
-		private Label Splines_Location_label;
-		private Button Splines_ShowLocation_Button;
-		private Label Splines_Instance_label;
-		private ComboBox Splines_Instance_Box;
-		private Panel splines_panel;
-		private ToolBarButton Info;
+//		private System.Windows.Forms.ToolBarButton Rail_Build_Direct_Button;
+		private System.Windows.Forms.ToolBarButton Rail_Build_Curve_Button;
+		private System.Windows.Forms.Label Stops_Model_label;
+		private System.Windows.Forms.ComboBox Stops_Model_Box;
+		private System.Windows.Forms.Label Svetofor_Model_label;
+		private System.Windows.Forms.ComboBox Svetofor_Model_Box;
+		private System.Windows.Forms.Label Signals_Model_label;
+		private System.Windows.Forms.ComboBox Signals_Model_Box;
+		private System.Windows.Forms.CheckBox Spline_Select_mode_Box;
+		private System.Windows.Forms.Label Splines_label;
+		private System.Windows.Forms.ComboBox Splines_Models_Box;
+		private System.Windows.Forms.Button Splines_Remove_Button;
+		private System.Windows.Forms.Button Splines_ChangeModel_Button;
+		private System.Windows.Forms.Label Splines_Location_label;
+		private System.Windows.Forms.Button Splines_ShowLocation_Button;
+		private System.Windows.Forms.Label Splines_Instance_label;
+		private System.Windows.Forms.ComboBox Splines_Instance_Box;
+		private System.Windows.Forms.Panel splines_panel;
 
         private Panel object_panel;
         private Label Objects_label;
@@ -2690,9 +2647,5 @@ namespace Trancity
         private CheckBox TrolleybusBox;
         private CheckBox TramwayBox;
         private Button StopsButton;
-        private ToolBarButton Troll_lines_Doblue;
-        private ToolBarButton Troll_lines_Against;
-        private ToolBarButton TramWireOverRail;
-        private ToolBarButton TrollWireOverRoad;
 	}
 }

@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Drawing;
+    using System.Runtime.CompilerServices;
     using System.Windows.Forms;
 
     public class TimeBox : UserControl
@@ -32,7 +33,7 @@
             base.Dispose(disposing);
         }
 
-        public void InitializeComponent()
+        private void InitializeComponent()
         {
             this.text_box = new System.Windows.Forms.TextBox();
             base.SuspendLayout();
@@ -59,7 +60,7 @@
             base.PerformLayout();
         }
 
-        public void Redraw()
+        private void Redraw()
         {
             this.text_box.Text = this.h.ToString("00") + ":" + this.m.ToString("00");
             if (this.view_seconds)
@@ -70,18 +71,18 @@
             this.text_box.SelectionLength = 2;
         }
 
-        public void text_box_Click(object sender, EventArgs e)
+        private void text_box_Click(object sender, EventArgs e)
         {
             this.pos = (this.text_box.SelectionStart / 3) * 2;
             this.Redraw();
         }
 
-        public void text_box_DoubleClick(object sender, EventArgs e)
+        private void text_box_DoubleClick(object sender, EventArgs e)
         {
             this.Redraw();
         }
 
-        public void text_box_KeyDown(object sender, KeyEventArgs e)
+        private void text_box_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
             if ((e.KeyCode == Keys.Up) || (e.KeyCode == Keys.Down))
@@ -123,7 +124,7 @@
             this.Redraw();
         }
 
-        public void text_box_KeyPress(object sender, KeyPressEventArgs e)
+        private void text_box_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar >= '0') && (e.KeyChar <= '9'))
             {
@@ -179,12 +180,12 @@
             }
         }
 
-        public void text_box_Leave(object sender, EventArgs e)
+        private void text_box_Leave(object sender, EventArgs e)
         {
             this.pos = (this.pos / 2) * 2;
         }
 
-        public void TimeBox_EnabledChanged(object sender, EventArgs e)
+        private void TimeBox_EnabledChanged(object sender, EventArgs e)
         {
             this.text_box.Enabled = base.Enabled;
             if (base.Enabled)

@@ -1,7 +1,7 @@
-using Common;
-using Engine;
-using SlimDX;
 using System;
+using Common;
+//using Microsoft.DirectX;
+using SlimDX;
 
 namespace Trancity
 {
@@ -13,15 +13,14 @@ namespace Trancity
         public bool дверьВодителя;
         private double _длина = 0.425;
         public int номер;
-        //        private IMatrixObject _объект;
+//        private IMatrixObject _объект;
         private MeshObject _объект;
-
         public bool открываются;
         private bool _правые;
         private double _состояние;
         private Дверь _створка;
         private double _ширина = 0.05;
-
+        
         public void CreateMesh()
         {
             _створка.CreateMesh();
@@ -50,10 +49,10 @@ namespace Trancity
 
                 case МодельДверей.Тип.ШарнирноПоворотные:
                     return new ШарнирноПоворотные(объект, p1.x, p1.z, p2.x, p2.z, p1.y, p2.y, правые, модель.dir, модель.filename, модель.длина, модель.высота, модель.ширина);
-
+                    
                 case МодельДверей.Тип.Сдвижные:
                     return new Сдвижные(объект, p1.x, p1.z, p2.x, p2.z, p1.y, p2.y, правые, модель.dir, модель.filename, модель.длина, модель.высота, модель.ширина);
-
+                    
                 case МодельДверей.Тип.Custom:
                     return new CustomDoors(объект, p1.x, p1.z, p2.x, p2.z, p1.y, p2.y, правые, модель.dir, модель.filename, модель.длина, модель.высота, модель.ширина);
             }
@@ -90,24 +89,19 @@ namespace Trancity
             {
                 if (открываются)
                 {
-                    return 0.8;
+                	return 0.8;
                 }
                 return -0.8;
             }
         }
 
-        public void CheckCondition()
-        {
-            _створка.IsNear = true;
-        }
-
-        // ReSharper disable RedundantExtendsListEntry
+// ReSharper disable RedundantExtendsListEntry
         private class Дверь : MeshObject, MeshObject.IFromFile, IMatrixObject
-        // ReSharper restore RedundantExtendsListEntry
+// ReSharper restore RedundantExtendsListEntry
         {
-            // ReSharper disable FieldCanBeMadeReadOnly.Local
+// ReSharper disable FieldCanBeMadeReadOnly.Local
             private string _filename;
-            // ReSharper restore FieldCanBeMadeReadOnly.Local
+// ReSharper restore FieldCanBeMadeReadOnly.Local
             public Matrix matrix;
 
             public Дверь(string filename, string dir)
@@ -155,21 +149,19 @@ namespace Trancity
             public override void Render()
             {
                 var matrix = _объект.last_matrix;//((IMatrixObject)_объект).GetMatrix(0);
-                float num = _правые ? -1f : 1f;
-                var d = _состояние * (Math.PI / 2.0);//(_состояние * Math.PI) / 2.0;
-                var matrix1 = Matrix.Translation(((float)_длина) / 2f, 0f, (num * -((float)_ширина)) / 2f);
-                var matrix2 = (matrix1 * Matrix.RotationY(num * -((float)d))) * Matrix.Translation(0f, 0f, num * ((float)(Math.Cos(d) * _ширина)));
-                var matrix3 = ((matrix1 * Matrix.RotationY(num * -((float)(Math.PI - d)))) * Matrix.Translation(-((float)(Math.Sin(d) * _ширина)), 0f, 0f)) * Matrix.Translation(((float)((Math.Sin(d) * _ширина) + (Math.Cos(d) * _длина))) * 2f, 0f, 0f);
+                var num = _правые ? -1 : ((float) 1);
+                var d = (_состояние * Math.PI) / 2.0;
+                var matrix2 = (Matrix.Translation(((float) _длина) / 2f, 0f, (num * -((float) _ширина)) / 2f) * Matrix.RotationY(num * -((float) d))) * Matrix.Translation(0f, 0f, num * ((float) (Math.Cos(d) * _ширина)));
+                var matrix3 = ((Matrix.Translation(((float) _длина) / 2f, 0f, (num * -((float) _ширина)) / 2f) * Matrix.RotationY(num * -((float) (Math.PI - d)))) * Matrix.Translation(-((float) (Math.Sin(d) * _ширина)), 0f, 0f)) * Matrix.Translation(((float) ((Math.Sin(d) * _ширина) + (Math.Cos(d) * _длина))) * 2f, 0f, 0f);
                 var point = new DoublePoint(_pos2.x - _pos1.x, _pos2.z - _pos1.z);
-                float val = (float)((point.Modulus / 2.0) / _длина);
-                var matrix4 = (Matrix.Scaling(val, (float)((_pos2.y - _pos1.y) / _высота), val) * Matrix.RotationY(-((float)point.Angle))) * Matrix.Translation((float)_pos1.x, (float)_pos1.y, (float)_pos1.z);
+                var matrix4 = (Matrix.Scaling((float) ((point.модуль / 2.0) / _длина), (float) ((_pos2.y - _pos1.y) / _высота), (float) ((point.модуль / 2.0) / _длина)) * Matrix.RotationY(-((float) point.угол))) * Matrix.Translation((float) _pos1.x, (float) _pos1.y, (float) _pos1.z);
                 if (_правые)
                 {
-                    matrix2 = Matrix.RotationY((float)Math.PI) * matrix2;
+                    matrix2 = Matrix.RotationY((float) Math.PI) * matrix2;
                 }
                 else
                 {
-                    matrix3 = Matrix.RotationY((float)Math.PI) * matrix3;
+                    matrix3 = Matrix.RotationY((float) Math.PI) * matrix3;
                 }
                 _створка.matrix = (matrix2 * matrix4) * matrix;
                 _створка.Render();
@@ -195,21 +187,20 @@ namespace Trancity
             public override void Render()
             {
                 var matrix = _объект.last_matrix;//((IMatrixObject)_объект).GetMatrix(0);
-                float num = _правые ? 1f : -1f;
+                var num = _правые ? -1 : ((float) 1);
                 var d = (_состояние * Math.PI) / 2.0;
-                var matrix2 = (Matrix.Translation(((float)_длина) / 2f, 0f, (num * ((float)_ширина)) / 2f) * Matrix.RotationY(num * ((float)(Math.PI - d)))) * Matrix.Translation((float)(Math.Cos(d) * _длина), 0f, 0f);
+                var matrix2 = (Matrix.Translation(((float) _длина) / 2f, 0f, (num * -((float) _ширина)) / 2f) * Matrix.RotationY(num * -((float) (Math.PI - d)))) * Matrix.Translation((float) (Math.Cos(d) * _длина), 0f, 0f);
                 var point = new DoublePoint(_pos2.x - _pos1.x, _pos2.z - _pos1.z);
-                float val = (float)(point.Modulus / _длина);
-                var matrix3 = (Matrix.Scaling(val, (float)((_pos2.y - _pos1.y) / _высота), val) * Matrix.RotationY(-((float)point.Angle))) * Matrix.Translation((float)_pos1.x, (float)_pos1.y, (float)_pos1.z);
+                var matrix3 = (Matrix.Scaling((float) (point.модуль / _длина), (float) ((_pos2.y - _pos1.y) / _высота), (float) (point.модуль / _длина)) * Matrix.RotationY(-((float) point.угол))) * Matrix.Translation((float) _pos1.x, (float) _pos1.y, (float) _pos1.z);
                 if (!_правые)
                 {
-                    matrix2 = Matrix.RotationY((float)Math.PI) * matrix2;
+                    matrix2 = Matrix.RotationY((float) Math.PI) * matrix2;
                 }
                 _створка.matrix = (matrix2 * matrix3) * matrix;
                 _створка.Render();
             }
         }
-
+        
         public class Сдвижные : Двери
         {
             public Сдвижные(MeshObject объект, double x1, double z1, double x2, double z2, double y1, double y2, bool правые, string dir, string filename, double длина, double высота, double ширина)
@@ -226,24 +217,24 @@ namespace Trancity
 
             public override void Render()
             {
-                var matrix = _объект.last_matrix;//((IMatrixObject)_объект).GetMatrix(0);
-                float num = _правые ? -1f : 1f;
+            	var matrix = _объект.last_matrix;//((IMatrixObject)_объект).GetMatrix(0);
+                var num = _правые ? ((float)-1) : ((float) 1);
+//                var d = (_состояние * Math.E) / 2.0;
                 var point = new DoublePoint(_pos2.x - _pos1.x, _pos2.z - _pos1.z);
-                var matrix10 = Matrix.RotationY(-((float)point.Angle));
-                var matrix12 = Matrix.Translation(((float)_длина) / 2f, 0f, 0f);
-                var matrix11 = (Matrix.Translation((float)(_состояние * _длина) * num, 0f, 0f) * matrix10);
-                var matrix2 = matrix11 * matrix12;
-                float val = (float)(point.Modulus / _длина);
-                var matrix3 = (Matrix.Scaling(val, (float)((_pos2.y - _pos1.y) / _высота), val) * Matrix.Translation((float)_pos1.x, (float)_pos1.y, (float)_pos1.z));
+                var matrix10 = Matrix.RotationY(-((float)point.угол));
+                var matrix12 = Matrix.Translation(((float) _длина) / 2f, 0f, 0f);
+                var matrix11 = (Matrix.Translation((float) (/*Math.Sin(d)*/_состояние * _длина) * num, 0f, 0f) * matrix10);
+                var matrix2 = matrix11 * matrix12;                
+                var matrix3 = (Matrix.Scaling((float) (point.модуль / _длина), (float) ((_pos2.y - _pos1.y) / _высота), (float) (point.модуль / _длина)) * Matrix.Translation((float) _pos1.x, (float) _pos1.y, (float) _pos1.z));
                 _створка.matrix = (matrix2 * matrix3) * matrix;
                 _створка.Render();
             }
         }
-
+        
         public class CustomDoors : Двери
         {
-            private Vector3 rotv1;
-            private Vector3 rotv2;
+        	private Vector3 rotv1;
+        	private Vector3 rotv2;
             public CustomDoors(MeshObject объект, double x1, double z1, double x2, double z2, double y1, double y2, bool правые, string dir, string filename, double длина, double высота, double ширина)
             {
                 _pos1 = new Double3DPoint(x1, y1, z1);

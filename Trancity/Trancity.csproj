@@ -2,15 +2,16 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5F21623D-9AA5-4FD0-9297-12105A3D1AEF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Trancity</RootNamespace>
+    <AssemblyName>Trancity</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <FileAlignment>8192</FileAlignment>
+    <FileAlignment>512</FileAlignment>
     <StartupObject>Trancity.MainForm</StartupObject>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\Andrey\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
@@ -19,18 +20,6 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <ApplicationIcon>Icons\favicon_backup2.ico</ApplicationIcon>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <NoStdLib>False</NoStdLib>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <SignAssembly>False</SignAssembly>
-    <DelaySign>False</DelaySign>
-    <RunCodeAnalysis>False</RunCodeAnalysis>
-    <AssemblyName>Trancity</AssemblyName>
-    <ReferencePath>D:\artyom imenno,NE SMOTRET\Серговск 6\trancity-code-r151\trancity-code-r151-Trancity-trunk\Trancity\</ReferencePath>
-    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -45,43 +34,18 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationIcon>bin\Debug\favicon_backup2.ico</ApplicationIcon>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>PdbOnly</DebugType>
-    <Optimize>True</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <StartAction>Project</StartAction>
-    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
-    <BaseAddress>4194304</BaseAddress>
-    <PlatformTarget>x86</PlatformTarget>
-    <RegisterForComInterop>False</RegisterForComInterop>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
-    <StartAction>Project</StartAction>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>Full</DebugType>
     <Optimize>False</Optimize>
@@ -91,32 +55,33 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
-    <Optimize>True</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'x64' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <StartAction>Project</StartAction>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <BaseAddress>4194304</BaseAddress>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <StartAction>Project</StartAction>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualC" />
-    <Reference Include="SlimDX">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="SlimDX" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -125,31 +90,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\DeviceOptionsDialog.Designer.cs">
-      <DependentUpon>DeviceOptionsDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Common\ITest.cs" />
-    <Compile Include="Common\MyRawInput.cs" />
-    <Compile Include="Common\MyXAudio2.cs" />
-    <Compile Include="Common\RestrictedStack.cs" />
     <Compile Include="Common\StreamWork.cs" />
+    <Compile Include="Common\Thread_test.cs" />
     <Compile Include="Common\UI\Controls.cs" />
     <Compile Include="Common\UI\MyGUI.cs" />
     <Compile Include="Common\UI\TestTexture.cs" />
-    <Compile Include="Common\NumericBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Common\Xml.cs" />
-    <Compile Include="ControlledSound.cs" />
-    <Compile Include="Func.cs" />
+    <Compile Include="Common\NumericBox.cs" />
     <Compile Include="GroundPart.cs" />
+    <Compile Include="Logging.cs" />
     <Compile Include="MyCamera.cs" />
     <Compile Include="ObjectLoader.cs" />
     <Compile Include="ObjectModel.cs" />
     <Compile Include="SkyBox.cs" />
-    <Compile Include="SoundCurve.cs" />
     <Compile Include="SoundLoader.cs" />
     <Compile Include="SimpleTimer.cs" />
+    <Compile Include="Common\charbuffer.cs" />
+    <Compile Include="Common\charbuffer_big.cs" />
+    <Compile Include="Common\Control_Key.cs" />
     <Compile Include="Common\DeviceOptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,10 +118,32 @@
     <Compile Include="Common\Mesh_Object.cs" />
     <Compile Include="Common\MyDirect3D.cs" />
     <Compile Include="Common\MyDirectInput.cs" />
+    <Compile Include="Common\MyDirectPlay.cs" />
+    <Compile Include="Common\MyDirectSound.cs" />
     <Compile Include="Localization.cs" />
     <Compile Include="MyList.cs" />
+    <Compile Include="Common\MyRandomList.cs" />
+    <Compile Include="Common\Windows\EnumWindowsProcHandler.cs" />
+    <Compile Include="Common\Windows\GetWindowFlags.cs" />
+    <Compile Include="Common\Windows\Message.cs" />
+    <Compile Include="Common\Windows\MessageBoxFlags.cs" />
+    <Compile Include="Common\Windows\Msg.cs" />
+    <Compile Include="Common\Windows\Point.cs" />
+    <Compile Include="Common\Windows\Rect.cs" />
+    <Compile Include="Common\Windows\ShowWindowFlags.cs" />
+    <Compile Include="Common\Windows\Style.cs" />
+    <Compile Include="Common\Windows\SystemColor.cs" />
+    <Compile Include="Common\Windows\TimerProcHandler.cs" />
+    <Compile Include="Common\Windows\WindowLong.cs" />
+    <Compile Include="Common\Windows\WindowPosFlags.cs" />
+    <Compile Include="Common\Windows\Windows.cs" />
+    <Compile Include="Common\Windows\WndProcHandler.cs" />
+    <Compile Include="Common\Xml.cs" />
     <Compile Include="ConvertTime.cs" />
+    <Compile Include="Double3DPoint.cs" />
+    <Compile Include="Double_Point.cs" />
     <Compile Include="Period_Point.cs" />
+    <Compile Include="Bounding_figures.cs" />
     <Compile Include="SplineLoader.cs" />
     <Compile Include="SplineModel.cs" />
     <Compile Include="StopListForm.cs">
@@ -174,13 +154,8 @@
     </Compile>
     <Compile Include="Stuff.cs" />
     <Compile Include="Spline.cs" />
-    <Compile Include="ThreadPoolTest.cs" />
     <Compile Include="Trancity\BaseSignal.cs" />
     <Compile Include="Trancity\Cheats.cs" />
-    <Compile Include="Trancity\Editor.Action.cs">
-      <DependentUpon>Editor.cs</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Trancity\Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,19 +175,35 @@
     <EmbeddedResource Include="Trancity\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Trancity\Main_Form.resx">
       <DependentUpon>Main_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Trancity\Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Options.Designer1.cs</LastGenOutput>
     </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <EmbeddedResource Include="UserControlForm.resx">
       <DependentUpon>UserControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Icons\favicon_backup2.ico" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="Trancity\ComputeTime_Dialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,7 +220,7 @@
     <Compile Include="Trancity\TimeBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Trancity\IVector.cs" />
+    <Compile Include="Trancity\Vector.cs" />
     <Compile Include="Trancity\Автобус.cs" />
     <Compile Include="Trancity\Безрельсовый_Транспорт.cs" />
     <Compile Include="Trancity\Игрок.cs" />
@@ -251,11 +242,9 @@
     <Compile Include="Trancity\Сигнальная_система.cs" />
     <Compile Include="Trancity\Указатель_наряда.cs" />
     <Compile Include="Controlling.cs" />
-    <Compile Include="IControlledObject.cs" />
+    <Compile Include="ControlledObject.cs" />
     <Compile Include="BaseStop.cs" />
-    <Compile Include="UserControlForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UserControlForm.cs" />
     <Compile Include="UserControlForm.Designer.cs">
       <DependentUpon>UserControlForm.cs</DependentUpon>
     </Compile>
@@ -307,22 +296,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ProfilingSessions\Session20201125_120755.sdps" />
     <Content Include="Readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Readme_Editor.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\DotR\DotR.csproj">
-      <Project>{0ce375cb-b3b4-4e29-aeb9-e51a23757f02}</Project>
-      <Name>DotR</Name>
-    </ProjectReference>
+    <Folder Include="Common\UI" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

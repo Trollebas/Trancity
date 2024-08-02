@@ -65,53 +65,11 @@ namespace Trancity
 			// 
 			// KeysListBox
 			// 
-			this.KeysListBox.DisplayMember = "1";
 			this.KeysListBox.FormattingEnabled = true;
-			this.KeysListBox.Items.AddRange(new object[] {
-			"Пауза",
-			"Режим карты",
-			"Автоматическое управление",
-			"Ручное управление",
-			"Запустить/заглушить двигатель",
-			"Дверь водителя",
-			"Все двери",
-			"Первая дверь",
-			"Вторая дверь",
-			"Третия дверь",
-			"Четвёртая дверь",
-			"Пятая дверь",
-			"Шестая дверь",
-			"Седьмая дверь",
-			"Восьмая дверь",
-			"Девятая дверь",
-			"Фары",
-			"Камера 1",
-			"Камера 2",
-			"Камера 3",
-			"Камера 4",
-			"Токоприёмник",
-			"Реверс",
-			"Ход",
-			"Тормоз",
-			"Налево",
-			"Направо",
-			"Сброс хода",
-			"Трамваная аварийка",
-			"Трамвайный поворотник налево",
-			"Трамвайный поворотник направо",
-			"Аварийка",
-			"Поворотник налево",
-			"Поворотник направо",
-			"Передача вперёд",
-			"Передача назад",
-			"Сделать скриншот",
-			"Отладочная информация"});
-			this.KeysListBox.Location = new System.Drawing.Point(12, 19);
+			this.KeysListBox.Location = new System.Drawing.Point(12, 12);
 			this.KeysListBox.Name = "KeysListBox";
 			this.KeysListBox.Size = new System.Drawing.Size(445, 355);
 			this.KeysListBox.TabIndex = 1;
-			this.KeysListBox.Tag = "UpdateListBox";
-			this.KeysListBox.ValueMember = "1";
 			// 
 			// Reset_Button
 			// 
@@ -139,7 +97,6 @@ namespace Trancity
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Управление";
 			this.ResumeLayout(false);
-
 		}
 		private System.Windows.Forms.Button Reset_Button;
 		private System.Windows.Forms.ListBox KeysListBox;
